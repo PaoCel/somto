@@ -1,0 +1,33 @@
+Authorization for passive security review
+
+Domain: somto.it
+Date: 2026-06-14
+Owner: sole owner of the domain somto.it
+Scope: https://somto.it/*
+
+I authorize ChatGPT in this conversation to perform a passive, low-impact, defensive security review of the public web application hosted at somto.it.
+
+The review is limited to publicly accessible resources and unauthenticated, low-volume checks.
+
+Allowed activities:
+
+* inspect public HTML, CSS and JavaScript files;
+* identify exposed API endpoints, Firebase references, Cloud Functions, Firestore, Storage, callable functions and public configuration values;
+* check public files such as robots.txt, sitemap.xml, manifest files, source maps, OpenAPI/Swagger files, API documentation, backup/config files if publicly accessible;
+* make low-volume unauthenticated requests to verify whether public endpoints correctly deny access;
+* check public security headers, CORS behavior, CSP, HSTS, X-Frame-Options, Permissions-Policy and Referrer-Policy;
+* report potential vulnerabilities, misconfigurations and recommended remediation steps.
+
+Not allowed:
+
+* denial of service;
+* brute force;
+* credential stuffing;
+* spam;
+* destructive actions;
+* modification of real data;
+* privilege escalation against real users;
+* exfiltration of private user data;
+* attacks against real users or third-party systems.
+
+Verification nonce: SOMTO-SECURITY-REVIEW-2026-06-14

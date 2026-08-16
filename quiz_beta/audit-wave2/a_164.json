@@ -1,0 +1,16 @@
+[
+  {
+    "questionId": "q_164_17",
+    "severity": "minor",
+    "problem": "L'explanation attribuisce al vero D.B. Cooper storico un bottino di '5 milioni di dollari', ma il vero D.B. Cooper nel 1971 ottenne un riscatto di 200.000 dollari. I 5 milioni sono la cifra fittizia inventata dalla serie per il personaggio di Westmoreland. La risposta corretta (index 0 = Westmoreland) è giusta.",
+    "fix": "Correggere l'explanation: '...il misterioso dirottatore che nel 1971 ottenne un riscatto di 200.000 dollari reali (la serie attribuisce invece 5 milioni al personaggio fittizio) e saltò da un aereo con un paracadute.'",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_164_35",
+    "severity": "minor",
+    "problem": "L'explanation afferma che Veronica Donovan 'viene uccisa dall'agente Kellerman' nel primo episodio della seconda stagione. In realtà viene uccisa da un agente noto come 'Blondie' (Steven Chester Prince), non da Kellerman. La risposta corretta (index 1) è giusta.",
+    "fix": "Correggere l'explanation: sostituire 'viene uccisa dall'agente Kellerman' con 'viene uccisa da un agente della Compagnia noto come Blondie'.",
+    "correctIndexShouldBe": -1
+  }
+]

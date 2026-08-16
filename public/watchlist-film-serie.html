@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>App watchlist per film e serie TV, gratis — Somto</title>
+  <meta name="description" content="Crea la watchlist di film e serie TV con Somto, gratis e in italiano: salva i titoli da vedere, segna gli episodi delle serie e ritrova in un attimo cosa guardare stasera. Web e iOS.">
+  <link rel="canonical" href="https://somto.it/watchlist-film-serie.html">
+  <link rel="alternate" hreflang="it-IT" href="https://somto.it/watchlist-film-serie.html">
+  <link rel="alternate" hreflang="en" href="https://somto.it/en/watchlist-film-serie.html">
+  <link rel="alternate" hreflang="x-default" href="https://somto.it/watchlist-film-serie.html">
+<meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="author" content="Somto">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Somto">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:url" content="https://somto.it/watchlist-film-serie.html">
+  <meta property="og:title" content="Watchlist di film e serie TV — Somto">
+  <meta property="og:description" content="Salva i titoli da vedere, organizzali per stato e ritrova in un attimo cosa guardare stasera con la watchlist di Somto.">
+  <meta property="og:image" content="https://somto.it/og/watchlist.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="Watchlist di film e serie TV su Somto">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Watchlist di film e serie TV — Somto">
+  <meta name="twitter:description" content="Salva i titoli da vedere, organizzali per stato e ritrova cosa guardare stasera con la watchlist di Somto.">
+  <meta name="twitter:image" content="https://somto.it/og/watchlist.png">
+
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://identitytoolkit.googleapis.com" crossorigin>
+
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+
+  <link rel="stylesheet" href="/css/landing.bundle.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://somto.it/" },
+      { "@type": "ListItem", "position": 2, "name": "Watchlist film e serie TV", "item": "https://somto.it/watchlist-film-serie.html" }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Cos'è la watchlist di Somto?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "La watchlist è la lista dei film e delle serie TV che vuoi vedere. Su Somto la salvi in un unico posto: ogni volta che scopri un titolo interessante lo aggiungi con un tocco e lo ritrovi quando arriva il momento di guardarlo."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Come aggiungo un film o una serie alla watchlist?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Puoi aggiungere un titolo dalla ricerca o dalla sua scheda, con un solo tocco. Il titolo entra subito nella watchlist insieme a voto, generi, stagioni e ai pareri dei tuoi amici."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "La watchlist di Somto è gratis?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sì, la watchlist e tutte le funzioni di Somto sono gratuite. Somto è disponibile come web app e su iOS, e la tua lista resta sincronizzata su entrambi."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "La watchlist mi aiuta a riprendere le serie iniziate?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sì. Per le serie TV la watchlist tiene traccia di dove sei rimasto: quando esce una nuova stagione sai subito da quale episodio ripartire, senza dover ricostruire nulla a memoria."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="lp-body" data-no-shell>
+
+  <header class="lp-nav" id="lpNav">
+    <div class="lp-nav-inner">
+      <a class="lp-nav-logo" href="/" aria-label="Somto — home">
+        <img src="/icons/somto-wordmark.png" alt="Somto">
+      </a>
+      <a class="lp-nav-cta" href="/login.html?next=/home.html">Entra</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="lp-hero">
+      <div class="lp-hero-glow g1"></div>
+      <div class="lp-hero-glow g2"></div>
+      <div class="lp-hero-glow g3"></div>
+      <div class="lp-hero-inner">
+        <span class="lp-eyebrow">Watchlist · Film e serie TV</span>
+        <h1>La tua <span class="lp-grad-text">watchlist</span> di film e serie TV</h1>
+        <p class="lp-hero-sub">
+          Salva in un unico posto tutti i film e le serie TV che vuoi vedere.
+          Con la watchlist di Somto non perdi più il filo di cosa guardare.
+        </p>
+        <div class="lp-cta-row">
+          <a class="lp-btn lp-btn-primary" href="/login.html?next=/home.html">Crea la tua watchlist</a>
+          <a class="lp-btn lp-btn-ghost" href="/">Vai alla home</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">A cosa serve</span>
+          <h2 class="lp-h2">Una lista sola per tutto quello che vuoi vedere</h2>
+          <p class="lp-lead">Basta titoli segnati su appunti sparsi, screenshot dimenticati e consigli persi nelle chat.</p>
+        </div>
+        <div class="lp-about-text">
+          <p>La watchlist è il punto di partenza di Somto: ogni volta che scopri un film o una serie TV interessante lo salvi con un tocco e lo ritrovi quando arriva il momento giusto. Niente più serate passate a scorrere cataloghi infiniti senza decidere.</p>
+          <p>Su Somto la watchlist non è una semplice lista statica. Ogni titolo porta con sé voto, stagioni, generi e i pareri dei tuoi amici, così quando apri la lista hai già tutto quello che ti serve per scegliere cosa guardare stasera.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">Cosa puoi fare</span>
+          <h2 class="lp-h2">La watchlist, come dovrebbe essere</h2>
+        </div>
+        <div class="lp-grid">
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 2.6h11A1.9 1.9 0 0 1 19.4 4.5v16.1c0 .8-.9 1.3-1.6.9L12 18.1l-5.8 3.4c-.7.4-1.6-.1-1.6-.9V4.5A1.9 1.9 0 0 1 6.5 2.6Z"/></svg></span>
+            <h3>Salva ogni titolo</h3>
+            <p>Aggiungi film e serie TV alla watchlist con un tocco, dalla ricerca o dalla scheda del titolo.</p>
+          </article>
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.6h18v2.6H3zM3 10.7h18v2.6H3zM3 15.8h12v2.6H3z"/></svg></span>
+            <h3>Organizza per stato</h3>
+            <p>Distingui i titoli da vedere da quelli ancora da votare e tieni la lista sempre ordinata.</p>
+          </article>
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+            <h3>Riprendi le serie</h3>
+            <p>Quando esce una nuova stagione sai subito dove eri rimasto e da dove ripartire.</p>
+          </article>
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 11.5a3.6 3.6 0 1 0 0-7.2 3.6 3.6 0 0 0 0 7.2Zm8 .5a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM9 13.2c-3.5 0-7 1.8-7 4.6V21h14v-3.2c0-2.8-3.5-4.6-7-4.6Zm8 .3c-.6 0-1.2.06-1.7.17 1.1 1 1.7 2.3 1.7 3.93V21h5v-2.7c0-2.5-2.9-3.8-5-3.8Z"/></svg></span>
+            <h3>Ispirati agli amici</h3>
+            <p>Guarda cosa salvano e votano le persone che segui e aggiungi i loro consigli alla tua lista.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">Esplora Somto</span>
+          <h2 class="lp-h2">Molto più di una watchlist</h2>
+        </div>
+        <div class="lp-about-text">
+          <p>La watchlist è solo l'inizio. Su Somto puoi anche <a href="/app-recensioni-film-serie.html">votare e recensire film e serie TV</a>, sfidare gli amici ai <a href="/quiz-film-serie-tv.html">quiz su film e serie TV</a> e ricevere <a href="/consigli-film-serie-amici.html">consigli su cosa guardare dai tuoi amici</a>.</p>
+          <p>Torna alla <a href="/">home di Somto</a> per scoprire tutte le funzionalità della piattaforma.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">Domande frequenti</span>
+          <h2 class="lp-h2">Tutto sulla watchlist di Somto</h2>
+        </div>
+        <div class="lp-faq">
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">Cos'è la watchlist di Somto?</summary>
+            <div class="lp-faq-a"><p>La watchlist è la lista dei film e delle serie TV che vuoi vedere. Su Somto la salvi in un unico posto: ogni volta che scopri un titolo interessante lo aggiungi con un tocco e lo ritrovi quando arriva il momento di guardarlo.</p></div>
+          </details>
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">Come aggiungo un film o una serie alla watchlist?</summary>
+            <div class="lp-faq-a"><p>Puoi aggiungere un titolo dalla ricerca o dalla sua scheda, con un solo tocco. Il titolo entra subito nella watchlist insieme a voto, generi, stagioni e ai pareri dei tuoi amici.</p></div>
+          </details>
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">La watchlist di Somto è gratis?</summary>
+            <div class="lp-faq-a"><p>Sì, la watchlist e tutte le funzioni di Somto sono gratuite. Somto è disponibile come web app e su iOS, e la tua lista resta sincronizzata su entrambi.</p></div>
+          </details>
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">La watchlist mi aiuta a riprendere le serie iniziate?</summary>
+            <div class="lp-faq-a"><p>Sì. Per le serie TV la watchlist tiene traccia di dove sei rimasto: quando esce una nuova stagione sai subito da quale episodio ripartire, senza dover ricostruire nulla a memoria.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section lp-final">
+      <div class="lp-container">
+        <div class="lp-final-inner">
+          <h2>Inizia la tua watchlist oggi</h2>
+          <p>Gratis, su web e iOS. Salva il primo titolo e non dimenticare mai più cosa guardare.</p>
+          <a class="lp-btn lp-btn-primary" href="/login.html?next=/home.html">Entra su Somto</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="lp-footer">
+    <div class="lp-footer-inner">
+      <div class="lp-footer-brand">
+        <img src="/icons/somto-wordmark.png" alt="Somto">
+        <p>Il social per chi ama film e serie TV. Vota, scopri e decidi cosa guardare con gli amici.</p>
+      </div>
+      <nav class="lp-footer-cols" aria-label="Link del sito">
+        <div class="lp-footer-col">
+          <h4>Somto</h4>
+          <a href="/">Home</a>
+          <a href="/login.html?next=/home.html">Accedi</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Scopri</h4>
+          <a href="/watchlist-film-serie.html">Watchlist</a>
+          <a href="/app-recensioni-film-serie.html">Voti e recensioni</a>
+          <a href="/quiz-film-serie-tv.html">Quiz</a>
+          <a href="/consigli-film-serie-amici.html">Consigli tra amici</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Confronti</h4>
+          <a href="/somto-vs-letterboxd.html">Somto vs Letterboxd</a>
+          <a href="/somto-vs-justwatch.html">Somto vs JustWatch</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Legale</h4>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Termini</a>
+          <a href="/cookies.html">Cookie</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Supporto</h4>
+          <a href="/support.html">Centro assistenza</a>
+        </div>
+      </nav>
+    </div>
+    <div class="lp-footer-base">© 2026 Somto. Tutti i diritti riservati.</div>
+  </footer>
+
+  <script>
+    (function () {
+      var nav = document.getElementById("lpNav");
+      if (!nav) return;
+      var onScroll = function () { nav.classList.toggle("is-scrolled", window.scrollY > 12); };
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+    })();
+  </script>
+</body>
+</html>

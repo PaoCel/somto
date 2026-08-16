@@ -1,0 +1,1165 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Dettaglio — Somto</title>
+  <meta name="robots" content="noindex,follow">
+  <meta name="description" content="Dettagli, voto e stagioni del contenuto">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Somto">
+  <meta property="og:description" content="Scopri e condividi film e serie TV su Somto.">
+  <meta property="og:image" content="/icons/icon-512.png">
+  <meta property="og:url" content="https://somto.it/title.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/css/title.bundle.css">
+  <link rel="stylesheet" href="/css/components/app-shell.css">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="/icons/icon-167.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icons/icon-120.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Somto">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0A0A0A">
+</head>
+<body>
+  <div id="appSplash" class="app-splash"><img class="splash-logo splash-wordmark" src="/icons/somto-wordmark.png" alt="Somto" data-i18n-attr="alt"><div class="splash-spinner"></div></div>
+
+  <main class="container page title-page">
+
+    <!-- ===== HERO HEADER (mirror: TitleHeroHeader) ===== -->
+    <section class="title-hero">
+      <div class="title-hero-backdrop" id="titleBackdrop"></div>
+      <div class="title-hero-scrim"></div>
+
+      <div class="title-hero-inner">
+        <!-- Top bar: type + year badges, watchlist, more, vote -->
+        <div class="title-hero-topbar">
+          <span class="title-hero-badge badge-accent" id="tTypeBadge">—</span>
+          <span class="title-hero-badge badge-warm" id="tYearBadge" style="display:none;"></span>
+          <span class="title-hero-topbar-spacer"></span>
+          <button id="watchlistBtn" class="title-hero-iconbtn" type="button" aria-label="Aggiungi a watchlist" style="display:none;" data-i18n-attr="aria-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+            </svg>
+          </button>
+          <button id="moreActionsBtn" class="title-hero-iconbtn" type="button" aria-label="Azioni del titolo" data-i18n-attr="aria-label">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/>
+            </svg>
+          </button>
+          <button id="heroVoteBtn" class="title-hero-votebtn" type="button" aria-label="Vota il titolo" data-i18n-attr="aria-label">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+            <span id="heroVoteBtnLabel" data-i18n>Vota</span>
+          </button>
+        </div>
+
+        <!-- Poster + text content -->
+        <div class="title-hero-main">
+          <div class="title-hero-poster" id="heroPoster">
+            <div class="poster-ph">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+            </div>
+          </div>
+
+          <div class="title-hero-text">
+            <h1 id="tName">Caricamento...</h1>
+            <p class="title-hero-original" id="tOriginal" style="display:none;"></p>
+            <p class="title-hero-sub" id="tSub"></p>
+
+            <div class="title-hero-statusrow" id="tStatusRow"></div>
+
+            <div class="title-hero-duration" id="tDuration" style="display:none;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+              <span id="tDurationText"></span>
+            </div>
+
+            <div class="title-hero-bottomrow">
+              <div class="title-hero-genres" id="tGenres"></div>
+              <div class="title-hero-stats">
+                <button class="title-hero-stat" id="statCommunityBtn" type="button">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                  <span class="title-hero-stat-value" id="statCommunity">—</span>
+                  <span class="title-hero-stat-sub" id="statCommunitySub"></span>
+                </button>
+                <button class="title-hero-stat" id="statFriendsBtn" type="button">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg>
+                  <span class="title-hero-stat-value" id="statFriends">—</span>
+                  <span class="title-hero-stat-sub" id="statFriendsSub"></span>
+                </button>
+                <button class="title-hero-stat" id="statExpertsBtn" type="button" style="display:none;">
+                  <span class="title-hero-stat-value" id="statExperts">—</span>
+                  <span class="title-hero-stat-sub" id="statExpertsSub"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Guest unlock -->
+    <div id="guestUnlockCard" class="glass-card guest-unlock-card" style="display:none;">
+      <p class="guest-unlock-copy" data-i18n>Iscriviti per votare, usare la watchlist, suggerire titoli e aprire thread con i tuoi amici.</p>
+      <a id="guestUnlockBtn" class="btn primary small" href="/login.html" data-i18n>Accedi o registrati</a>
+    </div>
+
+    <!-- ===== PERSONAL TRACKING (mirror: TitlePersonalTrackingSection) ===== -->
+    <section id="personalStateCard" class="glass-card title-tracking-card" style="display:none;">
+      <div class="title-section-head">
+        <h3 class="title-section-title" data-i18n>Tieni traccia di quello che hai visto</h3>
+        <p class="title-section-sub" id="personalStateSummary" data-i18n>Segna visto, progressi e rewatch senza dover votare subito.</p>
+      </div>
+      <div id="personalStateMeta" class="title-tracking-meta"></div>
+      <div id="personalStateActions" class="title-tracking-actions"></div>
+    </section>
+
+    <!-- ===== TAB BAR (mirror: TitleDetailTabBar) ===== -->
+    <nav class="title-tabbar" id="tabsNav" aria-label="Sezioni titolo">
+      <button class="tab-btn active" data-tab="overview" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
+        </svg>
+        <span data-i18n>Panoramica</span>
+      </button>
+      <button class="tab-btn" data-tab="episodes" type="button" id="episodesTabBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9h.01M7 13h.01M11 9h6M11 13h6"/>
+        </svg>
+        <span data-i18n>Episodi</span>
+      </button>
+      <button class="tab-btn" data-tab="updates" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/><path d="M8 3.5 5.5 6M16 3.5 18.5 6"/>
+        </svg>
+        <span data-i18n>Aggiornamenti</span>
+      </button>
+      <button class="tab-btn" data-tab="community" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 15a4 4 0 0 1-4 4H7l-4 4V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/>
+        </svg>
+        <span data-i18n>Community</span>
+      </button>
+    </nav>
+
+    <!-- ===== TAB CONTENT ===== -->
+    <div class="tabs-content">
+
+      <!-- TAB: PANORAMICA -->
+      <div class="tab-panel active" data-panel="overview">
+        <div class="glass-card" id="trailerCard" style="display:none;">
+          <div class="title-section-head title-section-head-row">
+            <div>
+              <h3 class="title-section-title" data-i18n>Sinossi e trailer</h3>
+              <p class="title-section-sub" data-i18n>Contesto editoriale e trailer ufficiale nello stesso blocco.</p>
+            </div>
+            <button id="trailerWatchOnYt" class="btn ghost small" type="button" style="display:none;" data-i18n>Apri su YouTube</button>
+          </div>
+          <div class="trailer-player" id="trailerPlayer"></div>
+          <div class="hint" id="trailerFallback" style="display:none;" data-i18n>Nessun trailer disponibile.</div>
+        </div>
+
+        <div class="glass-card" id="titleNewsCard" style="display:none;">
+          <div class="title-section-head">
+            <div>
+              <h3 class="title-section-title" data-i18n>Novità</h3>
+              <p class="title-section-sub" data-i18n>Trailer, teaser e prossime uscite di questo titolo.</p>
+            </div>
+          </div>
+          <div class="title-news-upcoming" id="titleNewsUpcoming" style="display:none;"></div>
+          <div class="title-news-videos" id="titleNewsVideos"></div>
+        </div>
+
+        <div class="glass-card watch-providers-card" id="watchProvidersCard" style="display:none;">
+          <div class="title-section-head title-section-head-row">
+            <div>
+              <h3 class="title-section-title" data-i18n>Dove guardarlo</h3>
+              <p class="title-section-sub" id="watchProvidersMeta" data-i18n>Regione IT</p>
+            </div>
+            <div class="watch-providers-actions">
+              <a id="watchProvidersTmdblink" class="btn ghost small" href="#" target="_blank" rel="noreferrer noopener" style="display:none;" data-i18n>Apri su TMDb</a>
+              <button id="watchProvidersSuggestBtn" class="btn ghost small" type="button" style="display:none;" data-i18n>Suggerisci</button>
+            </div>
+          </div>
+          <div id="watchProvidersList"><div class="hint">Caricamento...</div></div>
+          <p class="watch-providers-attribution" data-i18n>Dati streaming forniti da TMDb / JustWatch.</p>
+        </div>
+
+        <div class="glass-card cast-card" id="castCard" style="display:none;">
+          <div class="title-section-head title-section-head-row">
+            <div>
+              <h3 class="title-section-title" data-i18n>Cast</h3>
+              <p class="title-section-sub" id="castSubtitle" data-i18n>Chi recita, e chi ha conquistato la community.</p>
+            </div>
+            <button id="castShowAllBtn" class="btn ghost small" type="button" style="display:none;" data-i18n>Vedi tutto il cast</button>
+          </div>
+          <div class="cast-grid" id="castGrid"></div>
+          <button id="castVoteBtn" class="btn primary cast-vote-cta" type="button" style="display:none;"></button>
+        </div>
+
+        <div class="glass-card info-card">
+          <div class="title-section-head">
+            <h3 class="title-section-title" data-i18n>Info essenziali</h3>
+            <p class="title-section-sub" data-i18n>Una lettura curata dei dettagli principali.</p>
+          </div>
+          <div class="kv" id="tFacts"></div>
+        </div>
+      </div>
+
+      <!-- TAB: EPISODI (solo TV) -->
+      <div class="tab-panel" data-panel="episodes" id="episodesPanel">
+        <div class="glass-card">
+          <div class="title-section-head">
+            <h3 class="title-section-title" data-i18n>Episodi</h3>
+            <p class="title-section-sub" data-i18n>Qui segni cosa hai visto. Il voto stagione o episodio resta secondario e si apre solo quando ti serve.</p>
+          </div>
+          <div id="noSeasonsHint" class="title-section-empty" style="display:none;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline>
+            </svg>
+            <div class="title-section-empty-title" data-i18n>Stagioni non disponibili</div>
+            <p class="title-section-empty-msg" data-i18n>I dati per questa serie non sono ancora completi.</p>
+          </div>
+          <div id="seasonsBox" class="seasons-list"></div>
+        </div>
+      </div>
+
+      <!-- Il pannello correlati viene integrato in Panoramica dal controller,
+           conservando gli stessi dati e le stesse azioni esistenti. -->
+      <div class="tab-panel" data-panel="correlati" aria-hidden="true">
+        <div class="glass-card">
+          <div class="title-section-head title-section-head-row">
+            <div>
+              <h3 class="title-section-title" data-i18n>Titoli correlati</h3>
+              <p class="title-section-sub" data-i18n>Una corsia orizzontale per continuare l'esplorazione senza perdere il contesto.</p>
+            </div>
+            <button id="btnAddRelated" class="btn small primary" style="display:none;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              <span data-i18n>Aggiungi</span>
+            </button>
+          </div>
+          <div id="relatedList" class="related-rail"></div>
+          <div id="relatedEmpty" class="title-section-empty" style="display:none;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            </svg>
+            <div class="title-section-empty-title" data-i18n>Nessun correlato trovato</div>
+            <p class="title-section-empty-msg" data-i18n>Quando il catalogo trova affinità forti, compariranno qui.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: AGGIORNAMENTI -->
+      <div class="tab-panel title-updates-panel" data-panel="updates">
+        <div id="titleUpdatesHost"></div>
+        <div id="titleUpdatePreferences" class="glass-card title-update-preferences" style="display:none;">
+          <div class="title-section-head">
+            <h3 class="title-section-title" data-i18n>Notifiche per questo titolo</h3>
+            <p class="title-section-sub" data-i18n>Scegli quali aggiornamenti vuoi ricevere.</p>
+          </div>
+          <div class="title-update-preference-actions" role="group" aria-label="Notifiche per questo titolo" data-i18n-attr="aria-label">
+            <button class="btn ghost small" type="button" data-update-pref="auto" data-i18n>Automatico</button>
+            <button class="btn ghost small" type="button" data-update-pref="follow" data-i18n>Segui tutto</button>
+            <button class="btn ghost small" type="button" data-update-pref="important" data-i18n>Solo importanti</button>
+            <button class="btn ghost small" type="button" data-update-pref="muted" data-i18n>Silenzia</button>
+          </div>
+        </div>
+        <div id="titleUpdatesLoading" class="glass-card title-updates-status">
+          <div class="hint" data-i18n>Caricamento aggiornamenti...</div>
+        </div>
+        <div id="titleUpdatesError" class="glass-card title-updates-status" style="display:none;">
+          <p class="hint" data-i18n>Impossibile caricare gli aggiornamenti.</p>
+          <button id="titleUpdatesRetry" class="btn ghost small" type="button" data-i18n>Riprova</button>
+        </div>
+        <div id="titleUpdatesEmpty" class="glass-card title-updates-empty" style="display:none;">
+          <div class="title-section-empty">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg>
+            <div class="title-section-empty-title" data-i18n>Nessun aggiornamento disponibile</div>
+            <p class="title-section-empty-msg" data-i18n>Trailer, uscite e contenuti collegati compariranno qui.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: COMMUNITY -->
+      <div class="tab-panel" data-panel="community">
+        <div class="glass-card social-rating-card">
+          <div class="title-section-head">
+            <h3 class="title-section-title" data-i18n>Il tuo voto</h3>
+            <p class="title-section-sub" data-i18n>Tocca un numero per affinare il voto. Resta tutto su questa scheda.</p>
+          </div>
+          <div id="ratingTitleBox" class="rating-interface"></div>
+          <div class="social-rating-actions">
+            <button id="btnWriteReviewSocial" class="btn ghost small full" type="button" data-i18n>Aggiungi review e condivisione</button>
+          </div>
+        </div>
+
+        <!-- Distribuzione voti community su /10 (dato reale, dai rating title-level in memoria). -->
+        <div class="glass-card" id="communityDistributionCard" style="display:none;">
+          <div class="title-section-head">
+            <h3 class="title-section-title" data-i18n>Voto community</h3>
+            <p class="title-section-sub" data-i18n>Come si distribuiscono i voti su 10.</p>
+          </div>
+          <div class="community-rating-summary">
+            <div class="community-rating-ring" id="communityRatingRing">
+              <span class="community-rating-ring-value" id="communityRatingRingValue">—</span>
+            </div>
+            <div class="community-rating-count" id="communityRatingCount"></div>
+          </div>
+          <div id="communityDistributionBars" class="community-distribution-bars"></div>
+        </div>
+
+        <!-- Emozioni post-visione: "che impressione hai avuto?", max 3 su 12 chiavi. -->
+        <div id="emotionsPickerCard" class="glass-card" style="display:none;">
+          <div class="title-section-head">
+            <h3 class="title-section-title" data-i18n>La tua impressione</h3>
+            <p class="title-section-sub" data-i18n>Scegli fino a 3 emozioni che ti ha lasciato.</p>
+          </div>
+          <div id="emotionsPickerGrid" class="emotion-grid"></div>
+        </div>
+
+        <!-- Breakdown voti per stagione (solo se la serie ha voti dell'utente per stagione o un voto generale).
+             Mostra: lista per stagione, media stagioni, voto generale con menu "Sposta su…". -->
+        <div id="myRatingsBreakdown" class="glass-card" style="display:none;">
+          <div class="title-section-head">
+            <h3 class="title-section-title" data-i18n>I tuoi voti</h3>
+            <p class="title-section-sub" data-i18n>Voto generale e voti per stagione restano separati. Puoi spostare il voto generale su una stagione specifica.</p>
+          </div>
+          <div id="myRatingsBreakdownBody"></div>
+        </div>
+
+        <div id="myReviewPreview" class="glass-card my-review-card" style="display:none;">
+          <div class="title-section-head">
+            <h3 class="title-section-title" data-i18n>La tua review</h3>
+            <p class="title-section-sub" data-i18n>La ritrovi qui subito e, se vuoi, puoi anche condividerla nel thread pubblico.</p>
+          </div>
+          <div class="my-review-body">
+            <p id="myReviewText" class="my-review-text"></p>
+            <div class="my-review-foot">
+              <span class="my-review-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Review personale
+              </span>
+              <button id="btnEditReview" class="btn ghost xs" type="button" data-i18n>Modifica review</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card" id="friendsReviewsCard">
+          <div class="title-section-head">
+            <h3 class="title-section-title">Review amici</h3>
+            <p class="title-section-sub" data-i18n>Voti e recensioni degli amici che segui.</p>
+          </div>
+          <div id="friendsReviewsList" class="social-review-list"></div>
+        </div>
+
+        <div class="glass-card" id="communityReviewsCard">
+          <div class="title-section-head">
+            <h3 class="title-section-title">Review community</h3>
+            <p class="title-section-sub" data-i18n>Pareri leggibili in card, con rating e data ben visibili.</p>
+          </div>
+          <div id="communityReviewsList" class="social-review-list"></div>
+        </div>
+
+        <!-- Che impressione ha fatto alla community: top 5 emozioni scelte + %. Collassata di default (sezione secondaria). -->
+        <details class="glass-card collapsible-card" id="emotionsCommunityCard" style="display:none;">
+          <summary class="title-section-head collapsible-card-summary">
+            <span class="collapsible-card-head-text">
+              <h3 class="title-section-title" data-i18n>Che impressione ha fatto</h3>
+              <p class="title-section-sub" id="emotionsCommunitySub"></p>
+            </span>
+            <svg class="collapsible-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+          </summary>
+          <div id="emotionsCommunityList" class="emotion-bar-list"></div>
+        </details>
+
+        <!-- Personaggi preferiti ("Chi ti ha conquistato?"): top 3 + "vedi tutti".
+             Anti-spoiler: solo pick POSITIVI su personaggi, mai un voto su una
+             persona reale. Il body (locked/unlocked) è tutto JS: gate su
+             isCompletedPersonalState (film visto / serie completata), stesso
+             segnale già usato dal resto della pagina. -->
+        <div class="glass-card" id="charactersCard" style="display:none;">
+          <div class="title-section-head">
+            <h3 class="title-section-title" data-i18n>Personaggi preferiti</h3>
+            <p class="title-section-sub" id="charactersCardSub"></p>
+          </div>
+          <div id="charactersCardBody"></div>
+        </div>
+
+        <!-- Chi la sta guardando: amici/seguiti che stanno guardando questa serie + a che punto sono. Collassata di default. -->
+        <details class="glass-card collapsible-card" id="seriesWatchersCard" style="display:none;">
+          <summary class="title-section-head collapsible-card-summary">
+            <span class="collapsible-card-head-text">
+              <h3 class="title-section-title" data-i18n>Chi la sta guardando</h3>
+              <p class="title-section-sub" data-i18n>Amici e persone che segui, con il punto in cui sono arrivati.</p>
+            </span>
+            <svg class="collapsible-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+          </summary>
+          <div id="seriesWatchersList" class="series-watchers-list"></div>
+        </details>
+
+        <!-- Liste pubbliche che contengono questo titolo. Collassata di default. -->
+        <details class="glass-card collapsible-card" id="titleListsCard" style="display:none;">
+          <summary class="title-section-head collapsible-card-summary">
+            <span class="collapsible-card-head-text">
+              <h3 class="title-section-title">In queste liste</h3>
+              <p class="title-section-sub" data-i18n>Liste pubbliche e raccolte editoriali che includono questo titolo.</p>
+            </span>
+            <svg class="collapsible-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+          </summary>
+          <div id="titleListsList" class="title-lists-list"></div>
+        </details>
+
+        <!-- Azioni social -->
+        <div class="glass-card" id="threadBox" style="display:none;">
+          <div class="title-section-head">
+            <h3 class="title-section-title">Azioni social</h3>
+            <p class="title-section-sub" data-i18n>Suggerimenti, conversazioni di gruppo e thread pubblico dedicato.</p>
+          </div>
+
+          <div class="social-actions">
+            <button id="btnOpenRecommend" class="social-action-row" type="button">
+              <span class="social-action-icon icon-pink">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
+              </span>
+              <span class="social-action-text">
+                <span class="social-action-title" data-i18n>Suggerisci a un amico</span>
+                <span class="social-action-desc" data-i18n>Invia il titolo in DM con un messaggio personale.</span>
+              </span>
+              <svg class="social-action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+
+            <button id="btnOpenGroupThread" class="social-action-row" type="button">
+              <span class="social-action-icon icon-cyan">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a4 4 0 0 1-4 4H7l-4 4V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>
+              </span>
+              <span class="social-action-text">
+                <span class="social-action-title" data-i18n>Apri una discussione di gruppo</span>
+                <span class="social-action-desc" data-i18n>Condividilo in un gruppo esistente o creane uno al volo.</span>
+              </span>
+              <svg class="social-action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+
+            <button id="btnOpenPublicThread" class="social-action-row" type="button">
+              <span class="social-action-icon icon-warm">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+              </span>
+              <span class="social-action-text">
+                <span class="social-action-title" data-i18n>Apri il thread pubblico</span>
+                <span class="social-action-desc" data-i18n>Leggi cosa sta dicendo la community e partecipa.</span>
+              </span>
+              <svg class="social-action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+
+            <button id="btnOpenDmThread" class="social-action-row" type="button">
+              <span class="social-action-icon icon-pink">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </span>
+              <span class="social-action-text">
+                <span class="social-action-title" data-i18n>Avvia una chat con un amico</span>
+                <span class="social-action-desc" data-i18n>Conversazione privata 1:1 su questo titolo.</span>
+              </span>
+              <svg class="social-action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Suggerisci (legacy box: nascosto, azioni unificate sopra) -->
+        <div id="recBox" style="display:none;"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <script type="module" src="/js/utils/tabbar.bootstrap.js"></script>
+
+  <!-- MODALS -->
+
+  <!-- Edit Modal -->
+  <div id="editBox" class="modal" style="display:none;" role="dialog">
+    <div class="modal-backdrop" data-close="1"></div>
+    <div class="modal-card modal-scrollable">
+      <div class="modal-header">
+        <h2 class="modal-title" id="editTitle" data-i18n>Modifica contenuto</h2>
+        <button class="modal-close" data-close="1" aria-label="Chiudi" data-i18n-attr="aria-label">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <p class="text-muted" id="editSubtitle" style="margin-bottom: var(--space-md);"></p>
+
+        <form id="editForm">
+          <!-- Tab navigation -->
+          <div class="edit-tabs">
+            <button type="button" class="edit-tab active" data-tab="general">Generale</button>
+            <button type="button" class="edit-tab" data-tab="people" data-i18n>Persone</button>
+            <button type="button" class="edit-tab" data-tab="extra">Extra</button>
+          </div>
+
+          <!-- TAB: Generale -->
+          <div class="edit-tab-panel active" data-panel="general">
+            <div class="form-grid">
+              <!-- Poster -->
+              <div class="field full">
+                <span class="label">Locandina</span>
+                <div class="poster-edit">
+                  <div class="poster-edit-preview" id="ePosterPreview">
+                    <div class="poster-ph">
+                      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="poster-edit-actions">
+                    <input id="ePosterFile" type="file" class="input" accept="image/*" />
+                    <button id="ePosterRemove" class="btn small ghost" type="button" data-i18n>Rimuovi</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Titolo -->
+              <div class="field">
+                <label for="eName" class="label required">Titolo</label>
+                <input id="eName" type="text" class="input" required>
+              </div>
+
+              <!-- Tipo -->
+              <div class="field">
+                <label for="eType" class="label required" data-i18n>Tipo</label>
+                <select id="eType" class="input" required>
+                  <option value="movie" data-i18n>Film</option>
+                  <option value="tv" data-i18n>Serie TV</option>
+                </select>
+              </div>
+
+              <!-- Anno -->
+              <div class="field">
+                <label for="eYear" class="label">Anno</label>
+                <input id="eYear" type="number" class="input" min="1880" max="2100">
+              </div>
+
+              <!-- Durata Film -->
+              <div id="eRowDurationMovie" class="field">
+                <label for="eDurationMovie" class="label">Durata (min)</label>
+                <input id="eDurationMovie" type="number" class="input" min="1" max="600">
+              </div>
+
+              <!-- Info Serie TV -->
+              <div id="eRowTvFields" class="field full" style="display:none;">
+                <span class="label">Info serie</span>
+                <div class="form-grid cols-3">
+                  <div class="field">
+                    <label for="eSeasonsCount" class="label">Stagioni</label>
+                    <input id="eSeasonsCount" type="number" class="input" min="1" max="200">
+                  </div>
+                  <div class="field">
+                    <label for="eEpisodesPerSeason" class="label">Ep./stagione</label>
+                    <input id="eEpisodesPerSeason" type="number" class="input" min="1" max="200">
+                  </div>
+                  <div class="field">
+                    <label for="eDurationEpisode" class="label">Durata ep. (min)</label>
+                    <input id="eDurationEpisode" type="number" class="input" min="1" max="300">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Dettaglio stagioni (episodi diversi per stagione) -->
+              <div id="eRowTvSeasonsDetail" class="field full" style="display:none;">
+                <span class="label" data-i18n>Episodi per stagione</span>
+                <label class="toggle-line">
+                  <input id="eTogglePerSeason" type="checkbox">
+                  <span class="toggle-switch" aria-hidden="true"></span>
+                  <span class="toggle-text" data-i18n>Stagioni con episodi diversi</span>
+                </label>
+                <div class="hint" style="margin-top:6px;" data-i18n>Se attivo, puoi indicare quanti episodi ha ogni stagione.</div>
+                <div id="eSeasonsDetailGrid" class="season-details-grid" style="display:none;"></div>
+              </div>
+
+              <!-- Descrizione -->
+              <div class="field full">
+                <label for="eDescription" class="label" data-i18n>Descrizione</label>
+                <textarea id="eDescription" class="input" rows="3" placeholder="Breve sinossi..."></textarea>
+              </div>
+
+              <!-- Generi -->
+              <div class="field full">
+                <span class="label required" data-i18n>Generi</span>
+                <div id="eGenres" class="chips"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB: Persone -->
+          <div class="edit-tab-panel" data-panel="people">
+            <div class="form-grid">
+              <div class="field full">
+                <label class="label" for="eDirectorSearch" data-i18n>Regia</label>
+                <div class="people-picker">
+                  <div class="people-selected" id="eDirectorsSelected"></div>
+                  <input id="eDirectorSearch" type="text" class="input" placeholder="Cerca o aggiungi un regista..." autocomplete="off" data-i18n-attr="placeholder">
+                  <div class="people-results" id="eDirectorResults" style="display:none;"></div>
+                </div>
+                <div class="hint" style="margin-top:6px;" data-i18n>Puoi aggiungere registi e attori anche successivamente.</div>
+              </div>
+
+              <div class="field full">
+                <label class="label" for="eCastSearch">Attori</label>
+                <div class="people-picker">
+                  <div class="people-selected" id="eCastSelected"></div>
+                  <input id="eCastSearch" type="text" class="input" placeholder="Cerca o aggiungi un attore..." autocomplete="off" data-i18n-attr="placeholder">
+                  <div class="people-results" id="eCastResults" style="display:none;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB: Extra -->
+          <div class="edit-tab-panel" data-panel="extra">
+            <div class="form-grid cols-2">
+              <div class="field">
+                <label for="eOriginalName" class="label">Titolo originale</label>
+                <input id="eOriginalName" type="text" class="input">
+              </div>
+              <div class="field">
+                <label for="eAliases" class="label" data-i18n>Altri titoli</label>
+                <input id="eAliases" type="text" class="input">
+              </div>
+              <div class="field">
+                <label for="eLanguage" class="label" data-i18n>Lingua</label>
+                <input id="eLanguage" type="text" class="input">
+              </div>
+              <div class="field">
+                <label for="eCountry" class="label">Paese</label>
+                <input id="eCountry" type="text" class="input">
+              </div>
+              <div class="field full">
+                <label for="eNetwork" class="label">Piattaforma</label>
+                <input id="eNetwork" type="text" class="input">
+              </div>
+            </div>
+          </div>
+
+          <div id="editStatus" class="hint" style="display:none;"></div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button id="btnCancelEdit" class="btn ghost" type="button" data-close="1" data-i18n>Annulla</button>
+        <button id="btnSaveEdit" class="btn primary" type="submit" form="editForm" data-i18n>Salva</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Related Modal -->
+  <div id="relatedModal" class="modal" style="display:none;">
+    <div class="modal-backdrop" data-close="1"></div>
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 class="modal-title" data-i18n>Aggiungi correlato</h2>
+        <button class="modal-close" data-close="1">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="field">
+          <label for="relatedSearch" class="label" data-i18n>Cerca titolo</label>
+          <input id="relatedSearch" type="text" class="input" placeholder="Cerca..." data-i18n-attr="placeholder">
+        </div>
+
+        <div id="relatedSearchResults" class="search-results"></div>
+        <div id="relatedSearchStatus" class="hint" style="display:none;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recommend Modal -->
+  <div id="recModal" class="modal" style="display:none;">
+    <div class="modal-backdrop" data-close="1"></div>
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 class="modal-title" data-i18n>Suggerisci a un amico</h2>
+        <button class="modal-close" data-close="1">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form id="recForm">
+          <div class="field">
+            <label for="recTo" class="label">Amico</label>
+            <select id="recTo" class="input" required></select>
+          </div>
+          <div class="field">
+            <label for="recMsg" class="label">Messaggio (opzionale)</label>
+            <textarea id="recMsg" class="input" rows="3"></textarea>
+          </div>
+          <div id="recStatus" class="hint" style="display:none;"></div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn ghost" type="button" data-close="1" data-i18n>Annulla</button>
+        <button id="recSend" class="btn primary" type="submit" form="recForm" data-i18n>Invia</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Episode Action Sheet: aperto dal tap su un cerchio episodio (tab Episodi).
+       Bottom-sheet vero (grabber + card ancorata in basso, vedi .ep-sheet* in
+       title.css) invece del modale centrato generico — stessa meccanica
+       openModal/closeModal (display:block/none), solo skin diversa. -->
+  <div id="epActionSheet" class="modal ep-sheet" hidden>
+    <div class="modal-backdrop" data-close="1"></div>
+    <div class="modal-card ep-sheet-card">
+      <div class="ep-sheet-grabber" aria-hidden="true"></div>
+
+      <div class="modal-header ep-sheet-header">
+        <h2 class="modal-title" id="epSheetTitle">S1 · E1</h2>
+        <button class="modal-close" data-close="1" aria-label="Chiudi" data-i18n-attr="aria-label">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body ep-sheet-body">
+        <!-- Nessuna immagine per-episodio nel catalogo Somto (vedi
+             episodeMetaFromTitle): niente still/thumbnail, header testuale
+             puro (codice S{n}·E{m} + titolo episodio, vedi #epSheetTitle
+             nell'header sopra). -->
+        <div id="epSheetMeta" class="ep-sheet-meta"></div>
+
+        <div id="epSheetStats" class="ep-sheet-stats"></div>
+
+        <div class="ep-sheet-actions">
+          <button id="epSheetCommentsBtn" class="btn ep-sheet-action ep-sheet-action-primary" type="button">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H7l-4 4V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>
+            <span id="epSheetCommentsLabel" data-i18n>Commenti</span>
+          </button>
+
+          <div class="ep-sheet-secondary-actions">
+            <button id="epSheetSeenBtn" class="btn ghost small ep-sheet-action" type="button" data-i18n>Segna visto</button>
+
+            <div class="ep-sheet-vote-block">
+              <button id="epSheetVoteToggle" class="btn ghost small ep-sheet-action" type="button" data-i18n>Vota</button>
+              <div id="epSheetVoteBox" class="ep-sheet-vote-box" hidden></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Episode SEEN Sheet: esce subito dopo aver segnato visto un episodio
+       (avanzamento di +1, mai per allineamenti bulk "fino a qui"). Porta web
+       dell'EpisodeSeenSheet iOS: voto episodio inline (salva al tocco) +
+       emozioni dell'episodio + CTA discussione.
+       Stesso skin bottom-sheet di .ep-sheet. -->
+  <div id="epSeenSheet" class="modal ep-sheet" hidden>
+    <div class="modal-backdrop" data-close="1"></div>
+    <div class="modal-card ep-sheet-card">
+      <div class="ep-sheet-grabber" aria-hidden="true"></div>
+
+      <div class="modal-header ep-sheet-header">
+        <div class="ep-seen-heading">
+          <h2 class="modal-title" id="epSeenTitle">Visto!</h2>
+          <div id="epSeenSub" class="ep-seen-sub"></div>
+        </div>
+        <button class="modal-close" data-close="1" aria-label="Chiudi" data-i18n-attr="aria-label">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body ep-sheet-body">
+        <div class="field">
+          <span class="label">Com'era l'episodio?</span>
+          <div id="epSeenVoteBox"></div>
+        </div>
+
+        <div id="epSeenEmotionsField" class="field">
+          <span class="label" data-i18n>Come ti sei sentito guardandolo?</span>
+          <div id="epSeenEmotionsGrid" class="emotion-grid"></div>
+          <div id="epSeenEmotionsStatus" class="ep-seen-save-status" role="status" aria-live="polite"></div>
+        </div>
+
+        <!-- "Chi ti ha conquistato?": riga volti compatta, sempre proposta (a
+             insieme alle emozioni, si chiede a OGNI episodio. Salva al
+             tocco, nessun bottone dedicato. -->
+        <div id="epSeenCharactersField" class="field">
+          <span class="label" data-i18n>Chi ti ha conquistato?</span>
+          <div id="epSeenCharactersRow"></div>
+          <div id="epSeenCharactersStatus" class="ep-seen-save-status" role="status" aria-live="polite"></div>
+        </div>
+
+        <div id="epSeenTalk" class="ep-seen-talk" hidden data-i18n>💬 Se ne sta già parlando</div>
+
+        <div class="ep-seen-cta-row">
+          <button id="epSeenCommentBtn" class="btn primary" type="button" data-i18n>Dì la tua</button>
+          <button class="btn ghost" type="button" data-close="1" data-i18n>Non ora</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Episode Discussion Sheet: aperta dal tap su "Commenti" nella action
+       sheet episodio (sostituisce la navigazione a /thread.html?tid=, che
+       apriva una pagina a sé, mezza vuota, difficile da chiudere). Stesso
+       skin bottom-sheet di .ep-sheet (grabber + card ancorata in basso).
+       Due stati interni via [hidden] su due blocchi fratelli:
+       #epDiscGate (warning ingresso spoiler, mostrato 1x per sessione/thread)
+       e #epDiscThread (messaggi + composer, dopo "Entra"). -->
+  <div id="epDiscussionSheet" class="modal ep-sheet ep-disc-sheet" hidden>
+    <div class="modal-backdrop" data-close="1"></div>
+    <div class="modal-card ep-sheet-card ep-disc-card">
+      <div class="ep-sheet-grabber" aria-hidden="true"></div>
+
+      <div class="modal-header ep-sheet-header ep-disc-header">
+        <div class="ep-disc-header-text">
+          <h2 class="modal-title ep-disc-code" id="epDiscCode">S1 · E1</h2>
+          <p class="ep-disc-episode-name" id="epDiscEpisodeName" hidden></p>
+        </div>
+        <button class="modal-close" data-close="1" aria-label="Chiudi discussione" data-i18n-attr="aria-label">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Stato iniziale: warning ingresso spoiler -->
+      <div id="epDiscGate" class="ep-disc-gate">
+        <p class="ep-disc-gate-text" id="epDiscGateText" data-i18n>Questa discussione può contenere spoiler della serie. Vuoi procedere?</p>
+        <div class="ep-disc-gate-actions">
+          <button id="epDiscGateClose" class="btn ghost" type="button" data-close="1" data-i18n>Chiudi</button>
+          <button id="epDiscGateEnter" class="btn primary" type="button" data-i18n>Entra</button>
+        </div>
+      </div>
+
+      <!-- Stato dopo "Entra": messaggi reali + composer -->
+      <div id="epDiscThread" class="ep-disc-thread" hidden>
+        <div id="epDiscMessages" class="ep-disc-messages">
+          <div class="ep-disc-empty" id="epDiscEmpty" hidden data-i18n>Apri tu la conversazione — il primo messaggio popolerà il thread.</div>
+        </div>
+        <form id="epDiscComposerForm" class="ep-disc-composer" autocomplete="off">
+          <div class="ep-disc-composer-field">
+            <input id="epDiscComposerInput" class="ep-disc-composer-input" type="text" placeholder="Scrivi un messaggio…" maxlength="2000" data-i18n-attr="placeholder">
+            <div id="epDiscMentionDropdown" class="mention-dropdown" style="display:none;"></div>
+          </div>
+          <button id="epDiscComposerSend" class="btn primary ep-disc-composer-send" type="submit" aria-label="Invia" data-i18n-attr="aria-label">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Friends Votes Modal -->
+  <div id="friendsVotesModal" class="modal" style="display:none;">
+    <div class="modal-backdrop" data-close="1"></div>
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 class="modal-title" id="friendsVotesTitle" data-i18n>Voti dei tuoi amici</h2>
+        <button class="modal-close" data-close="1">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div id="friendsVotesHint" class="hint" style="display:none;"></div>
+        <div id="friendsVotesList" class="friends-votes-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Personaggi preferiti — classifica completa ("vedi tutti"): la card in
+       pagina resta al top 3, la lista intera vive solo qui dentro. -->
+  <div id="charactersFullModal" class="modal" style="display:none;">
+    <div class="modal-backdrop" data-close="1"></div>
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 class="modal-title" data-i18n>Personaggi preferiti</h2>
+        <button class="modal-close" data-close="1">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div id="charactersFullSub" class="hint" style="display:none;"></div>
+        <div id="charactersFullList" class="char-result-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Thread Modal -->
+  <div id="threadModal" class="modal" style="display:none;">
+    <div class="modal-backdrop" data-close="1"></div>
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 class="modal-title" data-i18n>Apri thread</h2>
+        <button class="modal-close" data-close="1">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="tabs" style="margin-bottom: var(--space-md);">
+          <button id="thrTabDm" class="btn small active" type="button" data-i18n>Con un amico</button>
+          <button id="thrTabGroup" class="btn small" type="button" data-i18n>Gruppo</button>
+        </div>
+
+        <div id="thrDmPanel">
+          <div class="field">
+            <label for="thrTo" class="label">Amico</label>
+            <select id="thrTo" class="input" required></select>
+          </div>
+        </div>
+
+        <div id="thrGroupPanel" style="display:none;">
+          <div class="field">
+            <label for="thrGroupName" class="label">Nome gruppo</label>
+            <input id="thrGroupName" class="input" type="text" />
+          </div>
+          <div class="field">
+            <span class="label">Membri</span>
+            <div id="thrGroupMembers" class="check-list"></div>
+          </div>
+        </div>
+
+        <div id="thrStatus" class="hint" style="display:none;"></div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn ghost" type="button" data-close="1" data-i18n>Annulla</button>
+        <button id="thrOpen" class="btn primary" type="button" data-i18n>Apri</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tooltip for stats -->
+  <div id="statTooltip" class="stat-tooltip" style="display:none;">
+    <div class="tooltip-content" id="tooltipContent"></div>
+  </div>
+
+  <!-- Review Modal (post-voto) -->
+  <!-- Cast completo + voto personaggi (docs/CHARACTER_VOTES_SPEC.md) -->
+  <div id="castModal" class="modal" style="display:none;">
+    <div class="modal-backdrop" data-close="1"></div>
+    <div class="modal-card modal-scrollable">
+      <div class="modal-header">
+        <h2 class="modal-title" id="castModalTitle" data-i18n>Cast completo</h2>
+        <button class="modal-close" data-close="1">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <p class="modal-sub" id="castModalHint"></p>
+      <div class="cast-grid cast-grid-modal" id="castModalGrid"></div>
+      <div class="modal-actions" id="castModalActions" style="display:none;">
+        <button class="btn ghost" data-close="1" data-i18n>Annulla</button>
+        <button class="btn primary" id="castModalSave" data-i18n>Salva</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="reviewModal" class="modal" style="display:none;">
+    <div class="modal-backdrop" data-close="1"></div>
+    <div class="modal-card modal-scrollable">
+      <div class="modal-header">
+        <h2 class="modal-title" data-i18n>Lascia una recensione</h2>
+        <button class="modal-close" data-close="1">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Hint -->
+        <p id="revHint" class="text-muted small" style="margin-bottom: var(--space-md);"></p>
+
+        <!-- Voto (facoltativo, stesso track della pagina) -->
+        <div class="field">
+          <span class="label" data-i18n>Il tuo voto</span>
+          <div id="revRatingBox"></div>
+        </div>
+
+        <!-- Emozioni post-visione (precaricate, salvate insieme alla review) -->
+        <div class="field">
+          <span class="label" data-i18n>Che impressione hai avuto?</span>
+          <div id="revEmotionsGrid" class="emotion-grid"></div>
+        </div>
+
+        <!-- "Chi ti ha conquistato?": solo film a livello titolo (le serie
+             scelgono i personaggi per episodio, nel foglio "episodio visto").
+             Draft locale, salvato insieme al resto della review al submit. -->
+        <div class="field" id="revCharactersField" hidden>
+          <span class="label" data-i18n>Chi ti ha conquistato?</span>
+          <div id="revCharactersRow"></div>
+          <p class="hint" style="margin-top: 0.4rem;" data-i18n>Scegline fino a 3. Facoltativo.</p>
+        </div>
+
+        <!-- Textarea recensione -->
+        <div class="field">
+          <textarea id="revText" class="input" rows="4" maxlength="5000"
+                    placeholder="Cosa ne pensi? (facoltativo)" data-i18n-attr="placeholder"></textarea>
+          <div class="rev-char-count"><span id="revCharCount">0</span>/5000</div>
+        </div>
+
+        <div class="field">
+          <span class="label" data-i18n>Con chi l'hai visto?</span>
+          <div id="revWatchedWithChips" class="rev-ww-chips" style="display:none;"></div>
+          <input id="revWatchedWithSearch" class="input" type="search" placeholder="Cerca tra chi segui…" autocomplete="off" / data-i18n-attr="placeholder">
+          <div id="revWatchedWithResults" class="rev-ww-results" style="display:none;"></div>
+          <div id="revWatchedWithHint" class="hint" style="display:none;"></div>
+        </div>
+
+        <div class="field">
+          <span class="label" data-i18n>Aggiungi una foto (facoltativa)</span>
+          <input id="revPhotoFile" class="input" type="file" accept="image/*" />
+          <div class="review-photo-toolbar">
+            <button id="revPhotoRemove" class="btn small ghost" type="button" style="display:none;" data-i18n>Rimuovi foto</button>
+          </div>
+          <div id="revPhotoPreview" class="review-photo-preview">
+            <div class="review-photo-placeholder" data-i18n>Nessuna foto allegata</div>
+          </div>
+        </div>
+
+        <!-- Visibilita: 3 opzioni indipendenti -->
+        <div class="field">
+          <span class="label" data-i18n>Vuoi condividerla?</span>
+          <div class="review-visibility-options">
+            <label class="review-vis-option">
+              <input type="checkbox" id="revPrivate" />
+              <div class="vis-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+              </div>
+              <div class="vis-info">
+                <span class="vis-label" data-i18n>Privata</span>
+                <span class="vis-desc" data-i18n>Solo per te, nella scheda titolo</span>
+              </div>
+            </label>
+            <label class="review-vis-option">
+              <input type="checkbox" id="revPublic" />
+              <div class="vis-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+              </div>
+              <div class="vis-info">
+                <span class="vis-label" data-i18n>Pubblica</span>
+                <span class="vis-desc" data-i18n>Nel thread pubblico del titolo</span>
+              </div>
+            </label>
+            <label class="review-vis-option">
+              <input type="checkbox" id="revGroup" />
+              <div class="vis-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+              <div class="vis-info">
+                <span class="vis-label" data-i18n>Di gruppo</span>
+                <span class="vis-desc" data-i18n>Condividi con un gruppo di amici</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Selettore gruppi (visibile solo se "Di gruppo" checked) -->
+        <div id="revGroupSelector" class="field" style="display:none;">
+          <span class="label">Scegli gruppo</span>
+          <div id="revGroupList" class="check-list"></div>
+          <div id="revNoGroups" class="hint" style="display:none;" data-i18n>Nessun gruppo ancora. Creane uno!</div>
+          <button id="revNewGroup" class="btn small ghost" type="button" style="margin-top: var(--space-sm);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            Crea nuovo gruppo
+          </button>
+          <div id="revNewGroupForm" style="display:none; margin-top: var(--space-sm);">
+            <div class="field">
+              <label for="revNewGroupName" class="label">Nome gruppo</label>
+              <input id="revNewGroupName" class="input" type="text" placeholder="Es. Cinefili, Serie addicted..." maxlength="40" />
+            </div>
+            <div class="field">
+              <span class="label">Membri</span>
+              <div id="revNewGroupMembers" class="check-list"></div>
+            </div>
+            <button id="revCreateGroup" class="btn small primary" type="button">Crea gruppo</button>
+          </div>
+        </div>
+
+        <!-- Status/errore -->
+        <div id="revStatus" class="hint" style="display:none;"></div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn ghost" type="button" data-close="1" data-i18n>Salta</button>
+        <button id="revSubmit" class="btn primary" type="button" data-i18n>Salva</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-wrap" id="toasts" role="status" aria-live="polite"></div>
+
+  <!-- Scripts -->
+  <script src="/firebaseConfig.js"></script>
+  <script type="module" src="/js/pages/title.page.js"></script>
+
+
+  <script src="/js/pwa.js" defer></script>
+</body>
+</html>

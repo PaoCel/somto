@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Accedi — Somto</title>
+  <meta name="robots" content="noindex,follow">
+  <meta name="description" content="Accedi o registrati su Somto">
+
+  <link rel="stylesheet" href="/css/auth.bundle.css">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="/icons/icon-167.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icons/icon-120.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Somto">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0A0A0A">
+</head>
+<body data-no-shell>
+  <main class="auth-screen">
+
+    <!-- Muro di locandine: decorativo, riempito da initAuthWall() a fondo pagina -->
+    <div class="auth-wall" id="authWall" aria-hidden="true"></div>
+    <div class="auth-veil" aria-hidden="true"></div>
+
+    <div class="auth-content">
+
+      <!-- Claim: cosa e' Somto, prima di chiedere le credenziali -->
+      <section class="auth-hero">
+        <div class="auth-brand">
+          <img src="/icons/somto-wordmark.png" alt="Somto" data-i18n-attr="alt">
+        </div>
+
+        <h1 class="auth-claim"><span data-i18n>Stasera</span> <em data-i18n>cosa guardiamo?</em></h1>
+
+        <p class="auth-claim-sub" data-i18n>Tieni il conto di film e serie, salva quello che vuoi vedere e scopri cosa stanno guardando i tuoi amici.</p>
+
+        <p class="auth-free">
+          <span data-i18n>Gratis per</span>
+          <a href="/android.html" data-i18n>Android</a><a class="auth-star" href="/android.html" aria-label="Nota su Android" data-i18n-attr="aria-label">*</a>
+          <span data-i18n>e</span>
+          <a href="https://apps.apple.com/app/id6760966564" rel="noopener" data-i18n>iPhone</a>.
+        </p>
+
+        <ul class="auth-points">
+          <li>
+            <span class="auth-point-ico auth-point-cyan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M6.5 3.5h11a1 1 0 0 1 1 1v16l-6.5-3.8L5.5 20.5v-16a1 1 0 0 1 1-1Z"/>
+              </svg>
+            </span>
+            <span>
+              <span data-i18n>Watchlist e liste condivise</span>
+              <small data-i18n>Filtri, ricerca, link pubblico</small>
+            </span>
+          </li>
+          <li>
+            <span class="auth-point-ico auth-point-warm">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m12 3.6 2.6 5.3 5.9.86-4.25 4.14 1 5.86L12 17l-5.25 2.76 1-5.86L3.5 9.76l5.9-.86L12 3.6Z"/>
+              </svg>
+            </span>
+            <span>
+              <span data-i18n>Voti per serie, stagione o episodio</span>
+              <small data-i18n>Con recensioni ed emozioni</small>
+            </span>
+          </li>
+          <li>
+            <span class="auth-point-ico auth-point-pink">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7.5 7h9a4.5 4.5 0 0 1 4.4 3.6l.7 4a3.2 3.2 0 0 1-5.7 2.5l-.9-1.2h-6l-.9 1.2a3.2 3.2 0 0 1-5.7-2.5l.7-4A4.5 4.5 0 0 1 7.5 7Z"/>
+                <path d="M7.6 11v2.4M6.4 12.2h2.4M15.4 11.4h.01M17.4 13.2h.01"/>
+              </svg>
+            </span>
+            <span>
+              <span data-i18n>Quiz, sfide e classifiche</span>
+              <small data-i18n>XP, streak, sfide anche fuori da Somto</small>
+            </span>
+          </li>
+          <li>
+            <span class="auth-point-ico auth-point-purple">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 3.5v10m0 0 3.6-3.6M12 13.5 8.4 9.9"/>
+                <path d="M4 15.5v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/>
+              </svg>
+            </span>
+            <span>
+              <span data-i18n>Importi da TV Time, Netflix e Trakt</span>
+              <small data-i18n>Non riparti da zero</small>
+            </span>
+          </li>
+        </ul>
+
+        <p class="auth-note">
+          <span data-i18n>* Su Android Somto si usa come web app: dal menu di Chrome scegli «Aggiungi a schermata Home» e resta tra le tue app.</span>
+          <a href="/android.html" data-i18n>Come si fa</a>
+        </p>
+      </section>
+
+      <!-- Form -->
+      <section class="auth-stack">
+        <div class="auth-card">
+          <h1 id="authCardTitle" class="auth-card-title" data-i18n>Entra in Somto</h1>
+
+          <!-- Social sempre disponibili; un tap senza consenso evidenzia i Termini. -->
+          <div id="socialCard" class="auth-social-row">
+            <button id="btnApple" class="auth-social auth-social-compact" type="button" aria-label="Accedi con Apple" data-i18n-attr="aria-label">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.7c0-2.4 2-3.6 2.1-3.6-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.6.9-.8 0-1.9-.9-3.1-.8-1.6 0-3 .9-3.9 2.4-1.6 2.9-.4 7.1 1.2 9.4.8 1.1 1.7 2.4 3 2.4 1.2-.1 1.6-.8 3.1-.8 1.4 0 1.8.8 3.1.8 1.3 0 2.1-1.2 2.9-2.3.9-1.3 1.3-2.6 1.3-2.7-.1 0-2.5-1-2.6-3.9ZM14 5.4c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.1 1.8-1 2.9 1.1.1 2.2-.5 2.8-1.4Z"/></svg>
+              Apple
+            </button>
+            <button id="btnGoogle" class="auth-social auth-social-compact" type="button" aria-label="Accedi con Google" data-i18n-attr="aria-label">
+              <svg viewBox="0 0 48 48" aria-hidden="true">
+                <path fill="#4285F4" d="M24 9.5c3.5 0 6.6 1.2 9 3.5l6.7-6.7C35.7 2.3 30.2 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.2 13.4 17.6 9.5 24 9.5Z"/>
+                <path fill="#34A853" d="M46.5 24.5c0-1.6-.1-3.2-.4-4.7H24v9h12.7c-.6 3-2.3 5.6-4.9 7.3l7.6 5.9c4.5-4.1 7.1-10.2 7.1-17.5Z"/>
+                <path fill="#FBBC05" d="M10.4 28.7c-.5-1.5-.8-3-.8-4.7s.3-3.2.8-4.7l-7.8-6.1C.9 16.2 0 20 0 24s.9 7.8 2.6 10.8l7.8-6.1Z"/>
+                <path fill="#EA4335" d="M24 48c6.5 0 12-2.1 16-5.8l-7.6-5.9c-2.1 1.4-4.8 2.2-8.4 2.2-6.4 0-11.8-3.9-13.7-9.8l-7.8 6.1C6.5 42.6 14.6 48 24 48Z"/>
+              </svg>
+              Google
+            </button>
+          </div>
+
+          <div class="auth-divider"><span data-i18n>oppure</span></div>
+
+          <form id="authForm" class="auth-form" aria-label="Form accesso" data-i18n-attr="aria-label">
+            <input id="email" class="auth-input" type="email" placeholder="Email" autocomplete="email" inputmode="email" required data-i18n-attr="placeholder">
+
+            <div id="fieldName" class="auth-field" hidden>
+              <input id="displayName" class="auth-input" type="text" placeholder="Display name" autocomplete="nickname" data-i18n-attr="placeholder">
+            </div>
+
+            <input id="password" class="auth-input" type="password" placeholder="Password" autocomplete="current-password" required data-i18n-attr="placeholder">
+
+            <div id="fieldConfirm" class="auth-field" hidden>
+              <input id="confirmPassword" class="auth-input" type="password" placeholder="Conferma password" autocomplete="new-password" data-i18n-attr="placeholder">
+            </div>
+
+            <!-- Termini community: richiesti per accesso e registrazione. -->
+            <div id="fieldTerms" class="auth-terms">
+              <label class="auth-terms-toggle">
+                <input id="acceptTerms" type="checkbox">
+                <span class="auth-terms-switch" aria-hidden="true"></span>
+                <span class="auth-terms-copy">
+                  <strong data-i18n>Accetto i Termini di servizio (EULA)</strong>
+                  <small data-i18n>Tolleranza zero per contenuti offensivi, spam o utenti abusivi.</small>
+                </span>
+              </label>
+              <div class="auth-terms-links">
+                <a href="/terms.html" data-i18n>Termini di servizio</a>
+                <a href="/support.html" data-i18n>Supporto e moderazione</a>
+              </div>
+            </div>
+
+            <!-- Età minima 14+ (solo registrazione) -->
+            <div id="fieldAge" class="auth-terms" hidden>
+              <label class="auth-terms-toggle">
+                <input id="ageConfirm" type="checkbox">
+                <span class="auth-terms-switch" aria-hidden="true"></span>
+                <span class="auth-terms-copy">
+                  <strong data-i18n>Confermo di avere almeno 14 anni</strong>
+                  <small>Somto ha funzioni social: età minima 14 anni (vedi <a href="/privacy.html">Privacy</a>).</small>
+                </span>
+              </label>
+            </div>
+
+            <button id="btnSubmit" class="auth-submit" type="submit" data-i18n>Accedi</button>
+          </form>
+
+          <div class="auth-links">
+            <button id="linkReset" class="auth-link-reset" type="button" data-i18n>Reset password</button>
+            <button id="linkToggleMode" class="auth-link-toggle" type="button" data-i18n>Crea un account</button>
+          </div>
+
+          <!-- Prova quiz da ospite: cattura chi arriva al muro login dal funnel quiz -->
+          <a class="auth-guest-quiz-link" href="/quiz-prova.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7.5 7h9a4.5 4.5 0 0 1 4.4 3.6l.7 4a3.2 3.2 0 0 1-5.7 2.5l-.9-1.2h-6l-.9 1.2a3.2 3.2 0 0 1-5.7-2.5l.7-4A4.5 4.5 0 0 1 7.5 7Z"/>
+              <path d="M7.6 11v2.4M6.4 12.2h2.4M15.4 11.4h.01M17.4 13.2h.01"/>
+            </svg>
+            <span data-i18n>Prova un quiz senza registrarti</span>
+          </a>
+
+          <p class="auth-legal">
+            <span data-i18n>Per continuare accetta i</span>
+            <a href="/terms.html" data-i18n>Termini</a>
+            <span data-i18n>e la</span>
+            <a href="/privacy.html">Privacy</a>.
+            <span data-i18n>Età minima 14 anni.</span>
+          </p>
+        </div>
+
+        <!-- Glass card: messaggio di errore/successo -->
+        <div id="authMessage" class="auth-card auth-message" hidden></div>
+
+        <!-- Hint registrazione -->
+        <p id="authHint" class="auth-hint" hidden>
+          Creando l'account accetti i <a href="/terms.html" data-i18n>Termini di servizio</a>, la <a href="/privacy.html">Privacy Policy</a> e puoi rivedere il consenso web dalla <a href="/consent.html">pagina dedicata</a>.
+        </p>
+
+        <a href="/account.html" id="linkGoAccount" class="auth-link-account" hidden data-i18n>Vai al tuo account</a>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Toast Container -->
+  <div class="toast-wrap" id="toasts" role="status" aria-live="polite"></div>
+
+  <!-- Scripts -->
+  <script src="/firebaseConfig.js"></script>
+  <script type="module" src="/js/pages/login.page.js?v=163-2026-07-31-login-vnext"></script>
+  <script src="/js/pwa.js" defer></script>
+</body>
+</html>

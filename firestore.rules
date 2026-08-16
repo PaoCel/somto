@@ -1,0 +1,2901 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ============================================
+    // HELPERS BASE
+    // ============================================
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function uid() {
+      return request.auth.uid;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && uid() == userId;
+    }
+
+    function isTimestampOrNull(value) {
+      return value == null || value is timestamp;
+    }
+
+    // Utility: check list (treated as set) contains every element of another list
+    function listContainsAll(container, subset) {
+      return subset.size() == 0 || container.hasAll(subset);
+    }
+
+    // Whitelist condivisa delle 12 reazioni emozione post-visione (specchio di
+    // EMOTION_KEYS in functions/lib/emotionAggregate.js). Riusata da
+    // titleEmotions.emotions[] e da characterVotes.picks[].reaction
+    // (docs/CHARACTER_VOTES_SPEC.md) — una sola lista, non due copie.
+    function emotionReactionKeys() {
+      return ["shocked", "frustrated", "sad", "reflective", "touched", "amused",
+        "scared", "bored", "understood", "thrilled", "confused", "tense"];
+    }
+
+    // --- USER SAFE ACCESS con get() ---
+    function userPath(userId) {
+      return /databases/$(database)/documents/users/$(userId);
+    }
+
+    function userExists(userId) {
+      return exists(userPath(userId));
+    }
+
+    function trustedFlag(data) {
+      return ('trusted' in data) && data.trusted == true;
+    }
+
+    function adminFlag(data) {
+      return ('isAdmin' in data) && data.isAdmin == true;
+    }
+
+    function levelValue(data) {
+      return ('level' in data) && data.level is string
+        ? data.level
+        : "base";
+    }
+
+    function isTrusted() {
+      return isSignedIn()
+        && userExists(uid())
+        && trustedFlag(get(userPath(uid())).data);
+    }
+
+    function userLevel() {
+      return isSignedIn() && userExists(uid())
+        ? levelValue(get(userPath(uid())).data)
+        : "base";
+    }
+
+    function isAdmin() {
+      return isSignedIn()
+        && userExists(uid())
+        && adminFlag(get(userPath(uid())).data);
+    }
+
+    function isFriendWith(userId, otherUserId) {
+      return isSignedIn()
+        && userExists(userId)
+        && userExists(otherUserId)
+        && exists(/databases/$(database)/documents/users/$(userId)/friends/$(otherUserId))
+        && get(/databases/$(database)/documents/users/$(userId)/friends/$(otherUserId)).data.status == "accepted";
+    }
+
+    function canAutoApproveTitles() {
+      return isAdmin() || isTrusted();
+    }
+
+    function isTrustedOrAdmin() {
+      return isTrusted() || isAdmin();
+    }
+
+    // --- RATE-LIMIT HELPERS ---
+    // Contatore per azione su users/{uid}/rateLimits/{action}. Restituisce true se:
+    //   - non esiste ancora alcun contatore, o
+    //   - la finestra precedente e' scaduta (resetAt < now), o
+    //   - il contatore corrente e' sotto il cap.
+    function rateLimitCounterPath(sourceUid, action) {
+      return /databases/$(database)/documents/users/$(sourceUid)/rateLimits/$(action);
+    }
+
+    function rateLimitOk(sourceUid, action, cap) {
+      return !exists(rateLimitCounterPath(sourceUid, action))
+        || get(rateLimitCounterPath(sourceUid, action)).data.resetAt < request.time
+        || get(rateLimitCounterPath(sourceUid, action)).data.count < cap;
+    }
+
+    // True se targetUid ha bloccato sourceUid (doc users/{targetUid}/blockedUsers/{sourceUid}).
+    function targetHasBlocked(targetUid, sourceUid) {
+      return exists(/databases/$(database)/documents/users/$(targetUid)/blockedUsers/$(sourceUid));
+    }
+
+    // --- SERVER-OWNED COUNTERS (anti-forge) ---
+    // Campi mantenuti SOLO dai trigger server (admin SDK, bypassano le rules):
+    // il client non deve mai modificarli via update. `stats`/contatori profilo
+    // alimentano la classifica creator e il riepilogo attivita'; se scrivibili
+    // dal client la leaderboard e le statistiche profilo sono falsificabili.
+    function userServerCountersUnchanged(prev, next) {
+      return next.get('stats', {}) == prev.get('stats', {})
+        && next.get('followersCount', 0) == prev.get('followersCount', 0)
+        && next.get('friendsCount', 0) == prev.get('friendsCount', 0);
+    }
+    // In signup il client crea il doc con stats azzerate: nessun valore gonfiato.
+    function userStatsZeroOnCreate(data) {
+      return (
+        !('stats' in data)
+        || (
+          data.stats is map
+          && data.stats.get('ratingsCount', 0) == 0
+          && data.stats.get('reviewsCount', 0) == 0
+          && data.stats.get('watchedCount', 0) == 0
+          && data.stats.get('totalWatchMinutes', 0) == 0
+          && data.stats.get('rewatchCount', 0) == 0
+          && data.stats.get('titlesCreated', 0) == 0
+          && data.stats.get('derivedRatingsCount', 0) == 0
+        )
+      )
+      && data.get('followersCount', 0) == 0
+      && data.get('friendsCount', 0) == 0;
+    }
+
+    // --- GUIDED PROFILES (server-only) ---
+    // accountType/isSynthetic/bio sono scritti SOLO da Cloud Functions (admin SDK,
+    // bypassa le rules). Un client che si registra deve restare real_user e non
+    // puo' auto-marcarsi guidato; in update non puo' cambiare questi campi ne'
+    // alterare la disclosure (bio). Default: real_user / non sintetico / bio vuota.
+    function guidedFieldsRealOnCreate(data) {
+      return data.get('accountType', 'real_user') == 'real_user'
+        && data.get('isSynthetic', false) == false;
+    }
+    function guidedFieldsUnchanged(prev, next) {
+      return next.get('accountType', 'real_user') == prev.get('accountType', 'real_user')
+        && next.get('isSynthetic', false) == prev.get('isSynthetic', false)
+        && next.get('bio', '') == prev.get('bio', '');
+    }
+
+    // titles/{id}: `ratingAggregate` (voto community denormalizzato, anche
+    // emesso come AggregateRating JSON-LD nelle pagine SSR), `slug` (URL/redirect
+    // 301) e `mergedTmdbIds` (identita' di merge) sono server-owned. Un utente
+    // trusted puo' editare i metadati del titolo ma non questi campi.
+    function titleServerFieldsUnchanged(prev, next) {
+      return next.get('ratingAggregate', {}) == prev.get('ratingAggregate', {})
+        && next.get('emotionAggregate', {}) == prev.get('emotionAggregate', {})
+        && next.get('slug', '') == prev.get('slug', '')
+        && next.get('mergedTmdbIds', []) == prev.get('mergedTmdbIds', []);
+    }
+
+    // Su CREATE gli stessi campi server-owned devono essere assenti o vuoti:
+    // il guard "Unchanged" sopra vale solo su update, quindi senza questo un
+    // qualunque utente loggato potrebbe forgiare in creazione un ratingAggregate
+    // (-> AggregateRating JSON-LD falso sulle pagine SSR), uno slug (-> squatting
+    // di URL indicizzati /film·/serie) o mergedTmdbIds. slug e aggregati vengono
+    // assegnati SOLO da trigger/CF (onTitleCreatedSlug, recompute*Aggregate).
+    function titleServerFieldsCleanOnCreate(d) {
+      return d.get('ratingAggregate', {}) == {}
+        && d.get('emotionAggregate', {}) == {}
+        && d.get('slug', '') == ''
+        && d.get('mergedTmdbIds', []) == [];
+    }
+
+    // quizStats/agg: lo scoring resta client-authoritative (nessuna Cloud
+    // Function lo aggiorna; il fix server-side e' un follow-up). Le rule non
+    // possono renderlo perfetto, ma vincolano ogni singola scrittura a un delta
+    // plausibile-per-partita: l'exploit "setta totalScore/xp a 9.999.999 in una
+    // riga" non passa piu' — un cheater dovrebbe macinare migliaia di scritture
+    // limitate (rate-limitabili / rilevabili). Cap generosi: nessuna partita
+    // legittima li supera (max ~10 domande/partita, score 1/risposta, xp <= ~54).
+    function quizPrevNum(prev, field) {
+      return prev.get(field, 0) is number ? prev.get(field, 0) : 0;
+    }
+    function quizStatsDeltaOk(prev, next) {
+      return next.get('totalScore', 0) is number
+        && next.get('weeklyScore', 0) is number
+        && next.get('xp', 0) is number
+        && next.get('attemptsCount', 0) is number
+        && next.get('correctCount', 0) is number
+        && next.get('wrongCount', 0) is number
+        && next.get('skippedCount', 0) is number
+        && next.get('dailyStreak', 0) is number
+        && next.get('bestDailyStreak', 0) is number
+        && next.get('dailyBonusGames', 0) is number
+        && next.get('totalScore', 0)      <= quizPrevNum(prev, 'totalScore')      + 50
+        && next.get('weeklyScore', 0)     <= quizPrevNum(prev, 'weeklyScore')     + 50
+        && next.get('xp', 0)              <= quizPrevNum(prev, 'xp')              + 200
+        && next.get('attemptsCount', 0)   <= quizPrevNum(prev, 'attemptsCount')   + 5
+        && next.get('correctCount', 0)    <= quizPrevNum(prev, 'correctCount')    + 50
+        && next.get('wrongCount', 0)      <= quizPrevNum(prev, 'wrongCount')      + 50
+        && next.get('skippedCount', 0)    <= quizPrevNum(prev, 'skippedCount')    + 50
+        && next.get('dailyStreak', 0)     <= quizPrevNum(prev, 'dailyStreak')     + 1
+        && next.get('bestDailyStreak', 0) <= quizPrevNum(prev, 'bestDailyStreak') + 1
+        && next.get('dailyBonusGames', 0) <= quizPrevNum(prev, 'dailyBonusGames') + 5;
+    }
+
+    // ============================================
+    // ANTI-SPOILER (campi condivisi su contenuti social)
+    // ============================================
+    // I doc social (threads.messages, posts, posts.comments, recommendations)
+    // possono dichiarare `containsSpoiler: bool` + `spoilerTitleIds: [string]`
+    // (max 5). Le rule li accettano come optional — i client legacy senza
+    // questi campi continuano a funzionare. La conferma server-side
+    // ("spoilerConfirmedBy") arriva dal callable admin `confirmSpoilerSuspect`
+    // e non è scrivibile dal client.
+    function spoilerFieldsOptional(data) {
+      return (!('containsSpoiler' in data) || data.containsSpoiler is bool)
+        && (
+          !('spoilerTitleIds' in data)
+          || (
+            data.spoilerTitleIds is list
+            && data.spoilerTitleIds.size() <= 5
+          )
+        );
+    }
+
+    // userLists/{id}.followersCount is maintained ONLY by the server trigger
+    // `syncListFollowersCount` (admin SDK, bypasses rules). A client editor
+    // must never change this counter — otherwise follower counts are fakeable.
+    // On CREATE the client may include followersCount == 0 (or omit it).
+    // On UPDATE we freeze it to the stored value.
+    function listFollowersCountUnchanged(prev, next) {
+      return next.get('followersCount', 0) == prev.get('followersCount', 0);
+    }
+
+    function userListPath(listId) {
+      return /databases/$(database)/documents/userLists/$(listId);
+    }
+
+    function userListExists(listId) {
+      return exists(userListPath(listId));
+    }
+
+    function userListData(listId) {
+      return get(userListPath(listId)).data;
+    }
+
+    function listVisibility(data) {
+      return ('visibility' in data) && data.visibility is string
+        ? data.visibility
+        : "private";
+    }
+
+    function listMemberUids(data) {
+      return ('memberUids' in data) && data.memberUids is list
+        ? data.memberUids
+        : [];
+    }
+
+    function listEditorUids(data) {
+      return ('editorUids' in data) && data.editorUids is list
+        ? data.editorUids
+        : [];
+    }
+
+    function listViewerUids(data) {
+      return ('viewerUids' in data) && data.viewerUids is list
+        ? data.viewerUids
+        : [];
+    }
+
+    function isListOwnerData(data) {
+      return isSignedIn()
+        && ('ownerUid' in data)
+        && data.ownerUid is string
+        && data.ownerUid == uid();
+    }
+
+    function isListMemberData(data) {
+      return isSignedIn()
+        && (
+          isListOwnerData(data)
+          || uid() in listMemberUids(data)
+        );
+    }
+
+    function isListViewerData(data) {
+      return isSignedIn()
+        && (
+          isListMemberData(data)
+          || uid() in listViewerUids(data)
+        );
+    }
+
+    function isListEditorData(data) {
+      return isSignedIn()
+        && (
+          isListOwnerData(data)
+          || uid() in listEditorUids(data)
+        );
+    }
+
+    function canReadListData(data) {
+      return isSignedIn()
+        && (
+          isAdmin()
+          || isListViewerData(data)
+        );
+    }
+
+    function canReadListContentData(data) {
+      return isSignedIn()
+        && (
+          isAdmin()
+          || listVisibility(data) == "public"
+          || isListViewerData(data)
+        );
+    }
+
+    function canEditListData(data) {
+      return isSignedIn()
+        && (
+          isAdmin()
+          || isListEditorData(data)
+        );
+    }
+
+    function canReadListById(listId) {
+      return userListExists(listId)
+        && canReadListData(userListData(listId));
+    }
+
+    function canReadListContentById(listId) {
+      return userListExists(listId)
+        && canReadListContentData(userListData(listId));
+    }
+
+    function canEditListById(listId) {
+      return userListExists(listId)
+        && canEditListData(userListData(listId));
+    }
+
+    function canReadListByAfterState(listId) {
+      return (
+        userListExists(listId)
+        && canReadListContentData(userListData(listId))
+      )
+      || (
+        existsAfter(userListPath(listId))
+        && canReadListContentData(getAfter(userListPath(listId)).data)
+      );
+    }
+
+    function canEditListByAfterState(listId) {
+      return (
+        userListExists(listId)
+        && canEditListData(userListData(listId))
+      )
+      || (
+        existsAfter(userListPath(listId))
+        && canEditListData(getAfter(userListPath(listId)).data)
+      );
+    }
+
+    function validListCover(cover) {
+      return cover is map
+        && cover.keys().hasOnly(["imageUrl", "imageURL", "storagePath", "fallbackTitleIds", "accentHex"])
+        && (!('imageUrl' in cover) || cover.imageUrl == null || cover.imageUrl is string)
+        && (!('imageURL' in cover) || cover.imageURL == null || cover.imageURL is string)
+        && (!('storagePath' in cover) || cover.storagePath == null || cover.storagePath is string)
+        && (!('fallbackTitleIds' in cover) || cover.fallbackTitleIds is list)
+        && (!('accentHex' in cover) || cover.accentHex == null || cover.accentHex is string);
+    }
+
+    function validListOwnerSummary(owner, ownerUid) {
+      return owner is map
+        && owner.keys().hasOnly(["uid", "displayName", "photoURL", "avatarURL"])
+        && (!('uid' in owner) || (owner.uid is string && owner.uid == ownerUid))
+        && (!('displayName' in owner) || owner.displayName is string)
+        && (!('photoURL' in owner) || owner.photoURL == null || owner.photoURL is string)
+        && (!('avatarURL' in owner) || owner.avatarURL == null || owner.avatarURL is string);
+    }
+
+    function validUserListDoc(data) {
+      return data.keys().hasOnly([
+          "ownerUid",
+          "title",
+          "description",
+          "visibility",
+          "kind",
+          "memberUids",
+          "editorUids",
+          "viewerUids",
+          "cover",
+          "owner",
+          "ownerDisplayName",
+          "ownerName",
+          "createdAt",
+          "updatedAt",
+          "slug",
+          "slugUpdatedAt",
+          "editorialSlug",
+          "editorial",
+          "followersCount",
+          "itemCount",
+          "completedCount",
+          "itemTitleIds",
+          "previewTitleIds",
+          "savedByUids",
+          "coverImageURL",
+          "coverImageUrl",
+          // Campi scritti SOLO lato server/ops (backfill-list-followers.js,
+          // seed): la hasOnly deve AMMETTERNE LA PRESENZA, altrimenti il
+          // primo doc che li riceve rende la lista immodificabile per il
+          // client (incidente "Marvel cronologico" 2026-07-31: qualsiasi
+          // update owner/admin falliva validUserListDoc → permission-denied).
+          // L'immutabilità lato client è garantita da
+          // listServerOwnedFieldsUnchanged e dal divieto in create.
+          "followersCountUpdatedAt",
+          "isTestSeed"
+        ])
+        && data.title is string
+        && data.title.size() >= 2
+        && data.title.size() <= 80
+        && ('ownerUid' in data)
+        && data.ownerUid is string
+        && data.ownerUid.size() > 0
+        && ('visibility' in data)
+        && data.visibility in ["private", "public", "shared"]
+        && ('kind' in data)
+        && data.kind in ["collection", "ordered_path"]
+        && (!('description' in data) || data.description == null || (data.description is string && data.description.size() <= 280))
+        && (!('owner' in data) || validListOwnerSummary(data.owner, data.ownerUid))
+        && (!('ownerDisplayName' in data) || data.ownerDisplayName is string)
+        && (!('ownerName' in data) || data.ownerName is string)
+        && (!('memberUids' in data) || data.memberUids is list)
+        && (!('editorUids' in data) || data.editorUids is list)
+        && (!('viewerUids' in data) || data.viewerUids is list)
+        && (!('itemTitleIds' in data) || data.itemTitleIds is list)
+        && (!('previewTitleIds' in data) || data.previewTitleIds is list)
+        && (!('savedByUids' in data) || data.savedByUids is list)
+        && (!('followersCount' in data) || data.followersCount is number)
+        && (!('itemCount' in data) || data.itemCount is number)
+        && (!('completedCount' in data) || data.completedCount is number)
+        && (!('slug' in data) || data.slug is string)
+        && (!('slugUpdatedAt' in data) || isTimestampOrNull(data.slugUpdatedAt))
+        && (!('editorialSlug' in data) || data.editorialSlug is string)
+        && (!('editorial' in data) || data.editorial is bool)
+        && (!('coverImageURL' in data) || data.coverImageURL == null || data.coverImageURL is string)
+        && (!('coverImageUrl' in data) || data.coverImageUrl == null || data.coverImageUrl is string)
+        && (!('cover' in data) || validListCover(data.cover))
+        && (!('createdAt' in data) || isTimestampOrNull(data.createdAt))
+        && (!('updatedAt' in data) || isTimestampOrNull(data.updatedAt))
+        && (
+          !('memberUids' in data)
+          || data.ownerUid in data.memberUids
+        )
+        && (
+          !('memberUids' in data)
+          || !('editorUids' in data)
+          || listContainsAll(data.memberUids, data.editorUids)
+        );
+    }
+
+    // itemTitleIds/previewTitleIds/itemCount/cover sono contenuti scelti dal
+    // creatore stesso al momento della creazione (titoli selezionati + cover),
+    // non dati altrui né contatori sociali: possono nascere già popolati.
+    // Restano vincolati per coerenza interna e per un cap dimensionale, cosi'
+    // il costo di validazione resta O(1)-ish e non si presta ad abuso (liste
+    // enormi non hanno senso di prodotto). Il cap 500 e' generoso rispetto a
+    // qualunque uso reale (i picker UI mostrano decine/centinaia di titoli).
+    function listClientCreateServerFieldsValid(data) {
+      return !('slug' in data)
+        && !('slugUpdatedAt' in data)
+        && !('followersCountUpdatedAt' in data)
+        && !('isTestSeed' in data)
+        && !('editorialSlug' in data)
+        && !('editorial' in data)
+        && (!('savedByUids' in data) || data.savedByUids == [])
+        && !('coverImageURL' in data)
+        && !('coverImageUrl' in data)
+        && (!('followersCount' in data) || data.followersCount == 0)
+        && (!('completedCount' in data) || data.completedCount == 0)
+        && (
+          !('itemTitleIds' in data)
+          || (
+            data.itemTitleIds is list
+            && data.itemTitleIds.size() <= 500
+          )
+        )
+        && (
+          !('previewTitleIds' in data)
+          || (
+            data.previewTitleIds is list
+            && data.previewTitleIds.size() <= data.get('itemTitleIds', []).size()
+          )
+        )
+        && (
+          !('itemCount' in data)
+          || data.itemCount == data.get('itemTitleIds', []).size()
+        )
+        && (
+          !('cover' in data)
+          || (
+            validListCover(data.cover)
+            && data.cover.get('fallbackTitleIds', []).size() <= 500
+          )
+        );
+    }
+
+    function listServerOwnedFieldsUnchanged(prev, next) {
+      return next.get('slug', null) == prev.get('slug', null)
+        && next.get('followersCountUpdatedAt', null) == prev.get('followersCountUpdatedAt', null)
+        && next.get('isTestSeed', null) == prev.get('isTestSeed', null)
+        && next.get('slugUpdatedAt', null) == prev.get('slugUpdatedAt', null)
+        && next.get('editorialSlug', null) == prev.get('editorialSlug', null)
+        && next.get('editorial', false) == prev.get('editorial', false)
+        && next.get('followersCount', 0) == prev.get('followersCount', 0)
+        && next.get('savedByUids', []) == prev.get('savedByUids', [])
+        && next.get('coverImageURL', null) == prev.get('coverImageURL', null)
+        && next.get('coverImageUrl', null) == prev.get('coverImageUrl', null)
+        && next.get('owner', null) == prev.get('owner', null)
+        && next.get('ownerDisplayName', null) == prev.get('ownerDisplayName', null)
+        && next.get('ownerName', null) == prev.get('ownerName', null)
+        && next.get('itemCount', 0) == prev.get('itemCount', 0)
+        && next.get('completedCount', 0) == prev.get('completedCount', 0)
+        && next.get('itemTitleIds', []) == prev.get('itemTitleIds', [])
+        && next.get('previewTitleIds', []) == prev.get('previewTitleIds', [])
+        && next.get('cover', null) == prev.get('cover', null);
+    }
+
+    function listMembershipFieldsUnchanged(prev, next) {
+      return next.get('memberUids', []) == prev.get('memberUids', [])
+        && next.get('editorUids', []) == prev.get('editorUids', [])
+        && next.get('viewerUids', []) == prev.get('viewerUids', []);
+    }
+
+    function listCreateTimestampsValid(data) {
+      return ('createdAt' in data)
+        && data.createdAt == request.time
+        && ('updatedAt' in data)
+        && data.updatedAt == request.time;
+    }
+
+    function listUpdateTimestampsValid(prev, next) {
+      return next.createdAt == prev.createdAt
+        && next.updatedAt == request.time;
+    }
+
+    function listOwnerUpdateAllowed(prev, next) {
+      return isListOwnerData(prev)
+        && next.diff(prev).affectedKeys().hasOnly(["title", "description", "visibility", "kind", "updatedAt"])
+        && next.ownerUid == prev.ownerUid
+        && listUpdateTimestampsValid(prev, next)
+        && listMembershipFieldsUnchanged(prev, next)
+        && listServerOwnedFieldsUnchanged(prev, next);
+    }
+
+    function listEditorRootUpdateAllowed(prev, next) {
+      return isSignedIn()
+        && !isListOwnerData(prev)
+        && uid() in listEditorUids(prev)
+        && next.diff(prev).affectedKeys().hasOnly(["title", "description", "kind", "updatedAt"])
+        && next.ownerUid == prev.ownerUid
+        && next.visibility == prev.visibility
+        && listUpdateTimestampsValid(prev, next)
+        && listMembershipFieldsUnchanged(prev, next)
+        && listServerOwnedFieldsUnchanged(prev, next)
+        && next.get('itemCount', 0) == prev.get('itemCount', 0)
+        && next.get('completedCount', 0) == prev.get('completedCount', 0)
+        && next.get('itemTitleIds', []) == prev.get('itemTitleIds', [])
+        && next.get('previewTitleIds', []) == prev.get('previewTitleIds', [])
+        && next.get('cover', null) == prev.get('cover', null);
+    }
+
+    function validUserListItemDoc(data, titleId) {
+      return data.keys().hasOnly(["titleId", "orderIndex", "addedByUid", "note", "addedAt", "updatedAt"])
+        && (!('titleId' in data) || data.titleId == titleId)
+        && (!('orderIndex' in data) || data.orderIndex is number)
+        && (!('note' in data) || data.note == null || data.note is string)
+        && (!('addedAt' in data) || isTimestampOrNull(data.addedAt))
+        && (!('updatedAt' in data) || isTimestampOrNull(data.updatedAt));
+    }
+
+    function validUserListItemCreate(data, titleId) {
+      return validUserListItemDoc(data, titleId)
+        && ('addedByUid' in data)
+        && data.addedByUid == uid()
+        && ('addedAt' in data)
+        && data.addedAt == request.time
+        && ('updatedAt' in data)
+        && data.updatedAt == request.time;
+    }
+
+    function validUserListItemUpdate(prev, next, titleId) {
+      return validUserListItemDoc(next, titleId)
+        && next.get('addedByUid', null) == prev.get('addedByUid', null)
+        && next.get('addedAt', null) == prev.get('addedAt', null)
+        && (!('updatedAt' in next) || next.updatedAt == request.time);
+    }
+
+    function canCreateOwnerListMember(listId, memberId) {
+      return existsAfter(userListPath(listId))
+        && getAfter(userListPath(listId)).data.ownerUid == uid()
+        && memberId == uid()
+        && request.resource.data.uid == memberId
+        && request.resource.data.role == "owner";
+    }
+
+    function validTitleStateDoc(data, titleId) {
+      return ('titleId' in data)
+        && data.titleId is string
+        && data.titleId == titleId
+        && ('mediaType' in data)
+        && data.mediaType in ["movie", "tv"]
+        && ('state' in data)
+        && data.state in ["unseen", "seen_unrated", "rated", "not_started", "in_progress", "completed_unrated"]
+        && (!('generalWatchlist' in data) || data.generalWatchlist is bool)
+        && (!('rewatchIntent' in data) || data.rewatchIntent is bool)
+        && (!('hasTitleRating' in data) || data.hasTitleRating is bool)
+        && (!('ratingValue' in data) || data.ratingValue == null || data.ratingValue is number)
+        && (!('seenAt' in data) || isTimestampOrNull(data.seenAt))
+        && (!('completedAt' in data) || isTimestampOrNull(data.completedAt))
+        && (!('ratedAt' in data) || isTimestampOrNull(data.ratedAt))
+        && (!('rewatchAddedAt' in data) || isTimestampOrNull(data.rewatchAddedAt))
+        && (!('createdAt' in data) || isTimestampOrNull(data.createdAt))
+        && (!('updatedAt' in data) || isTimestampOrNull(data.updatedAt))
+        && (!('lastInteractionAt' in data) || isTimestampOrNull(data.lastInteractionAt))
+        && (!('source' in data) || data.source == null || data.source is string)
+        && (!('seriesProgress' in data) || data.seriesProgress == null || data.seriesProgress is map)
+        && (!('completedCount' in data) || data.completedCount is number)
+        && (!('watchMinutesContribution' in data) || data.watchMinutesContribution is number)
+        && (!('schemaVersion' in data) || data.schemaVersion is number)
+        && (!('reminders' in data) || data.reminders == null || data.reminders is map)
+        && (!('titleSnapshot' in data)
+          || (
+            data.titleSnapshot is map
+            && (!('titleId' in data.titleSnapshot) || data.titleSnapshot.titleId == titleId)
+            && (!('name' in data.titleSnapshot) || data.titleSnapshot.name is string)
+            && (!('posterPath' in data.titleSnapshot) || data.titleSnapshot.posterPath == null || data.titleSnapshot.posterPath is string)
+            && (!('mediaType' in data.titleSnapshot) || data.titleSnapshot.mediaType in ["movie", "tv"])
+          )
+        );
+    }
+
+    function validTitleUpdatePrefDoc(data, titleId) {
+      return data.keys().hasOnly(["titleId", "mode", "updatedAt"])
+        && data.titleId == titleId
+        && data.mode in ["follow", "important", "muted"]
+        && (!('updatedAt' in data) || isTimestampOrNull(data.updatedAt));
+    }
+
+    function validSavedListDoc(data, listId) {
+      return userListExists(listId)
+        && listVisibility(userListData(listId)) == "public"
+        && data.keys().hasOnly(["listId", "isPinned", "pinnedAt", "updatedAt"])
+        && data.listId == listId
+        && data.isPinned is bool
+        && (!('pinnedAt' in data) || isTimestampOrNull(data.pinnedAt))
+        && (!('updatedAt' in data) || isTimestampOrNull(data.updatedAt));
+    }
+
+    function validListProgressEntryDoc(data) {
+      return ('listId' in data)
+        && data.listId is string
+        && data.listId.size() > 0
+        && userListExists(data.listId)
+        // Progress su liste pubbliche (chiunque le veda) OPPURE su liste
+        // condivise/private di cui il chiamante è membro.
+        && (
+          listVisibility(userListData(data.listId)) == "public"
+          || isListMemberData(userListData(data.listId))
+        )
+        && canReadListContentById(data.listId)
+        && ('titleId' in data)
+        && data.titleId is string
+        && data.titleId.size() > 0
+        && ('mediaType' in data)
+        && data.mediaType in ["movie", "tv"]
+        && ('state' in data)
+        && data.state in ["not_started", "in_progress", "completed"]
+        && (!('seriesProgress' in data) || data.seriesProgress == null || data.seriesProgress is map)
+        && (!('completedAt' in data) || isTimestampOrNull(data.completedAt))
+        && (!('updatedAt' in data) || isTimestampOrNull(data.updatedAt))
+        && (!('lastInteractionAt' in data) || isTimestampOrNull(data.lastInteractionAt))
+        && (!('watchMinutesContribution' in data) || data.watchMinutesContribution is number);
+    }
+
+
+    // ============================================
+    // USERS (PUBLIC)
+    // ============================================
+
+    match /users/{userId} {
+      // Username regex stretto (RE2-compat, niente lookahead):
+      // - parte e finisce con alphanumerico
+      // - separatore (. _ -) opzionale solo tra due alphanumerici
+      // - niente separatori consecutivi (.. __ -- mix)
+      // - niente spazi
+      // La size 3-24 e' enforced separatamente da .size().
+      function validDisplayNamePair(data) {
+        return ('displayName' in data)
+          && ('displayNameLower' in data)
+          && data.displayName is string
+          && data.displayName.size() >= 3
+          && data.displayName.size() <= 24
+          && data.displayName.matches('^[A-Za-z0-9]([._-]?[A-Za-z0-9])*$')
+          && data.displayNameLower is string
+          && data.displayNameLower.size() >= 3
+          && data.displayNameLower.size() <= 24
+          && data.displayNameLower.matches('^[a-z0-9]([._-]?[a-z0-9])*$');
+      }
+
+      function displayNameChanged() {
+        return request.resource.data.displayName != resource.data.displayName
+          || request.resource.data.displayNameLower != resource.data.displayNameLower;
+      }
+
+      function validAvatarFields(data) {
+        return (!('photoURL' in data) || data.photoURL is string || data.photoURL == null)
+          && (!('avatarURL' in data) || data.avatarURL is string || data.avatarURL == null);
+      }
+
+      function validOnboardingStatusMap(data) {
+        return !('onboardingStatus' in data)
+          || (
+            data.onboardingStatus is map
+            && (!('version' in data.onboardingStatus) || data.onboardingStatus.version is number)
+            && (!('completedLevel' in data.onboardingStatus) || data.onboardingStatus.completedLevel in [0, 1, 2, 3])
+            && (!('confidenceScore' in data.onboardingStatus)
+              || (
+                data.onboardingStatus.confidenceScore is number
+                && data.onboardingStatus.confidenceScore >= 0
+                && data.onboardingStatus.confidenceScore <= 100
+              )
+            )
+            && (!('startedAt' in data.onboardingStatus) || isTimestampOrNull(data.onboardingStatus.startedAt))
+            && (!('completedAt' in data.onboardingStatus) || isTimestampOrNull(data.onboardingStatus.completedAt))
+            && (!('lastPromptAt' in data.onboardingStatus) || isTimestampOrNull(data.onboardingStatus.lastPromptAt))
+            && (!('dismissedAt' in data.onboardingStatus) || isTimestampOrNull(data.onboardingStatus.dismissedAt))
+          );
+      }
+
+      function validTasteProfileMap(data) {
+        return !('tasteProfile' in data)
+          || (
+            data.tasteProfile is map
+            && (!('seedTitleIds' in data.tasteProfile)
+              || (data.tasteProfile.seedTitleIds is list && data.tasteProfile.seedTitleIds.size() <= 24)
+            )
+            && (!('seedLikedTitleIds' in data.tasteProfile)
+              || (data.tasteProfile.seedLikedTitleIds is list && data.tasteProfile.seedLikedTitleIds.size() <= 24)
+            )
+            && (!('vibe' in data.tasteProfile)
+              || (data.tasteProfile.vibe is list && data.tasteProfile.vibe.size() <= 2)
+            )
+            && (!('filmVsSeries' in data.tasteProfile) || data.tasteProfile.filmVsSeries in ["film", "mix", "series"])
+            && (!('mainstream' in data.tasteProfile) || data.tasteProfile.mainstream in ["mainstream", "mix", "discover"])
+            && (!('era' in data.tasteProfile)
+              || data.tasteProfile.era == null
+              || (data.tasteProfile.era is string && data.tasteProfile.era.size() <= 40)
+            )
+            && (!('context' in data.tasteProfile)
+              || (data.tasteProfile.context is list && data.tasteProfile.context.size() <= 3)
+            )
+            && (!('dislikes' in data.tasteProfile)
+              || (data.tasteProfile.dislikes is list && data.tasteProfile.dislikes.size() <= 5)
+            )
+            && (!('favoriteTitleText' in data.tasteProfile)
+              || data.tasteProfile.favoriteTitleText == null
+              || (data.tasteProfile.favoriteTitleText is string && data.tasteProfile.favoriteTitleText.size() <= 120)
+            )
+            && (!('contentTolerance' in data.tasteProfile)
+              || data.tasteProfile.contentTolerance == null
+              || data.tasteProfile.contentTolerance in ["light", "heavy", "disturbing"]
+            )
+            && (!('updatedAt' in data.tasteProfile) || isTimestampOrNull(data.tasteProfile.updatedAt))
+          );
+      }
+
+      function validNotificationPrefsDoc(data) {
+        return data.keys().hasOnly(["disabledTypes", "updatedAt"])
+          && ('disabledTypes' in data)
+          && data.disabledTypes is list
+          && data.disabledTypes.size() <= 30
+          && data.disabledTypes.hasOnly([
+            "friend_request",
+            "friend_accept",
+            "follow",
+            "recommendation",
+            "thread_message",
+            "thread_mention",
+            "post_mention",
+            "post_like",
+            "post_comment",
+            "comment_like",
+            "rating_like",
+            "rating_comment",
+            "watched_with_tag",
+            "new_user",
+            "moderation_pending",
+            "engagement_nudge",
+            "new_season_available",
+            "official_update",
+            "title_update"
+          ])
+          && (!('updatedAt' in data) || isTimestampOrNull(data.updatedAt));
+      }
+
+      // TODO(security H1): users/{userId} oggi e' read-aperto a ogni utente
+      // loggato sull'intero doc. Il doc contiene campi sensibili oltre alle
+      // info "profilo pubblico":
+      //   - tasteProfile.*  (preferenze, dislikes, vibe) -> profiling implicito
+      //   - engagement.*    (stream interno, signal lifecycle)
+      //   - communitySafetyAcceptedAt / communitySafetyVersion (stato
+      //     accettazione policy, leak meta)
+      //   - notification counters / lastActiveAt (presence indirect)
+      // Refactor pianificato: spostare le info pubbliche in un doc
+      // publicUserProfile/{uid} (campi: uid, displayName, displayNameLower,
+      // photoURL, avatarURL, trusted, isAdmin, level, friendsCount,
+      // followersCount, watchedCount). Migrazione richiede update lato iOS
+      // (UserRepository) e PWA (users.api.js) per leggere il doc separato.
+      // Non in scope per questo pack (touch lato app off-limits).
+      allow read: if isSignedIn();
+
+      // Signup:
+      // - trusted/isAdmin devono essere false se presenti
+      // - level può essere assente o "base" (default)
+      allow create: if isSignedIn()
+        && uid() == userId
+        && !trustedFlag(request.resource.data)
+        && !adminFlag(request.resource.data)
+        && levelValue(request.resource.data) == "base"
+        && validDisplayNamePair(request.resource.data)
+        && validAvatarFields(request.resource.data)
+        && validOnboardingStatusMap(request.resource.data)
+        && validTasteProfileMap(request.resource.data)
+        && userStatsZeroOnCreate(request.resource.data)
+        && guidedFieldsRealOnCreate(request.resource.data);
+
+      // Update:
+      // - owner NON può cambiare trusted/isAdmin/level
+      //   (può solo valorizzare level="base" se prima mancava)
+      // - admin può cambiare tutto
+      allow update: if
+        (
+          isOwner(userId)
+          && trustedFlag(request.resource.data) == trustedFlag(resource.data)
+          && adminFlag(request.resource.data) == adminFlag(resource.data)
+          && levelValue(request.resource.data) == levelValue(resource.data)
+          && (!displayNameChanged() || validDisplayNamePair(request.resource.data))
+          && validAvatarFields(request.resource.data)
+          // Contatori server-owned (stats/followersCount/friendsCount) congelati:
+          // il client non puo' gonfiare statistiche profilo o creator leaderboard.
+          && userServerCountersUnchanged(resource.data, request.resource.data)
+          // Profili guidati: accountType/isSynthetic/bio non modificabili dal client.
+          && guidedFieldsUnchanged(resource.data, request.resource.data)
+          // NOTE: onboardingStatus and tasteProfile are now in usersPrivate.
+          // Legacy data in the public doc must not block updates (e.g. rating stats).
+        )
+        ||
+        (
+          isAdmin()
+        );
+
+      allow delete: if false;
+
+      // --- LIBRARY ---
+      // I titoli visti sono contenuto pubblico del profilo (tab "Visti").
+      match /library/{titleId} {
+        allow read: if isSignedIn();
+        allow create, update, delete: if isOwner(userId);
+      }
+
+      // --- WATCHLIST ---
+      match /watchlist/{entryId} {
+        allow read: if isOwner(userId);
+        allow create, update, delete: if isOwner(userId);
+      }
+
+      match /savedLists/{listId} {
+        allow read: if isOwner(userId);
+        allow create, update: if isOwner(userId)
+          && validSavedListDoc(request.resource.data, listId);
+        allow delete: if isOwner(userId);
+      }
+
+      match /listProgressEntries/{entryId} {
+        allow read: if isOwner(userId);
+        allow create, update: if isOwner(userId)
+          && validListProgressEntryDoc(request.resource.data);
+        allow delete: if isOwner(userId);
+      }
+
+      // --- PERSONAL TITLE STATES ---
+      match /titleStates/{titleId} {
+        allow read: if isOwner(userId);
+        allow create, update: if isOwner(userId)
+          && validTitleStateDoc(request.resource.data, titleId);
+        allow delete: if isOwner(userId);
+      }
+
+      // Preferenza privata per gli aggiornamenti di un titolo. Il client può
+      // gestire solo il proprio doc; il fan-out la legge via Admin SDK.
+      match /titleUpdatePrefs/{titleId} {
+        allow read: if isOwner(userId);
+        allow create, update: if isOwner(userId)
+          && validTitleUpdatePrefDoc(request.resource.data, titleId);
+        allow delete: if isOwner(userId);
+      }
+
+      // Episode records recovered from server-side imports (TV Time specials
+      // and rows whose ordinary season/episode coordinates are incomplete).
+      // They are personal viewing history: owner-readable, never writable by
+      // clients. The backend keeps countsTowardProgress=false until a record
+      // is explicitly verified, so imports cannot inflate completion/minutes.
+      match /episodeViews/{viewId} {
+        allow read: if isOwner(userId);
+        allow create, update, delete: if false;
+      }
+
+      // --- DERIVED RATINGS (roll-up voti episodio -> stagione/serie) ---
+      // Voto DERIVATO e PRIVATO: media dei voti episodio dell'utente, calcolata
+      // solo lato server dal trigger recomputeUserDerivedRating (admin SDK).
+      // Read owner-only (alimenta profilo/taste), write deny-all ai client: il
+      // client non può forgiare un voto derivato né aggirare l'esclusione dal
+      // voto pubblico (che resta in /ratings/, unica fonte dell'aggregato).
+      match /derivedRatings/{titleId} {
+        allow read: if isOwner(userId);
+        allow write: if false;
+      }
+
+      // --- CHARACTER PICKS ROLLUP (spec §2.4, docs/CHARACTER_VOTES_SPEC.md) ---
+      // "Il tuo personaggio preferito" per titolo: calcolato solo dal trigger
+      // onWriteCharacterVote (admin SDK). Owner-read, deny-all write ai
+      // client, identico a derivedRatings.
+      match /characterPicks/{titleId} {
+        allow read: if isOwner(userId);
+        allow write: if false;
+      }
+
+      // --- VIEWING HISTORY IMPORTS (Netflix CSV, etc.) ---
+      // Server-only writes: startTitlesImport/confirmTitlesImport (admin SDK)
+      // own the whole lifecycle (job doc + parsed row items). The client only
+      // ever reads its own import's progress/results; it can never write
+      // directly (no forging titleStateIdsWritten, no bypassing the row cap
+      // or the matching cascade).
+      match /imports/{importId} {
+        allow read: if isOwner(userId);
+        allow write: if false;
+
+        match /items/{itemId} {
+          allow read: if isOwner(userId);
+          allow write: if false;
+        }
+
+        match /payload/{payloadId} {
+          allow read, write: if false;
+        }
+
+        // Immutable forensic snapshots captured before an import mutates a
+        // titleState. They may contain the user's full private viewing state:
+        // Admin SDK only, including reads (owner/admin clients are denied).
+        match /previousStates/{titleId} {
+          allow read, write: if false;
+        }
+      }
+
+      // --- USER SYSTEM DOCS (client writable subset) ---
+      match /_system/{docId} {
+        // Milestone tecniche di adozione tracker: dato pseudonimo privato,
+        // scritto/letto solo da Admin SDK e mai esposto ai client (nemmeno
+        // owner/admin). Non contiene titleId, testo o coordinate episodio.
+        allow read, write: if docId == "productTracking" && false;
+
+        allow read: if isOwner(userId) && docId == "notificationPrefs";
+
+        allow create, update: if isOwner(userId)
+          && docId == "notificationPrefs"
+          && validNotificationPrefsDoc(request.resource.data);
+
+        allow delete: if isOwner(userId) && docId == "notificationPrefs";
+      }
+
+      // --- RATE LIMITS (rules-enforced anti-spam counters) ---
+      // Contatori per azione usati da recommendations/reports per cap giornaliero.
+      // Schema: { count: number, resetAt: timestamp }. Il client deve aggiornare
+      // il contatore atomicamente con l'azione protetta (batched write) altrimenti
+      // la create rule della collection bersaglio fallisce.
+      match /rateLimits/{action} {
+        allow read: if isOwner(userId);
+
+        allow create: if isOwner(userId)
+          && action in ["recommendations", "reports"]
+          && request.resource.data.keys().hasOnly(["count", "resetAt"])
+          && request.resource.data.count == 1
+          && request.resource.data.resetAt is timestamp
+          // Finestra minima 12h: impedisce di azzerare il contatore con una
+          // finestra di 1ms (bypass del rate-limit). Il client usa 24h.
+          && request.resource.data.resetAt > request.time + duration.value(12, 'h');
+
+        allow update: if isOwner(userId)
+          && action in ["recommendations", "reports"]
+          && request.resource.data.keys().hasOnly(["count", "resetAt"])
+          && request.resource.data.resetAt is timestamp
+          && (
+            // Stessa finestra: count += 1 (resetAt invariato).
+            (request.resource.data.resetAt == resource.data.resetAt
+              && request.resource.data.count == resource.data.count + 1)
+            // Nuova finestra (vecchia scaduta): count reset a 1, finestra >= 12h
+            // (no reset a finestra di 1ms → niente bypass del rate-limit).
+            || (resource.data.resetAt < request.time
+              && request.resource.data.count == 1
+              && request.resource.data.resetAt > request.time + duration.value(12, 'h'))
+          );
+
+        allow delete: if false;
+      }
+
+      // --- MATCH FEEDBACK ---
+      // Dati Match Mode privati: solo owner può leggere/scrivere il proprio feedback.
+      match /matchFeedback/{titleId} {
+        allow read: if isOwner(userId);
+
+        allow create, update: if isOwner(userId)
+          && request.resource.data.titleId is string
+          && request.resource.data.titleId.size() > 0
+          && request.resource.data.titleId == titleId
+          && (!("action" in request.resource.data) || request.resource.data.action in ["like", "skip", "superlike", "seen"]);
+
+        allow delete: if isOwner(userId);
+      }
+
+      // --- FRIENDS ---
+      match /friends/{friendUid} {
+        allow read: if isSignedIn()
+          && (
+            resource.data.status == "accepted"
+            || userId == uid()
+            || friendUid == uid()
+          );
+
+        // Create: only initiator can creare stato "pending" (no accept o block diretti)
+        allow create: if isSignedIn()
+          && (userId == uid() || friendUid == uid())
+          && userId != friendUid
+          && request.resource.data.status == "pending"
+          && request.resource.data.initiatedBy == uid()
+          && request.resource.data.createdAt == request.time
+          && !('acceptedAt' in request.resource.data);
+
+        // Accept: il destinatario (non l'iniziatore) può marcare "accepted"
+        // su entrambe le copie, così il batch client resta atomico/coerente.
+        allow update: if isSignedIn()
+          && (userId == uid() || friendUid == uid())
+          && resource.data.status == "pending"
+          && resource.data.initiatedBy != uid()
+          && request.resource.data.status == "accepted"
+          && request.resource.data.initiatedBy == resource.data.initiatedBy
+          && request.resource.data.createdAt == resource.data.createdAt
+          && request.resource.data.acceptedAt == request.time;
+
+        // Block: ciascun utente può bloccare la controparte partendo da pending/accepted
+        allow update: if isSignedIn()
+          && userId == uid()
+          && resource.data.status in ["pending", "accepted"]
+          && request.resource.data.status == "blocked"
+          && request.resource.data.blockedBy == uid()
+          && request.resource.data.createdAt == resource.data.createdAt
+          && (!('acceptedAt' in resource.data) || request.resource.data.acceptedAt == resource.data.acceptedAt)
+          && request.resource.data.updatedAt == request.time;
+
+        allow delete: if isSignedIn()
+          && (userId == uid() || friendUid == uid());
+      }
+
+      // --- FOLLOWING ---
+      match /following/{targetUserId} {
+        allow read: if isSignedIn();
+        allow create, update, delete: if isOwner(userId);
+      }
+
+      // --- FOLLOWERS ---
+      match /followers/{followerUserId} {
+        allow read: if isSignedIn();
+        allow create, update: if isSignedIn() && followerUserId == uid();
+        allow delete: if isSignedIn() && followerUserId == uid();
+      }
+
+      // --- BLOCKED USERS ---
+      match /blockedUsers/{blockedUid} {
+        allow read: if isOwner(userId);
+
+        allow create, update: if isOwner(userId)
+          && blockedUid != userId
+          && request.resource.data.keys().hasOnly(["blockedUid", "source", "createdAt", "updatedAt"])
+          && request.resource.data.blockedUid == blockedUid
+          && (!('source' in request.resource.data) || request.resource.data.source is string)
+          && request.resource.data.createdAt == request.time
+          && request.resource.data.updatedAt == request.time;
+
+        allow delete: if isOwner(userId);
+      }
+
+      // --- NOTIFICATION TOKENS (PUSH) ---
+      match /notificationTokens/{tokenId} {
+        allow read: if isOwner(userId);
+
+        allow create: if isOwner(userId)
+          && request.resource.data.token is string
+          && request.resource.data.token.size() > 0
+          && request.resource.data.platform is string
+          && request.resource.data.createdAt == request.time
+          && request.resource.data.updatedAt == request.time;
+
+        // I client rimandano l'intero payload a ogni refresh, createdAt incluso
+        // (serverTimestamp = request.time). Pretendere createdAt IDENTICO
+        // all'originale faceva fallire ogni refresh in silenzio: i doc token
+        // restavano congelati alla data di installazione e non avevamo piu' modo
+        // di distinguere un device vivo da un fantasma. Accettiamo entrambe le
+        // forme, purche' createdAt non venga spostato indietro nel tempo.
+        allow update: if isOwner(userId)
+          && request.resource.data.token == resource.data.token
+          && request.resource.data.platform == resource.data.platform
+          && (request.resource.data.createdAt == resource.data.createdAt
+              || request.resource.data.createdAt == request.time)
+          && request.resource.data.updatedAt == request.time;
+
+        allow delete: if isOwner(userId);
+      }
+
+      // --- USER NOTIFICATIONS (IN-APP) ---
+      match /notifications/{notificationId} {
+        allow read: if isOwner(userId);
+
+        // Creazione solo da backend (admin SDK bypassa le rules)
+        allow create: if false;
+
+        allow update: if isOwner(userId)
+          && request.resource.data.fromUid == resource.data.fromUid
+          && request.resource.data.toUid == resource.data.toUid
+          && request.resource.data.type == resource.data.type
+          && request.resource.data.createdAt == resource.data.createdAt
+          && request.resource.data.read is bool;
+
+        allow delete: if isOwner(userId);
+      }
+
+      // --- ONBOARDING TELEMETRY ---
+      match /onboardingTelemetry/{sessionId} {
+        allow read: if isOwner(userId);
+
+        allow create, update: if isOwner(userId)
+          && request.resource.data.uid == uid()
+          && request.resource.data.version is number
+          && request.resource.data.version >= 1
+          && (!('levelChosen' in request.resource.data)
+            || request.resource.data.levelChosen in [1, 2, 3]
+          )
+          && (!('completedLevel' in request.resource.data)
+            || request.resource.data.completedLevel in [0, 1, 2, 3]
+          )
+          && (!('completed' in request.resource.data) || request.resource.data.completed is bool)
+          && (!('clicks' in request.resource.data)
+            || (
+              request.resource.data.clicks is list
+              && request.resource.data.clicks.size() <= 120
+            )
+          )
+          && (!('steps' in request.resource.data) || request.resource.data.steps is map)
+          && (!('startedAt' in request.resource.data) || isTimestampOrNull(request.resource.data.startedAt))
+          && (!('endedAt' in request.resource.data) || isTimestampOrNull(request.resource.data.endedAt))
+          && (!('updatedAt' in request.resource.data) || isTimestampOrNull(request.resource.data.updatedAt));
+
+        allow delete: if isOwner(userId);
+      }
+
+      // --- TASTE SIGNALS ---
+      match /signals/{signalId} {
+        allow read: if isOwner(userId);
+        allow create: if isOwner(userId)
+          && request.resource.data.titleId is string
+          && request.resource.data.actionType is string
+          && request.resource.data.dedupeKey is string;
+      }
+
+      // --- TASTE PROFILE (aggregato) ---
+      match /tasteProfile/{docId} {
+        allow read: if isOwner(userId);
+        allow create, update: if isOwner(userId);
+        allow delete: if false;
+      }
+    }
+
+    // ============================================
+    // USERNAMES (Public handle reservation)
+    // ============================================
+
+    match /usernames/{displayNameLower} {
+      allow read: if isSignedIn();
+
+      // Regex stretto (RE2-compat): inizia/finisce con alphanum lower,
+      // separatore singolo (. _ -) opzionale solo tra due alphanum,
+      // niente consecutivi/leading/trailing.
+      allow create: if isSignedIn()
+        && !exists(/databases/$(database)/documents/usernames/$(displayNameLower))
+        && userExists(uid())
+        && request.resource.data.uid == uid()
+        && request.resource.data.displayNameLower == displayNameLower
+        && request.resource.data.displayName is string
+        && request.resource.data.displayName.size() >= 3
+        && request.resource.data.displayName.size() <= 24
+        && request.resource.data.displayName.matches('^[A-Za-z0-9]([._-]?[A-Za-z0-9])*$')
+        && request.resource.data.displayNameLower is string
+        && request.resource.data.displayNameLower.size() >= 3
+        && request.resource.data.displayNameLower.size() <= 24
+        && request.resource.data.displayNameLower.matches('^[a-z0-9]([._-]?[a-z0-9])*$');
+
+      allow update: if isSignedIn()
+        && resource.data.uid == uid()
+        && request.resource.data.uid == resource.data.uid
+        && request.resource.data.displayNameLower == resource.data.displayNameLower
+        && request.resource.data.displayNameLower == displayNameLower
+        && request.resource.data.displayName is string
+        && request.resource.data.displayName.size() >= 3
+        && request.resource.data.displayName.size() <= 24
+        && request.resource.data.displayName.matches('^[A-Za-z0-9]([._-]?[A-Za-z0-9])*$');
+
+      allow delete: if isSignedIn() && resource.data.uid == uid();
+    }
+
+    // ============================================
+    // USERS PRIVATE
+    // ============================================
+
+    // Preferenza lingua dell'utente. Vive qui e non su `users/{uid}` perche'
+    // `users` e' il doc PUBBLICO (read: isSignedIn) e la lingua e' una
+    // preferenza privata: metterla la' andrebbe contro il refactor gia'
+    // pianificato che sposta fuori i campi non pubblici.
+    //
+    // Nota: `usersPrivate` era gia' scrivibile dall'owner senza validazione di
+    // campo, quindi questa regola NON apre niente di nuovo — restringe. Non usa
+    // `hasOnly` di proposito: il doc ospita gia' `onboardingStatus` e
+    // `tasteProfile`, e un allowlist stretto romperebbe scritture esistenti.
+    // Vincola solo il valore di `language`, quando presente.
+    function validUserLanguage() {
+      return !('language' in request.resource.data)
+        || (request.resource.data.language is string
+            && request.resource.data.language in ['it', 'en']);
+    }
+
+    match /usersPrivate/{userId} {
+      allow read: if isOwner(userId);
+      allow write: if isOwner(userId) && validUserLanguage();
+      allow delete: if false;
+
+      // OAuth integration tokens (Trakt access/refresh tokens, device code):
+      // written ONLY by Cloud Functions (admin SDK). Deny ALL client access —
+      // these are secrets, the owner must never read or write them. Firestore
+      // rules do NOT cascade from the parent `usersPrivate/{userId}` allow to
+      // subcollections, so without this explicit match the default-deny at the
+      // bottom would already cover it; this makes the intent explicit and is
+      // asserted by a rules test.
+      match /integrations/{docId} {
+        allow read, write: if false; // Cloud Functions admin SDK only
+      }
+    }
+
+    // ============================================
+    // TITLES
+    // ============================================
+
+    match /titles/{titleId} {
+      // Catalogo PUBBLICO: leggibile da chiunque, anche non loggato — le schede
+      // titolo devono essere visibili a tutti (pagine SSR pubbliche /film·/serie,
+      // browsing/quiz da ospite, condivisione link). Metadati non sensibili, gia'
+      // esposti dalle pagine SSR pubbliche. NON restringere a status=="approved":
+      // la query `documentId in` di listTitles non filtra status.
+      allow read: if true;
+
+      // Policy: qualunque utente loggato puo' creare un titolo (import da TMDB
+      // via ricerca). Aggiungere un titolo mancante al catalogo e' un'azione
+      // base, non un privilegio da curatore. Lo status resta vincolato; la
+      // moderazione dei metadati editoriali resta ai trusted (vedi update).
+      allow create: if isSignedIn()
+        && request.resource.data.status in ["pending", "approved"]
+        && titleServerFieldsCleanOnCreate(request.resource.data);
+
+      // Admin: controllo pieno (moderazione). Trusted: edita i metadati ma NON
+      // i campi server-owned (ratingAggregate/slug/mergedTmdbIds).
+      allow update: if isAdmin()
+        || (isTrusted() && titleServerFieldsUnchanged(resource.data, request.resource.data));
+      allow delete: if isAdmin();
+    }
+
+    // ============================================
+    // USER LISTS / WATCHLIST V2
+    // ============================================
+
+    match /userLists/{listId} {
+      // Root doc contiene privacy/membership: leggibile solo da owner/membri/admin.
+      // I dati pubblici passano da publicUserLists/{listId}, proiezione server-owned.
+      allow get: if canReadListData(resource.data);
+      allow list: if isAdmin();
+      allow list: if isSignedIn() && uid() in resource.data.memberUids;
+      // COMPAT build iOS <= 1.2.11 (App Store 1.2.3): la dashboard watchlist
+      // interroga la root con `where visibility == 'public'`; senza questa
+      // rule la query viene negata e l'intera tab va in errore (incident
+      // 2026-07-02). Riespone il root doc (incl. memberUids) delle sole liste
+      // pubbliche agli utenti loggati, come prima dell'hardening. Rimuovere
+      // quando la coorte App Store e' su una build >= 1.3.0 (publicUserLists).
+      allow list: if isSignedIn() && resource.data.visibility == 'public';
+
+      // Create: la lista nasce solo con il creator come unico member.
+      // Eventuali collaboratori vanno aggiunti dopo via update (flow inviti).
+      // Questo previene che un attaccante crei liste "shared" preinserendo
+      // utenti che non hanno accettato di partecipare.
+      allow create: if isSignedIn()
+        && request.resource.data.ownerUid == uid()
+        && request.resource.data.memberUids == [uid()]
+        && (
+          !('editorUids' in request.resource.data)
+          || request.resource.data.editorUids == []
+        )
+        && (
+          !('viewerUids' in request.resource.data)
+          || request.resource.data.viewerUids == []
+        )
+        // followersCount is server-owned: must start at 0 (o assente).
+        && (
+          !('followersCount' in request.resource.data)
+          || request.resource.data.followersCount == 0
+        )
+        && listCreateTimestampsValid(request.resource.data)
+        && listClientCreateServerFieldsValid(request.resource.data)
+        && validUserListDoc(request.resource.data);
+
+      allow update: if userListExists(listId)
+        && isAdmin()
+        && validUserListDoc(request.resource.data)
+        && listUpdateTimestampsValid(resource.data, request.resource.data)
+        // followersCount is server-owned: clients cannot bump it on update.
+        && listFollowersCountUnchanged(resource.data, request.resource.data);
+
+      allow update: if userListExists(listId)
+        && listOwnerUpdateAllowed(resource.data, request.resource.data)
+        && validUserListDoc(request.resource.data)
+        // followersCount is server-owned: clients cannot bump it on update.
+        && listFollowersCountUnchanged(resource.data, request.resource.data);
+
+      allow update: if userListExists(listId)
+        && listEditorRootUpdateAllowed(resource.data, request.resource.data)
+        && validUserListDoc(request.resource.data)
+        // followersCount is server-owned: clients cannot bump it on update.
+        && listFollowersCountUnchanged(resource.data, request.resource.data);
+
+      allow delete: if isAdmin() || isListOwnerData(resource.data);
+
+      match /items/{titleId} {
+        allow read: if canReadListContentById(listId);
+        allow create: if canEditListByAfterState(listId)
+          && validUserListItemCreate(request.resource.data, titleId);
+        allow update: if canEditListByAfterState(listId)
+          && validUserListItemUpdate(resource.data, request.resource.data, titleId);
+        allow delete: if canEditListByAfterState(listId);
+      }
+
+      match /members/{memberId} {
+        allow read: if canReadListById(listId);
+        allow create: if canCreateOwnerListMember(listId, memberId)
+          && request.resource.data.keys().hasOnly(["uid", "role", "displayName", "photoURL", "joinedAt"])
+          && request.resource.data.uid == memberId
+          && request.resource.data.role == "owner"
+          && (!('displayName' in request.resource.data) || request.resource.data.displayName is string)
+          && (!('photoURL' in request.resource.data) || request.resource.data.photoURL == null || request.resource.data.photoURL is string)
+          && (!('joinedAt' in request.resource.data) || isTimestampOrNull(request.resource.data.joinedAt));
+        allow update: if false;
+        allow delete: if false;
+      }
+
+      match /progress/{memberId} {
+        allow read: if canReadListById(listId);
+        allow create, update: if false;
+        allow delete: if userListExists(listId)
+          && (isAdmin() || isListOwnerData(userListData(listId)));
+      }
+    }
+
+    match /publicUserLists/{listId} {
+      allow read: if isSignedIn();
+      allow create, update, delete: if false;
+    }
+
+    // ============================================
+    // UPCOMING MANUAL
+    // ============================================
+
+    match /upcoming_manual/{docId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin() || isTrusted();
+    }
+
+    // ============================================
+    // TITLE EDITS
+    // ============================================
+
+    match /titleEdits/{editId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn();
+      allow update: if isTrustedOrAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // ============================================
+    // RATINGS
+    // ============================================
+
+    match /ratings/{ratingId} {
+      // Solo loggati: i voti contengono reviewText e `watchedWith` (grafo
+      // sociale "con chi hai visto"). Le pagine titolo pubbliche (SSR) leggono
+      // via admin SDK, non da qui — restringere non rompe la SEO.
+      allow read: if isSignedIn();
+
+      // reviewText e' opzionale, ammesso su ogni livello (title/season/episode).
+      // Tetto 5000 char allineato al client (iOS submitRating + PWA upsertRating).
+      function validRatingReviewFields(data) {
+        return (!('reviewText' in data)
+            || data.reviewText == null
+            || (data.reviewText is string && data.reviewText.size() <= 5000))
+          && (!('reviewPhotoUrl' in data)
+            || data.reviewPhotoUrl == null
+            || (data.reviewPhotoUrl is string && data.reviewPhotoUrl.size() <= 2000))
+          && (!('reviewPhotoStoragePath' in data)
+            || data.reviewPhotoStoragePath == null
+            || (data.reviewPhotoStoragePath is string && data.reviewPhotoStoragePath.size() <= 2000))
+          && (!('mediaUrls' in data)
+            || data.mediaUrls is list)
+          && (!('watchedWith' in data)
+            || data.watchedWith is list)
+          && (!('watchedWithGroup' in data)
+            || data.watchedWithGroup == null
+            || data.watchedWithGroup is map);
+      }
+
+      function validRatingLevelFields(data) {
+        return (!('season' in data)
+            || data.season == null
+            || (data.season is number && data.season > 0))
+          && (!('episode' in data)
+            || data.episode == null
+            || (data.episode is number && data.episode > 0))
+          && (data.level != "title"
+            || ((!('season' in data) || data.season == null)
+              && (!('episode' in data) || data.episode == null)))
+          && (data.level != "season"
+            || (data.season is number && data.season > 0
+              && (!('episode' in data) || data.episode == null)))
+          && (data.level != "episode"
+            || (data.season is number && data.season > 0
+              && data.episode is number && data.episode > 0));
+      }
+
+      allow create: if isSignedIn()
+        && request.resource.data.uid == uid()
+        && request.resource.data.rating is number
+        && request.resource.data.rating >= 1
+        && request.resource.data.rating <= 10
+        && request.resource.data.titleId is string
+        && request.resource.data.titleId.size() > 0
+        && request.resource.data.level is string
+        && request.resource.data.level in ["title", "season", "episode"]
+        && (!('createdAt' in request.resource.data) || request.resource.data.createdAt is timestamp)
+        && request.resource.data.updatedAt == request.time
+        && validRatingLevelFields(request.resource.data)
+        && validRatingReviewFields(request.resource.data);
+
+      allow update: if isSignedIn()
+        && resource.data.uid == uid()
+        && request.resource.data.uid == resource.data.uid
+        && request.resource.data.titleId == resource.data.titleId
+        && request.resource.data.rating is number
+        && request.resource.data.rating >= 1
+        && request.resource.data.rating <= 10
+        && request.resource.data.updatedAt == request.time
+        && (!('level' in resource.data) || request.resource.data.level == resource.data.level)
+        && validRatingLevelFields(request.resource.data)
+        && validRatingReviewFields(request.resource.data);
+
+      allow delete: if isSignedIn()
+        && resource.data.uid == uid();
+    }
+
+    // ============================================
+    // TITLE EMOTIONS ("Che impressione hai avuto?")
+    // ============================================
+    // 1 doc per utente per titolo, id composito identico ai ratings:
+    // {uid}__{titleId}__title__0__0 (level fisso "title" in v1; il formato
+    // resta pronto per stagioni). L'id e' vincolato in rule: impossibile
+    // creare N doc per titolo e gonfiare l'aggregato community.
+    // Aggregato denormalizzato server-owned: titles/{id}.emotionAggregate
+    // (trigger recomputeTitleEmotionAggregate). `isSynthetic` solo admin SDK.
+
+    match /titleEmotions/{emotionId} {
+      // Come i ratings: contenuto profilo visibile ai loggati. SSR legge via
+      // admin SDK, non da qui.
+      allow read: if isSignedIn();
+
+      function validEmotionDoc(data) {
+        return data.keys().hasOnly(["uid", "titleId", "level", "season", "episode",
+            "emotions", "source", "createdAt", "updatedAt"])
+          && data.uid == uid()
+          && data.titleId is string
+          && data.titleId.size() > 0
+          && data.level == "title"
+          && (!('season' in data) || data.season == null)
+          && (!('episode' in data) || data.episode == null)
+          && data.emotions is list
+          && data.emotions.size() >= 1
+          && data.emotions.size() <= 3
+          && data.emotions.toSet().size() == data.emotions.size()
+          && data.emotions.hasOnly(emotionReactionKeys())
+          && (!('source' in data)
+            || data.source == null
+            || (data.source is string && data.source.size() <= 40))
+          && data.updatedAt == request.time;
+      }
+
+      allow create: if isSignedIn()
+        && emotionId == uid() + "__" + request.resource.data.titleId + "__title__0__0"
+        && (!('createdAt' in request.resource.data) || request.resource.data.createdAt is timestamp)
+        && validEmotionDoc(request.resource.data);
+
+      allow update: if isSignedIn()
+        && resource.data.uid == uid()
+        && request.resource.data.uid == resource.data.uid
+        && request.resource.data.titleId == resource.data.titleId
+        && validEmotionDoc(request.resource.data);
+
+      allow delete: if isSignedIn()
+        && resource.data.uid == uid();
+    }
+
+    // ============================================
+    // EPISODE EMOTIONS ("Come ti sei sentito guardandolo?")
+    // ============================================
+    // Nuovo dato separato da titleEmotions: 1 doc per utente/episodio con id
+    // canonico {uid}__{titleId}__episode__{season}__{episode}. La separazione
+    // evita di reinterpretare le emozioni legacy della serie come emozioni di
+    // un episodio arbitrario. `hasOnly` esclude anche isSynthetic: eventuali
+    // documenti sintetici possono essere scritti soltanto via Admin SDK e il
+    // trigger li esclude dall'aggregato community.
+    match /episodeEmotions/{emotionId} {
+      // Coerente con ratings/titleEmotions: il contenuto è leggibile solo da
+      // utenti autenticati; gli aggregati non espongono uid.
+      allow read: if isSignedIn();
+
+      function validEpisodeEmotionDoc(data) {
+        return data.keys().hasOnly(["uid", "titleId", "level", "season",
+            "episode", "emotions", "source", "createdAt", "updatedAt"])
+          && data.uid == uid()
+          && data.titleId is string
+          && data.titleId.size() > 0
+          && data.titleId.matches('^[A-Za-z0-9_-]+$')
+          && data.level == "episode"
+          && data.season is int
+          && data.season > 0
+          && data.episode is int
+          && data.episode > 0
+          && data.emotions is list
+          && data.emotions.size() >= 1
+          && data.emotions.size() <= 3
+          && data.emotions.toSet().size() == data.emotions.size()
+          && data.emotions.hasOnly(emotionReactionKeys())
+          && (!('source' in data)
+            || data.source == null
+            || (data.source is string && data.source.size() <= 40))
+          && data.updatedAt == request.time;
+      }
+
+      allow create: if isSignedIn()
+        && emotionId == uid() + "__" + request.resource.data.titleId
+             + "__episode__" + string(request.resource.data.season)
+             + "__" + string(request.resource.data.episode)
+        && (!('createdAt' in request.resource.data)
+          || request.resource.data.createdAt is timestamp)
+        && validEpisodeEmotionDoc(request.resource.data);
+
+      allow update: if isSignedIn()
+        && resource.data.uid == uid()
+        && emotionId == uid() + "__" + resource.data.titleId
+             + "__episode__" + string(resource.data.season)
+             + "__" + string(resource.data.episode)
+        && request.resource.data.uid == resource.data.uid
+        && request.resource.data.titleId == resource.data.titleId
+        && request.resource.data.level == resource.data.level
+        && request.resource.data.season == resource.data.season
+        && request.resource.data.episode == resource.data.episode
+        && request.resource.data.get('createdAt', null)
+             == resource.data.get('createdAt', null)
+        && validEpisodeEmotionDoc(request.resource.data);
+
+      allow delete: if isSignedIn()
+        && resource.data.uid == uid();
+    }
+
+    // Bucket community per episodio. Solo il trigger gen2 scrive; i client
+    // autenticati possono leggere counts/totalSelections/totalUsers.
+    match /titles/{titleId}/episodeEmotionAggregates/{bucketId} {
+      allow read: if isSignedIn();
+      allow write: if false;
+    }
+
+    // ============================================
+    // CHARACTER VOTES ("Chi ti ha conquistato?")
+    // ============================================
+    // Spec: docs/CHARACTER_VOTES_SPEC.md §2/§4. Gemello di titleEmotions: id
+    // composito vincolato con la stessa logica, hasOnly stretto, no doc-spam
+    // (1 doc per utente per oggetto votato). Solo pick POSITIVI verso
+    // personaggi — mai un voto numerico su una persona reale.
+    match /characterVotes/{voteId} {
+      allow read: if isSignedIn();
+
+      // Un elemento di picks[]: { personId, character?, reaction? }.
+      function validCharacterVotePickItem(item) {
+        return item is map
+          && item.keys().hasOnly(["personId", "character", "reaction"])
+          && item.personId is string
+          && item.personId.size() > 0
+          && item.personId.size() <= 32
+          && (!('character' in item)
+            || item.character == null
+            || (item.character is string && item.character.size() <= 120))
+          && (!('reaction' in item)
+            || item.reaction == null
+            || (item.reaction is string && item.reaction in emotionReactionKeys()));
+      }
+
+      // Le rules non hanno loop: valida i (massimo 3) slot indicizzati in modo
+      // esplicito e verifica i personId distinti a coppie (size 2 e 3).
+      function validCharacterVotePicks(picks) {
+        return picks is list
+          && picks.size() >= 1
+          && picks.size() <= 3
+          && validCharacterVotePickItem(picks[0])
+          && (picks.size() < 2 || validCharacterVotePickItem(picks[1]))
+          && (picks.size() < 3 || validCharacterVotePickItem(picks[2]))
+          && (picks.size() < 2 || picks[0].personId != picks[1].personId)
+          && (picks.size() < 3
+            || (picks[0].personId != picks[2].personId
+              && picks[1].personId != picks[2].personId));
+      }
+
+      // level=="title": pick diretto su film/serie, season/episode fissi a 0.
+      // level=="episode": season/episode > 0. Season "predisposto" (spec) ma
+      // non usato in v1, quindi non e' tra i level ammessi.
+      function validCharacterVoteLevelFields(data) {
+        return data.season is number
+          && data.episode is number
+          && (data.level != "title" || (data.season == 0 && data.episode == 0))
+          && (data.level != "episode" || (data.season > 0 && data.episode > 0));
+      }
+
+      // hasOnly esclude implicitamente isSynthetic (solo admin SDK, come
+      // titleEmotions: nessun client puo' marcare un voto sintetico).
+      function validCharacterVoteDoc(data) {
+        return data.keys().hasOnly(["uid", "titleId", "level", "season",
+            "episode", "picks", "source", "createdAt", "updatedAt"])
+          && data.uid == uid()
+          && data.titleId is string
+          && data.titleId.size() > 0
+          // titleId deve essere gia' nella forma sanitizzata usata da
+          // makeCharacterVoteId/makeRatingId ([A-Za-z0-9_-]+): cosi' la
+          // concatenazione grezza qui sotto e la sanitizzazione lato client
+          // non possono mai divergere sullo stesso titleId (vedi anche
+          // ratings/titleEmotions, che assumono lo stesso invariante senza
+          // verificarlo esplicitamente).
+          && data.titleId.matches('^[A-Za-z0-9_-]+$')
+          && data.level in ["title", "episode"]
+          && validCharacterVoteLevelFields(data)
+          && validCharacterVotePicks(data.picks)
+          && (!('source' in data)
+            || data.source == null
+            || (data.source is string && data.source.size() <= 40))
+          && data.updatedAt == request.time;
+      }
+
+      allow create: if isSignedIn()
+        && voteId == uid() + "__" + request.resource.data.titleId + "__"
+             + request.resource.data.level + "__"
+             + string(request.resource.data.season) + "__"
+             + string(request.resource.data.episode)
+        && (!('createdAt' in request.resource.data) || request.resource.data.createdAt is timestamp)
+        && validCharacterVoteDoc(request.resource.data);
+
+      allow update: if isSignedIn()
+        && resource.data.uid == uid()
+        && request.resource.data.uid == resource.data.uid
+        && request.resource.data.titleId == resource.data.titleId
+        && request.resource.data.level == resource.data.level
+        && request.resource.data.season == resource.data.season
+        && request.resource.data.episode == resource.data.episode
+        && validCharacterVoteDoc(request.resource.data);
+
+      allow delete: if isSignedIn() && resource.data.uid == uid();
+    }
+
+    // Aggregato episodio (volume pick, non utenti unici) — spec §2.2.
+    // Server-owned: scritto solo dal trigger onWriteCharacterVote.
+    match /titles/{titleId}/characterVotes/{bucketId} {
+      allow read: if isSignedIn();
+      allow write: if false;
+    }
+
+    // Aggregato serie/stagione a utenti unici — spec §2.3. Server-owned:
+    // scritto solo dal trigger onWriteCharacterPicks.
+    match /titles/{titleId}/aggregates/{docId} {
+      allow read: if isSignedIn();
+      allow write: if false;
+    }
+
+    // ============================================
+    // RECOMMENDATIONS
+    // ============================================
+
+    match /recommendations/{recId} {
+      function validRecommendationBase(data) {
+        return data.keys().hasOnly([
+          "fromUid",
+          "toUid",
+          "titleId",
+          "message",
+          "createdAt",
+          "status",
+          "threadId",
+          "viewedAt",
+          "containsSpoiler",
+          "spoilerTitleIds"
+        ])
+          && data.fromUid is string
+          && data.fromUid.size() > 0
+          && data.toUid is string
+          && data.toUid.size() > 0
+          && data.titleId is string
+          && data.titleId.size() > 0
+          && data.message is string
+          && data.message.size() <= 5000
+          && data.createdAt is timestamp
+          && data.status in ["unread", "seen", "archived"]
+          && (data.threadId == null || (data.threadId is string && data.threadId.size() > 0))
+          && isTimestampOrNull(data.viewedAt)
+          && spoilerFieldsOptional(data);
+      }
+      function canReadRecommendation() {
+        return resource.data.fromUid == uid()
+          || resource.data.toUid == uid()
+          || isAdmin();
+      }
+      function recommendationSpoilerFieldsUnchanged() {
+        return request.resource.data.get('containsSpoiler', false) == resource.data.get('containsSpoiler', false)
+          && request.resource.data.get('spoilerTitleIds', []) == resource.data.get('spoilerTitleIds', []);
+      }
+      function validRecommendationThreadLinkUpdate() {
+        return uid() == resource.data.fromUid
+          && validRecommendationBase(request.resource.data)
+          && request.resource.data.fromUid == resource.data.fromUid
+          && request.resource.data.toUid == resource.data.toUid
+          && request.resource.data.titleId == resource.data.titleId
+          && request.resource.data.message == resource.data.message
+          && request.resource.data.createdAt == resource.data.createdAt
+          && request.resource.data.status == resource.data.status
+          && request.resource.data.viewedAt == resource.data.viewedAt
+          && resource.data.threadId == null
+          && request.resource.data.threadId is string
+          && request.resource.data.threadId.size() > 0
+          && recommendationSpoilerFieldsUnchanged();
+      }
+      function validRecommendationRecipientUpdate() {
+        let nextStatus = request.resource.data.status;
+        let currentStatus = resource.data.status;
+        return uid() == resource.data.toUid
+          && validRecommendationBase(request.resource.data)
+          && request.resource.data.fromUid == resource.data.fromUid
+          && request.resource.data.toUid == resource.data.toUid
+          && request.resource.data.titleId == resource.data.titleId
+          && request.resource.data.message == resource.data.message
+          && request.resource.data.createdAt == resource.data.createdAt
+          && request.resource.data.threadId == resource.data.threadId
+          && (
+            nextStatus == currentStatus
+            || (currentStatus == "unread" && nextStatus in ["seen", "archived"])
+            || (currentStatus == "seen" && nextStatus == "archived")
+          )
+          && (
+            request.resource.data.viewedAt == resource.data.viewedAt
+            || (
+              currentStatus == "unread"
+              && nextStatus == "seen"
+              && request.resource.data.viewedAt == request.time
+            )
+          )
+          && recommendationSpoilerFieldsUnchanged();
+      }
+      allow read: if isSignedIn()
+        && canReadRecommendation();
+
+      // ⭐ FIX: non puoi raccomandare a te stesso
+      // Rate-limit: max 50 raccomandazioni in finestra corrente
+      // (contatore in users/{uid}/rateLimits/recommendations).
+      // Anti-harassment: blocca se target ha bloccato la sorgente.
+      allow create: if isSignedIn()
+        && validRecommendationBase(request.resource.data)
+        && request.resource.data.fromUid == uid()
+        && request.resource.data.toUid != uid()
+        && request.resource.data.status == "unread"
+        && request.resource.data.threadId == null
+        && request.resource.data.viewedAt == null
+        && request.resource.data.createdAt == request.time
+        && rateLimitOk(uid(), "recommendations", 50)
+        && !targetHasBlocked(request.resource.data.toUid, uid());
+
+      allow update: if isSignedIn()
+        && canReadRecommendation()
+        && (
+          validRecommendationThreadLinkUpdate()
+          || validRecommendationRecipientUpdate()
+        );
+
+      allow delete: if isAdmin();
+    }
+
+    // ============================================
+    // THREADS
+    // ============================================
+
+    match /threads/{threadId} {
+      function threadDocPath() {
+        return /databases/$(database)/documents/threads/$(threadId);
+      }
+      function threadExists() {
+        return exists(threadDocPath());
+      }
+      function threadData() {
+        return get(threadDocPath()).data;
+      }
+      function isPublicThreadId() {
+        return threadId.matches('^public_.+');
+      }
+      function threadParticipantsValue(data) {
+        return ('participants' in data) && data.participants is list
+          ? data.participants
+          : [];
+      }
+      function threadCreatedByValue(data) {
+        return ('createdBy' in data) && data.createdBy is string
+          ? data.createdBy
+          : "";
+      }
+      function threadVisibilityValue(data) {
+        return ('visibility' in data) && data.visibility in ["public", "private"]
+          ? data.visibility
+          : (
+            isPublicThreadId()
+            || (('contextType' in data) && data.contextType == "public")
+          ) ? "public" : "private";
+      }
+      function legacyPrivateThreadOwnerFallback(data) {
+        return threadVisibilityValue(data) == "private"
+          && threadCreatedByValue(data) == uid()
+          && threadParticipantsValue(data).size() == 0;
+      }
+      function canReadThreadData(data) {
+        return threadVisibilityValue(data) == "public"
+          || uid() in threadParticipantsValue(data)
+          || legacyPrivateThreadOwnerFallback(data);
+      }
+      function isParticipant() {
+        return isSignedIn() && uid() in threadParticipantsValue(resource.data);
+      }
+      function isPublicThread() {
+        return threadVisibilityValue(resource.data) == "public";
+      }
+      function canAccessExistingThread() {
+        return isSignedIn()
+          && threadExists()
+          && canReadThreadData(threadData());
+      }
+      function threadLastSenderUid(data) {
+        return ('lastSenderUid' in data) ? data.lastSenderUid : null;
+      }
+      function threadLastMessageId(data) {
+        return ('lastMessageId' in data) ? data.lastMessageId : null;
+      }
+      function validThreadDocShape(data) {
+        return data.keys().hasOnly([
+          "titleId",
+          "visibility",
+          "contextType",
+          "contextId",
+          "participants",
+          "groupName",
+          "createdBy",
+          "createdAt",
+          "lastMessageAt",
+          "lastMessagePreview",
+          "lastSenderUid",
+          "lastMessageId"
+        ])
+          && ('visibility' in data)
+          && data.visibility in ["public", "private"]
+          && ('contextType' in data)
+          && data.contextType in ["public", "dm", "group"]
+          && ('contextId' in data)
+          && data.contextId is string
+          && data.contextId.size() > 0
+          && ('participants' in data)
+          && data.participants is list
+          && data.participants.size() <= 50
+          && ('groupName' in data)
+          && data.groupName is string
+          && data.groupName.size() <= 120
+          && ('createdBy' in data)
+          && data.createdBy is string
+          && data.createdBy.size() > 0
+          && ('createdAt' in data)
+          && data.createdAt is timestamp
+          && ('lastMessageAt' in data)
+          && isTimestampOrNull(data.lastMessageAt)
+          && ('lastMessagePreview' in data)
+          && data.lastMessagePreview is string
+          && data.lastMessagePreview.size() <= 100
+          && (!('lastSenderUid' in data) || data.lastSenderUid == null || data.lastSenderUid is string)
+          && (!('lastMessageId' in data) || data.lastMessageId == null || data.lastMessageId is string);
+      }
+      function validThreadCreateData(data) {
+        return validThreadDocShape(data)
+          && data.createdBy == uid()
+          && data.createdAt == request.time
+          && data.lastMessageAt == null
+          && data.lastMessagePreview == ""
+          && ('lastSenderUid' in data)
+          && data.lastSenderUid == null
+          && ('lastMessageId' in data)
+          && data.lastMessageId == null
+          && (
+            (
+              data.visibility == "public"
+              && data.contextType == "public"
+              && isPublicThreadId()
+              && data.titleId is string
+              && data.titleId.size() > 0
+              && data.participants.size() == 0
+            )
+            ||
+            (
+              data.visibility == "private"
+              && data.contextType == "dm"
+              && (data.titleId == null || (data.titleId is string && data.titleId.size() > 0))
+              && data.participants.size() == 2
+              && uid() in data.participants
+              && data.groupName == ""
+            )
+            ||
+            (
+              data.visibility == "private"
+              && data.contextType == "group"
+              && (data.titleId == null || (data.titleId is string && data.titleId.size() > 0))
+              && data.participants.size() >= 2
+              && uid() in data.participants
+            )
+          );
+      }
+      function messageDocPath(messageId) {
+        return /databases/$(database)/documents/threads/$(threadId)/messages/$(messageId);
+      }
+      function sameOptionalTitleRef(afterData, beforeData) {
+        return (
+          !('titleRef' in beforeData)
+          && !('titleRef' in afterData)
+        )
+        || (
+          ('titleRef' in beforeData)
+          && ('titleRef' in afterData)
+          && afterData.titleRef == beforeData.titleRef
+        );
+      }
+      function validTitleRef(titleRef) {
+        return titleRef is map
+          && titleRef.keys().hasOnly(["titleId", "titleName"])
+          && ('titleId' in titleRef)
+          && titleRef.titleId is string
+          && titleRef.titleId.size() > 0
+          && (!('titleName' in titleRef) || titleRef.titleName == null || (titleRef.titleName is string && titleRef.titleName.size() <= 180));
+      }
+      // GIF nei commenti: solo URL su host giphy.com (il proxy gifSearch serve
+      // solo quelli). Blocca URL arbitrari / tracking pixel / host esterni.
+      function validGifUrl(url) {
+        return url is string
+          && url.size() > 0
+          && url.size() <= 500
+          && url.matches('https://[a-z0-9.-]*giphy[.]com/.*');
+      }
+      function validThreadMessageCreate(data) {
+        return data.keys().hasOnly([
+            "uid",
+            "displayName",
+            "text",
+            "type",
+            "createdAt",
+            "titleRef",
+            "gifUrl",
+            "containsSpoiler",
+            "spoilerTitleIds"
+          ])
+          && ('uid' in data)
+          && data.uid == uid()
+          && ('displayName' in data)
+          && data.displayName is string
+          && data.displayName.size() > 0
+          && data.displayName.size() <= 80
+          && ('text' in data)
+          && data.text is string
+          && data.text.size() <= 5000
+          && ('type' in data)
+          && (data.type == "text" || data.type == "gif")
+          && (
+            (data.type == "text" && data.text.size() > 0 && !('gifUrl' in data))
+            || (data.type == "gif" && ('gifUrl' in data) && validGifUrl(data.gifUrl))
+          )
+          && ('createdAt' in data)
+          && data.createdAt == request.time
+          && (!('titleRef' in data) || validTitleRef(data.titleRef))
+          && spoilerFieldsOptional(data);
+      }
+      function validThreadReactionUpdate(afterData, beforeData) {
+        let beforeReactions = beforeData.get("reactions", {});
+        let afterReactions = afterData.get("reactions", {});
+        return afterData.keys().hasOnly([
+            "uid",
+            "displayName",
+            "text",
+            "type",
+            "createdAt",
+            "titleRef",
+            "gifUrl",
+            "reactions",
+            "containsSpoiler",
+            "spoilerTitleIds"
+          ])
+          && afterData.uid == beforeData.uid
+          && afterData.displayName == beforeData.displayName
+          && afterData.text == beforeData.text
+          && afterData.type == beforeData.type
+          && afterData.get('gifUrl', '') == beforeData.get('gifUrl', '')
+          && afterData.createdAt == beforeData.createdAt
+          && sameOptionalTitleRef(afterData, beforeData)
+          && ('reactions' in afterData)
+          && afterData.reactions is map
+          && spoilerFieldsOptional(afterData)
+          && (
+            afterData.get('containsSpoiler', false) == beforeData.get('containsSpoiler', false)
+          )
+          && (
+            afterData.get('spoilerTitleIds', []) == beforeData.get('spoilerTitleIds', [])
+          )
+          && (
+            validOwnReactionToggle(beforeReactions, afterReactions, "👍")
+            || validOwnReactionToggle(beforeReactions, afterReactions, "❤️")
+            || validOwnReactionToggle(beforeReactions, afterReactions, "😮")
+            || validOwnReactionToggle(beforeReactions, afterReactions, "🤯")
+          );
+      }
+      function validOwnReactionToggle(beforeReactions, afterReactions, emoji) {
+        let beforeActors = beforeReactions.get(emoji, []);
+        let afterActors = afterReactions.get(emoji, []);
+        return beforeActors is list
+          && afterActors is list
+          && afterActors.size() <= 500
+          && afterReactions.diff(beforeReactions).affectedKeys().hasOnly([emoji])
+          && (
+            (
+              !(uid() in beforeActors)
+              && uid() in afterActors
+              && afterActors.hasAll(beforeActors)
+              && afterActors.size() == beforeActors.size() + 1
+            )
+            ||
+            (
+              uid() in beforeActors
+              && !(uid() in afterActors)
+              && beforeActors.hasAll(afterActors)
+              && beforeActors.size() == afterActors.size() + 1
+            )
+          );
+      }
+      function validThreadMessageMetadataUpdate() {
+        let nextMessageId = request.resource.data.lastMessageId;
+        return validThreadDocShape(request.resource.data)
+          && request.resource.data.visibility == resource.data.visibility
+          && request.resource.data.createdBy == resource.data.createdBy
+          && request.resource.data.titleId == resource.data.titleId
+          && request.resource.data.contextType == resource.data.contextType
+          && request.resource.data.contextId == resource.data.contextId
+          && request.resource.data.participants == resource.data.participants
+          && request.resource.data.groupName == resource.data.groupName
+          && request.resource.data.createdAt == resource.data.createdAt
+          && request.resource.data.lastMessagePreview is string
+          && request.resource.data.lastMessagePreview.size() <= 100
+          && request.resource.data.lastSenderUid == uid()
+          && request.resource.data.lastMessageAt == request.time
+          && nextMessageId is string
+          && nextMessageId.size() > 0
+          && (
+            !('lastMessageId' in resource.data)
+            || resource.data.lastMessageId == null
+            || resource.data.lastMessageId != nextMessageId
+          )
+          && existsAfter(messageDocPath(nextMessageId))
+          && getAfter(messageDocPath(nextMessageId)).data.uid == uid()
+          && getAfter(messageDocPath(nextMessageId)).data.createdAt == request.time;
+      }
+      function validGroupMembershipUpdate() {
+        return validThreadDocShape(request.resource.data)
+          && resource.data.contextType == "group"
+          && !resource.data.contextId.matches('^support_.+')
+          && uid() in resource.data.participants
+          && request.resource.data.visibility == resource.data.visibility
+          && request.resource.data.createdBy == resource.data.createdBy
+          && request.resource.data.titleId == resource.data.titleId
+          && request.resource.data.contextType == resource.data.contextType
+          && request.resource.data.contextId == resource.data.contextId
+          && request.resource.data.groupName == resource.data.groupName
+          && request.resource.data.createdAt == resource.data.createdAt
+          && request.resource.data.lastMessageAt == resource.data.lastMessageAt
+          && request.resource.data.lastMessagePreview == resource.data.lastMessagePreview
+          && threadLastSenderUid(request.resource.data) == threadLastSenderUid(resource.data)
+          && threadLastMessageId(request.resource.data) == threadLastMessageId(resource.data)
+          && listContainsAll(request.resource.data.participants, resource.data.participants)
+          && request.resource.data.participants.size() >= resource.data.participants.size()
+          && request.resource.data.participants.size() <= resource.data.participants.size() + 1;
+      }
+      function validTypingDoc(data, typingUid) {
+        return canAccessExistingThread()
+          && typingUid == uid()
+          && data.keys().hasOnly(["displayName", "timestamp"])
+          && ('displayName' in data)
+          && data.displayName is string
+          && data.displayName.size() > 0
+          && data.displayName.size() <= 80
+          && ('timestamp' in data)
+          && data.timestamp == request.time;
+      }
+
+      allow get: if isSignedIn()
+        && canReadThreadData(resource.data);
+
+      allow list: if isSignedIn()
+        && (
+          resource.data.visibility == "public"
+          || resource.data.contextType == "public"
+          || isPublicThreadId()
+        );
+
+      allow list: if isSignedIn()
+        && uid() in resource.data.participants;
+
+      allow create: if isSignedIn()
+        && validThreadCreateData(request.resource.data);
+
+      allow update: if isSignedIn()
+        && canAccessExistingThread()
+        && (
+          validThreadMessageMetadataUpdate()
+          || validGroupMembershipUpdate()
+        );
+
+      allow delete: if isAdmin();
+
+      match /messages/{messageId} {
+        allow read: if isSignedIn()
+          && canAccessExistingThread();
+
+        allow create: if isSignedIn()
+          && canAccessExistingThread()
+          && validThreadMessageCreate(request.resource.data);
+
+        allow update: if isSignedIn()
+          && canAccessExistingThread()
+          && validThreadReactionUpdate(request.resource.data, resource.data);
+
+        allow delete: if isSignedIn()
+          && (resource.data.uid == uid() || isAdmin());
+      }
+
+      match /typing/{typingUid} {
+        allow read: if isSignedIn()
+          && canAccessExistingThread();
+        allow create, update: if isSignedIn()
+          && validTypingDoc(request.resource.data, typingUid);
+        allow delete: if isSignedIn()
+          && canAccessExistingThread()
+          && typingUid == uid();
+      }
+    }
+
+    // ============================================
+    // GENRES
+    // ============================================
+
+    match /genres/{genreId} {
+      allow read: if true;
+      allow create, update, delete: if isTrusted();
+    }
+
+    match /contentCategories/{categoryId} {
+      allow read: if true;
+      allow create, update, delete: if isTrusted();
+    }
+
+    match /metadataIssues/{issueId} {
+      allow read: if isTrustedOrAdmin();
+      allow create, update, delete: if false;
+    }
+
+    // ============================================
+    // POSTS
+    // ============================================
+
+    match /posts/{postId} {
+      function postDocPath() {
+        return /databases/$(database)/documents/posts/$(postId);
+      }
+      function postExists() {
+        return exists(postDocPath());
+      }
+      function existingPostData() {
+        return get(postDocPath()).data;
+      }
+      function validPostKind(data) {
+        return !('kind' in data) || data.kind in ["post", "share"];
+      }
+
+      function isSharePost(data) {
+        return ('kind' in data) && data.kind == "share";
+      }
+
+      function validPostText(data) {
+        return data.text is string
+          && data.text.size() <= 2000
+          && (isSharePost(data) || data.text.size() > 0);
+      }
+
+      function validPostAuthorName(data) {
+        return ('authorName' in data)
+          && data.authorName is string
+          && data.authorName.size() > 0
+          && data.authorName.size() <= 80;
+      }
+
+      function validPostTitleId(data) {
+        return !('titleId' in data) || data.titleId is string || data.titleId == null;
+      }
+
+      // Campi scritti SOLO dall'admin SDK. `source*`/`spoilerScope` marcano i
+      // post-eco dei commenti thread (lib/commentEcho.js): un client non deve
+      // poterli forgiare (post finto "commento su Ted Lasso S3E7", gate
+      // anti-spoiler aggirato) né stripparli con un update.
+      function noClientOfficialPostFields(data) {
+        return !('isOfficialUpdate' in data)
+          && !('officialUpdate' in data)
+          && !('linkedTitleIds' in data)
+          && !('skipAutoFeedFanout' in data)
+          && !('sourceKind' in data)
+          && !('sourceThreadId' in data)
+          && !('sourceMessageId' in data)
+          && !('spoilerScope' in data)
+          && !('textTruncated' in data);
+      }
+
+      function validSharedPost(data) {
+        return !('sharedPost' in data)
+          || (
+            data.sharedPost is map
+            && ('postId' in data.sharedPost)
+            && data.sharedPost.postId is string
+            && data.sharedPost.postId.size() > 0
+            && ('authorUid' in data.sharedPost)
+            && data.sharedPost.authorUid is string
+            && data.sharedPost.authorUid.size() > 0
+            && ('authorName' in data.sharedPost)
+            && data.sharedPost.authorName is string
+            && data.sharedPost.authorName.size() > 0
+            && data.sharedPost.authorName.size() <= 80
+            && ('text' in data.sharedPost)
+            && data.sharedPost.text is string
+            && data.sharedPost.text.size() > 0
+            && data.sharedPost.text.size() <= 2000
+            && (!('titleId' in data.sharedPost) || data.sharedPost.titleId is string || data.sharedPost.titleId == null)
+          );
+      }
+
+      function validPostPayload(data) {
+        return data.authorUid is string
+          && data.authorUid.size() > 0
+          && validPostAuthorName(data)
+          && validPostKind(data)
+          && validPostText(data)
+          && validPostTitleId(data)
+          && noClientOfficialPostFields(data)
+          && validSharedPost(data)
+          && (!('visibility' in data) || data.visibility in ["public", "friends", "private"])
+          && (!isSharePost(data) || ('sharedPost' in data))
+          && spoilerFieldsOptional(data);
+      }
+
+      function postVisibility(data) {
+        return ('visibility' in data && data.visibility is string)
+          ? data.visibility
+          : "public";
+      }
+
+      function canReadPost(data) {
+        let vis = postVisibility(data);
+        let owner = ('authorUid' in data) && data.authorUid == uid();
+        // "comment" = post-eco di un commento in un thread pubblico
+        // (lib/commentEcho.js). In lettura vale come pubblico per chi è
+        // loggato; NON è nella whitelist di validPostPayload, quindi nessun
+        // client può crearlo — solo l'admin SDK. Valore separato da "public"
+        // perché i client vecchi (iOS sullo Store) interrogano "public" e non
+        // conoscono il gate anti-spoiler per progresso.
+        return vis == "public"
+          || vis == "comment"
+          || (vis == "friends" && (owner || isFriendWith(data.authorUid, uid())))
+          || (vis == "private" && (owner || isAdmin()));
+      }
+      function canAccessPostThread() {
+        return isSignedIn()
+          && postExists()
+          && canReadPost(existingPostData());
+      }
+
+      allow read: if isSignedIn() && canReadPost(resource.data);
+
+      allow create: if isSignedIn()
+        && request.resource.data.authorUid == uid()
+        && validPostPayload(request.resource.data)
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time;
+
+      allow update: if isSignedIn()
+        && resource.data.authorUid == uid()
+        && request.resource.data.authorUid == resource.data.authorUid
+        && request.resource.data.createdAt == resource.data.createdAt
+        && request.resource.data.updatedAt is timestamp
+        && validPostPayload(request.resource.data);
+
+      allow delete: if isSignedIn() && resource.data.authorUid == uid();
+
+      match /likes/{likeUid} {
+        allow read: if canAccessPostThread();
+
+        allow create: if isSignedIn()
+          && canAccessPostThread()
+          && likeUid == uid()
+          && request.resource.data.uid == uid()
+          && request.resource.data.createdAt == request.time;
+
+        allow update: if false;
+        allow delete: if isSignedIn()
+          && canAccessPostThread()
+          && likeUid == uid();
+      }
+
+      match /comments/{commentId} {
+        allow read: if canAccessPostThread();
+
+        allow create: if isSignedIn()
+          && canAccessPostThread()
+          && request.resource.data.uid == uid()
+          && request.resource.data.authorName is string
+          && request.resource.data.authorName.size() > 0
+          && request.resource.data.authorName.size() <= 80
+          && request.resource.data.text is string
+          && request.resource.data.text.size() > 0
+          && request.resource.data.text.size() <= 5000
+          && request.resource.data.createdAt == request.time
+          && (!('parentCommentId' in request.resource.data)
+            || (request.resource.data.parentCommentId is string
+              && request.resource.data.parentCommentId.size() <= 200))
+          && (!('parentUid' in request.resource.data)
+            || (request.resource.data.parentUid is string
+              && request.resource.data.parentUid.size() <= 128))
+          && (!('parentAuthorName' in request.resource.data)
+            || (request.resource.data.parentAuthorName is string
+              && request.resource.data.parentAuthorName.size() <= 80))
+          && spoilerFieldsOptional(request.resource.data);
+
+        allow update: if false;
+        allow delete: if isSignedIn()
+          && (
+            resource.data.uid == uid()
+            || (postExists() && existingPostData().authorUid == uid())
+            || isAdmin()
+          );
+
+        match /likes/{likeUid} {
+          allow read: if canAccessPostThread();
+
+          allow create: if isSignedIn()
+            && canAccessPostThread()
+            && likeUid == uid()
+            && request.resource.data.uid == uid()
+            && request.resource.data.createdAt == request.time;
+
+          allow update: if false;
+          allow delete: if isSignedIn()
+            && canAccessPostThread()
+            && likeUid == uid();
+        }
+      }
+
+      match /shares/{shareId} {
+        allow read: if isSignedIn();
+
+        allow create: if isSignedIn()
+          && request.resource.data.uid == uid()
+          && request.resource.data.mode in ["feed", "external"]
+          && request.resource.data.createdAt == request.time;
+
+        allow update, delete: if false;
+      }
+    }
+
+    // ============================================
+    // RATING FEED (like/comment su voti)
+    // ============================================
+
+    match /ratingFeed/{eventId} {
+      function ratingFeedThreadExists() {
+        return exists(/databases/$(database)/documents/ratingFeed/$(eventId));
+      }
+
+      function validRatingFeedLikeDoc(data) {
+        return data.keys().hasOnly(["uid", "createdAt"])
+          && data.uid == uid()
+          && data.createdAt == request.time;
+      }
+
+      function validRatingFeedCommentDoc(data) {
+        return data.keys().hasOnly([
+            "uid",
+            "authorName",
+            "text",
+            "createdAt",
+            "authorAvatarURL",
+            "parentCommentId",
+            "parentUid",
+            "parentAuthorName",
+            "containsSpoiler",
+            "spoilerTitleIds"
+          ])
+          && data.uid == uid()
+          && data.authorName is string
+          && data.authorName.size() > 0
+          && data.authorName.size() <= 80
+          && data.text is string
+          && data.text.size() > 0
+          && data.text.size() <= 5000
+          && (
+            !('authorAvatarURL' in data)
+            || data.authorAvatarURL == null
+            || (
+              data.authorAvatarURL is string
+              && data.authorAvatarURL.size() <= 1200
+            )
+          )
+          && (!('parentCommentId' in data)
+            || (data.parentCommentId is string && data.parentCommentId.size() <= 200))
+          && (!('parentUid' in data)
+            || (data.parentUid is string && data.parentUid.size() <= 128))
+          && (!('parentAuthorName' in data)
+            || (data.parentAuthorName is string && data.parentAuthorName.size() <= 80))
+          && data.createdAt == request.time
+          && spoilerFieldsOptional(data);
+      }
+
+      allow get: if isSignedIn();
+      allow list: if false;
+      allow update, delete: if false;
+      allow create: if false;
+
+      match /likes/{likeUid} {
+        allow read: if isSignedIn() && ratingFeedThreadExists();
+
+        allow create: if isSignedIn()
+          && ratingFeedThreadExists()
+          && likeUid == uid()
+          && validRatingFeedLikeDoc(request.resource.data);
+
+        allow update: if false;
+        allow delete: if isSignedIn()
+          && ratingFeedThreadExists()
+          && likeUid == uid();
+      }
+
+      match /comments/{commentId} {
+        allow read: if isSignedIn() && ratingFeedThreadExists();
+
+        allow create: if isSignedIn()
+          && ratingFeedThreadExists()
+          && validRatingFeedCommentDoc(request.resource.data);
+
+        allow update: if false;
+        allow delete: if isSignedIn()
+          && ratingFeedThreadExists()
+          && (resource.data.uid == uid() || isAdmin());
+
+        match /likes/{likeUid} {
+          allow read: if isSignedIn() && ratingFeedThreadExists();
+
+          allow create: if isSignedIn()
+            && ratingFeedThreadExists()
+            && likeUid == uid()
+            && validRatingFeedLikeDoc(request.resource.data);
+
+          allow update: if false;
+          allow delete: if isSignedIn()
+            && ratingFeedThreadExists()
+            && likeUid == uid();
+        }
+      }
+    }
+
+    // ============================================
+    // PEOPLE (Attori, Registi)
+    // ============================================
+
+    match /people/{personId} {
+      allow read: if true;
+      allow create, update: if isTrusted();
+      allow delete: if isAdmin();
+    }
+
+    // ============================================
+    // LEADERBOARD (Cloud Functions)
+    // ============================================
+
+    match /leaderboard/{docId} {
+      allow read: if isSignedIn();
+      allow write: if false;
+    }
+
+    // ============================================
+    // EVENTS (Home banner)
+    // ============================================
+
+    match /events/{docId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+
+    // ============================================
+    // REPORTS (Abuse/Segnalazioni)
+    // ============================================
+
+    match /reports/{reportId} {
+      // Rate-limit: max 20 report nella finestra corrente
+      // (contatore in users/{uid}/rateLimits/reports).
+      allow create: if isSignedIn()
+        && request.resource.data.fromUid == uid()
+        && request.resource.data.type in ["user", "post", "comment", "thread"]
+        && request.resource.data.targetId is string
+        && request.resource.data.targetId.size() > 0
+        && request.resource.data.reason is string
+        && request.resource.data.reason.size() > 0
+        && request.resource.data.createdAt == request.time
+        && rateLimitOk(uid(), "reports", 20);
+
+      allow read, update, delete: if isAdmin();
+    }
+
+    // ============================================
+    // MODERATION QUEUE (anti-spoiler auto-checker)
+    // ============================================
+    // Solo admin può leggere/aggiornare. Le scritture provengono dai trigger
+    // server (admin SDK), i client non possono creare doc qui — la
+    // chiusura (decision confirmed/false_positive) passa SEMPRE per la
+    // callable `confirmSpoilerSuspect` (server admin SDK).
+    match /moderationQueue/{queueId} {
+      allow read: if isAdmin();
+      allow create, update, delete: if false;
+    }
+
+    // ============================================
+    // IMPORT COMMENT REVIEW (ripubblicazione commenti TV Time)
+    // ============================================
+    // Coda di revisione dei commenti-episodio importati da TV Time. Scritta SOLO
+    // dal server (processTvTimeEpisodeComments via admin SDK); pubblicazione sui
+    // thread pubblici passa per publishImportComments (admin) DOPO revisione
+    // umana. Lettura admin per la console; nessun accesso client (contiene testo
+    // utente in attesa di consenso/verifica). Doc id: {uid}__{importId}.
+    match /importCommentReview/{reviewId} {
+      allow read: if isAdmin();
+      allow create, update, delete: if false;
+      match /comments/{commentId} {
+        allow read: if isAdmin();
+        allow create, update, delete: if false;
+      }
+    }
+
+    // ============================================
+    // CLIENT ERRORS (osservabilità minima web)
+    // ============================================
+    // Diagnostica errori JS non gestiti dalle pagine autenticate della PWA
+    // (public/js/api/errors.api.js, wiring in public/js/components/appShell.js).
+    // Ogni utente signed-in può creare SOLO il proprio doc, con schema stretto
+    // (niente campi extra, niente payload oversize) — nessuna lettura/modifica
+    // lato client: la console è solo per admin. TTL su `expiresAt` va abilitata
+    // manualmente in console Firebase (14 giorni).
+    match /clientErrors/{id} {
+      allow read: if isAdmin();
+      allow create: if isSignedIn()
+        && request.resource.data.uid == uid()
+        && request.resource.data.keys().hasOnly(['uid', 'message', 'source', 'line', 'col', 'stack', 'page', 'ua', 'createdAt', 'expiresAt'])
+        && request.resource.data.message is string && request.resource.data.message.size() <= 500
+        && request.resource.data.source is string && request.resource.data.source.size() <= 300
+        && request.resource.data.line is number
+        && request.resource.data.col is number
+        && request.resource.data.stack is string && request.resource.data.stack.size() <= 2000
+        && request.resource.data.page is string && request.resource.data.page.size() <= 300
+        && request.resource.data.ua is string && request.resource.data.ua.size() <= 300;
+      allow update, delete: if false;
+    }
+
+    // ============================================
+    // EXPERIMENTS / FEATURE FLAGS
+    // ============================================
+
+    match /experiments/{docId} {
+      allow read: if docId == "global";
+      allow create, update, delete: if isAdmin();
+    }
+
+    // ============================================
+    // OFFICIAL UPDATES (sistema editoriale)
+    // ============================================
+    // Registro bozze/pubblicazioni degli aggiornamenti ufficiali.
+    // Scrittura SOLO server (callable publishOfficialUpdate /
+    // unpublishOfficialUpdate via admin SDK). Lettura admin per la
+    // console editoriale web (/admin-official-updates.html).
+    match /officialUpdates/{slug} {
+      allow read: if isAdmin();
+      allow create, update, delete: if false;
+    }
+
+    // ============================================
+    // TITLE UPDATE EVENTS (timeline pubblica)
+    // ============================================
+    // Solo gli eventi published sono pubblici, coerentemente col catalogo
+    // titles e le pagine SSR. Draft/retired restano visibili agli admin per la
+    // console editoriale. Ogni scrittura passa da Admin SDK: i client, incluso
+    // un admin autenticato, non possono creare o alterare notizie ufficiali.
+    match /titleUpdateEvents/{eventId} {
+      allow get, list: if resource.data.status == "published" || isAdmin();
+      allow create, update, delete: if false;
+    }
+
+    // ============================================
+    // PRODUCT METRICS (funnel aggregato, dashboard admin)
+    // ============================================
+    // Contatori giornalieri AGGREGATI e anonimi (nessun uid) scritti solo dal
+    // server (callable logProductEvent + trigger + snapshot schedulato via admin
+    // SDK). Lettura admin per /admin-metrics.html.
+    match /productMetrics/{docId} {
+      allow read: if isAdmin();
+      allow create, update, delete: if false;
+    }
+
+    // ============================================
+    // FEED EVENTS (server-driven feed, append-only)
+    // ============================================
+
+    match /feedEvents/{eventId} {
+      allow read: if isSignedIn() && resource.data.ownerUid == uid();
+      allow create, update, delete: if false;
+    }
+
+    // ============================================
+    // QUIZ
+    // ============================================
+    // quizQuestions: AI/seed content, moderated by admins. Le risposte/spoiler
+    // sono nei doc, quindi il read e' filtrato a soli status giocabili
+    // (approved / beta_pending_review). Le query per id/titleId che oggi non
+    // filtrano lato query falliscono se il batch include doc in stato diverso
+    // (pending/flagged): TODO segnato in PWA quiz.api.js e iOS QuizRepository.swift.
+    match /quizQuestions/{questionId} {
+      allow read: if isSignedIn()
+        && resource.data.status in ["approved", "beta_pending_review"];
+      allow create, update, delete: if isAdmin();
+    }
+
+    // quizMeta/themes: aggregato pubblico dei titoli che hanno domande
+    // giocabili (titleId, title, mediaType, count) — NESSUNA risposta/spoiler.
+    // Read pubblica (serve al picker temi anche per i guest e alle pagine quiz
+    // pubbliche); write solo server (admin SDK: scheduledRebuildQuizThemes /
+    // rebuildQuizThemes). Usato per listing completo + ricerca.
+    match /quizMeta/{docId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // QuizSession V2 contiene lo snapshot server-side con answer key,
+    // idempotenza e risultato canonico. I client accedono esclusivamente
+    // tramite startQuizSessionV2/submitQuizSessionV2 (Admin SDK).
+    match /quizSessions/{sessionId} {
+      allow read, write: if false;
+    }
+
+    // Per-user attempts. Owner-only read/write.
+    match /users/{userId}/quizAttempts/{attemptId} {
+      allow read, create, update, delete: if isSignedIn() && userId == uid();
+    }
+
+    // Per-user aggregated quiz stats (cached counters).
+    match /users/{userId}/quizStats/{docId} {
+      allow read: if isSignedIn();
+      // Delta per-scrittura limitato: niente forge della leaderboard in 1 riga.
+      allow create: if isSignedIn() && userId == uid()
+        && quizStatsDeltaOk({}, request.resource.data);
+      allow update: if isSignedIn() && userId == uid()
+        && quizStatsDeltaOk(resource.data, request.resource.data);
+      allow delete: if false;
+    }
+
+    // Collection-group read so the leaderboard can aggregate stats across all
+    // users without requiring a backend fan-out. Signed-in users only.
+    match /{path=**}/quizStats/{docId} {
+      allow read: if isSignedIn();
+    }
+
+    // Collection-group read su `library`: serve allo step "Segui qualcuno"
+    // dell'onboarding per proporre chi ha in libreria i titoli appena scelti
+    // (docs/ONBOARDING_V2.md). NON apre dati nuovi: `users/{userId}/library`
+    // e' gia' leggibile da ogni utente loggato (e' il tab pubblico "Visti"),
+    // qui cambia solo il modo di interrogarla. `library` esiste solo sotto
+    // `users/{uid}` — se un domani nascesse un'altra sottocollezione con lo
+    // stesso nome sotto un parent privato, questa regola la esporrebbe.
+    match /{path=**}/library/{titleId} {
+      allow read: if isSignedIn();
+    }
+
+    // Challenges between users. Internal (friend) challenges are created by
+    // the client; external (share-link) challenges are created server-side by
+    // the invite Cloud Functions (admin SDK), so the create rule below only
+    // ever needs to admit internal ones.
+    match /quizChallenges/{challengeId} {
+      allow read: if isSignedIn()
+        && (resource.data.fromUid == uid()
+          || resource.data.get('toUid', '') == uid()
+          || isAdmin());
+
+      allow create: if isSignedIn()
+        && request.resource.data.fromUid == uid()
+        && request.resource.data.get('inviteType', 'internal') == 'internal'
+        && request.resource.data.toUid is string
+        && request.resource.data.toUid != uid()
+        && request.resource.data.questionIds is list
+        && request.resource.data.questionIds.size() > 0
+        && request.resource.data.questionIds.size() <= 50
+        && request.resource.data.status == "pending";
+
+      // Players may only record their own side; the fromUid / toUid binding
+      // and the questionIds set are frozen — the invite functions own those
+      // transitions via the admin SDK.
+      allow update: if isSignedIn()
+        && (resource.data.fromUid == uid() || resource.data.get('toUid', '') == uid())
+        && request.resource.data.fromUid == resource.data.fromUid
+        && request.resource.data.get('toUid', '') == resource.data.get('toUid', '')
+        && request.resource.data.questionIds == resource.data.questionIds;
+
+      allow delete: if isAdmin();
+    }
+
+    // External-invite tokens. Written and read exclusively by the invite
+    // Cloud Functions via the admin SDK — clients must never touch them, so
+    // the raw token hash is never exposed and tokens stay non-enumerable.
+    match /quizInvites/{inviteId} {
+      allow read, write: if false;
+    }
+
+    // Global cross-user title-match cache for viewing-history imports
+    // (Netflix CSV, TV Time GDPR, ...) — functions/lib/importAdapters/
+    // importMatchCache.js. Deny-all: only the import Cloud Functions
+    // (admin SDK) read/write it. No PII, no per-user data (keyed by a
+    // normalized-title hash, value is a shared titles/{id} match) — clients
+    // never need direct access, they only ever see their own import's
+    // results under users/{uid}/imports.
+    match /importMatchCache/{cacheKey} {
+      allow read, write: if false;
+    }
+
+    // Matching-tick continuation docs for the resumable import worker
+    // (runImportMatchTick). Server-only: created/deleted by the import Cloud
+    // Functions (admin SDK) to chain matching across many 540s invocations.
+    // Deny-all to clients — no user ever reads or writes these.
+    match /importMatchTicks/{tickId} {
+      allow read, write: if false;
+    }
+
+    // Contatori rate-limit per callable guest (IP hashato). Solo server.
+    match /guestRateLimits/{counterId} {
+      allow read, write: if false;
+    }
+
+    // User-submitted reports on a specific question. Created by any
+    // authenticated user; read-only for admins (the user can keep playing).
+    match /quizQuestionReports/{reportId} {
+      allow create: if isSignedIn()
+        && request.resource.data.reportedBy == uid()
+        && request.resource.data.questionId is string
+        && request.resource.data.questionId.size() > 0
+        && request.resource.data.reason is string
+        && request.resource.data.reason.size() > 0
+        && request.resource.data.reason.size() <= 500;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Leaderboard buckets — denormalized, read-public, writes via cloud function only.
+    match /leaderboard_weekly/{leaderboardUid} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /leaderboard_allTime/{leaderboardUid} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ============================================
+    // BLOG POSTS — DB-driven articoli /blog/{slug}
+    // ============================================
+    match /blogPosts/{slug} {
+      // I post pubblicati sono pubblici (lettura anche senza auth, serve per SEO crawl).
+      // I draft sono leggibili solo da admin/trusted.
+      allow get: if resource.data.status == "published" || isTrustedOrAdmin();
+      // Niente `list: if true` (esponeva le bozze a una query senza filtro):
+      // una list passa solo se ogni doc e' pubblicato, o se chiede un admin.
+      // Il client (listRecentBlogPosts) filtra gia' where status==published.
+      allow list: if isTrustedOrAdmin() || resource.data.status == "published";
+      allow create, update: if isAdmin()
+        && request.resource.data.title is string
+        && request.resource.data.title.size() > 0
+        && request.resource.data.body is string
+        && request.resource.data.status in ["draft", "published"];
+      allow delete: if isAdmin();
+    }
+
+    // ============================================
+    // GUIDED PROFILES (profili guidati supervisionati)
+    // ============================================
+    // Scritti SOLO da Cloud Functions (admin SDK, bypassa le rules). I client non
+    // possono ne' leggere ne' scrivere queste collection di controllo. La
+    // disclosure pubblica vive su users/{uid}.accountType/bio (gia' leggibile).
+    match /appConfig/{docId} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+    match /guidedProfiles/{guidedUid} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+    match /guidedContentDrafts/{draftId} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+    match /guidedProfileRuns/{runId} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+    match /guidedDmAttempts/{attemptId} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+
+    // ============================================
+    // DEFAULT DENY
+    // ============================================
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "questionId": "q_171_1",
+    "severity": "critical",
+    "problem": "L'explanation afferma che Spielberg rifiutò la regia per 'dedicarsi ad A.I. - Intelligenza Artificiale'. Falso: Spielberg dichiarò di aver rifiutato per trascorrere più tempo con la famiglia e perché non sentiva la sfida creativa (definiì il progetto 'shooting ducks in a barrel'). A.I. non è mai stato citato come motivo. La risposta corretta (Chris Columbus) è giusta.",
+    "fix": "Correggere l'explanation rimuovendo il riferimento ad A.I.: 'Spielberg rifiutò la regia dichiarando di voler trascorrere più tempo con la famiglia e di non sentire una sfida creativa sufficiente nel progetto. Chris Columbus fu scelto tra una rosa di candidati e girò i primi due film della saga.'",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_171_2",
+    "severity": "critical",
+    "problem": "L'explanation chiama Chris Columbus 'il produttore'. Columbus è il REGISTA, non il produttore. Il produttore del film è David Heyman. Fatto falso nell'explanation, la risposta corretta (Daniel Radcliffe, indice 2) è giusta.",
+    "fix": "Correggere 'il produttore Chris Columbus' → 'il regista Chris Columbus'. Il produttore era David Heyman, che incontrò Radcliffe a teatro con il padre.",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_171_13",
+    "severity": "minor",
+    "problem": "La domanda chiede chi porta Harry 'a Diagon Alley e poi al Binario 9 e 3/4'. Hagrid porta Harry a Diagon Alley ✓, ma non al Binario 9¾: nel film Harry va alla stazione con Hagrid, ma è la famiglia Weasley (Molly Weasley) a mostrargli come attraversare il muro. La domanda è imprecisa e l'explanation non menziona il ruolo dei Weasley per il binario.",
+    "fix": "Correggere la domanda in 'Chi accompagna Harry a Diagon Alley per la prima volta?' oppure aggiungere nell'explanation: 'Hagrid accompagna Harry alla stazione di King's Cross, ma è la famiglia Weasley a mostrargli come accedere al Binario 9 e 3/4.'",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_171_38",
+    "severity": "critical",
+    "problem": "L'explanation afferma che Tom Felton 'aveva in precedenza recitato in Il Gladiatore e Tornando a casa per Natale'. Completamente falso: Tom Felton non appare in nessuno dei due film. In 'Il Gladiatore' (2000) recitava Richard Harris (che interpreta Silente). Felton aveva in realtà recitato in 'The Borrowers' (1997) e 'Anna and the King' (1999). La risposta corretta (Tom Felton, indice 2) è giusta.",
+    "fix": "Correggere l'explanation: 'Tom Felton, prima di Harry Potter, aveva recitato in The Borrowers (1997) come Peagreen Clock e in Anna and the King (1999) nel ruolo di Louis T. Leonowens. Aveva anche audizionato per i ruoli di Harry e Ron prima di essere scelto come Draco.'",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_171_41",
+    "severity": "critical",
+    "problem": "Il poltergeist tagliato dal film si chiama 'Pix' in italiano (o 'Peeves' nelle edizioni più recenti), NON 'Piton il Poltergeist'. In italiano 'Piton' è il professor Severus Snape: usare 'Piton' per il poltergeist crea una grave confusione tra due personaggi completamente diversi. La risposta corretta (indice 2) è giusta ma il nome in italiano è sbagliato.",
+    "fix": "Correggere 'Piton il Poltergeist (Peeves)' → 'Pix (Peeves) il Poltergeist' nella domanda e nell'explanation.",
+    "correctIndexShouldBe": -1
+  }
+]

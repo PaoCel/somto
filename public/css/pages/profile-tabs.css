@@ -1,0 +1,281 @@
+/* profile-tabs.css — Tab Review + Taste su Profile. Replica iOS
+   ProfileReviewsSection + ProfileTasteSection (ProfileComponents.swift). */
+
+/* Empty state condiviso review/taste */
+.profile-empty {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-card);
+  padding: 1.6rem 1rem;
+  text-align: center;
+  background: var(--panel);
+  display: flex; flex-direction: column; gap: 0.4rem;
+  align-items: center;
+}
+.profile-empty svg { width: 28px; height: 28px; color: var(--text-muted); }
+.profile-empty h3 { margin: 0; font-size: 1rem; font-weight: var(--weight-bold); color: var(--text-primary); }
+.profile-empty p { margin: 0; font-size: 0.86rem; color: var(--text-secondary); line-height: 1.45; }
+
+/* ──────────────────── REVIEW ──────────────────── */
+.profile-reviews-list {
+  display: flex; flex-direction: column; gap: 0.7rem;
+  padding: 0.7rem 0;
+}
+.profile-review-card {
+  display: flex; gap: 0.85rem;
+  padding: 0.85rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+.profile-review-poster {
+  width: 62px; height: 92px;
+  border-radius: 14px;
+  object-fit: cover;
+  flex: 0 0 auto;
+  background: var(--panel-strong);
+}
+.profile-review-poster.placeholder {
+  background: linear-gradient(135deg, color-mix(in oklab, var(--brand-primary) 25%, transparent), var(--panel-strong));
+}
+.profile-review-main {
+  min-width: 0; flex: 1;
+  display: flex; flex-direction: column; gap: 0.45rem;
+}
+.profile-review-head {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 0.5rem;
+}
+.profile-review-title {
+  margin: 0; font-size: 0.96rem; font-weight: var(--weight-bold);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.profile-review-rating {
+  display: inline-flex; align-items: center; gap: 0.2rem;
+  padding: 0.18rem 0.45rem;
+  border-radius: var(--radius-pill);
+  background: color-mix(in oklab, var(--brand-primary) 12%, transparent);
+  color: var(--brand-primary);
+  font-size: 0.82rem;
+  font-weight: var(--weight-bold);
+  font-variant-numeric: tabular-nums;
+  flex: 0 0 auto;
+}
+.profile-review-rating svg { width: 12px; height: 12px; }
+.profile-review-meta {
+  display: flex; gap: 0.5rem; flex-wrap: wrap;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+.profile-review-meta span:not(:last-child)::after {
+  content: " ·";
+  margin-left: 0.1rem;
+  color: var(--text-muted);
+}
+.profile-review-body {
+  margin: 0; font-size: 0.88rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+.profile-review-toggle {
+  align-self: flex-start;
+  appearance: none; background: none; border: 0;
+  color: var(--brand-primary);
+  font-size: 0.82rem;
+  font-weight: var(--weight-semibold);
+  cursor: pointer;
+  padding: 0;
+}
+
+/* ──────────────────── TASTE ──────────────────── */
+.profile-taste-content {
+  display: flex; flex-direction: column; gap: 1.2rem;
+  padding: 0.7rem 0;
+}
+.profile-taste-section h3 {
+  margin: 0 0 0.55rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+.profile-taste-chips {
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+}
+.profile-taste-chip {
+  padding: 0.32rem 0.7rem;
+  border-radius: var(--radius-pill);
+  background: var(--panel-strong);
+  border: 1px solid var(--border);
+  font-size: 0.82rem;
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+}
+
+.profile-taste-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem;
+}
+.profile-taste-card {
+  display: flex; gap: 0.7rem;
+  padding: 0.65rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  text-decoration: none;
+  color: var(--text-primary);
+  align-items: flex-start;
+}
+.profile-taste-poster {
+  width: 54px; height: 80px;
+  border-radius: 12px;
+  object-fit: cover;
+  flex: 0 0 auto;
+  background: var(--panel-strong);
+}
+.profile-taste-poster.placeholder { background: linear-gradient(135deg, color-mix(in oklab, var(--brand-primary) 25%, transparent), var(--panel-strong)); }
+.profile-taste-info {
+  min-width: 0; flex: 1;
+  display: flex; flex-direction: column; gap: 0.25rem;
+}
+.profile-taste-info h5 {
+  margin: 0; font-size: 0.84rem; font-weight: var(--weight-bold);
+  white-space: normal; overflow: hidden; text-overflow: ellipsis;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+}
+.profile-taste-genres { font-size: 0.72rem; color: var(--text-muted); }
+.profile-taste-rating {
+  display: inline-flex; align-items: center; gap: 0.18rem;
+  font-size: 0.78rem; color: var(--brand-primary);
+  font-weight: var(--weight-bold);
+  font-variant-numeric: tabular-nums;
+}
+.profile-taste-rating svg { width: 12px; height: 12px; }
+
+.profile-recent-scroll {
+  display: flex; gap: 0.6rem;
+  overflow-x: auto;
+  padding-bottom: 0.4rem;
+  margin: 0 -1rem;
+  padding-left: 1rem; padding-right: 1rem;
+  scrollbar-width: none;
+}
+.profile-recent-scroll::-webkit-scrollbar { display: none; }
+.profile-recent-poster {
+  flex: 0 0 auto;
+  width: 110px;
+  display: flex; flex-direction: column; gap: 0.3rem;
+  text-decoration: none; color: var(--text-primary);
+}
+.profile-recent-poster-img {
+  width: 110px; height: 164px;
+  border-radius: 14px;
+  object-fit: cover;
+  background: var(--panel-strong);
+}
+.profile-recent-poster-img.placeholder { background: linear-gradient(135deg, color-mix(in oklab, var(--brand-primary) 25%, transparent), var(--panel-strong)); }
+.profile-recent-poster strong {
+  font-size: 0.82rem; font-weight: var(--weight-bold);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.profile-recent-poster small { font-size: 0.7rem; color: var(--text-muted); }
+
+.profile-skeleton {
+  padding: 1.4rem;
+  text-align: center;
+  font-size: 0.86rem;
+  color: var(--text-muted);
+}
+
+/* ──────────────────── TEMPO DI VISIONE — toggle unità ──────────────────── */
+/* Wrapper button attorno a #watchTimeDigits: reset totale, cliccabile su
+   tutta la larghezza per ciclare le modalità (giorni:ore:min → ore → ... ).
+   #watchTimeDigits/.profile-watchtime-* restano stilati da account.css
+   (card "paper" chiara); qui serve solo il reset del <button>. */
+.profile-watchtime-unitbtn {
+  appearance: none;
+  border: 0;
+  background: none;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+  border-radius: 16px;
+  transition: opacity var(--transition-fast, 0.18s ease), transform var(--transition-fast, 0.18s ease);
+}
+.profile-watchtime-unitbtn:hover { opacity: 0.85; }
+.profile-watchtime-unitbtn:active { transform: scale(0.98); }
+.profile-watchtime-unitbtn:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 3px;
+}
+
+.profile-watchtime-unithint {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.28rem;
+  font-size: 0.72rem;
+  font-weight: var(--weight-semibold);
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* Matitina — affordance visiva "questo si può toccare/modificare", accanto
+   all'hint testuale. Stessa icona edit-2 di .profile-hero-tool (account.html),
+   qui più piccola e sempre discreta (non è un bottone a sé, il tap va sull'
+   intero box .profile-watchtime-unitbtn). */
+.profile-watchtime-unithint-icon {
+  width: 0.68rem;
+  height: 0.68rem;
+  flex: none;
+  opacity: 0.75;
+}
+
+/* ──────────────────── VISTI — filtro STATO (asse indipendente dal tipo) ──────────────────── */
+.profile-status-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.7rem;
+}
+.profile-status-chip {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 0.4rem 0.85rem;
+  font-size: 0.76rem;
+  font-weight: var(--weight-semibold);
+  background: var(--panel);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: transform var(--transition-fast, 0.18s ease), background var(--transition-fast, 0.18s ease);
+}
+.profile-status-chip:active { transform: scale(0.95); }
+.profile-status-chip.active {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: #fff;
+}
+
+/* ──────────────────── VISTI — badge rewatch (↺ ×N) ──────────────────── */
+.profile-vote-rewatch-badge {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.14rem 0.45rem;
+  border-radius: var(--radius-pill);
+  background: var(--panel-strong);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 0.66rem;
+  font-weight: var(--weight-bold);
+  font-variant-numeric: tabular-nums;
+}

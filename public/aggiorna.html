@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Aggiorna Somto</title>
+  <meta name="robots" content="noindex,follow">
+  <link rel="stylesheet" href="/css/main.css" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Somto">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0A0A0A">
+</head>
+<body>
+  <div class="container">
+    <div class="card pad" style="margin-top:18px; max-width:520px">
+      <div class="card-title" data-i18n>È disponibile una nuova versione</div>
+      <div class="card-sub" style="margin-top:6px" id="agg-sub" data-i18n>
+        Aggiorna Somto per avere le ultime novità e correzioni.
+      </div>
+      <div class="divider"></div>
+
+      <!-- CTA iOS: App Store -->
+      <a class="btn primary" id="agg-appstore"
+         href="https://apps.apple.com/it/app/somto/id6760966564"
+         style="display:none; width:100%">Aggiorna dall'App Store</a>
+
+      <!-- CTA web: ricarica per prendere l'ultima versione della web app -->
+      <button class="btn primary" id="agg-reload" style="display:none; width:100%" data-i18n>
+        Ricarica per aggiornare
+      </button>
+
+      <a class="btn ghost" href="/" style="width:100%; margin-top:10px" data-i18n>Vai alla Home</a>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var ua = navigator.userAgent || "";
+      var isIOS = /iPad|iPhone|iPod/.test(ua) ||
+        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+      var sub = document.getElementById("agg-sub");
+      var appstore = document.getElementById("agg-appstore");
+      var reload = document.getElementById("agg-reload");
+
+      if (isIOS) {
+        appstore.style.display = "";
+        sub.textContent = "Aggiorna l'app Somto dall'App Store per avere le ultime novità.";
+      } else {
+        reload.style.display = "";
+        sub.textContent = "Sei sulla web app: ricarica per prendere l'ultima versione. Su iPhone trovi l'app aggiornata sull'App Store.";
+      }
+
+      reload.addEventListener("click", async function () {
+        reload.disabled = true;
+        reload.textContent = "Aggiorno…";
+        try {
+          if ("serviceWorker" in navigator) {
+            var regs = await navigator.serviceWorker.getRegistrations();
+            await Promise.all(regs.map(function (r) { return r.update(); }));
+          }
+          if (window.caches && caches.keys) {
+            var keys = await caches.keys();
+            await Promise.all(keys.map(function (k) { return caches.delete(k); }));
+          }
+        } catch (e) { /* best effort */ }
+        location.replace("/?updated=" + Date.now());
+      });
+    })();
+  </script>
+  <!-- Traduce il markup marcato `data-i18n`: questa pagina non carica
+       l'app-shell, quindi il modulo va importato esplicitamente. -->
+  <script type="module" src="/js/i18n/index.js"></script>
+  <script src="/js/pwa.js" defer></script>
+</body>
+</html>

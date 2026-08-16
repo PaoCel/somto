@@ -1,0 +1,9 @@
+[
+  {
+    "questionId": "q_179_24",
+    "severity": "minor",
+    "problem": "La domanda indica 'Giordania (Wadi Rum)' come il paesaggio desertico principale di Arrakis, ma la fonte primaria per le distese di dune sabbiose (spice-mining) era la Liwa Oasis ad Abu Dhabi, UAE (11 giorni di riprese, scelta personale di Villeneuve come location centrale). Wadi Rum ha fornito le scene con formazioni rocciose. Variety titola esplicitamente \"'Dune': Arrakis Is Abu Dhabi's Liwa Desert\". L'explanation peggiora il problema descrivendo la UAE come semplici 'ulteriori scene desertiche', invertendo di fatto l'importanza relativa delle due location.",
+    "fix": "Cambiare la risposta corretta a 'Emirati Arabi Uniti (Liwa Oasis, Abu Dhabi)' oppure riformulare la domanda come 'Quale paese ha fornito le scene delle dune sabbiose di Arrakis per l'estrazione della spezia?' con risposta UAE. In alternativa, rendere la risposta corretta 'Entrambi Giordania (Wadi Rum) e Emirati Arabi Uniti (Liwa Oasis)' e riformulare la domanda. Aggiornare l'explanation per indicare correttamente che Liwa/UAE era la location principale per le dune e Wadi Rum forniva le formazioni rocciose.",
+    "correctIndexShouldBe": -1
+  }
+]

@@ -1,0 +1,5 @@
+{
+  "layout": "articolo.njk",
+  "tags": ["articolo"],
+  "permalink": "{{ slug }}/index.html"
+}

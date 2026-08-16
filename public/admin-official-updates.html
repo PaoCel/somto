@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Aggiornamenti ufficiali - Somto</title>
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Console admin privata per comporre e pubblicare gli aggiornamenti ufficiali Somto.">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/pages/admin-editorial.css">
+
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Somto">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0A0A0A">
+</head>
+<body class="admin-editorial-page">
+  <div id="appSplash" class="app-splash">
+    <img class="splash-logo splash-wordmark" src="/icons/somto-wordmark.png" alt="Somto">
+    <div class="splash-spinner"></div>
+  </div>
+
+  <main class="analytics-shell" aria-labelledby="pageTitle">
+    <header class="analytics-topbar">
+      <a class="analytics-back" href="/account.html" aria-label="Torna al profilo">Indietro</a>
+      <div>
+        <p class="analytics-kicker">Admin</p>
+        <h1 id="pageTitle">Aggiornamenti ufficiali</h1>
+      </div>
+      <div class="analytics-topbar-actions">
+        <button id="reloadListBtn" class="btn small primary" type="button">Aggiorna elenco</button>
+      </div>
+    </header>
+
+    <section id="gate" class="analytics-state" hidden role="alert">
+      <h2>Accesso negato</h2>
+      <p>Questa pagina risponde solo agli account admin.</p>
+    </section>
+
+    <section id="mainContent" hidden>
+      <section class="editorial-card" aria-label="Componi aggiornamento">
+        <h2 class="editorial-card-title">Componi un aggiornamento</h2>
+
+        <div class="field">
+          <label class="label" for="titleInput">Titolo</label>
+          <input id="titleInput" class="input" type="text" maxlength="160" placeholder="Es. Stranger Things 5 arriva a novembre">
+          <span class="char-counter" id="titleCounter">0/160</span>
+        </div>
+
+        <div class="field">
+          <label class="label" for="slugInput">Slug</label>
+          <input id="slugInput" class="input" type="text" maxlength="96" placeholder="generato dal titolo">
+        </div>
+
+        <div class="field">
+          <label class="label" for="textInput">Testo</label>
+          <textarea id="textInput" class="input" rows="6" maxlength="2000" placeholder="Il testo dell'aggiornamento..."></textarea>
+          <span class="char-counter" id="textCounter">0/2000</span>
+        </div>
+
+        <div class="field">
+          <label class="label" for="summaryInput">Sommario</label>
+          <input id="summaryInput" class="input" type="text" maxlength="240" placeholder="derivato dal testo se vuoto">
+          <span class="char-counter" id="summaryCounter">0/240</span>
+        </div>
+
+        <div class="field">
+          <label class="label" for="typeSelect">Tipo</label>
+          <select id="typeSelect" class="input">
+            <option value="announcement">Annuncio</option>
+            <option value="new_season">Nuova stagione</option>
+            <option value="new_episode">Nuovo episodio</option>
+            <option value="release_date">Data di uscita</option>
+            <option value="renewal">Rinnovo</option>
+            <option value="cancellation">Cancellazione</option>
+            <option value="sequel">Sequel</option>
+            <option value="trailer">Trailer</option>
+            <option value="casting">Casting</option>
+            <option value="rumor">Rumor</option>
+            <option value="not_confirmed">Non confermato</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="label" for="titleSearchInput">Titoli collegati <span id="linkedCountLabel">0/10</span></label>
+          <div class="editorial-search-wrap">
+            <input id="titleSearchInput" class="input" type="search" placeholder="Cerca un titolo nel catalogo..." autocomplete="off">
+            <div id="titleSearchResults" class="editorial-search-results" hidden></div>
+          </div>
+          <div id="linkedChips" class="editorial-chips">
+            <span class="analytics-muted">Nessun titolo collegato.</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label" for="sourceUrlsInput">Fonti</label>
+          <textarea id="sourceUrlsInput" class="input" rows="3" placeholder="Un URL per riga (max 6)"></textarea>
+        </div>
+
+        <div class="field">
+          <label class="label" for="audienceInput">Audience di test</label>
+          <input id="audienceInput" class="input" type="text" placeholder="uid separati da virgola (opzionale)">
+        </div>
+
+        <div class="field">
+          <label class="label" for="scheduledAtInput">Programma per</label>
+          <input id="scheduledAtInput" class="input" type="datetime-local">
+          <p class="hint">Vale solo su "Salva bozza": la bozza viene pubblicata automaticamente a quell'ora (controllo ogni 15 minuti). Vuoto = bozza senza programmazione.</p>
+        </div>
+
+        <div class="editorial-actions">
+          <button id="previewBtn" class="btn secondary" type="button">Anteprima (dry run)</button>
+          <button id="draftBtn" class="btn ghost" type="button">Salva bozza</button>
+          <button id="publishBtn" class="btn primary" type="button">Pubblica</button>
+        </div>
+
+        <div id="previewPanel" class="editorial-preview" hidden>
+          <h3>Anteprima</h3>
+          <div id="previewWarnings" class="editorial-alert editorial-alert--notify" role="status" hidden></div>
+          <dl>
+            <dt>Slug</dt><dd id="previewSlug">-</dd>
+            <dt>Post</dt><dd id="previewPostId">-</dd>
+            <dt>Audience stimata</dt><dd id="previewRecipientCount">-</dd>
+          </dl>
+        </div>
+      </section>
+
+      <section class="editorial-card" aria-label="Pubblicati e bozze">
+        <h2 class="editorial-card-title">Pubblicati e bozze</h2>
+        <div class="analytics-table-wrap">
+          <table class="analytics-table">
+            <thead>
+              <tr>
+                <th>Titolo</th>
+                <th>Slug</th>
+                <th>Stato</th>
+                <th>Aggiornato</th>
+                <th>Audience</th>
+                <th>Azioni</th>
+              </tr>
+            </thead>
+            <tbody id="updatesBody">
+              <tr><td colspan="6"><div class="analytics-empty">Carico...</div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div class="toast-wrap" id="toasts" role="status" aria-live="polite"></div>
+
+  <script src="/firebaseConfig.js"></script>
+  <script type="module" src="/js/pages/admin-official-updates.page.js"></script>
+  <script src="/js/pwa.js" defer></script>
+</body>
+</html>

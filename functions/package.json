@@ -1,0 +1,46 @@
+{
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log",
+    "test": "npm run test:unit && npm run test:rules",
+    "test:unit": "node --test ./test/unit/*.test.cjs",
+    "test:rules": "firebase emulators:exec --only firestore,storage \"node --test ./test/rules.spec.cjs ./test/rules-repro-suggestion.spec.cjs ./test/rules-repro-list-poisoned.spec.cjs ./test/quiz-session-v2.integration.spec.cjs\"",
+    "backfill:rating-feed": "node ./scripts/backfill-rating-feed-thread-docs.js",
+    "backfill:user-private-profile": "node ./scripts/backfill-user-private-profile.js",
+    "backfill:auth-user-docs": "node ./scripts/backfill-auth-user-docs.js",
+    "backfill:support-threads": "node ./scripts/backfill-support-threads.js",
+    "backfill:title-states-metrics": "node ./scripts/backfill-title-states-metrics.js",
+    "backfill:product-tracking": "node ./scripts/backfill-product-tracking-import-cohorts.js",
+    "backfill:public-user-lists": "node ./scripts/backfill-public-user-lists.js",
+    "backfill:comment-echo": "node ./scripts/backfill-comment-echo-posts.js",
+    "audit:title-states": "node ./scripts/audit-title-states.js",
+    "audit:quiz-corpus": "node ./scripts/audit-quiz-corpus.cjs",
+    "reco:export": "node ./scripts/export-reco-dataset.js",
+    "reco:benchmark": "node ./scripts/benchmark-recommendations.js",
+    "scan:title-updates": "node ./scripts/scan-title-updates.cjs",
+    "apply:title-updates": "node ./scripts/apply-title-update-events.cjs"
+  },
+  "engines": {
+    "node": "22"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "@google-cloud/firestore": "^7.11.0",
+    "cookie-signature": "^1.0.7",
+    "firebase-admin": "^13.9.0",
+    "firebase-functions": "^7.0.5",
+    "proxy-addr": "^2.0.7",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "^5.0.1",
+    "firebase": "^12.17.1",
+    "firebase-functions-test": "^3.5.0"
+  },
+  "private": true
+}

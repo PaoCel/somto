@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Gestione Consenso — Somto</title>
+  <meta name="robots" content="noindex,follow">
+  <meta name="description" content="Rivedi e modifica le preferenze di consenso di Somto.">
+  <link rel="canonical" href="https://somto.it/consent.html">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body class="settings-page">
+  <main class="container page">
+    <header class="settings-head">
+      <div class="settings-user-copy">
+        <h1>Gestione consenso</h1>
+        <p class="settings-sub">Questa pagina è pubblica: puoi rivedere le tue scelte anche senza essere autenticato.</p>
+      </div>
+    </header>
+
+    <section class="settings-group">
+      <h2>Analytics di prodotto</h2>
+      <div class="settings-item">
+        <span>Stato attuale</span>
+        <small id="publicConsentStatus">Solo strumenti necessari attivi</small>
+      </div>
+      <button id="publicConsentAcceptBtn" class="settings-item" type="button">
+        <span>Accetta analytics</span>
+        <small>Abilita misurazione first-party di funnel, retention e feature usage</small>
+      </button>
+      <button id="publicConsentRejectBtn" class="settings-item" type="button">
+        <span>Tieni solo i necessari</span>
+        <small>Il prodotto continua a funzionare senza analytics opzionali</small>
+      </button>
+    </section>
+
+    <section class="settings-group">
+      <a class="settings-item" href="/cookies.html">
+        <span>Cookie policy</span>
+        <small>Dettaglio su consenso, local storage e analytics</small>
+      </a>
+      <a class="settings-item" href="/privacy.html">
+        <span>Privacy policy</span>
+        <small>Informativa trattamento dati</small>
+      </a>
+      <a class="settings-item" href="/terms.html">
+        <span>Termini di servizio</span>
+        <small>Regole di utilizzo del servizio</small>
+      </a>
+      <a class="settings-item" href="/support.html">
+        <span>Supporto</span>
+        <small>Canali di assistenza e informazioni utili</small>
+      </a>
+    </section>
+  </main>
+
+  <div class="toast-wrap" id="toasts" role="status" aria-live="polite"></div>
+  <script type="module" src="/js/pages/consent.page.js"></script>
+</body>
+</html>

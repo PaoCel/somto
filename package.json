@@ -1,0 +1,48 @@
+{
+  "name": "somto",
+  "version": "1.0.0",
+  "description": "Social app per film e serie TV: PWA, iOS e backend Firebase.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test ./test/web/*.test.js",
+    "check:public": "node ./scripts/check-public-readiness.mjs",
+    "functions:serve": "npm --prefix functions run serve",
+    "functions:shell": "npm --prefix functions run shell",
+    "functions:deploy": "npm --prefix functions run deploy",
+    "functions:logs": "npm --prefix functions run logs",
+    "deploy:check:staging": "node ./scripts/check-deploy-safety.mjs staging",
+    "deploy:check:prod": "node ./scripts/check-deploy-safety.mjs prod",
+    "deploy:staging": "npm run deploy:check:staging && firebase deploy --config firebase.staging.json --project \"$(node ./scripts/print-deploy-project.mjs staging)\"",
+    "deploy:prod": "npm run deploy:check:prod && firebase deploy --project \"$(node ./scripts/print-deploy-project.mjs prod)\"",
+    "deploy:staging:hosting": "npm run deploy:check:staging && firebase deploy --config firebase.staging.json --only hosting --project \"$(node ./scripts/print-deploy-project.mjs staging)\"",
+    "deploy:prod:hosting": "npm run deploy:check:prod && firebase deploy --only hosting --project \"$(node ./scripts/print-deploy-project.mjs prod)\"",
+    "e2e:install": "playwright install chromium",
+    "e2e:seed": "node ./e2e/scripts/seed-emulator.mjs",
+    "e2e:run": "playwright test",
+    "e2e": "firebase emulators:exec --project demo-2watch --only auth,firestore,storage,hosting \"npm run e2e:seed && npm run e2e:run\"",
+    "build:pwa": "esbuild public/js/pages/*.page.js --bundle --minify --format=esm --outdir=public/dist --target=es2022 --splitting --sourcemap",
+    "watch:pwa": "esbuild public/js/pages/*.page.js --bundle --format=esm --outdir=public/dist --target=es2022 --splitting --watch"
+  },
+  "keywords": [
+    "firebase",
+    "ios",
+    "movies",
+    "pwa",
+    "swiftui",
+    "tv"
+  ],
+  "author": "Paolo Celestini",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "csv-parser": "^3.2.0",
+    "firebase-admin": "^13.4.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "@resvg/resvg-js": "^2.6.2",
+    "esbuild": "^0.28.2",
+    "gray-matter": "^4.0.3",
+    "satori": "^0.10.14"
+  }
+}

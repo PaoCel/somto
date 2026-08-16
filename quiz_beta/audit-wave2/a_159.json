@@ -1,0 +1,30 @@
+[
+  {
+    "questionId": "q_159_12",
+    "severity": "critical",
+    "problem": "Il correctAnswerIndex=1 (Leonard Peabody) è sbagliato. Il 'vero nome' (nome di nascita) dell'antagonista è Harold Jenkins; Leonard Peabody è il nome falso/alias che adotta dopo essere uscito di prigione per avvicinarsi a Vanya. La spiegazione ha i nomi invertiti: scrive 'si chiama in realtà Leonard Peabody, ma usa il nome falso di Harold Jenkins', ma è il contrario — nato Harold Jenkins, si spaccia per Leonard Peabody.",
+    "fix": "Impostare correctAnswerIndex=0 (Harold Jenkins). Correggere la spiegazione in: 'L'antagonista si chiama in realtà Harold Jenkins, nato lo stesso giorno degli Hargreeves e rifiutato da Reginald. Dopo aver ucciso il padre e trascorso dodici anni in prigione, assume il nome falso di Leonard Peabody per avvicinarsi a Vanya.'",
+    "correctIndexShouldBe": 0
+  },
+  {
+    "questionId": "q_159_13",
+    "severity": "critical",
+    "problem": "L'opzione corretta (index 2) afferma che la seconda stagione si svolge 'a Dallas durante la crisi dei missili di Cuba'. La crisi dei missili cubani avvenne nell'ottobre 1962, mentre la stagione 2 è ambientata tra il 1960 e il novembre 1963 intorno all'assassinio di Kennedy. La minaccia nucleare della serie è legata all'assassinio di JFK il 22 novembre 1963, non alla crisi dei missili. Queste sono crisi storiche distinte avvenute in anni diversi.",
+    "fix": "Correggere il testo dell'opzione 2 in: '1963, a Dallas nei giorni intorno all'assassinio di Kennedy'. Aggiornare la spiegazione rimuovendo il riferimento alla 'crisi dei missili cubana' e sostituendolo con: 'La stagione culmina nei giorni attorno all'assassinio di Kennedy (22 novembre 1963); la minaccia nucleare nasce dal paradosso temporale innescato dalla presenza degli Hargreeves, non dalla crisi dei missili del 1962.'",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_159_23",
+    "severity": "minor",
+    "problem": "La domanda chiede 'In quale guerra combatte Klaus nella seconda stagione', ma Klaus combatte in Vietnam durante la stagione 1 (viene accidentalmente teletrasportato durante la fuga da Cha-Cha e Hazel con la valigetta). La stagione 2 mostra Klaus ricercare Dave a Dallas nel 1963 per impedirgli di arruolarsi, ma il combattimento è già avvenuto in stagione 1. La stessa spiegazione lo conferma scrivendo 'Nella stagione 1, Klaus viene accidentalmente teletrasportato...'. La risposta (Vietnam) è corretta ma la domanda ha una premessa fuorviante.",
+    "fix": "Correggere il testo della domanda in: 'In quale guerra combatte Klaus dopo essersi teletrasportato accidentalmente nel passato nella prima stagione?' oppure 'In quale conflitto storico viene coinvolto Klaus a causa dei suoi viaggi nel tempo?'",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_159_47",
+    "severity": "minor",
+    "problem": "La spiegazione afferma 'Vinse l'Eisner Award 2007 come miglior serie limitata'. L'Eisner Award fu assegnato nel 2008 (per opere pubblicate nel 2007-2008), non nel 2007. Il primo numero uscì nel settembre 2007 ma la serie si completò nel febbraio 2008, e il premio fu conferito alla cerimonia Eisner del 2008.",
+    "fix": "Correggere in: 'Vinse l'Eisner Award 2008 come miglior serie limitata.'",
+    "correctIndexShouldBe": -1
+  }
+]

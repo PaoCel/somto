@@ -1,0 +1,12 @@
+/* Bundle specifico per aggiunta titolo */
+@import url('./reset.css');
+@import url('./variables.css');
+@import url('./base.css');
+@import url('./components/button.css');
+@import url('./components/card.css');
+@import url('./components/form.css');
+@import url('./components/toast.css');
+@import url('./components/utilities.css');
+@import url('./components/social.css');
+@import url('./pages.css');
+@import url('./pages/add_title.css');

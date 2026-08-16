@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0A0A0A">
+<title>Watchlist vNext · Somto</title>
+<link rel="stylesheet" href="/css/variables.css">
+<link rel="stylesheet" href="/mockups/watchlist-vnext.css?v=1">
+</head>
+<body>
+
+<header class="doc-head">
+  <div class="doc-wrap">
+    <p class="doc-kicker">Somto · proposta di redesign</p>
+    <h1>Watchlist vNext</h1>
+    <p class="doc-lead">Tre direzioni per sostituire l'attuale Watchlist a 4 sotto-tab. Tutte usano i token reali di Somto (palette, raggi, tipografia) e dati veri: poster TMDB, durate, piattaforme IT.</p>
+    <div class="doc-badges">
+      <span class="doc-badge doc-badge--rec">A · Stasera — consigliata</span>
+      <span class="doc-badge">B · Muro</span>
+      <span class="doc-badge">C · Scaffali</span>
+    </div>
+  </div>
+</header>
+
+<section class="doc-wrap doc-section">
+  <h2>Cosa non va oggi</h2>
+  <div class="doc-grid2">
+    <div class="doc-card doc-card--bad">
+      <h3>1. Due livelli di navigazione</h3>
+      <p>Watchlist è già una tab in basso, e dentro ha altre 4 tab (Home / Da vedere / Condivise / Per te). "Home" è un portale che duplica le altre tre: <em>Da vedere</em> appare due volte, <em>Condivise</em> due volte, <em>Per te</em> due volte. Chi apre la tab non sa dove stia la sua roba.</p>
+    </div>
+    <div class="doc-card doc-card--bad">
+      <h3>2. Densità bassissima</h3>
+      <p>Righe verticali con miniatura piccola: ~4 titoli per schermata. Una griglia poster ne mostra 9–12. In un prodotto dove il poster <em>è</em> il linguaggio (Letterboxd), stiamo usando una lista della spesa.</p>
+    </div>
+    <div class="doc-card doc-card--bad">
+      <h3>3. Filtri da form desktop</h3>
+      <p>Tre <code>&lt;select&gt;</code> + un input numerico "Anno minimo" su mobile. Il pattern 2026 è la riga di chip orizzontale (Spotify Library) con eventuale bottom sheet per l'avanzato.</p>
+    </div>
+    <div class="doc-card doc-card--bad">
+      <h3>4. Il lavoro vero non è supportato</h3>
+      <p>Il job to be done n.1 è "cosa guardo stasera", il n.2 è "riprendo la serie". Oggi il primo è un deck di 3 card sepolto sotto un titolo di sezione e non personalizzato (sono solo gli ultimi 3 salvati); il secondo non c'è proprio in questa vista.</p>
+    </div>
+    <div class="doc-card doc-card--bad">
+      <h3>5. Le liste occupano più spazio di quanto valgano</h3>
+      <p>Percorsi, liste mie, condivise, editoriali Somto, liste pubbliche: cinque sezioni per una feature da power user, in cima alla schermata. E su un account nuovo diventano cinque riquadri vuoti: l'app sembra rotta.</p>
+    </div>
+    <div class="doc-card doc-card--bad">
+      <h3>6. Concorrenza di ruoli</h3>
+      <p>"Liste pubbliche" ed "Editoriali Somto" sono <em>discovery</em>, non la mia watchlist. Stanno in Community o Cerca, non qui.</p>
+    </div>
+  </div>
+</section>
+
+<section class="doc-wrap doc-section">
+  <h2>La tesi</h2>
+  <div class="doc-thesis">
+    <p><strong>Una sola schermata scrollabile. Zero sotto-tab.</strong> In cima la <em>decisione</em> (cosa guardo adesso), sotto la <em>pila</em> come griglia di poster, e le <strong>liste diventano un filtro</strong>, non una sezione.</p>
+    <ul>
+      <li><strong>Decidere &gt; sfogliare.</strong> Hick's law: più opzioni = decisione più lenta. Netflix ha "Play Something", Letterboxd ha "Sort by Shuffle" (e un ecosistema di watchlist-picker di terze parti nato proprio perché serviva). Somto ha 128 titoli in coda e nessun modo di sceglierne uno.</li>
+      <li><strong>Poster first.</strong> Griglia 3 colonne = 9 titoli visibili invece di 4. Badge piattaforma sull'angolo, barra progresso sulle serie: tutto quello che serve senza testo.</li>
+      <li><strong>Liste = filtri.</strong> Una lista è un sottoinsieme della watchlist: si applica alla stessa griglia con una chip. Elimina 4 sezioni e un intero sotto-tab.</li>
+      <li><strong>Chip al posto dei select.</strong> Filtri visibili con conteggio, stato attivo evidente, reset in un tap.</li>
+      <li><strong>Discovery fuori.</strong> Liste pubbliche ed editoriali migrano in Community.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="doc-wrap doc-section">
+  <h2>A · "Stasera" <span class="doc-tag doc-tag--rec">consigliata</span></h2>
+  <p class="doc-note">Decisione in cima, pila sotto. È la versione che risolve entrambi i job to be done senza chiedere all'utente di navigare. La griglia che avevi in mente c'è, ma sotto il livello che le dà senso.</p>
+  <div class="doc-frames">
+    <figure class="frame-fig">
+      <div class="phone" id="frameA"></div>
+      <figcaption>Scroll iniziale — decisione + continua a guardare</figcaption>
+    </figure>
+    <figure class="frame-fig">
+      <div class="phone" id="frameA2"></div>
+      <figcaption>Scroll basso — griglia filtrata + liste</figcaption>
+    </figure>
+    <div class="doc-anno">
+      <h4>Anatomia</h4>
+      <ol>
+        <li><b>Header 1 riga.</b> "Watchlist" + conteggio reale. Cerca e "＋" restano icone.</li>
+        <li><b>Card Stasera.</b> Un solo titolo, scelto dalla watchlist con un motivo esplicito ("2h 04m — ci sta prima di dormire", "esce da Netflix il 12", "l'hai salvato 4 mesi fa"). Due bottoni: <em>Guardo questo</em> / <em>Un altro</em>. Il secondo è lo shuffle: costo zero, nessuna scrittura, e uccide la paralisi da scelta.</li>
+        <li><b>Continua.</b> Le serie in corso con prossimo episodio e barra di avanzamento. Oggi questa informazione esiste (<code>seriesProgress</code>) ma nella Watchlist non si vede.</li>
+        <li><b>Chip sticky.</b> Tutto / Film / Serie / Sotto 2h / piattaforme che l'utente ha / le sue liste. Con conteggio. Sostituiscono i 3 select + l'input anno.</li>
+        <li><b>Griglia 3 col.</b> Poster puro. Badge piattaforma in alto a destra, barra progresso in basso per le serie, "＋" lungo tap per le azioni rapide.</li>
+        <li><b>Liste in fondo</b>, come scaffale orizzontale con copertina a mosaico. Toccarne una applica il filtro alla griglia sopra.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="doc-wrap doc-section">
+  <h2>B · "Muro"</h2>
+  <p class="doc-note">La versione massimalista sulla densità: nessun hero, la griglia parte subito sotto le chip. La decisione è compressa in un solo bottone flottante (🎲). È la più vicina a Letterboxd — e la più fredda: chi apre l'app senza sapere cosa vuole resta davanti a 128 poster.</p>
+  <div class="doc-frames">
+    <figure class="frame-fig">
+      <div class="phone" id="frameB"></div>
+      <figcaption>Muro di poster, chip sticky, FAB "scegli tu"</figcaption>
+    </figure>
+    <figure class="frame-fig">
+      <div class="phone" id="frameB2"></div>
+      <figcaption>Long press su un poster — azioni rapide senza uscire</figcaption>
+    </figure>
+    <div class="doc-anno">
+      <h4>Quando ha senso</h4>
+      <ul>
+        <li>Se le metriche dicono che la Watchlist viene usata più per <em>gestire</em> (togliere, riordinare, cercare) che per <em>decidere</em>.</li>
+        <li>Costa meno da costruire: è il layout A senza hero e senza "Continua".</li>
+        <li>Il long-press bottom sheet (Segna visto / Sposta in lista / Rimuovi / Dove si guarda) va comunque fatto in tutte e tre le direzioni.</li>
+      </ul>
+      <h4>Rischio</h4>
+      <p>Sposta tutto il carico cognitivo sull'utente. Il 🎲 flottante è una toppa: funziona per chi lo scopre, e la maggioranza non lo scopre.</p>
+    </div>
+  </div>
+</section>
+
+<section class="doc-wrap doc-section">
+  <h2>C · "Scaffali"</h2>
+  <p class="doc-note">Nessuna griglia in prima battuta: la pila viene spezzata in scaffali orizzontali per <em>intenzione</em> — sto guardando / stasera ci sta / prima o poi / con amici. È l'idea del backlog-kanban applicata a un tracker: l'app decide l'ordine al posto tuo.</p>
+  <div class="doc-frames">
+    <figure class="frame-fig">
+      <div class="phone" id="frameC"></div>
+      <figcaption>Scaffali per intenzione</figcaption>
+    </figure>
+    <figure class="frame-fig">
+      <div class="phone" id="frameC2"></div>
+      <figcaption>"Vedi tutti" su uno scaffale → griglia già filtrata</figcaption>
+    </figure>
+    <div class="doc-anno">
+      <h4>Pro</h4>
+      <ul>
+        <li>Ogni scaffale risponde a una domanda diversa: nessuna schermata "mucchio".</li>
+        <li>Gli scaffali si guadagnano il posto: se non hai serie in corso, quello scaffale non esiste (niente stati vuoti a catena).</li>
+      </ul>
+      <h4>Contro</h4>
+      <ul>
+        <li>Densità bassa: lo scroll orizzontale mostra 3 poster per riga contro i 9 della griglia.</li>
+        <li>È il layout che abbiamo già oggi in Home — rischia di sembrare "la stessa cosa con altri nomi".</li>
+        <li>Richiede regole di classificazione buone, se no gli scaffali sembrano arbitrari.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="doc-wrap doc-section">
+  <h2>Dettagli che valgono per tutte e tre</h2>
+  <div class="doc-frames">
+    <figure class="frame-fig">
+      <div class="phone" id="frameSheet"></div>
+      <figcaption>Bottom sheet filtri — sostituisce i select</figcaption>
+    </figure>
+    <figure class="frame-fig">
+      <div class="phone" id="frameEmpty"></div>
+      <figcaption>Watchlist vuota — una promessa, non 5 box vuoti</figcaption>
+    </figure>
+    <div class="doc-anno">
+      <h4>Regole</h4>
+      <ul>
+        <li><b>Un empty state solo.</b> Oggi un account nuovo vede 4–5 riquadri vuoti in fila. Ne serve uno, con una call to action vera.</li>
+        <li><b>Il filtro piattaforma usa i loghi</b> già denormalizzati (<code>titles.watchProviderLogos</code>): niente round trip TMDB.</li>
+        <li><b>Ogni chip mostra il conteggio.</b> Un filtro che porta a zero risultati non deve essere selezionabile.</li>
+        <li><b>Copy invariato dove esiste già</b> (<code>docs/I18N_GLOSSARY.md</code>): "Da vedere", "Segna come visto", "Rimuovi dalla watchlist" si riusano identici su iOS e web.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="doc-wrap doc-foot">
+  <p>Mockup statici, dati TMDB reali. Nessuna riga dell'app è stata modificata: questa pagina vive in <code>/mockups/</code> ed è noindex.</p>
+</footer>
+
+<script src="/mockups/watchlist-vnext.js?v=1" defer></script>
+</body>
+</html>

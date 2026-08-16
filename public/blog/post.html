@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title id="postTitle">Articolo — Somto</title>
+  <meta id="postDescription" name="description" content="">
+  <meta id="postRobots" name="robots" content="index,follow">
+  <link id="postCanonical" rel="canonical" href="https://somto.it/blog/post/">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="author" content="Somto">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Somto">
+  <meta property="og:locale" content="it_IT">
+  <meta id="postOgTitle" property="og:title" content="">
+  <meta id="postOgDesc" property="og:description" content="">
+  <meta id="postOgImage" property="og:image" content="https://somto.it/icons/icon-512.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+
+  <link rel="stylesheet" href="/css/landing.bundle.css">
+  <link rel="stylesheet" href="/css/pages/blog-post.css">
+</head>
+<body class="blog-post-page" data-no-shell>
+  <main>
+    <article class="blog-article">
+      <div class="blog-wrap">
+        <nav class="blog-crumbs" aria-label="Percorso">
+          <a href="/">Somto</a>
+          <span>›</span>
+          <a href="/blog/">Blog</a>
+          <span>›</span>
+          <span id="crumbTitle">Articolo</span>
+        </nav>
+
+        <header class="blog-hero">
+          <h1 id="postH1" class="blog-title">Caricamento…</h1>
+          <p id="postExcerpt" class="blog-lede"></p>
+          <div class="blog-meta" id="postMeta"></div>
+        </header>
+
+        <img id="postCover" class="blog-cover" alt="" hidden>
+
+        <div id="postBody" class="blog-body">
+          <p>Caricamento dell'articolo…</p>
+        </div>
+
+        <section class="blog-cta">
+          <h2>Pronto a usare Somto?</h2>
+          <p>Salva i titoli che ti consigliamo, organizza la watchlist e scopri cosa guardare stasera.</p>
+          <a class="lp-btn lp-btn-primary" href="/login.html">Entra su Somto</a>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <script src="/firebaseConfig.js"></script>
+  <script type="module">
+    import { getBlogPostBySlug } from "/js/api/blogPosts.api.js";
+
+    function $(id) { return document.getElementById(id); }
+    function escapeHtml(s) {
+      return String(s || "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    }
+
+    /** Markdown ultra-light: paragrafi separati da blank line, # heading,
+     *  ## subheading, **bold**, *italic*, [link](url), liste con "- ".
+     *  Per pieni Markdown advanced, salvare body in HTML in DB.
+     */
+    function renderMarkdown(md) {
+      const lines = String(md || "").split(/\r?\n/);
+      const out = [];
+      let para = [];
+      let list = null;
+
+      const flushPara = () => {
+        if (para.length) {
+          const text = inline(para.join(" ").trim());
+          if (text) out.push(`<p>${text}</p>`);
+          para = [];
+        }
+      };
+      const flushList = () => {
+        if (list) { out.push(`<ul>${list.map((i) => `<li>${inline(i)}</li>`).join("")}</ul>`); list = null; }
+      };
+      const inline = (s) => escapeHtml(s)
+        .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+        .replace(/\*([^*]+)\*/g, "<em>$1</em>")
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" rel="noopener">$1</a>');
+
+      for (const raw of lines) {
+        const line = raw.trim();
+        if (!line) { flushPara(); flushList(); continue; }
+        if (line.startsWith("## ")) { flushPara(); flushList(); out.push(`<h3>${inline(line.slice(3))}</h3>`); continue; }
+        if (line.startsWith("# ")) { flushPara(); flushList(); out.push(`<h2>${inline(line.slice(2))}</h2>`); continue; }
+        if (line.startsWith("- ")) { flushPara(); list = list || []; list.push(line.slice(2)); continue; }
+        flushList();
+        para.push(line);
+      }
+      flushPara(); flushList();
+      return out.join("\n");
+    }
+
+    function formatPublished(ts) {
+      if (!ts) return "";
+      const ms = typeof ts.toMillis === "function" ? ts.toMillis()
+        : (typeof ts.seconds === "number" ? ts.seconds * 1000 : new Date(ts).getTime());
+      if (!ms) return "";
+      return new Date(ms).toLocaleDateString("it-IT", { day: "numeric", month: "long", year: "numeric" });
+    }
+
+    async function init() {
+      const params = new URLSearchParams(window.location.search || "");
+      const slug = String(params.get("slug") || "").trim();
+      if (!slug) {
+        $("postBody").innerHTML = '<p>Articolo non trovato.</p>';
+        return;
+      }
+      const post = await getBlogPostBySlug(slug).catch(() => null);
+      if (!post) {
+        $("postH1").textContent = "Articolo non disponibile";
+        $("postBody").innerHTML = '<p>L\'articolo richiesto non è disponibile o è stato rimosso. Torna al <a href="/blog/">blog</a>.</p>';
+        $("postRobots").content = "noindex,follow";
+        return;
+      }
+
+      document.title = `${post.title} — Somto`;
+      $("postTitle").textContent = `${post.title} — Somto`;
+      $("postDescription").content = post.excerpt || "";
+      $("postCanonical").href = `https://somto.it/blog/post/?slug=${encodeURIComponent(post.slug)}`;
+      $("postOgTitle").content = post.title;
+      $("postOgDesc").content = post.excerpt || "";
+      if (post.coverImage) $("postOgImage").content = post.coverImage;
+
+      $("crumbTitle").textContent = post.title;
+      $("postH1").textContent = post.title;
+      $("postExcerpt").textContent = post.excerpt || "";
+      const metaParts = [];
+      const dateStr = formatPublished(post.publishedAt);
+      if (dateStr) metaParts.push(`<time>${dateStr}</time>`);
+      if (post.author?.name) metaParts.push(`<span>di ${escapeHtml(post.author.name)}</span>`);
+      $("postMeta").innerHTML = metaParts.join(" · ");
+
+      if (post.coverImage) {
+        const cover = $("postCover");
+        cover.src = post.coverImage; cover.alt = post.title; cover.hidden = false;
+      }
+
+      const body = post.bodyFormat === "html" ? String(post.body || "") : renderMarkdown(post.body);
+      $("postBody").innerHTML = body || "<p>Articolo vuoto.</p>";
+    }
+
+    init();
+  </script>
+</body>
+</html>

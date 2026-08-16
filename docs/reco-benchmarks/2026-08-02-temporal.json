@@ -1,0 +1,80 @@
+{
+  "generatedAtMs": 1785682708841,
+  "dataset": "/tmp/somto-reco-2026-08-02-corrected.json",
+  "datasetSource": "gia-visto",
+  "cutoffMs": 1784196095852,
+  "split": "temporal",
+  "signal": "ratings",
+  "collabSeeds": 8,
+  "minCoOcc": 2,
+  "collabWeight": 6,
+  "temporal": true,
+  "k": 10,
+  "seed": 1337,
+  "pool": "production-like",
+  "levels": "all",
+  "users": 10,
+  "catalogSize": 18446,
+  "models": {
+    "popularity": {
+      "users": 10,
+      "recall@10": 0.003125,
+      "precision@10": 0.01,
+      "ndcg@10": 0.022009176629808017,
+      "map@10": 0.01,
+      "hitRate": 0.1,
+      "coverage": 0.0014095196790632116,
+      "diversity": 0.7432777777777778,
+      "novelty": 4.006373886719831,
+      "emptyLists": 0
+    },
+    "somto": {
+      "users": 10,
+      "recall@10": 0.0008928571428571428,
+      "precision@10": 0.01,
+      "ndcg@10": 0.022009176629808017,
+      "map@10": 0.01,
+      "hitRate": 0.1,
+      "coverage": 0.0042827713325382195,
+      "diversity": 0.6492710746044079,
+      "novelty": 5.406036373068931,
+      "emptyLists": 0
+    },
+    "somto-top": {
+      "users": 10,
+      "recall@10": 0.026785714285714284,
+      "precision@10": 0.04,
+      "ndcg@10": 0.04356061689137627,
+      "map@10": 0.01611111111111111,
+      "hitRate": 0.2,
+      "coverage": 0.003849072969749539,
+      "diversity": 0.5545340708674041,
+      "novelty": 5.350186748061718,
+      "emptyLists": 0
+    },
+    "itemknn": {
+      "users": 10,
+      "recall@10": 0.00392156862745098,
+      "precision@10": 0.02,
+      "ndcg@10": 0.013305201013572899,
+      "map@10": 0.0032500000000000003,
+      "hitRate": 0.1,
+      "coverage": 0.003469586902309444,
+      "diversity": 0.7135061235061235,
+      "novelty": 4.9150531380397275,
+      "emptyLists": 0
+    },
+    "hybrid": {
+      "users": 10,
+      "recall@10": 0.005978641456582633,
+      "precision@10": 0.030000000000000006,
+      "ndcg@10": 0.03628869103342175,
+      "map@10": 0.012678571428571428,
+      "hitRate": 0.3,
+      "coverage": 0.003957497560446709,
+      "diversity": 0.6791235369568703,
+      "novelty": 5.309662073862777,
+      "emptyLists": 0
+    }
+  }
+}

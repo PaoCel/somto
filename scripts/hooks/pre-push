@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+# Somto pre-push guard — gate iOS.
+#
+# Perche' qui e non in GitHub Actions:
+#   la CI del repo gira su ubuntu (gratis). Un job iOS ha bisogno di un runner
+#   macOS, che su piano GitHub Free per repo privati costa 10x i minuti: il
+#   monte gratuito basta a ~1-2 build al mese, contro le ~4,6 modifiche iOS al
+#   giorno di questo repo (277 commit su ios/ in 60 giorni). Il gate iOS sta
+#   quindi sul Mac dove le build gia' avvengono, e la CI si tiene i controlli
+#   che girano gratis su Linux (vedi .github/workflows/ci.yml, job swift-guards).
+#
+# Cosa fa: solo se il push tocca ios/ o project.yml, esegue scripts/ios-ci.sh
+# in modalita' fast (footgun · SwiftLint · xcodegen · build Debug).
+# La build Release e i test restano su scripts/ios-release.sh, che li fa gia'.
+#
+# LIMITE NOTO — valida l'ALBERO DI LAVORO, non i commit in partenza.
+# Se si modificano file mentre il push e' in corso, il gate compila uno stato
+# diverso da quello che si sta spedendo e puo' fallire a torto (successo il
+# 2026-08-09). Farlo "giusto" richiederebbe uno stash o un worktree usa-e-getta
+# sul ref pushato: piu' macchinario, e con una sola persona sul checkout il
+# caso e' raro. Regola pratica: non toccare i file mentre il push gira.
+#
+# Per attivare: scripts/hooks/install.sh
+# Override (emergenza): git push --no-verify
+#                       SOMTO_SKIP_IOS_GATE=1 git push
+
+set -u
+
+red()    { printf '\033[31m%s\033[0m\n' "$*"; }
+yellow() { printf '\033[33m%s\033[0m\n' "$*"; }
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+
+if [ "${SOMTO_SKIP_IOS_GATE:-}" = "1" ]; then
+  yellow "[pre-push] gate iOS saltato (SOMTO_SKIP_IOS_GATE=1)."
+  exit 0
+fi
+
+# Quali commit stiamo per pushare. stdin del hook: <local ref> <local sha>
+# <remote ref> <remote sha>, una riga per ref.
+touches_ios=0
+while read -r _local_ref local_sha _remote_ref remote_sha; do
+  # Cancellazione di un ref: niente da controllare.
+  case "${local_sha}" in *[!0]*) ;; *) continue ;; esac
+
+  case "${remote_sha}" in
+    *[!0]*) range="${remote_sha}..${local_sha}" ;;
+    # Ref nuovo sul remote: limita il confronto a main per non riesaminare
+    # tutta la storia del repo.
+    *)      range="$(git merge-base "${local_sha}" origin/main 2>/dev/null || echo '')..${local_sha}" ;;
+  esac
+
+  changed="$(git diff --name-only "${range}" 2>/dev/null || true)"
+  if printf '%s\n' "${changed}" | grep -qE '^ios/'; then
+    touches_ios=1
+  fi
+done
+
+if [ "${touches_ios}" -eq 0 ]; then
+  exit 0
+fi
+
+echo "[pre-push] il push tocca ios/ — gate iOS (fast)."
+
+if ! "${REPO_ROOT}/scripts/ios-ci.sh" --fast; then
+  red    "[pre-push] Push bloccato: gate iOS fallito."
+  yellow "  riprova:  scripts/ios-ci.sh --fast"
+  yellow "  override: SOMTO_SKIP_IOS_GATE=1 git push   (sconsigliato)"
+  exit 1
+fi
+
+exit 0

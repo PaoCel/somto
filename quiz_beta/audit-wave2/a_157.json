@@ -1,0 +1,16 @@
+[
+  {
+    "questionId": "q_157_11",
+    "severity": "critical",
+    "problem": "L'explanation afferma 'Entrambi sono stati adottati dalla famiglia Nunier', ma è FALSO: solo Guzmán è adottato. Marina è la figlia BIOLOGICA di Laura Osuna e Ventura Nunier. La risposta segnata (indice 1, 'Adottiva') è tecnicamente corretta nel descrivere Marina come sorella adottiva di Guzmán (perché è Guzmán l'adottato), ma l'explanation contiene un fatto falso che induce in errore il lettore.",
+    "fix": "Correggere l'explanation: 'Marina è la sorella adottiva di Guzmán: solo Guzmán è stato adottato dai Nunier dopo la morte per overdose dei suoi genitori biologici. Marina è invece la figlia biologica di Laura e Ventura Nunier.'",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_157_22",
+    "severity": "critical",
+    "problem": "La risposta segnata come corretta (indice 1: 'I suoi genitori biologici, che erano tossicodipendenti poveri, morirono per overdose') NON è la ragione dell'ostilità di Guzmán verso i borsisti. La vera causa è che un precedente borsista, Pablo, aveva avuto una relazione con Marina (allora 14enne) e l'aveva infettata con l'HIV. Questo evento è ciò che genera il pregiudizio di Guzmán verso tutti i nuovi borsisti. La morte dei genitori biologici è un fatto reale ma non è correlata all'ostilità specifica verso i borsisti. Nessuna delle opzioni di risposta copre la vera motivazione.",
+    "fix": "Riscrivere la domanda o sostituire le opzioni di risposta. La risposta corretta dovrebbe essere: 'Un precedente borsista aveva infettato sua sorella Marina con l'HIV'. L'explanation deve essere corretta di conseguenza.",
+    "correctIndexShouldBe": -1
+  }
+]

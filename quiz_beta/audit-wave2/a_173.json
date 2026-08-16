@@ -1,0 +1,16 @@
+[
+  {
+    "questionId": "q_173_46",
+    "severity": "critical",
+    "problem": "Il testo della domanda dice che il personaggio 'muore colpito sulla Morte Nera', ma Arvel Crynyd muore schiantando il suo A-wing sul ponte di comando dell'Executor (Super Star Destroyer), non sulla Morte Nera. È l'Executor che poi precipita sulla Morte Nera. La premessa della domanda contiene un fatto falso.",
+    "fix": "Correggere il testo della domanda in: 'Quale personaggio dell'Alleanza abbatte l'Executor schiantandosi contro il suo ponte di comando durante la battaglia di Endor?' — oppure riformulare come: 'Quale pilota ribelle muore abbattendo il Super Star Destroyer Executor durante la battaglia spaziale di Endor?'. La risposta corretta (indice 3, Arvel Crynyd) rimane invariata.",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_173_4",
+    "severity": "minor",
+    "problem": "La spiegazione dice che Warwick Davis era 'allora undicenne' (11 anni) durante le riprese. Le riprese principali si svolsero dal 11 gennaio al 20 maggio 1982; Davis era nato il 3 febbraio 1970, quindi era 11 anni all'inizio delle riprese ma compì 12 anni il 3 febbraio 1982 nel corso del filming. Il dato '11 anni' corrisponde all'età al momento del reclutamento/inizio riprese, non alla totalità delle riprese. Imprecisione minore, non un fatto falso.",
+    "fix": "Modificare 'allora undicenne' in 'allora dodicenne' (o 'tra gli undici e i dodici anni') per maggiore accuratezza rispetto al periodo di riprese (gennaio–maggio 1982).",
+    "correctIndexShouldBe": -1
+  }
+]

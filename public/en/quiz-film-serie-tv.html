@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Movie and TV Show Quiz — Somto</title>
+  <meta name="description" content="Put yourself to the test with Somto's movie and TV show quizzes: questions on film and series, challenges with friends, leaderboards, XP, and a daily streak.">
+  <link rel="canonical" href="https://somto.it/en/quiz-film-serie-tv.html">
+  <link rel="alternate" hreflang="it-IT" href="https://somto.it/quiz-film-serie-tv.html">
+  <link rel="alternate" hreflang="en" href="https://somto.it/en/quiz-film-serie-tv.html">
+  <link rel="alternate" hreflang="x-default" href="https://somto.it/quiz-film-serie-tv.html">
+<meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="author" content="Somto">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Somto">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://somto.it/quiz-film-serie-tv.html">
+  <meta property="og:title" content="Movie and TV Show Quiz — Somto">
+  <meta property="og:description" content="Questions on film and TV shows, challenges with friends, leaderboards, XP, and streaks: play Somto's quizzes.">
+  <meta property="og:image" content="https://somto.it/og/quiz.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="Movie and TV show quiz on Somto">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Movie and TV Show Quiz — Somto">
+  <meta name="twitter:description" content="Questions on film and TV shows, challenges with friends, and leaderboards: play Somto's quizzes.">
+  <meta name="twitter:image" content="https://somto.it/og/quiz.png">
+
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://identitytoolkit.googleapis.com" crossorigin>
+
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+
+  <link rel="stylesheet" href="/css/landing.bundle.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://somto.it/" },
+      { "@type": "ListItem", "position": 2, "name": "Movie and TV show quiz", "item": "https://somto.it/quiz-film-serie-tv.html" }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does Somto's movie and TV show quiz work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Each game is a set of questions about movies and TV shows: plots, actors, directors, details, and quotes. Answer, find out right away if you got it right, and earn XP for every correct answer."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I challenge my friends to the quiz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. You can send a direct challenge to a friend and compare results, even with people who aren't on Somto yet: just share the challenge invite link."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are XP, streaks, and bonuses in the quiz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "XP is the experience points you rack up by playing. Your streak rewards playing every day, while bonuses multiply the points from your first games each day. Together, they determine your spot on the leaderboard."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Somto's quiz contain spoilers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, the quiz is designed to be quick and spoiler-free. The questions test your movie and TV show knowledge without revealing endings or plot twists."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="lp-body" data-no-shell>
+
+  <header class="lp-nav" id="lpNav">
+    <div class="lp-nav-inner">
+      <a class="lp-nav-logo" href="/en/" aria-label="Somto — Home">
+        <img src="/icons/somto-wordmark.png" alt="Somto">
+      </a>
+      <a class="lp-nav-cta" href="/login.html?next=/home.html">Sign In</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="lp-hero">
+      <div class="lp-hero-glow g1"></div>
+      <div class="lp-hero-glow g2"></div>
+      <div class="lp-hero-glow g3"></div>
+      <div class="lp-hero-inner">
+        <span class="lp-eyebrow">Quiz · Challenges</span>
+        <h1><span class="lp-grad-text">Quiz</span> on movies and TV shows</h1>
+        <p class="lp-hero-sub">
+          Put your movie knowledge to the test, challenge your friends,
+          and climb the leaderboard with XP, daily streaks, and bonuses.
+        </p>
+        <div class="lp-cta-row">
+          <a class="lp-btn lp-btn-primary" href="/quiz-prova.html">Play now — no sign-up required</a>
+          <a class="lp-btn lp-btn-ghost" href="/login.html?signup=1&next=/home.html">Create an account</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">What it's for</span>
+          <h2 class="lp-h2">How well do you really know movies and TV shows?</h2>
+          <p class="lp-lead">Somto's quiz turns your passion for movies into a challenge to win.</p>
+        </div>
+        <div class="lp-about-text">
+          <p>Every game is a set of questions about movies and TV shows: plots, actors, directors, details, and quotes. Answer, find out right away if you got it right, and earn XP for every correct answer.</p>
+          <p>The quiz is built to be quick and spoiler-free: a few questions, plenty of fun, and a leaderboard that keeps you hooked. The more you play, the higher you climb — and the more you'll want to challenge someone.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">What you can do</span>
+          <h2 class="lp-h2">Play, challenge, climb the leaderboard</h2>
+        </div>
+        <div class="lp-grid">
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 16.4a1.35 1.35 0 1 1 0-2.7 1.35 1.35 0 0 1 0 2.7Zm1.8-6.3c-.8.5-1 .9-1 1.6v.3h-1.8v-.5c0-1.2.4-1.9 1.4-2.5.7-.5 1-.8 1-1.4 0-.7-.5-1.1-1.3-1.1-.8 0-1.3.4-1.5 1.3l-1.7-.6C9.1 7.3 10.3 6.4 12 6.4c2 0 3.3 1.1 3.3 2.7 0 1.2-.5 1.9-1.5 2.5Z"/></svg></span>
+            <h3>Always fresh questions</h3>
+            <p>A catalog of movie and TV show questions that keeps growing, so you never get bored.</p>
+          </article>
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 11.5a3.6 3.6 0 1 0 0-7.2 3.6 3.6 0 0 0 0 7.2Zm8 .5a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM9 13.2c-3.5 0-7 1.8-7 4.6V21h14v-3.2c0-2.8-3.5-4.6-7-4.6Zm8 .3c-.6 0-1.2.06-1.7.17 1.1 1 1.7 2.3 1.7 3.93V21h5v-2.7c0-2.5-2.9-3.8-5-3.8Z"/></svg></span>
+            <h3>Challenge your friends</h3>
+            <p>Send a direct challenge and compare results, even with people who aren't on Somto yet.</p>
+          </article>
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.6l2.9 5.9 6.5.95-4.7 4.58 1.1 6.47L12 17.96l-5.8 3.05 1.1-6.47L2.6 9.95l6.5-.95L12 2.6Z"/></svg></span>
+            <h3>Leaderboards</h3>
+            <p>Weekly or all-time: see where you stand and who you need to beat to reach the top.</p>
+          </article>
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L4.5 13.2h6L9 22l9-12h-6.4z"/></svg></span>
+            <h3>XP, streaks, and bonuses</h3>
+            <p>Build up XP, keep your daily streak alive, and multiply your points with bonuses.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">Explore Somto</span>
+          <h2 class="lp-h2">The quiz is just one part</h2>
+        </div>
+        <div class="lp-about-text">
+          <p>Beyond the quiz, Somto lets you <a href="/en/app-recensioni-film-serie.html">rate and review movies and TV shows</a>, build your <a href="/en/watchlist-film-serie.html">movie and TV show watchlist</a>, and get <a href="/en/consigli-film-serie-amici.html">recommendations on what to watch from your friends</a>.</p>
+          <p>Head back to the <a href="/en/">Somto homepage</a> to discover all the features.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">Frequently asked questions</span>
+          <h2 class="lp-h2">Everything about Somto's quizzes</h2>
+        </div>
+        <div class="lp-faq">
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">How does Somto's movie and TV show quiz work?</summary>
+            <div class="lp-faq-a"><p>Each game is a set of questions about movies and TV shows: plots, actors, directors, details, and quotes. Answer, find out right away if you got it right, and earn XP for every correct answer.</p></div>
+          </details>
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">Can I challenge my friends to the quiz?</summary>
+            <div class="lp-faq-a"><p>Yes. You can send a direct challenge to a friend and compare results, even with people who aren't on Somto yet: just share the challenge invite link.</p></div>
+          </details>
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">What are XP, streaks, and bonuses in the quiz?</summary>
+            <div class="lp-faq-a"><p>XP is the experience points you rack up by playing. Your streak rewards playing every day, while bonuses multiply the points from your first games each day. Together, they determine your spot on the leaderboard.</p></div>
+          </details>
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">Does Somto's quiz contain spoilers?</summary>
+            <div class="lp-faq-a"><p>No, the quiz is designed to be quick and spoiler-free. The questions test your movie and TV show knowledge without revealing endings or plot twists.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section lp-final">
+      <div class="lp-container">
+        <div class="lp-final-inner">
+          <h2>Ready to play?</h2>
+          <p>Free, on web and iOS. Start your first game and challenge your friends.</p>
+          <a class="lp-btn lp-btn-primary" href="/login.html?next=/home.html">Sign In to Somto</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="lp-footer">
+    <div class="lp-footer-inner">
+      <div class="lp-footer-brand">
+        <img src="/icons/somto-wordmark.png" alt="Somto">
+        <p>The social network for movie and TV show lovers. Rate, discover, and decide what to watch with friends.</p>
+      </div>
+      <nav class="lp-footer-cols" aria-label="Site links">
+        <div class="lp-footer-col">
+          <h4>Somto</h4>
+          <a href="/en/">Home</a>
+          <a href="/login.html?next=/home.html">Sign In</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Discover</h4>
+          <a href="/en/watchlist-film-serie.html">Watchlist</a>
+          <a href="/en/app-recensioni-film-serie.html">Ratings and reviews</a>
+          <a href="/en/quiz-film-serie-tv.html">Quiz</a>
+          <a href="/en/consigli-film-serie-amici.html">Recommendations from friends</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Comparisons</h4>
+          <a href="/en/somto-vs-letterboxd.html">Somto vs Letterboxd</a>
+          <a href="/en/somto-vs-justwatch.html">Somto vs JustWatch</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/cookies.html">Cookies</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Support</h4>
+          <a href="/en/support.html">Help center</a>
+        </div>
+      </nav>
+    </div>
+    <div class="lp-footer-base">© 2026 Somto. All rights reserved.</div>
+  </footer>
+
+  <script>
+    (function () {
+      var nav = document.getElementById("lpNav");
+      if (!nav) return;
+      var onScroll = function () { nav.classList.toggle("is-scrolled", window.scrollY > 12); };
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+    })();
+  </script>
+</body>
+</html>

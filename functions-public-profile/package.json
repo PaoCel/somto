@@ -1,0 +1,13 @@
+{
+  "name": "functions-public-profile",
+  "description": "Public profile callable functions for Firebase",
+  "engines": {
+    "node": "22"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^13.6.1",
+    "firebase-functions": "^7.0.5"
+  },
+  "private": true
+}

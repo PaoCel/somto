@@ -1,0 +1,66 @@
+{
+  "total": 500,
+  "byTitle": {
+    "Black Widow": 25,
+    "The Greatest Showman": 25,
+    "La fabbrica di cioccolato": 25,
+    "Breaking Bad": 25,
+    "The Avengers": 25,
+    "Iron Man": 25,
+    "Guardiani della Galassia": 25,
+    "Ant-Man": 25,
+    "Captain America - Il primo vendicatore": 25,
+    "Iron Man 3": 25,
+    "Avengers: Age of Ultron": 25,
+    "Guardiani della Galassia Vol. 2": 25,
+    "Interstellar": 25,
+    "Better Call Saul": 25,
+    "Sole a catinelle": 25,
+    "Suits": 25,
+    "Squid Game": 25,
+    "A Beautiful Mind": 25,
+    "La casa di carta (Money Heist / La Casa de Papel)": 25,
+    "Sopravvissuto - The Martian": 25
+  },
+  "byConfidence": {
+    "low": 0,
+    "medium": 16,
+    "high": 484
+  },
+  "bySource": {
+    "GREEN": 500,
+    "YELLOW": 0,
+    "RED": 0
+  },
+  "byDifficulty": {
+    "easy": 148,
+    "medium": 257,
+    "hard": 95
+  },
+  "bySpoiler": {
+    "none": 136,
+    "light": 151,
+    "medium": 112,
+    "heavy": 101
+  },
+  "byCategory": {
+    "anagraphic": 87,
+    "chronology": 10,
+    "scene": 47,
+    "character": 89,
+    "object": 39,
+    "plot": 79,
+    "relationship": 33,
+    "motivation": 24,
+    "trivia": 21,
+    "consequence": 59,
+    "quote_paraphrase": 12
+  },
+  "idxDist": {
+    "0": 126,
+    "1": 237,
+    "2": 87,
+    "3": 50
+  },
+  "issues": []
+}

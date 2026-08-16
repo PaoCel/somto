@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Segnalazione di sicurezza
+    url: https://github.com/PaoCel/somto/security/advisories/new
+    about: Invia vulnerabilità in modo privato
+  - name: Supporto Somto
+    url: https://somto.it/support.html
+    about: Assistenza per account e utilizzo del prodotto

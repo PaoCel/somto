@@ -1,0 +1,149 @@
+/* ============================================
+   WATCHED.CSS — Lista "Visti" (PWA)
+   Card scure stile iOS WatchlistStateCard
+   ============================================ */
+
+.watched-page .page {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+}
+
+/* Header */
+.watched-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 0.2rem 0.1rem;
+}
+.watched-back {
+  flex: 0 0 auto;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-fast);
+}
+.watched-back svg { width: 1.1rem; height: 1.1rem; }
+.watched-back:active { transform: scale(0.92); }
+.watched-headline { padding-top: 0.1rem; }
+.watched-headline h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: var(--weight-black);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.watched-headline p {
+  margin: 0.25rem 0 0;
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+}
+
+/* Lista */
+.watched-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+/* Riga — iOS WatchlistStateCard */
+.watched-item {
+  display: flex;
+  gap: 0.8rem;
+  padding: 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: var(--bg-secondary);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.22);
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: transform var(--transition-fast);
+}
+.watched-item:active { transform: scale(0.99); }
+
+.watched-poster {
+  flex: 0 0 auto;
+  width: 78px;
+  aspect-ratio: 2 / 3;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--panel);
+}
+.watched-poster img { width: 100%; height: 100%; object-fit: cover; }
+.watched-poster .poster-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
+.watched-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.watched-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+.watched-title {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.95rem;
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+.watched-chevron {
+  flex: 0 0 auto;
+  width: 0.8rem;
+  height: 0.8rem;
+  margin-top: 0.15rem;
+  color: var(--text-muted);
+}
+.watched-status {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.35;
+}
+
+/* Empty state */
+.watched-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+  padding: 2.6rem 1.2rem;
+}
+.watched-empty svg {
+  width: 3rem;
+  height: 3rem;
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+.watched-empty-title {
+  margin: 0.2rem 0 0;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+}
+.watched-empty-text {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  max-width: 22rem;
+}

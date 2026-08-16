@@ -1,0 +1,56 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "05:00"
+      timezone: Europe/Rome
+    groups:
+      github-actions:
+        patterns: ["*"]
+
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "05:15"
+      timezone: Europe/Rome
+    groups:
+      root-dependencies:
+        update-types: [minor, patch]
+
+  - package-ecosystem: npm
+    directory: /functions
+    schedule:
+      interval: weekly
+      day: monday
+      time: "05:30"
+      timezone: Europe/Rome
+    groups:
+      functions-dependencies:
+        update-types: [minor, patch]
+
+  - package-ecosystem: npm
+    directory: /functions-public-profile
+    schedule:
+      interval: weekly
+      day: monday
+      time: "05:45"
+      timezone: Europe/Rome
+    groups:
+      public-profile-dependencies:
+        update-types: [minor, patch]
+
+  - package-ecosystem: npm
+    directory: /blog
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Rome
+    groups:
+      blog-dependencies:
+        update-types: [minor, patch]

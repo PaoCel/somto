@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Watchlist — Somto</title>
+  <meta name="robots" content="noindex,follow">
+  <meta name="description" content="La tua watchlist personale">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/pages/watchlist.css?v=80-2026-08-05-seeall">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="/icons/icon-167.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icons/icon-120.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Somto">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0A0A0A">
+</head>
+<body class="page-watchlist">
+  <div id="appSplash" class="app-splash"><img class="splash-logo splash-wordmark" src="/icons/somto-wordmark.png" alt="Somto" data-i18n-attr="alt"><div class="splash-spinner"></div></div>
+
+  <main class="container page">
+    <!-- Una sola schermata: scaffali, watchlist intera, liste. Nessun sotto-tab.
+         Tutto renderizzato da watchlist.page.js. -->
+    <div id="wlRoot" class="wlv-root" aria-live="polite">
+      <div class="wlv-boot" role="status">
+        <span class="wlv-boot-spinner"></span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Bottom sheet condiviso (azioni titolo, filtri, ricerca) -->
+  <div id="wlSheetLayer" class="wlv-sheet-layer" hidden>
+    <div class="wlv-sheet-backdrop" data-wlv-close></div>
+    <div id="wlSheet" class="wlv-sheet" role="dialog" aria-modal="true"></div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/firebaseConfig.js"></script>
+  <script type="module" src="/js/pages/watchlist.page.js?v=80-2026-08-05-seeall"></script>
+  <script type="module" src="/js/utils/tabbar.bootstrap.js"></script>
+
+  <!-- Rating Bottom Sheet -->
+  <div id="ratingSheetOverlay" class="rating-sheet-overlay" aria-hidden="true">
+    <div class="rating-sheet">
+      <div class="rating-sheet-handle"></div>
+      <div class="rating-sheet-title" id="ratingSheetTitle"></div>
+      <div class="rating-sheet-stars" id="ratingSheetStars">
+        <button class="rating-star" data-value="1">1</button>
+        <button class="rating-star" data-value="2">2</button>
+        <button class="rating-star" data-value="3">3</button>
+        <button class="rating-star" data-value="4">4</button>
+        <button class="rating-star" data-value="5">5</button>
+        <button class="rating-star" data-value="6">6</button>
+        <button class="rating-star" data-value="7">7</button>
+        <button class="rating-star" data-value="8">8</button>
+        <button class="rating-star" data-value="9">9</button>
+        <button class="rating-star" data-value="10">10</button>
+      </div>
+      <div class="rating-sheet-variants" id="ratingSheetVariants" style="display:none;"></div>
+      <div class="rating-sheet-actions">
+        <button id="ratingSheetConfirm" class="btn primary full" disabled data-i18n>Conferma voto</button>
+      </div>
+      <button id="ratingSheetSkip" class="rating-sheet-skip" data-i18n>Segna solo come visto, senza voto</button>
+    </div>
+  </div>
+
+  <script src="/js/pwa.js" defer></script>
+</body>
+</html>

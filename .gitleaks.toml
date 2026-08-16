@@ -1,0 +1,42 @@
+title = "Somto secret scanning policy"
+minVersion = "v8.25.0"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Firebase client configuration is public by design"
+targetRules = ["gcp-api-key"]
+paths = [
+  '''^public/firebaseConfig\.js$''',
+  '''^public/service-worker\.js$''',
+  '''^ios/TwoWatch/Resources/FirebaseConfig\.plist$''',
+  '''^ios/TwoWatch/Resources/GoogleService-Info\.plist$''',
+]
+
+[[allowlists]]
+description = "Known public Firebase client config and asset download URLs"
+targetRules = ["generic-api-key"]
+condition = "AND"
+regexTarget = "line"
+paths = [
+  '''^public/firebaseConfig\.js$''',
+  '''^public/service-worker\.js$''',
+  '''^public/js/components/posterWall\.js$''',
+  '''^public/js/pages/login\.page\.js$''',
+  '''^public/mockups/landing-vnext\.html$''',
+  '''^public/mockups/login-vnext\.html$''',
+  '''^public/mockups/title-vnext\.js$''',
+]
+regexes = [
+  '''apiKey\s*:''',
+  '''https://firebasestorage\.googleapis\.com/.*[?&]token=''',
+]
+
+[[allowlists]]
+description = "Local storage and idempotency identifiers are not credentials"
+targetRules = ["generic-api-key"]
+regexTarget = "line"
+regexes = [
+  '''(?:dismissedKey|DISMISS_KEY|storageKey|idempotencyKey)\s*(?:=|:)''',
+]

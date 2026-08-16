@@ -1,0 +1,25 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "787YK9YUB3.com.paolocelestini.twowatch.ios",
+        "paths": [
+          "/",
+          "/index.html",
+          "/home.html",
+          "/share/title/*",
+          "/quiz/invite/*",
+          "/lista/*",
+          "/novita/*",
+          "/title.html*",
+          "/thread.html*",
+          "/threads.html",
+          "/user.html*",
+          "/watchlist.html",
+          "/account.html*"
+        ]
+      }
+    ]
+  }
+}

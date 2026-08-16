@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Metriche prodotto - Somto</title>
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Dashboard admin privata con le metriche prodotto di Somto: funnel di acquisizione, North Star WAU, andamento giornaliero.">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/pages/admin-metrics.css">
+
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Somto">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0A0A0A">
+</head>
+<body class="admin-metrics-page">
+  <div id="appSplash" class="app-splash">
+    <img class="splash-logo splash-wordmark" src="/icons/somto-wordmark.png" alt="Somto">
+    <div class="splash-spinner"></div>
+  </div>
+
+  <main class="analytics-shell" aria-labelledby="pageTitle">
+    <header class="analytics-topbar">
+      <a class="analytics-back" href="/account.html" aria-label="Torna al profilo">Indietro</a>
+      <div>
+        <p class="analytics-kicker">Admin</p>
+        <h1 id="pageTitle">Metriche prodotto</h1>
+      </div>
+      <div class="analytics-topbar-actions">
+        <button id="reloadBtn" class="btn small primary" type="button">Aggiorna</button>
+      </div>
+    </header>
+
+    <section id="gate" class="analytics-state" hidden role="alert">
+      <h2>Accesso negato</h2>
+      <p>Questa pagina risponde solo agli account admin.</p>
+    </section>
+
+    <section id="errorState" class="analytics-state" hidden role="alert">
+      <h2>Errore</h2>
+      <p id="errorText">Non riesco a caricare le metriche.</p>
+    </section>
+
+    <section id="dashboard" hidden>
+      <div id="noDataState" class="analytics-state" hidden>
+        <h2>Ancora nessun dato</h2>
+        <p>Le metriche si popolano da oggi — ripassa domani.</p>
+      </div>
+
+      <div id="metricsContent">
+        <section id="kpiGrid" class="analytics-kpi-grid" aria-label="Metriche principali"></section>
+
+        <section class="metrics-card" aria-label="Adozione tracker dopo import">
+          <h2 class="metrics-card-title">Tracker dopo import</h2>
+          <p id="trackingCohortNote" class="metrics-card-note"></p>
+          <div id="trackingCohortGrid" class="analytics-kpi-grid metrics-cohort-grid"></div>
+        </section>
+
+        <section class="metrics-card" aria-label="Funnel di acquisizione">
+          <h2 class="metrics-card-title">Funnel · ultimi 7 giorni</h2>
+          <div id="funnelWrap" class="metrics-funnel"></div>
+        </section>
+
+        <section class="metrics-card" aria-label="Andamento giornaliero">
+          <h2 class="metrics-card-title">Andamento</h2>
+          <div id="chartWrap" class="metrics-chart"></div>
+        </section>
+
+        <section class="analytics-table-wrap" aria-label="Dettaglio giornaliero">
+          <table class="analytics-table">
+            <thead>
+              <tr>
+                <th>Giorno</th>
+                <th>Signup avviati</th>
+                <th>Signup</th>
+                <th>Onboarding compl.</th>
+                <th>Import avviati</th>
+                <th>Import compl.</th>
+                <th>Import falliti</th>
+                <th>Quiz (guest)</th>
+                <th>Tracker attivi 24h</th>
+                <th>DAU / WAU</th>
+              </tr>
+            </thead>
+            <tbody id="dailyBody"></tbody>
+          </table>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast-wrap" id="toasts" role="status" aria-live="polite"></div>
+
+  <script src="/firebaseConfig.js"></script>
+  <script type="module" src="/js/pages/admin-metrics.page.js"></script>
+  <script src="/js/pwa.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+[
+  {
+    "questionId": "q_140_21",
+    "severity": "minor",
+    "problem": "L'explanation afferma che Thorkell è prozio di Thorfinn 'essendo lo zio del defunto Thors'. FALSO: Thorkell è prozio di Thorfinn perché è fratello di Sigvaldi, il cui padre è Sigvaldi e la cui figlia è Helga (madre di Thorfinn). Thorkell è quindi zio di Helga, non zio di Thors. La risposta segnata (indice 0) è comunque corretta: Thorkell è fratello di Sigvaldi e prozio di Thorfinn.",
+    "fix": "Correggere l'explanation: 'Thorkell è il prozio di Thorfinn in quanto fratello di Sigvaldi, capo dei Jomsvikings, il cui figlio è Helga, madre di Thorfinn. Non è lo zio di Thors (padre di Thorfinn), bensì lo zio della madre Helga.'",
+    "correctIndexShouldBe": -1
+  }
+]

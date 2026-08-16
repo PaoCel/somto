@@ -1,0 +1,9 @@
+[
+  {
+    "questionId": "q_175_9",
+    "severity": "minor",
+    "problem": "La domanda chiede 'Come si chiama il gatto' e presenta sia 'Jones' (idx 0, segnata corretta) sia 'Jonesy' (idx 2) come opzioni. Il nome ufficiale del personaggio è Jones, ma nel film viene chiamato indifferentemente Jones e Jonesy dagli stessi personaggi. Avere entrambi i nomi come opzioni distinte crea un distrattore artificialmente confuso: un utente che ricorda il soprannome 'Jonesy' (usato più frequentemente nel dialogo) potrebbe rispondere idx 2 pur essendo corretto.",
+    "fix": "Sostituire l'opzione idx 2 'Jonesy' con un nome di gatto inventato (es. 'Max' o 'Felix') oppure riformulare la domanda specificando 'nome ufficiale del gatto' per disambiguare.",
+    "correctIndexShouldBe": -1
+  }
+]

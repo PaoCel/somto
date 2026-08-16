@@ -1,0 +1,9 @@
+[
+  {
+    "questionId": "family_classics_una_grande_famiglia_036",
+    "severity": "critical",
+    "problem": "La domanda chiede cosa decide di fare 'Ernesto' con le quote societarie, ma secondo Wikipedia è Eleonora (non Ernesto) che prende questa decisione: 'Eleonora decide di rinunciare alle sue quote e di dividerle in parti uguali con i suoi sei figli e con la nuora Chiara.' La premessa della domanda è fattualmente sbagliata — attribuisce ad Ernesto una decisione che appartiene alla madre Eleonora. Ernesto muore nella terza stagione, ed è Eleonora la titolare delle quote che le divide. La risposta segnata (index 1: 'Dividerle in parti uguali tra i figli e Chiara') descrive correttamente l'azione, ma il soggetto della domanda è errato.",
+    "fix": "Cambiare il testo della domanda da 'Che cosa decide di fare Ernesto con le quote societarie alla fine?' a 'Che cosa decide di fare Eleonora con le sue quote societarie alla fine?' e aggiornare l'explanation di conseguenza: 'Eleonora decide di rinunciare alle proprie quote e di dividerle in parti uguali tra i sei figli e la nuora Chiara.'",
+    "correctIndexShouldBe": -1
+  }
+]

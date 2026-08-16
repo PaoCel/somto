@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Impostazioni — Somto</title>
+  <meta name="robots" content="noindex,follow">
+  <meta name="description" content="Gestisci notifiche, privacy e supporto">
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="/icons/icon-167.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icons/icon-120.png">
+</head>
+<body class="settings-page">
+  <div id="appSplash" class="app-splash"><img class="splash-logo splash-wordmark" src="/icons/somto-wordmark.png" alt="Somto" data-i18n-attr="alt"><div class="splash-spinner"></div></div>
+
+  <main class="container page">
+    <header class="settings-head">
+      <div class="settings-user">
+        <div id="settingsAvatar" class="settings-avatar">SM</div>
+        <div class="settings-user-copy">
+          <h1 id="settingsName" data-i18n>Impostazioni</h1>
+          <p id="settingsHandle">@utente</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="settings-group">
+      <h2 data-i18n>Preferenze</h2>
+      <div class="settings-list">
+        <div class="settings-item" id="languageRow">
+          <span class="settings-item-icon" data-tint="cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></span>
+          <span class="settings-item-copy"><strong data-i18n="Lingua">Lingua</strong><small data-i18n="Scegli la lingua dell'app">Scegli la lingua dell'app</small></span>
+          <select id="languageSelect" aria-label="Lingua" data-i18n-attr="aria-label">
+            <option value="it">Italiano</option>
+            <option value="en">English</option>
+          </select>
+        </div>
+        <a class="settings-item" href="/notifications.html">
+          <span class="settings-item-icon" data-tint="pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></span>
+          <span class="settings-item-copy"><strong data-i18n>Notifiche push</strong><small data-i18n>Tipi di notifiche e frequenza</small></span>
+          <svg class="settings-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+        <a class="settings-item" href="/notifications.html">
+          <span class="settings-item-icon" data-tint="cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"></path><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path></svg></span>
+          <span class="settings-item-copy"><strong data-i18n>Inbox attività</strong><small data-i18n>Suggerimenti ricevuti e inviati</small></span>
+          <svg class="settings-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+        <a class="settings-item" href="/account.html">
+          <span class="settings-item-icon" data-tint="orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span>
+          <span class="settings-item-copy"><strong data-i18n>Profilo pubblico</strong><small data-i18n>Nome, avatar e dati visibili</small></span>
+          <svg class="settings-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+      </div>
+    </section>
+
+    <section class="settings-group">
+      <h2 data-i18n>Privacy e dati</h2>
+      <div class="settings-list">
+        <div class="settings-item is-static">
+          <span class="settings-item-icon" data-tint="cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="m7 16 4-6 4 3 5-7"></path></svg></span>
+          <span class="settings-item-copy"><strong data-i18n>Analytics di prodotto</strong><small id="consentStatus" data-i18n>Solo strumenti necessari attivi</small></span>
+        </div>
+        <button id="consentAcceptBtn" class="settings-item" type="button" data-active-label="Attivo" data-i18n-attr="data-active-label">
+          <span class="settings-item-icon" data-tint="green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+          <span class="settings-item-copy"><strong data-i18n>Accetta analytics</strong><small data-i18n>Aiuta SOMTO a misurare funnel, retention e feature usage</small></span>
+        </button>
+        <button id="consentRejectBtn" class="settings-item" type="button" data-active-label="Attivo" data-i18n-attr="data-active-label">
+          <span class="settings-item-icon" data-tint="pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></span>
+          <span class="settings-item-copy"><strong data-i18n>Tieni solo i necessari</strong><small data-i18n>Il servizio continua a funzionare senza analytics opzionali</small></span>
+        </button>
+        <div id="marketingConsentItem" class="auth-terms">
+          <label class="auth-terms-toggle">
+            <input id="marketingConsentToggle" type="checkbox">
+            <span class="auth-terms-switch" aria-hidden="true"></span>
+            <span class="auth-terms-copy">
+              <strong data-i18n>Comunicazioni email</strong>
+              <small data-i18n>Ricevi aggiornamenti e novità via email. Puoi disattivarlo quando vuoi.</small>
+            </span>
+          </label>
+        </div>
+        <button id="exportDataBtn" class="settings-item" type="button">
+          <span class="settings-item-icon" data-tint="cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></span>
+          <span class="settings-item-copy"><strong data-i18n>Scarica i miei dati</strong><small data-i18n>Una copia JSON di watchlist, voti, liste, profilo e attività.</small></span>
+        </button>
+        <a class="settings-item" href="/privacy.html">
+          <span class="settings-item-icon" data-tint="pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></span>
+          <span class="settings-item-copy"><strong>Privacy policy</strong><small data-i18n>Informativa sul trattamento dei dati</small></span>
+          <svg class="settings-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+        <a class="settings-item" href="/cookies.html">
+          <span class="settings-item-icon" data-tint="orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><circle cx="9" cy="10" r="0.6" fill="currentColor"></circle><circle cx="14" cy="14" r="0.6" fill="currentColor"></circle><circle cx="15" cy="9" r="0.6" fill="currentColor"></circle></svg></span>
+          <span class="settings-item-copy"><strong>Cookie policy</strong><small data-i18n>Consenso, local storage e analytics</small></span>
+          <svg class="settings-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+        <a class="settings-item" href="/terms.html">
+          <span class="settings-item-icon" data-tint="cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg></span>
+          <span class="settings-item-copy"><strong data-i18n>Termini di servizio</strong><small data-i18n>Regole base di utilizzo di SOMTO</small></span>
+          <svg class="settings-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+        <a class="settings-item" href="/consent.html">
+          <span class="settings-item-icon" data-tint="green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></span>
+          <span class="settings-item-copy"><strong data-i18n>Gestione consenso</strong><small data-i18n>Pagina pubblica per rivedere le scelte privacy</small></span>
+          <svg class="settings-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+        <a class="settings-item" href="/delete-account.html">
+          <span class="settings-item-icon" data-tint="danger"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2m2 0-1 15H7L6 6"/></svg></span>
+          <span class="settings-item-copy"><strong data-i18n>Informazioni sulla cancellazione</strong><small data-i18n>Dati eliminati, anonimizzati o conservati</small></span>
+          <svg class="settings-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+      </div>
+    </section>
+
+    <section class="settings-group">
+      <h2 data-i18n>Supporto</h2>
+      <div class="settings-list">
+        <a class="settings-item" href="/support.html">
+          <span class="settings-item-icon" data-tint="pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></span>
+          <span class="settings-item-copy"><strong data-i18n>Supporto SOMTO</strong><small data-i18n>Canali di assistenza e risorse utili</small></span>
+          <svg class="settings-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+        <a class="settings-item" href="/threads.html">
+          <span class="settings-item-icon" data-tint="cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></span>
+          <span class="settings-item-copy"><strong data-i18n>Community e thread</strong><small data-i18n>Discussioni, aiuto e confronto</small></span>
+          <svg class="settings-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+      </div>
+    </section>
+
+    <section class="settings-group">
+      <h2 data-i18n>Sicurezza</h2>
+      <div class="settings-list">
+        <button id="settingsLogoutBtn" class="settings-item settings-item-danger" type="button">
+          <span class="settings-item-icon" data-tint="danger"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg></span>
+          <span class="settings-item-copy"><strong data-i18n>Logout</strong><small data-i18n>Esci dal tuo account su questo dispositivo</small></span>
+        </button>
+        <button id="settingsDeleteAccountBtn" class="settings-item settings-item-danger" type="button">
+          <span class="settings-item-icon" data-tint="danger"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></span>
+          <span class="settings-item-copy"><strong data-i18n>Elimina account</strong><small data-i18n>Cancella definitivamente account e dati. Irreversibile.</small></span>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast-wrap" id="toasts" role="status" aria-live="polite"></div>
+
+  <script src="/firebaseConfig.js"></script>
+  <script type="module" src="/js/pages/settings.page.js"></script>
+  <script type="module" src="/js/utils/tabbar.bootstrap.js"></script>
+  <script src="/js/pwa.js" defer></script>
+</body>
+</html>

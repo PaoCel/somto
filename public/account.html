@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Il tuo profilo — Somto</title>
+  <meta name="robots" content="noindex,follow">
+  <meta name="description" content="Il tuo profilo personale">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/pages/profile-tabs.css">
+  <link rel="stylesheet" href="/css/pages/profile-community.css">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="/icons/icon-167.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icons/icon-120.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Somto">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0A0A0A">
+</head>
+<body class="account-page">
+  <div id="appSplash" class="app-splash"><img class="splash-logo splash-wordmark" src="/icons/somto-wordmark.png" alt="Somto" data-i18n-attr="alt"><div class="splash-spinner"></div></div>
+  <main class="container page">
+
+    <!-- ===== Identity hero card (iOS ProfileTopHeader) ===== -->
+    <section class="profile-hero-card">
+      <div class="profile-hero-tools">
+        <button id="btnEditIdentity" class="profile-hero-tool" type="button" aria-label="Modifica profilo" data-i18n-attr="aria-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>
+        </button>
+        <button id="btnProfileMenu" class="profile-hero-tool" type="button" aria-label="Altre azioni account" data-i18n-attr="aria-label">
+          <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.9"></circle><circle cx="12" cy="12" r="1.9"></circle><circle cx="19" cy="12" r="1.9"></circle></svg>
+        </button>
+      </div>
+
+      <div class="profile-hero-identity">
+        <div class="profile-hero-avatar" id="avatarWrap" role="button" tabindex="0" aria-label="Visualizza foto profilo">
+          <div class="profile-hero-avatar-inner" id="avatar">?</div>
+          <button id="btnAvatarUpload" class="profile-hero-avatar-edit" type="button" aria-label="Cambia foto profilo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+          </button>
+        </div>
+        <div class="profile-hero-meta">
+          <h1 class="profile-hero-name" id="meName">Caricamento...</h1>
+          <p class="profile-hero-handle" id="meEmail">@username</p>
+        </div>
+      </div>
+
+      <!-- Stessi quattro contatori del profilo pubblico (iOS
+           UserProfileDetailView.publicProfileMetrics): il proprio profilo
+           mostrava invece "Amici", che legge il grafo delle richieste di
+           amicizia ormai dismesso in favore dei soli follower. -->
+      <div class="profile-hero-stats" aria-label="Statistiche profilo" data-i18n-attr="aria-label">
+        <div class="profile-hero-stat">
+          <span class="profile-hero-stat-value stat-loading" id="statsWatched">0</span>
+          <span class="profile-hero-stat-label" data-i18n>Visti</span>
+        </div>
+        <span class="profile-hero-stat-divider" aria-hidden="true"></span>
+        <div class="profile-hero-stat">
+          <span class="profile-hero-stat-value stat-loading" id="statsReviewsHero">0</span>
+          <span class="profile-hero-stat-label" data-i18n>Voti</span>
+        </div>
+        <span class="profile-hero-stat-divider" aria-hidden="true"></span>
+        <button id="statsFollowersBlock" class="profile-hero-stat" type="button" aria-label="Vedi follower" data-i18n-attr="aria-label">
+          <span class="profile-hero-stat-value stat-loading" id="statsFollowers">0</span>
+          <span class="profile-hero-stat-label" data-i18n>Follower</span>
+        </button>
+        <span class="profile-hero-stat-divider" aria-hidden="true"></span>
+        <button id="statsFollowingBlock" class="profile-hero-stat" type="button" aria-label="Vedi seguiti" data-i18n-attr="aria-label">
+          <span class="profile-hero-stat-value stat-loading" id="statsFollowing">0</span>
+          <span class="profile-hero-stat-label" data-i18n>Seguiti</span>
+        </button>
+      </div>
+
+      <input type="file" id="avatarInput" accept="image/jpeg,image/png,image/webp" hidden>
+    </section>
+
+    <!-- Hidden stat hooks consumed by account.page.js -->
+    <div id="personalStats" class="visually-hidden" aria-hidden="true">
+      <span id="statRatedCount">0</span>
+      <span id="statAvgRating">-</span>
+      <span id="statTopGenre">-</span>
+      <span id="statWatchlistRatio">0</span>
+    </div>
+
+    <!-- ===== Tempo di visione (iOS ProfileActivitySummarySection) ===== -->
+    <section id="profileWatchSummary" class="profile-watchtime-card">
+      <div class="profile-watchtime-head">
+        <span class="profile-watchtime-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>
+          <span data-i18n>Tempo di visione</span>
+        </span>
+        <span class="profile-watchtime-badge-group">
+          <span id="statsReviews" class="profile-watchtime-badge stat-loading">0 voti</span>
+          <span id="statsDerivedRatings" class="profile-watchtime-badge-sub" hidden></span>
+        </span>
+      </div>
+      <button type="button" id="watchTimeUnitBtn" class="profile-watchtime-unitbtn" aria-label="Cambia unità del tempo di visione" data-i18n-attr="aria-label">
+        <div class="profile-watchtime-digits" id="watchTimeDigits" aria-label="Tempo totale di visione" aria-busy="true" data-i18n-attr="aria-label">
+          <div class="profile-watchtime-unit">
+            <div class="profile-watchtime-value stat-loading" id="watchDays">0</div>
+            <div class="profile-watchtime-label" data-i18n>giorni</div>
+          </div>
+          <div class="profile-watchtime-divider">:</div>
+          <div class="profile-watchtime-unit">
+            <div class="profile-watchtime-value stat-loading" id="watchHoursValue">0</div>
+            <div class="profile-watchtime-label" data-i18n>ore</div>
+          </div>
+          <div class="profile-watchtime-divider">:</div>
+          <div class="profile-watchtime-unit">
+            <div class="profile-watchtime-value stat-loading" id="watchMinutesValue">0</div>
+            <div class="profile-watchtime-label" data-i18n>min</div>
+          </div>
+        </div>
+        <span class="profile-watchtime-unithint" id="watchTimeUnitHint" aria-hidden="true">
+          <span class="profile-watchtime-unithint-text" data-i18n>tocca per cambiare unità</span>
+          <svg class="profile-watchtime-unithint-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>
+        </span>
+      </button>
+      <p class="profile-watchtime-caption" data-i18n>Tempo totale speso a guardare titoli nella tua libreria.</p>
+      <a class="profile-import-cta" href="/import.html">
+        <span class="profile-import-cta-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path></svg>
+        </span>
+        <span>
+          <strong data-i18n>Importa la tua cronologia</strong>
+          <small data-i18n>TV Time chiude il 15/07 — importa ora, o da Netflix</small>
+        </span>
+      </a>
+      <div id="categoryStrip" class="profile-category-strip is-loading" aria-label="Titoli visti per categoria" data-i18n-attr="aria-label">
+        <div class="profile-category-col" data-category="film">
+          <svg class="profile-category-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"></rect><path d="M8 3v18M16 3v18M3 8.5h5M3 15.5h5M16 8.5h5M16 15.5h5"></path></svg>
+          <span class="profile-category-count">0</span>
+          <span class="profile-category-label" data-i18n>Film</span>
+        </div>
+        <span class="profile-category-divider" aria-hidden="true"></span>
+        <div class="profile-category-col" data-category="serie_tv">
+          <svg class="profile-category-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="12.5" rx="2.5"></rect><path d="M8.5 22h7M12 18.5V22"></path></svg>
+          <span class="profile-category-count">0</span>
+          <span class="profile-category-label" data-i18n>Serie TV</span>
+        </div>
+        <span class="profile-category-divider" aria-hidden="true"></span>
+        <div class="profile-category-col" data-category="cartoni_animati">
+          <svg class="profile-category-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M9 10h.01M15 10h.01M8.5 14.5a4.6 4.6 0 0 0 7 0"></path></svg>
+          <span class="profile-category-count">0</span>
+          <span class="profile-category-label" data-i18n>Cartoni</span>
+        </div>
+        <span class="profile-category-divider" aria-hidden="true"></span>
+        <div class="profile-category-col" data-category="anime">
+          <svg class="profile-category-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l2.3 6.7 6.7 2.3-6.7 2.3L12 20.5l-2.3-6.7L3 11.5l6.7-2.3z"></path></svg>
+          <span class="profile-category-count">0</span>
+          <span class="profile-category-label" data-i18n>Anime</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Content card with tabs (iOS ProfileContentTabs) ===== -->
+    <section class="profile-content-card">
+      <div class="profile-tabs" role="tablist">
+        <button id="tabMyVotes" class="profile-tab active" data-tab="votes" role="tab" aria-selected="true" data-i18n>Visti</button>
+        <button id="tabCommunity" class="profile-tab" data-tab="community" role="tab" aria-selected="false" data-i18n>Attività</button>
+        <button id="tabTaste" class="profile-tab" data-tab="taste" role="tab" aria-selected="false" data-i18n>Taste</button>
+      </div>
+
+      <!-- Tab: Visti (titoli votati o visti senza voto) -->
+      <div id="panelVotes" class="tab-panel active">
+        <div class="profile-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path></svg>
+          <input id="votesSearchInput" type="text" placeholder="Cerca un titolo visto" autocomplete="off" data-i18n-attr="placeholder">
+        </div>
+        <div id="myVotesList"></div>
+      </div>
+
+      <!-- Tab: Community (contributo alla community: review, emozioni, post) -->
+      <div id="panelCommunity" class="tab-panel" style="display:none;">
+        <div id="communityList" class="profile-community-list"></div>
+        <div id="communityEmpty" class="profile-empty" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.7 8.5 8.5 0 0 1-7.6 4.8 8.4 8.4 0 0 1-3.7-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.7 8.5 8.5 0 0 1 4.8-7.7 8.4 8.4 0 0 1 3.7-.9h.5a8.5 8.5 0 0 1 8 8z"/></svg>
+          <h3 data-i18n>Ancora nessun contributo</h3>
+          <p data-i18n>Qui compariranno recensioni, emozioni e post condivisi con la community.</p>
+        </div>
+      </div>
+
+      <!-- Tab: Taste (generi preferiti, top picks, recenti) -->
+      <div id="panelTaste" class="tab-panel" style="display:none;">
+        <div id="tasteContent" class="profile-taste-content"></div>
+        <div id="tasteEmpty" class="profile-empty" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 1.5 2.4 5.4 5.6.7-4.2 4 1.1 5.6L12 14.5 7.1 17.2l1.1-5.6L4 7.6l5.6-.7L12 1.5Z"/></svg>
+          <h3 data-i18n>Taste ancora da definire</h3>
+          <p data-i18n>Appena guardi e voti di più, qui vedremo meglio i tuoi segnali.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Modals ===== -->
+    <div id="connectionsModal" class="social-modal" style="display:none;">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="connectionsTitle">Connessioni</h2>
+          <button id="btnCloseConnections" class="btn icon ghost" type="button" aria-label="Chiudi connessioni" data-i18n-attr="aria-label">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="friends-search">
+            <input id="connectionsSearchInput" type="text" placeholder="Cerca utenti..." autocomplete="off" data-i18n-attr="placeholder">
+          </div>
+          <div id="connectionsList" class="friends-list-compact"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="profileMenuModal" class="social-modal" style="display:none;">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content profile-menu-modal">
+        <div class="modal-header">
+          <h2>Azioni account</h2>
+          <button id="btnCloseProfileMenu" class="btn icon ghost" type="button" aria-label="Chiudi azioni account" data-i18n-attr="aria-label">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body profile-menu-actions">
+          <button id="btnMenuEditProfile" class="profile-menu-action" type="button" data-i18n>Modifica profilo</button>
+          <button id="btnMenuShareProfile" class="profile-menu-action" type="button" data-i18n>Condividi profilo</button>
+          <button id="btnMenuTuneTaste" class="profile-menu-action" type="button">Affina i gusti</button>
+          <a class="profile-menu-action" href="/settings.html" data-i18n>Impostazioni</a>
+          <a id="btnMenuAdminMetrics" class="profile-menu-action" href="/admin-metrics.html" hidden>Metriche prodotto</a>
+          <button id="btnMenuSignOut" class="profile-menu-action is-danger" type="button" data-i18n>Logout</button>
+          <button id="btnMenuDeleteAccount" class="profile-menu-action is-danger" type="button" data-i18n>Elimina account</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="avatarPreviewModal" class="avatar-preview-modal" style="display:none;">
+      <button type="button" class="avatar-preview-backdrop" aria-label="Chiudi anteprima foto" data-i18n-attr="aria-label"></button>
+      <div class="avatar-preview-dialog" role="dialog" aria-modal="true" aria-label="Anteprima foto profilo">
+        <button id="btnCloseAvatarPreview" class="avatar-preview-close" type="button" aria-label="Chiudi" data-i18n-attr="aria-label">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <div id="avatarPreviewFrame" class="avatar-preview-frame"></div>
+        <button id="btnAvatarChange" class="btn small primary" type="button" data-i18n>Cambia foto</button>
+      </div>
+    </div>
+
+    <div id="avatarCropModal" class="avatar-crop-modal" hidden aria-hidden="true">
+      <button id="avatarCropBackdrop" type="button" class="avatar-crop-backdrop" aria-label="Annulla ritaglio foto" data-i18n-attr="aria-label"></button>
+      <div class="avatar-crop-dialog" role="dialog" aria-modal="true" aria-labelledby="avatarCropTitle" aria-describedby="avatarCropHelp">
+        <div class="avatar-crop-header">
+          <div>
+            <h2 id="avatarCropTitle" data-i18n>Inquadra la foto</h2>
+            <p id="avatarCropHelp" data-i18n>Trascina per scegliere il centro e usa lo zoom per avvicinare.</p>
+          </div>
+          <button id="btnAvatarCropClose" class="avatar-crop-close" type="button" aria-label="Annulla ritaglio foto">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <div id="avatarCropStage" class="avatar-crop-stage" tabindex="0" aria-label="Anteprima ritaglio foto profilo">
+          <img id="avatarCropImage" alt="" draggable="false">
+          <span class="avatar-crop-ring" aria-hidden="true"></span>
+        </div>
+
+        <label class="avatar-crop-zoom" for="avatarCropZoom">
+          <span aria-hidden="true">−</span>
+          <input id="avatarCropZoom" type="range" min="1" max="4" step="0.01" value="1" aria-label="Zoom foto profilo">
+          <span aria-hidden="true">+</span>
+        </label>
+
+        <p id="avatarCropStatus" class="avatar-crop-status" role="status" aria-live="polite"></p>
+
+        <div class="avatar-crop-actions">
+          <button id="btnAvatarCropCancel" class="btn ghost" type="button" data-i18n>Annulla</button>
+          <button id="btnAvatarCropConfirm" class="btn primary" type="button" data-i18n>Usa questa foto</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Toast Container -->
+  <div class="toast-wrap" id="toasts" role="status" aria-live="polite"></div>
+
+  <!-- Scripts -->
+  <script src="/firebaseConfig.js"></script>
+  <script type="module" src="/js/pages/account.page.js"></script>
+  <script type="module" src="/js/pages/profile-tabs.page.js"></script>
+  <script type="module" src="/js/utils/tabbar.bootstrap.js"></script>
+
+  <!-- Rating Bottom Sheet -->
+  <div id="ratingSheetOverlay" class="rating-sheet-overlay" aria-hidden="true">
+    <div class="rating-sheet">
+      <div class="rating-sheet-handle"></div>
+      <div class="rating-sheet-title" id="ratingSheetTitle"></div>
+      <div class="rating-sheet-stars" id="ratingSheetStars">
+        <button class="rating-star" data-value="1">1</button>
+        <button class="rating-star" data-value="2">2</button>
+        <button class="rating-star" data-value="3">3</button>
+        <button class="rating-star" data-value="4">4</button>
+        <button class="rating-star" data-value="5">5</button>
+        <button class="rating-star" data-value="6">6</button>
+        <button class="rating-star" data-value="7">7</button>
+        <button class="rating-star" data-value="8">8</button>
+        <button class="rating-star" data-value="9">9</button>
+        <button class="rating-star" data-value="10">10</button>
+      </div>
+      <div class="rating-sheet-variants" id="ratingSheetVariants" style="display:none;"></div>
+      <div class="rating-sheet-actions">
+        <button id="ratingSheetConfirm" class="btn primary full" disabled data-i18n>Conferma voto</button>
+      </div>
+      <button id="ratingSheetSkip" class="rating-sheet-skip" data-i18n>Segna solo come visto, senza voto</button>
+    </div>
+  </div>
+
+  <script src="/js/pwa.js" defer></script>
+</body>
+</html>

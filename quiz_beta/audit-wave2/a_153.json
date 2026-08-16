@@ -1,0 +1,23 @@
+[
+  {
+    "questionId": "q_153_23",
+    "severity": "critical",
+    "problem": "Il testo della domanda dice 'alla fine del primo episodio della stagione 1', ma il Darksaber compare solo nel FINALE della stagione 1 (Capitolo 8, non nel primo episodio). Il primo episodio non contiene il Darksaber. La risposta corretta (Moff Gideon) è giusta per il Capitolo 8, ma la premessa della domanda è falsa come scritta.",
+    "fix": "Correggere il testo in: 'Chi detiene il Darksaber nella scena finale della prima stagione di The Mandalorian?' (o 'alla fine del Capitolo 8').",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_153_50",
+    "severity": "critical",
+    "problem": "L'explanation afferma che 'Din Djarin, che lo aveva vinto in battaglia, lo cede a Bo-Katan affinché guidi il suo popolo' nel finale della stagione 3. Questo è factualmente sbagliato: nel finale (Capitolo 24), Moff Gideon DISTRUGGE il Darksaber stringendo con forza la mano di Bo-Katan. Il Darksaber non viene 'ceduto' da Din nel finale — Bo-Katan lo aveva già ricevuto nell'episodio 6 della stagione 3. Il simbolo del potere di Bo-Katan nel finale è la riaccensione della Grande Forgia, non il possesso del Darksaber (distrutto). La risposta all'indice 1 (il Darksaber) può essere considerata contestualmente giusta nel senso che Bo-Katan lo brandisce prima della sua distruzione, ma l'explanation è fuorviante e contiene un fatto falso sull'azione di Din.",
+    "fix": "Correggere l'explanation: 'Nel finale della stagione 3, Bo-Katan brandisce il Darksaber nella battaglia contro Moff Gideon, il quale però lo distrugge stringendolo con forza. Dopo la morte di Gideon, Bo-Katan riaccende la Grande Forgia come simbolo della rinascita di Mandalore, diventando la sua guida.' Alternativamente, cambiare la risposta corretta a 'Il sigillo del Clan Kryze' o riformulare la domanda sul simbolo di leadership in modo da escludere il Darksaber (distrutto).",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_153_48",
+    "severity": "minor",
+    "problem": "Il testo della domanda indica il finale della stagione 1 come 'Il Salvataggio', ma 'Il Salvataggio' (The Rescue) è il titolo del finale della stagione 2 (Capitolo 16). Il Capitolo 8 si intitola 'La Redenzione' (Redemption) in italiano. Errore nel sottotitolo italiano dell'episodio citato nella domanda.",
+    "fix": "Correggere il testo da 'l'episodio \\'Il Salvataggio\\'' a 'l'episodio \\'La Redenzione\\'' (Capitolo 8, stagione 1).",
+    "correctIndexShouldBe": -1
+  }
+]

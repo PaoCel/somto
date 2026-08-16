@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Cookie Policy — Somto</title>
+  <meta name="description" content="Cookie policy di Somto.">
+  <link rel="canonical" href="https://somto.it/cookies.html">
+  <link rel="alternate" hreflang="it-IT" href="https://somto.it/cookies.html">
+  <link rel="alternate" hreflang="x-default" href="https://somto.it/cookies.html">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body class="settings-page">
+  <main class="container page">
+    <header class="settings-head">
+      <div class="settings-user-copy">
+        <h1>Cookie Policy</h1>
+        <p class="settings-sub">Somto usa solo strumenti necessari di default; gli analytics di prodotto web partono solo dopo scelta esplicita.</p>
+      </div>
+    </header>
+
+    <section class="settings-group">
+      <h2>Categorie</h2>
+      <p>Usiamo strumenti strettamente necessari per login, sicurezza, sessione e stato dell’interfaccia.</p>
+      <p>Gli analytics first-party sono opzionali e servono a misurare funnel, retention e uso delle feature.</p>
+      <p>Nessun tracking marketing o ads personalizzate è attivo sulla web app.</p>
+    </section>
+
+    <section class="settings-group">
+      <h2>Gestione del consenso</h2>
+      <p>Puoi accettare o rifiutare gli analytics opzionali dal banner o dalla pagina Impostazioni.</p>
+      <p>Il rifiuto non blocca le funzioni essenziali del servizio. Per richieste su privacy, consenso o dati personali puoi scrivere a <a href="mailto:support@somto.it">support@somto.it</a>.</p>
+    </section>
+
+    <section class="settings-group">
+      <h2>Stato attuale</h2>
+      <p>La configurazione attuale prevede Firebase Analytics lato web come strumento opzionale e nessuna CMP ads-driven o SDK pubblicitario attivo.</p>
+    </section>
+
+    <section class="settings-group">
+      <h2>Le tue scelte su questo browser</h2>
+      <div class="settings-item">
+        <span>Stato attuale</span>
+        <small id="cookieConsentStatus">Solo strumenti necessari attivi</small>
+      </div>
+      <button id="cookieConsentAcceptBtn" class="settings-item" type="button">
+        <span>Accetta analytics</span>
+        <small>Abilita misurazione first-party di funnel, retention e feature usage</small>
+      </button>
+      <button id="cookieConsentRejectBtn" class="settings-item" type="button">
+        <span>Tieni solo i necessari</span>
+        <small>Il servizio continua a funzionare senza analytics opzionali</small>
+      </button>
+    </section>
+
+    <section class="settings-group">
+      <a class="settings-item" href="/settings.html">
+        <span>Gestisci consenso</span>
+        <small>Apri le impostazioni privacy e dati</small>
+      </a>
+      <a class="settings-item" href="/consent.html">
+        <span>Rivedi le tue scelte</span>
+        <small>Pagina pubblica accessibile anche senza login</small>
+      </a>
+      <a class="settings-item" href="/privacy.html">
+        <span>Privacy policy</span>
+        <small>Informativa trattamento dati</small>
+      </a>
+    </section>
+  </main>
+
+  <div class="toast-wrap" id="toasts" role="status" aria-live="polite"></div>
+  <script type="module" src="/js/pages/cookies.page.js"></script>
+</body>
+</html>

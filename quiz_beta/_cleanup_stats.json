@@ -1,0 +1,73 @@
+{
+  "generatedAt": "2026-05-11 11:01:47",
+  "total": 500,
+  "indexBefore": {
+    "0": 126,
+    "1": 237,
+    "2": 87,
+    "3": 50
+  },
+  "indexAfter": {
+    "0": 114,
+    "1": 139,
+    "2": 134,
+    "3": 113
+  },
+  "questionsTouchedByNormalization": 71,
+  "fixCounts": {
+    "autorita -> autorità": 1,
+    "qual e -> qual è": 11,
+    "citta -> città": 6,
+    "gia -> già": 1,
+    "puo -> può": 2,
+    "capacita -> capacità": 1,
+    "piu -> più": 5,
+    "perche -> perché": 7,
+    "societa -> società": 1,
+    "eta -> età": 1,
+    "e' -> è": 61,
+    "E' -> È": 3,
+    "liberta -> libertà": 1,
+    "realta -> realtà": 1,
+    "verita -> verità": 1
+  },
+  "confidence": {
+    "low": 0,
+    "medium": 16,
+    "high": 484
+  },
+  "spoiler": {
+    "none": 136,
+    "light": 151,
+    "medium": 112,
+    "heavy": 101
+  },
+  "difficulty": {
+    "easy": 148,
+    "medium": 257,
+    "hard": 95
+  },
+  "category": {
+    "anagraphic": 87,
+    "chronology": 10,
+    "scene": 47,
+    "character": 89,
+    "object": 39,
+    "plot": 79,
+    "relationship": 33,
+    "motivation": 24,
+    "trivia": 21,
+    "consequence": 59,
+    "quote_paraphrase": 12
+  },
+  "mediumReviewFile": {
+    "file": "quiz_questions_medium_review.json",
+    "count": 16
+  },
+  "heavySpoilerFile": {
+    "file": "quiz_questions_heavy_spoiler_review.json",
+    "count": 101
+  },
+  "structuralIssuesDuringProcessing": [],
+  "finalIssues": []
+}

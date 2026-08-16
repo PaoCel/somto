@@ -1,0 +1,201 @@
+{
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "headers": [
+      {
+        "source": "**",
+        "headers": [
+          { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains; preload" },
+          { "key": "X-Content-Type-Options", "value": "nosniff" },
+          { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+          { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), payment=()" },
+          { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+          { "key": "Content-Security-Policy-Report-Only", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://image.tmdb.org https://commons.wikimedia.org https://lh3.googleusercontent.com https://firebasestorage.googleapis.com; font-src 'self'; connect-src 'self' https://www.gstatic.com https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://firebaseinstallations.googleapis.com https://fcmregistrations.googleapis.com https://firebasestorage.googleapis.com https://www.googleapis.com https://europe-west1-gia-visto.cloudfunctions.net https://www.google-analytics.com https://region1.google-analytics.com https://api.themoviedb.org https://it.wikipedia.org https://www.wikidata.org; frame-src 'self' https://gia-visto.firebaseapp.com https://accounts.google.com https://appleid.apple.com https://www.youtube.com; worker-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'" }
+        ]
+      },
+      {
+        "source": "**/*.@(jpg|jpeg|png|webp|gif|ico|svg|avif)",
+        "headers": [
+          { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        ]
+      },
+      {
+        "source": "**/*.@(woff|woff2|ttf|otf|eot)",
+        "headers": [
+          { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        ]
+      },
+      {
+        "source": "**/*.@(js|css)",
+        "headers": [
+          { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+        ]
+      },
+      {
+        "source": "**/*.html",
+        "headers": [
+          { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+        ]
+      },
+      {
+        "source": "**/sitemap*.xml",
+        "headers": [
+          { "key": "Cache-Control", "value": "public, max-age=3600" }
+        ]
+      },
+      {
+        "source": "robots.txt",
+        "headers": [
+          { "key": "Cache-Control", "value": "public, max-age=3600" }
+        ]
+      },
+      {
+        "source": "/.well-known/apple-app-site-association",
+        "headers": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Cache-Control", "value": "public, max-age=3600" }
+        ]
+      },
+      {
+        "source": "/.well-known/chatgpt-security-authorization.txt",
+        "headers": [
+          { "key": "Content-Type", "value": "text/plain; charset=utf-8" },
+          { "key": "Cache-Control", "value": "public, max-age=300" }
+        ]
+      },
+      {
+        "source": "/manifest.json",
+        "headers": [
+          { "key": "Content-Type", "value": "application/manifest+json; charset=utf-8" },
+          { "key": "Cache-Control", "value": "public, max-age=300, must-revalidate" }
+        ]
+      },
+      {
+        "source": "/service-worker.js",
+        "headers": [
+          { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
+          { "key": "Service-Worker-Allowed", "value": "/" }
+        ]
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "/share/title/**",
+        "function": "shareTitlePreview"
+      },
+      {
+        "source": "/quiz/invite/**",
+        "function": "quizInvitePreview"
+      },
+      {
+        "source": "/quiz/**",
+        "function": "quizPage"
+      },
+      {
+        "source": "/sitemap-quiz.xml",
+        "function": "sitemapQuiz"
+      },
+      {
+        "source": "/lista/**",
+        "function": "listPage"
+      },
+      {
+        "source": "/sitemap-lista.xml",
+        "function": "sitemapLists"
+      },
+      {
+        "source": "/novita/**",
+        "function": "officialUpdatePage"
+      },
+      {
+        "source": "/prossime-uscite.json",
+        "function": "upcomingReleasesFeed"
+      },
+      {
+        "source": "/film/**",
+        "function": "titlePage"
+      },
+      {
+        "source": "/serie/**",
+        "function": "titlePage"
+      },
+      {
+        "source": "/sitemap-titoli.xml",
+        "function": "sitemapTitles"
+      },
+      {
+        "source": "/sitemap-titoli-index.xml",
+        "function": "sitemapTitles"
+      },
+      {
+        "source": "/sitemap-titoli-*.xml",
+        "function": "sitemapTitles"
+      }
+    ]
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "disallowLegacyRuntimeConfig": true,
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ]
+    },
+    {
+      "source": "functions-public-profile",
+      "codebase": "publicprofile",
+      "disallowLegacyRuntimeConfig": true,
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ]
+    }
+  ],
+  "emulators": {
+    "singleProjectMode": false,
+    "auth": {
+      "host": "127.0.0.1",
+      "port": 59099
+    },
+    "firestore": {
+      "host": "127.0.0.1",
+      "port": 58080
+    },
+    "storage": {
+      "host": "127.0.0.1",
+      "port": 58081
+    },
+    "hosting": {
+      "host": "127.0.0.1",
+      "port": 5500
+    },
+    "hub": {
+      "host": "127.0.0.1",
+      "port": 58400
+    },
+    "logging": {
+      "host": "127.0.0.1",
+      "port": 58401
+    }
+  }
+}

@@ -1,0 +1,609 @@
+/* ============================================
+   APP-SHELL.CSS — Header (BrandChromeBar) + Tabbar
+   Componente condiviso, identico su ogni pagina.
+   Replica ios/.../BrandWordmarkView.swift + RootView tabbar
+   ============================================ */
+
+/* Spazio per header flottante */
+.has-app-shell .page {
+  padding-top: calc(var(--safe-top) + 4.45rem);
+}
+
+/* Nasconde shell legacy prima che il JS la rimuova (no flash) */
+nav.tabbar,
+.app-shell-topbar,
+a.fab,
+.fab { display: none !important; }
+
+/* ============================================
+   HEADER — BrandChromeBar
+   [menu][search]   [wordmark]   [chat][bell]
+   ============================================ */
+.tw-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: var(--z-shell);
+  padding: calc(var(--safe-top) + 0.5rem) var(--container-padding) 0.5rem;
+  pointer-events: none;
+  view-transition-name: tw-header;
+}
+
+.tw-headerbar {
+  pointer-events: auto;
+  position: relative;
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.4rem;
+  border-radius: var(--radius-pill);
+  background: #FFFFFF;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+  transition: background var(--transition-base), box-shadow var(--transition-base);
+}
+
+.tw-chrome-group {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.tw-chrome-btn {
+  position: relative;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: #0A0A0A;
+  transition: transform var(--transition-fast), background var(--transition-base), box-shadow var(--transition-base);
+}
+.tw-chrome-btn svg { width: 1.2rem; height: 1.2rem; }
+.tw-chrome-btn:active { transform: scale(0.9); }
+
+.tw-wordmark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  transition: background var(--transition-base), box-shadow var(--transition-base);
+}
+.tw-wordmark img {
+  height: 1.5rem;
+  width: auto;
+  display: block;
+}
+.tw-wordmark:active { transform: translate(-50%, -50%) scale(0.94); }
+
+/* Badge sui tasti chrome (chat = pallino cyan, bell = conteggio pink) */
+.tw-chrome-badge {
+  position: absolute;
+  top: 0.05rem;
+  right: 0.05rem;
+  min-width: 1.05rem;
+  height: 1.05rem;
+  padding: 0 0.28rem;
+  border-radius: var(--radius-pill);
+  background: var(--brand-primary);
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: var(--weight-bold);
+  line-height: 1.05rem;
+  text-align: center;
+  border: 1.5px solid #fff;
+}
+.tw-chrome-badge.dot {
+  min-width: 0;
+  width: 0.6rem;
+  height: 0.6rem;
+  padding: 0;
+  top: 0.2rem;
+  right: 0.2rem;
+  background: var(--accent);
+}
+.tw-chrome-badge[hidden] { display: none; }
+
+/* Stato compatto (scroll) — il pill si dissolve, chip individuali */
+.tw-header.is-compact .tw-headerbar {
+  background: transparent;
+  box-shadow: none;
+}
+.tw-header.is-compact .tw-chrome-btn {
+  background: #FFFFFF;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.26);
+}
+.tw-header.is-compact .tw-wordmark {
+  background: #FFFFFF;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.26);
+}
+
+/* ============================================
+   BOTTOM TABBAR — 5 voci
+   Home · Match · Watchlist · Quiz · Profilo
+   ============================================ */
+.tw-tabbar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: var(--z-sticky);
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0;
+  height: var(--tabbar-height);
+  padding-bottom: var(--safe-bottom);
+  background: rgba(16, 16, 22, 0.82);
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.4);
+  view-transition-name: tw-tabbar;
+}
+
+.tw-tab {
+  position: relative;
+  flex: 1 1 0;
+  max-width: 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.18rem;
+  padding: 0.5rem 0 0.35rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+.tw-tab-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  transition: transform var(--transition-fast);
+}
+.tw-tab-icon svg {
+  width: 1.55rem;
+  height: 1.55rem;
+}
+.tw-tab-label {
+  font-size: 0.62rem;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.01em;
+  line-height: 1;
+}
+.tw-tab:active .tw-tab-icon { transform: scale(0.88); }
+
+.tw-tab.is-active {
+  color: var(--brand-primary);
+}
+.tw-tab.is-active .tw-tab-icon {
+  filter: drop-shadow(0 2px 8px rgba(233, 30, 99, 0.5));
+}
+
+/* Avatar al posto dell'icona profilo */
+.tw-tab-avatar {
+  width: 1.55rem;
+  height: 1.55rem;
+  border-radius: var(--radius-pill);
+  object-fit: cover;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+}
+.tw-tab.is-active .tw-tab-avatar {
+  border-color: var(--brand-primary);
+}
+
+/* Badge sul tab (es. quiz/sfide) */
+.tw-tab-badge {
+  position: absolute;
+  top: 0.2rem;
+  right: calc(50% - 1.1rem);
+  min-width: 1rem;
+  height: 1rem;
+  padding: 0 0.22rem;
+  border-radius: var(--radius-pill);
+  background: var(--brand-primary);
+  color: #fff;
+  font-size: 0.58rem;
+  font-weight: var(--weight-bold);
+  line-height: 1rem;
+  text-align: center;
+  border: 1.5px solid #15151C;
+}
+.tw-tab-badge[hidden] { display: none; }
+
+/* Variante testuale (es. "Beta"): stessa collocazione, larghezza libera invece di cerchio numerico */
+.tw-tab-badge.is-text {
+  right: auto;
+  left: calc(50% + 0.35rem);
+  min-width: 0;
+  height: auto;
+  padding: 0.06rem 0.3rem;
+  font-size: 0.5rem;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* ============================================
+   DRAWER (menu laterale)
+   ============================================ */
+.app-shell-layer,
+.app-shell-search-layer {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  pointer-events: none;
+}
+
+.app-shell-backdrop,
+.app-shell-search-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.62);
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+
+.app-shell-drawer {
+  position: absolute;
+  top: 0; bottom: 0; left: 0;
+  width: min(86vw, 21rem);
+  transform: translateX(-104%);
+  transition: transform 0.28s var(--ease-spring);
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border);
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 24px 0 60px rgba(0, 0, 0, 0.5);
+}
+
+.app-shell-drawer-head {
+  padding: calc(var(--safe-top) + 0.9rem) 1rem 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.app-shell-drawer-head .identity {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+.app-shell-drawer-head .avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-pill);
+  background: var(--brand-gradient);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-weight: var(--weight-bold);
+  font-size: 0.85rem;
+  color: #fff;
+}
+#appShellAvatarImg { width: 100%; height: 100%; object-fit: cover; }
+
+.app-shell-drawer-head .meta { min-width: 0; }
+.app-shell-drawer-head .meta strong,
+.app-shell-drawer-head .meta small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.app-shell-drawer-head .meta strong { color: var(--text-primary); font-size: 0.95rem; }
+.app-shell-drawer-head .meta small { color: var(--text-secondary); font-size: 0.78rem; }
+
+.app-shell-close {
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.app-shell-drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 0.85rem calc(var(--safe-bottom) + 1.25rem);
+}
+
+.app-shell-shortcuts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin-bottom: 1rem;
+}
+
+.app-shell-shortcut {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  border-radius: var(--radius-md);
+  padding: 0.7rem 0.65rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: var(--weight-semibold);
+  font-size: 0.85rem;
+}
+.app-shell-shortcut:active { transform: scale(0.98); }
+
+.app-shell-section + .app-shell-section { margin-top: 1.1rem; }
+.app-shell-section h3 {
+  margin: 0 0 0.5rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.app-shell-grid { display: flex; flex-direction: column; gap: 0.4rem; }
+
+.app-shell-link {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  padding: 0.7rem 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  text-align: left;
+  font-size: 0.88rem;
+  text-decoration: none;
+}
+.app-shell-link:active { transform: scale(0.99); }
+
+.app-shell-link-head {
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-weight: var(--weight-semibold);
+}
+
+.app-shell-icon {
+  width: 1.15rem;
+  height: 1.15rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  flex: 0 0 auto;
+}
+.app-shell-icon svg { width: 100%; height: 100%; }
+.app-shell-icon.small { width: 1.05rem; height: 1.05rem; }
+
+.app-shell-link-button {
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  font: inherit;
+}
+
+.app-shell-link-with-sub .app-shell-link-head { align-items: flex-start; gap: 0.7rem; }
+.app-shell-link-with-sub .app-shell-icon {
+  width: 2rem; height: 2rem;
+  background: var(--brand-warm, var(--brand-primary));
+  color: var(--bg-primary, #0A0A0A);
+  border-radius: var(--radius-sm, 10px);
+}
+.app-shell-link-with-sub .app-shell-icon svg { width: 1.1rem; height: 1.1rem; }
+.app-shell-link-text { display: inline-flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
+.app-shell-link-text strong { font-weight: var(--weight-bold); font-size: 0.92rem; color: var(--text-primary); }
+.app-shell-link-text small { font-size: 0.74rem; color: var(--text-secondary); font-weight: var(--weight-regular); }
+
+.app-shell-badge {
+  align-self: center;
+  min-width: 1.3rem;
+  padding: 0.12rem 0.4rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.7rem;
+  font-weight: var(--weight-bold);
+  color: #fff;
+  background: var(--brand-primary);
+  text-align: center;
+}
+
+/* ============================================
+   SEARCH OVERLAY
+   ============================================ */
+.app-shell-search-panel {
+  position: absolute;
+  top: calc(var(--safe-top) + 0.6rem);
+  left: var(--container-padding);
+  right: var(--container-padding);
+  max-width: var(--container-max);
+  margin: 0 auto;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 1rem;
+  transform: translateY(-12px);
+  opacity: 0;
+  transition: transform 0.2s var(--ease-spring), opacity 0.2s ease;
+  box-shadow: var(--shadow-lg);
+}
+
+.app-shell-search-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+.app-shell-search-head strong { font-size: 0.95rem; }
+
+.app-shell-search-form { display: flex; gap: 0.5rem; }
+.app-shell-search-form input {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-input);
+  background: var(--panel);
+  color: var(--text-primary);
+  padding: 0.65rem 0.8rem;
+  font-size: 16px;
+}
+.app-shell-search-form input::placeholder { color: var(--text-muted); }
+.app-shell-search-form button {
+  border: 0;
+  border-radius: var(--radius-input);
+  padding: 0.65rem 1rem;
+  background: var(--brand-gradient);
+  color: #fff;
+  font-weight: var(--weight-semibold);
+}
+
+.app-shell-search-scopes {
+  margin-top: 0.7rem;
+  display: flex;
+  gap: 0.45rem;
+}
+.app-shell-search-scopes .scope-pill {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text-secondary);
+  border-radius: var(--radius-pill);
+  padding: 0.36rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: var(--weight-semibold);
+}
+.app-shell-search-scopes .scope-pill.active {
+  border-color: rgba(233, 30, 99, 0.55);
+  color: #fff;
+  background: rgba(233, 30, 99, 0.22);
+}
+
+.app-shell-search-results {
+  margin-top: 0.75rem;
+  max-height: min(44vh, 360px);
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--panel);
+}
+.app-shell-search-results .hint { padding: 0.7rem 0.8rem; }
+
+.app-shell-search-results .result-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.65rem 0.8rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border);
+}
+.app-shell-search-results .result-row:last-child { border-bottom: 0; }
+.app-shell-search-results .copy { min-width: 0; }
+.app-shell-search-results .copy strong,
+.app-shell-search-results .copy small {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.app-shell-search-results .copy small { color: var(--text-muted); margin-top: 2px; }
+.app-shell-search-results .arrow { color: var(--text-muted); }
+
+.app-shell-search-advanced {
+  display: inline-flex;
+  margin-top: 0.7rem;
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: var(--weight-semibold);
+}
+
+/* ===== Stati aperti ===== */
+body.app-shell-menu-open,
+body.app-shell-search-open { overflow: hidden; }
+
+body.app-shell-menu-open .app-shell-layer,
+body.app-shell-search-open .app-shell-search-layer { pointer-events: auto; }
+
+body.app-shell-menu-open .app-shell-backdrop,
+body.app-shell-search-open .app-shell-search-backdrop { opacity: 1; }
+
+body.app-shell-menu-open .app-shell-drawer { transform: translateX(0); }
+
+body.app-shell-search-open .app-shell-search-panel {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Header/tabbar restano fermi durante la View Transition */
+::view-transition-group(tw-header),
+::view-transition-group(tw-tabbar) { animation-duration: 0s; }
+::view-transition-old(tw-header),
+::view-transition-new(tw-header),
+::view-transition-old(tw-tabbar),
+::view-transition-new(tw-tabbar) { animation: none; mix-blend-mode: normal; }
+
+/* ============================================
+   DISMISS BANNER (js/components/dismissBanner.js)
+   Riusa le classi .notification-* (definite anche in css/pages/account.css)
+   ma è autosufficiente: funziona anche su pagine che non caricano account.css
+   (es. home.html, index.html, login.html).
+   ============================================ */
+.notification-banner.dismiss-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+  margin: 12px 0;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius-card);
+  background: var(--panel);
+  border: 1px solid var(--border);
+}
+.dismiss-banner .notification-content { display: flex; align-items: center; gap: 0.6rem; min-width: 0; }
+.dismiss-banner .notification-icon { font-size: 1.3rem; line-height: 1; flex: 0 0 auto; }
+.dismiss-banner .notification-text { font-size: 0.82rem; color: var(--text-secondary); min-width: 0; }
+.dismiss-banner .notification-title { display: block; color: var(--text-primary); font-weight: var(--weight-semibold); }
+.dismiss-banner-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 0 0 auto;
+}
+.dismiss-banner-cta { white-space: nowrap; }
+.dismiss-banner-close {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 0.2rem 0.35rem;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+.dismiss-banner-close:hover,
+.dismiss-banner-close:focus-visible {
+  color: var(--text-primary);
+  background: var(--panel);
+}

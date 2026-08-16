@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Analytics admin - Somto</title>
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Dashboard admin privata per leggere iscrizioni e contributi Somto.">
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Somto">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0A0A0A">
+</head>
+<body class="admin-analytics-page">
+  <div id="appSplash" class="app-splash">
+    <img class="splash-logo splash-wordmark" src="/icons/somto-wordmark.png" alt="Somto">
+    <div class="splash-spinner"></div>
+  </div>
+
+  <main class="analytics-shell" aria-labelledby="pageTitle">
+    <header class="analytics-topbar">
+      <a class="analytics-back" href="/account.html" aria-label="Torna al profilo">Indietro</a>
+      <div>
+        <p class="analytics-kicker">Admin</p>
+        <h1 id="pageTitle">Analytics</h1>
+      </div>
+      <div class="analytics-topbar-actions">
+        <select id="limitSelect" class="input analytics-limit" aria-label="Numero utenti">
+          <option value="20">20 iscritti</option>
+          <option value="40" selected>40 iscritti</option>
+          <option value="50">50 iscritti</option>
+        </select>
+        <button id="reloadBtn" class="btn small primary" type="button">Aggiorna</button>
+      </div>
+    </header>
+
+    <section id="gate" class="analytics-state" hidden role="alert">
+      <h2>Accesso negato</h2>
+      <p>Questa pagina risponde solo all'account autorizzato.</p>
+    </section>
+
+    <section id="errorState" class="analytics-state" hidden role="alert">
+      <h2>Errore</h2>
+      <p id="errorText">Non riesco a caricare i dati.</p>
+    </section>
+
+    <section id="dashboard" hidden>
+      <div class="analytics-meta">
+        <span id="generatedAt">-</span>
+        <span id="scopeLabel">-</span>
+      </div>
+
+      <section id="kpiGrid" class="analytics-kpi-grid" aria-label="Metriche principali"></section>
+
+      <section class="analytics-controls" aria-label="Filtri">
+        <div>
+          <label class="analytics-label" for="searchInput">Cerca</label>
+          <input id="searchInput" class="input" type="search" placeholder="Nome, email, piattaforma, fonte">
+        </div>
+        <div>
+          <label class="analytics-label" for="platformFilter">Piattaforma</label>
+          <select id="platformFilter" class="input">
+            <option value="all">Tutte</option>
+            <option value="web">Web</option>
+            <option value="ios">iOS</option>
+            <option value="unknown">Sconosciuta</option>
+          </select>
+        </div>
+        <div>
+          <label class="analytics-label" for="activationFilter">Attivazione</label>
+          <select id="activationFilter" class="input">
+            <option value="all">Tutti</option>
+            <option value="active">Con attività</option>
+            <option value="quiet">Senza attività</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="analytics-table-wrap" aria-label="Ultimi iscritti">
+        <table class="analytics-table">
+          <thead>
+            <tr>
+              <th>Utente</th>
+              <th>Iscrizione</th>
+              <th>Piattaforma</th>
+              <th>Contributo</th>
+              <th>Quiz</th>
+              <th>Ultima attività</th>
+            </tr>
+          </thead>
+          <tbody id="usersBody"></tbody>
+        </table>
+      </section>
+    </section>
+  </main>
+
+  <div class="toast-wrap" id="toasts" role="status" aria-live="polite"></div>
+
+  <script src="/firebaseConfig.js"></script>
+  <script type="module" src="/js/pages/admin-analytics.page.js"></script>
+  <script src="/js/pwa.js" defer></script>
+</body>
+</html>

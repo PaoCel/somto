@@ -1,0 +1,34 @@
+keyword,tier,intento,pagina_bersaglio,posizione_2026_07_27,note
+alternativa a tv time,priority,migrazione,/vieni-da-tv-time.html,non indicizzata,finestra aperta ora - TV Time chiusa il 15/07/2026
+tv time chiude cosa fare,priority,migrazione,/vieni-da-tv-time.html,non indicizzata,evento passato - intento in calo
+come esportare dati tv time,priority,migrazione,/blog/come-esportare-dati-tv-time/,non rilevata,gia scritto - da aggiornare al post-chiusura
+importare dati tv time,priority,migrazione,/vieni-da-tv-time.html,non indicizzata,il nostro vantaggio reale
+app per tenere traccia film e serie tv,priority,scoperta,/blog/migliori-app-tenere-traccia-film-serie-tv/,4.9,ranka ma zero clic - problema di title/meta
+app per segnare film visti,priority,scoperta,/app-recensioni-film-serie.html,12.0,posizione 12 = fondo pagina 2
+watchlist film e serie tv,priority,scoperta,/watchlist-film-serie.html,4.9,17 impression in 90gg - volume basso
+app watchlist italiana,priority,scoperta,/watchlist-film-serie.html,non rilevata,differenziatore italiano
+alternativa a letterboxd,priority,migrazione,/somto-vs-letterboxd.html,non indicizzata,scansionata 22/05 mai indicizzata
+alternativa a justwatch,priority,migrazione,/somto-vs-justwatch.html,non indicizzata,
+quiz film e serie tv,priority,gioco,/quiz-film-serie-tv.html,nessuna impression,le /quiz/* sono le uniche in pos 4-10
+quiz serie tv senza registrazione,priority,gioco,/quiz-prova.html,mai scansionata,guest play gia funzionante
+somto,priority,marca,/,5.4,siamo quinti sul nostro nome
+somto app,priority,marca,/,9.1,siamo noni sul nostro nome
+app per decidere cosa guardare,secondary,scoperta,/,non rilevata,
+sito per scegliere film,secondary,scoperta,/,83.0,3 impression
+app per scegliere film,secondary,scoperta,/,53.7,3 impression
+serie tv simili a breaking bad,secondary,contenuto,/blog/serie-tv-simili-a-breaking-bad/,10.0,20 impression 0 clic - meglio piazzata del blog
+serie tv simili a stranger things,secondary,contenuto,/blog/serie-tv-simili-a-stranger-things/,21.8,
+migliori serie tv 2026,secondary,contenuto,/blog/migliori-serie-tv-2026/,3.3,6 impression - volume basso in questa forma
+migliori film 2026,secondary,contenuto,/blog/migliori-film-2026/,36.2,
+come organizzare la watchlist,secondary,contenuto,/blog/come-organizzare-watchlist-film-serie-tv/,2.7,pos 2.7 con 7 impression = query rara
+consigli film tra amici,secondary,social,/consigli-film-serie-amici.html,5.2,
+app serie tv anti spoiler,secondary,scoperta,nessuna,non rilevata,funzione reale senza pagina dedicata
+tenere traccia episodi serie tv,secondary,scoperta,/watchlist-film-serie.html,non rilevata,
+alternativa a serializd,secondary,migrazione,nessuna,non rilevata,citata in tutte le liste italiane
+alternativa a simkl,secondary,migrazione,nessuna,non rilevata,
+alternativa a trakt,secondary,migrazione,nessuna,non rilevata,
+dove vedere in streaming,ignore,scoperta,nessuna,-,JustWatch possiede la query e ha il database che non abbiamo
+trama di [titolo],ignore,informativa,/film/*,~80,1069 pagine contro IMDb e TMDB - non convertono comunque
+cast di [titolo],ignore,informativa,/film/*,~80,idem
+film streaming gratis,ignore,pirateria,nessuna,-,pubblico sbagliato
+netflix,ignore,marca altrui,nessuna,-,volume enorme intento nullo per noi

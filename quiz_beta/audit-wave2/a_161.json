@@ -1,0 +1,16 @@
+[
+  {
+    "questionId": "q_161_27",
+    "severity": "minor",
+    "problem": "L'explanation dice che gli interni sono stati costruiti 'su tre set in un teatro di posa nel Bronx'. York Studios nel Bronx dispone di cinque stage, non tre. 'Tre set' potrebbe riferirsi a tre scenografie distinte (MDR, corridoi, wellness), ma non al numero di stage fisici. Imprecisione minore che non inficia la risposta corretta.",
+    "fix": "Correggere 'tre set' in 'i set' oppure 'diversi stage a York Studios nel Bronx'.",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_161_3",
+    "severity": "minor",
+    "problem": "L'explanation afferma che Erickson 'concepì l'idea durante un periodo di depressione mentre lavorava in una fabbrica di porte'. Le fonti principali descrivono la situazione come lavoro monotono e mentalmente spossante (mind-numbing), non esplicitamente 'depressione'. Una fonte secondaria usa il termine 'period of depression'. Il nucleo del fatto (fabbrica di porte) è corretto; 'periodo di depressione' è una semplificazione marginalmente esagerata.",
+    "fix": "Sostituire 'durante un periodo di depressione' con 'lavorando a un lavoro monotono e ripetitivo' per fedeltà alle dichiarazioni di Erickson.",
+    "correctIndexShouldBe": -1
+  }
+]

@@ -1,0 +1,50 @@
+{
+  "name": "Somto",
+  "short_name": "Somto",
+  "id": "/",
+  "start_url": "/home.html",
+  "scope": "/",
+  "display": "standalone",
+  "lang": "it",
+  "dir": "ltr",
+  "categories": ["entertainment", "social"],
+  "background_color": "#0A0A0A",
+  "theme_color": "#0A0A0A",
+  "description": "Somto — il social per tenere traccia di cosa guardi e condividere voti e suggerimenti.",
+  "shortcuts": [
+    {
+      "name": "Impostazioni",
+      "short_name": "Settings",
+      "url": "/settings.html"
+    },
+    {
+      "name": "Supporto",
+      "short_name": "Supporto",
+      "url": "/support.html"
+    }
+  ],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ]
+}

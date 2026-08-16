@@ -1,0 +1,16 @@
+[
+  {
+    "questionId": "q_174_7",
+    "severity": "minor",
+    "problem": "Il testo della domanda dice 'la celebre battuta che pronuncia mentre fa il gesto di commiato', ma 'Hasta la vista, baby' non è pronunciata durante un gesto di commiato: viene detta al T-1000 già congelato prima di spararlo (fonderia). Il vero gesto di commiato è il pollice alzato alla fine, che accompagna la frase 'I know now why you cry' (Q22). La risposta corretta (indice 0) è comunque giusta come battuta iconica del film, ma la domanda confonde due scene distinte e può trarre in inganno.",
+    "fix": "Riformulare la domanda, ad esempio: 'Qual è la celebre battuta ironica che il T-800 rivolge al T-1000 congelato prima di distruggerlo?'",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_174_50",
+    "severity": "minor",
+    "problem": "Domanda quasi identica a q_174_23: entrambe chiedono della frase 'NO FATE' incisa da Sarah Connor su un tavolo e hanno la stessa risposta corretta (indice 0). La Q23 pone la stessa domanda con le stesse opzioni di risposta (anche se formulate leggermente diversamente). È un duplicato contenutistico che va eliminato o sostituito con una domanda su un argomento diverso.",
+    "fix": "Eliminare q_174_50 (o q_174_23) e sostituire la domanda duplicata con un quesito su un tema non ancora coperto dal set.",
+    "correctIndexShouldBe": -1
+  }
+]

@@ -1,0 +1,207 @@
+<style>
+  .stage{display:flex;justify-content:center;padding:14px 10px 30px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .ph{width:100%;max-width:392px;background:#0c0b11;border:1px solid rgba(255,255,255,.09);
+    border-radius:30px;overflow:hidden;color:#f2f1f7}
+  .ph *{box-sizing:border-box}
+  .sb{display:flex;justify-content:space-between;align-items:center;padding:10px 20px 2px;font-size:12px;color:#cfceda}
+  .pad{padding:12px 14px}
+  .muted{color:#9a99a8}.faint{color:#6e6d7c}
+  .card{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:13px}
+  .chip{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;padding:4px 9px;border-radius:999px;
+    border:1px solid rgba(255,255,255,.12);color:#c9c8d6}
+  .grad{background:linear-gradient(90deg,#ff6a5f,#ec4899 55%,#a855f7);color:#fff;border:none}
+  .tabs{display:flex;gap:7px;padding:12px 14px 4px}
+  .tb{flex:1;text-align:center;font-size:12px;padding:9px 4px;border-radius:12px;cursor:pointer;
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:#a09fae}
+  .tb.on{background:linear-gradient(90deg,#ff6a5f,#ec4899 55%,#a855f7);color:#fff;border:none}
+  .barT{flex:1;height:7px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden}
+  .barF{height:100%;background:linear-gradient(90deg,#22d3ee,#a855f7)}
+  .row{display:flex;align-items:center;gap:8px;font-size:11px}
+  .av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:500;color:#fff;flex:none}
+  .vb{font-size:12px;font-weight:500;color:#22d3ee;border:1px solid rgba(34,211,238,.4);border-radius:8px;padding:2px 7px}
+  .circle{width:60px;height:60px;border-radius:50%;border:2px solid #2bb8e0;display:grid;place-items:center;
+    font-size:18px;font-weight:500;position:relative;background:rgba(43,184,224,.06);cursor:pointer}
+  .circle .ck{position:absolute;top:-3px;right:-3px;width:19px;height:19px;border-radius:50%;background:#34d399;
+    color:#04241a;display:grid;place-items:center;font-size:12px;font-weight:700}
+  .circle.on{background:#22d3ee;color:#04222b;border-color:#7fe6f7;box-shadow:0 0 0 4px rgba(34,211,238,.18)}
+  .estat{display:flex;gap:9px;justify-content:center;font-size:11px;margin-top:5px}
+  .amber{color:#f5a524}.coral{color:#ff8a5f}.green{color:#34d399}.cyan{color:#22d3ee}
+  .sheet{position:fixed;left:0;right:0;bottom:0;background:#151420;border-top:1px solid rgba(255,255,255,.1);
+    border-radius:20px 20px 0 0;padding:12px 16px 22px;max-width:392px;margin:0 auto;
+    transform:translateY(110%);transition:transform .28s ease;z-index:9}
+  .sheet.show{transform:translateY(0)}
+  .act3{display:flex;gap:8px;margin-top:12px}
+  .abtn{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;padding:11px 4px;border-radius:12px;
+    font-size:11.5px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#e7e6ef;cursor:pointer}
+  .abtn svg{width:20px;height:20px}
+  .screen{display:none}.screen.on{display:block}
+  .scrim{position:fixed;inset:0;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:opacity .25s;z-index:8}
+  .scrim.show{opacity:1;pointer-events:auto}
+  .stub{padding:40px 16px;text-align:center;color:#6e6d7c;font-size:13px}
+</style>
+
+<div class="stage">
+  <div class="ph" style="position:relative">
+    <div class="sb"><span>9:27</span><span>5G ▪▪▪</span></div>
+
+    <div class="pad" style="padding-bottom:0">
+      <div style="display:flex;gap:12px;align-items:center">
+        <div style="width:58px;height:82px;border-radius:11px;flex:none;background:linear-gradient(160deg,#5b7c1a,#caa93a);display:grid;place-items:end center;font-size:9px;color:#122;padding:5px;font-weight:600">Breaking Bad</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:19px;font-weight:500">Breaking Bad</div>
+          <div class="muted" style="font-size:12px">Serie · 2008 · 5 stagioni</div>
+          <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+            <span class="chip cyan" style="border-color:rgba(34,211,238,.4)">★ Il tuo voto: 9</span>
+            <span class="chip green" style="border-color:rgba(52,211,153,.4)">In pari · Votata</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <div class="tb" data-s="info">Info</div>
+      <div class="tb" data-s="ep">Episodi</div>
+      <div class="tb on" data-s="soc">Sociale</div>
+    </div>
+
+    <div class="screen" id="s-info"><div class="stub">Info · sinossi, trailer, cast, dove guardarlo</div></div>
+
+    <div class="screen on" id="s-soc">
+      <div class="pad">
+        <div class="card">
+          <div style="font-size:15px;font-weight:500">Community serie</div>
+          <div class="muted" style="font-size:12px;margin:2px 0 14px">Pareri, discussioni e voti su tutta la serie.</div>
+          <div style="display:flex;gap:16px;align-items:center">
+            <div style="width:92px;height:92px;border-radius:50%;flex:none;background:conic-gradient(#22d3ee,#a855f7,#ff6a5f,#22d3ee);display:grid;place-items:center">
+              <div style="width:76px;height:76px;border-radius:50%;background:#131019;display:grid;place-items:center;text-align:center">
+                <div><div style="font-size:24px;font-weight:500">9.0</div><div class="green" style="font-size:10.5px">Eccellente</div></div>
+              </div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:8px;font-variant-numeric:tabular-nums">
+              <div class="row"><span class="faint" style="width:34px">9–10</span><span class="barT"><span class="barF" style="width:68%"></span></span><span class="muted" style="width:26px;text-align:right">68%</span></div>
+              <div class="row"><span class="faint" style="width:34px">7–8</span><span class="barT"><span class="barF" style="width:22%"></span></span><span class="muted" style="width:26px;text-align:right">22%</span></div>
+              <div class="row"><span class="faint" style="width:34px">5–6</span><span class="barT"><span class="barF" style="width:7%"></span></span><span class="muted" style="width:26px;text-align:right">7%</span></div>
+              <div class="row"><span class="faint" style="width:34px">3–4</span><span class="barT"><span class="barF" style="width:2%"></span></span><span class="muted" style="width:26px;text-align:right">2%</span></div>
+              <div class="row"><span class="faint" style="width:34px">1–2</span><span class="barT"><span class="barF" style="width:1%"></span></span><span class="muted" style="width:26px;text-align:right">1%</span></div>
+            </div>
+          </div>
+          <div class="faint" style="font-size:11px;margin-top:10px">Su 10 · basato su 2.842 voti</div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin:16px 2px 10px">
+          <div style="font-size:14px;font-weight:500">Ultime recensioni</div><div class="cyan" style="font-size:12px">Vedi tutte</div>
+        </div>
+        <div style="display:flex;gap:10px;margin-bottom:13px">
+          <div class="av" style="background:linear-gradient(135deg,#8b5cf6,#ec4899)">H8</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:12.5px"><span style="font-weight:500">Heisenberg88</span> <span class="faint">2 giorni fa</span> <span class="vb" style="margin-left:4px">9</span></div>
+            <div class="muted" style="font-size:12.5px;margin-top:3px">La migliore serie di sempre. Scrittura, regia e interpretazioni ai massimi livelli.</div>
+            <div class="faint" style="font-size:11.5px;margin-top:4px">♥ 128</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px">
+          <div class="av" style="background:linear-gradient(135deg,#22d3ee,#6366f1)">BM</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:12.5px"><span style="font-weight:500">BlueMeth</span> <span class="faint">5 giorni fa</span> <span class="vb" style="margin-left:4px">8</span></div>
+            <div class="muted" style="font-size:12.5px;margin-top:3px">Tensione incredibile in ogni episodio. Impossibile smettere di guardarla.</div>
+            <div class="faint" style="font-size:11.5px;margin-top:4px">♥ 86</div>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin:16px 0 4px;padding:11px;border-radius:12px;border:1px solid #a855f7;color:#d6b6ff;font-size:13px;font-weight:500">💬 Apri thread pubblico della serie</div>
+
+        <div style="margin-top:14px;border-top:1px solid rgba(255,255,255,.07);padding-top:12px;display:flex;flex-direction:column;gap:11px;font-size:12.5px">
+          <div style="display:flex;justify-content:space-between"><span>🙂 Che impressione ha fatto</span><span class="faint">Elettrizzante 41% ›</span></div>
+          <div style="display:flex;justify-content:space-between"><span>👥 Chi la sta guardando</span><span class="faint">+8 amici ›</span></div>
+          <div style="display:flex;justify-content:space-between"><span>📃 In queste liste</span><span class="faint">6 liste ›</span></div>
+        </div>
+      </div>
+
+      <div style="margin:0 14px 16px;padding:12px;border-radius:16px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08)">
+        <div style="font-size:13.5px;font-weight:500">Commenti per episodio</div>
+        <div class="muted" style="font-size:11.5px;margin:2px 0 10px">Cosa dicono gli altri sui singoli episodi.</div>
+        <div style="display:flex;gap:10px;align-items:center">
+          <div style="display:flex;gap:4px">
+            <span style="width:38px;height:26px;border-radius:6px;background:linear-gradient(135deg,#3a2036,#2b2540)"></span>
+            <span style="width:38px;height:26px;border-radius:6px;background:linear-gradient(135deg,#2b3a20,#20402b)"></span>
+          </div>
+          <div style="flex:1"><div style="font-size:12.5px;font-weight:500">S5 · E14 Ozymandias</div><div style="font-size:11px"><span style="color:#ec4899">512 commenti</span> <span class="faint">· in corso</span></div></div>
+          <span class="faint">›</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="screen" id="s-ep">
+      <div class="pad">
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div><div style="font-size:15px;font-weight:500">Stagione 1</div><div class="faint" style="font-size:12px">7 episodi · 2 visti</div></div>
+            <span class="faint">⌄</span>
+          </div>
+          <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:16px;justify-content:space-between">
+            <div style="text-align:center"><div class="circle" data-ep="1">1<span class="ck">✓</span></div><div class="estat"><span class="amber">★8.8</span><span class="muted">💬23</span></div></div>
+            <div style="text-align:center"><div class="circle" data-ep="2">2<span class="ck">✓</span></div><div class="estat"><span class="amber">★8.7</span><span class="muted">💬17</span></div></div>
+            <div style="text-align:center"><div class="circle on" data-ep="3">3</div><div class="estat"><span class="amber">★9.1</span><span class="muted">💬31</span></div></div>
+            <div style="text-align:center"><div class="circle" data-ep="4">4</div><div class="estat"><span class="amber">★8.6</span><span class="muted">💬12</span></div></div>
+            <div style="text-align:center"><div class="circle" data-ep="5">5</div><div class="estat faint">—</div></div>
+            <div style="text-align:center"><div class="circle" data-ep="6">6</div><div class="estat faint">—</div></div>
+            <div style="text-align:center"><div class="circle" data-ep="7">7</div><div class="estat faint">—</div></div>
+          </div>
+          <div class="faint" style="font-size:11px;text-align:center;margin-top:16px">Tocca un episodio per aprire le azioni · tocca ✓ per segnarlo visto al volo</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scrim" id="scrim"></div>
+    <div class="sheet" id="sheet">
+      <div style="width:38px;height:4px;border-radius:99px;background:rgba(255,255,255,.2);margin:0 auto 12px"></div>
+      <div style="display:flex;gap:12px">
+        <div style="width:88px;height:56px;border-radius:10px;flex:none;background:linear-gradient(135deg,#2b2540,#3a2036)"></div>
+        <div style="flex:1;min-width:0">
+          <div class="cyan" style="font-size:11.5px" id="sh-code">Breaking Bad · S1E3</div>
+          <div style="font-size:14px;font-weight:500;margin:1px 0 3px" id="sh-title">…E il sacco a pelo</div>
+          <div class="muted" style="font-size:11.5px">Walt e Jesse cercano un posto sicuro per cucinare.</div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin:13px 2px;font-size:11.5px;text-align:center">
+        <div><div class="green">✓</div><div class="faint">Visto</div></div>
+        <div><div class="cyan" style="font-weight:500">9</div><div class="faint">Tuo voto</div></div>
+        <div><div class="coral" style="font-weight:500">9.1</div><div class="faint">Community</div></div>
+        <div><div style="font-weight:500" id="sh-c">31</div><div class="faint">Commenti</div></div>
+      </div>
+      <div class="act3">
+        <div class="abtn" style="background:rgba(52,211,153,.12);border-color:rgba(52,211,153,.4);color:#7ff0cd">👁 Visto</div>
+        <div class="abtn">★ Vota</div>
+        <div class="abtn grad">💬 Commenti</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.tb').forEach(function(t){
+    t.addEventListener('click',function(){
+      document.querySelectorAll('.tb').forEach(function(x){x.classList.remove('on')});
+      t.classList.add('on');
+      document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('on')});
+      var m={info:'s-info',ep:'s-ep',soc:'s-soc'};
+      document.getElementById(m[t.dataset.s]).classList.add('on');
+      closeSheet();
+    });
+  });
+  var EP={1:['S1E1','Travelers','42'],2:['S1E2','Il gatto è nel sacco','28'],3:['…E il sacco a pelo','…E il sacco a pelo','31'],4:['S1E4','Cancer Man','12'],5:['S1E5','Gray Matter','9'],6:['S1E6','Crazy Handful of Nothin’','7'],7:['S1E7','A No-Rough-Stuff-Type Deal','5']};
+  document.querySelectorAll('.circle').forEach(function(c){
+    c.addEventListener('click',function(){
+      var n=c.dataset.ep, d=EP[n];
+      document.getElementById('sh-code').textContent='Breaking Bad · S1E'+n;
+      document.getElementById('sh-title').textContent=(n==='3'?'…E il sacco a pelo':d[1]);
+      document.getElementById('sh-c').textContent=d[2];
+      document.getElementById('sheet').classList.add('show');
+      document.getElementById('scrim').classList.add('show');
+    });
+  });
+  function closeSheet(){document.getElementById('sheet').classList.remove('show');document.getElementById('scrim').classList.remove('show');}
+  document.getElementById('scrim').addEventListener('click',closeSheet);
+</script>

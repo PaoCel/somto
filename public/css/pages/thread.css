@@ -1,0 +1,1197 @@
+/* ============================================
+   THREAD.CSS — Threads list + Thread detail
+   Replica 1:1 ios/.../Threads/ThreadsListView + ThreadDetailView
+   Dark theme, mobile-first
+   ============================================ */
+
+/* ============================================
+   THREADS LIST (threads.html)
+   Mirror: ThreadsListView
+   ============================================ */
+.threads-page-title {
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: var(--weight-black);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-lg);
+}
+
+/* ── Segmented control (capsule, 3 tabs) ── */
+.threads-segmented {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  padding: 4px;
+  border-radius: var(--radius-pill);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  margin-bottom: var(--space-lg);
+}
+
+.threads-seg-btn {
+  flex: 1 1 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0.6rem 0.35rem;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--transition-base), color var(--transition-base), transform var(--transition-fast);
+}
+.threads-seg-btn svg {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+}
+.threads-seg-btn:active { transform: scale(0.97); }
+.threads-seg-btn.active {
+  background: var(--accent);
+  color: #0A0A0A;
+}
+
+@media (max-width: 460px) {
+  .threads-seg-btn { font-size: 11px; gap: 4px; }
+  .threads-seg-btn svg { width: 0.9rem; height: 0.9rem; }
+}
+
+/* ── Section label ── */
+.threads-section-label {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: var(--weight-black);
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin: 0 0 var(--space-sm);
+}
+
+/* ── List ── */
+.threads-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+/* ── Loading / empty ── */
+.threads-loading {
+  display: flex;
+  justify-content: center;
+  padding: 2.4rem 0;
+}
+.threads-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-xs);
+  padding: 2rem 1.2rem;
+  border-radius: var(--radius-card);
+  background: var(--panel-strong);
+  border: 1px solid var(--border);
+}
+.threads-empty-icon {
+  width: 3rem;
+  height: 3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  background: rgba(0, 217, 255, 0.12);
+  color: var(--accent);
+  margin-bottom: var(--space-xs);
+}
+.threads-empty-icon svg { width: 1.5rem; height: 1.5rem; }
+.threads-empty-title {
+  font-size: var(--text-base);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+}
+.threads-empty-msg {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: var(--leading-normal);
+}
+
+.threads-load-more {
+  display: block;
+  width: max-content;
+  margin: var(--space-xs) auto 0;
+  padding: 0.5rem 1.1rem;
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  cursor: pointer;
+}
+.threads-load-more:active { transform: scale(0.97); }
+
+/* ── Thread card ── */
+.threadcard {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 18px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color var(--transition-base), transform var(--transition-fast);
+}
+.threadcard:active { transform: scale(0.985); }
+
+.threadcard-poster {
+  position: relative;
+  width: 56px;
+  height: 80px;
+  flex: 0 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--panel-strong);
+}
+.threadcard-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.threadcard-poster-ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+}
+.threadcard-poster-ph svg { width: 1.4rem; height: 1.4rem; }
+
+.threadcard-corner {
+  position: absolute;
+  left: 4px;
+  bottom: 4px;
+  padding: 3px 6px;
+  border-radius: var(--radius-pill);
+  font-size: 0.58rem;
+  font-weight: var(--weight-black);
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+.threadcard-corner.is-dm { background: rgba(156, 39, 176, 0.85); }
+.threadcard-corner.is-group { background: rgba(0, 217, 255, 0.85); }
+
+.threadcard-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.threadcard-top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.threadcard-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+}
+.threadcard-unread-dot {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+}
+
+/* ── Badges row ── */
+.threadcard-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.threadcard-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: var(--radius-pill);
+  font-size: 0.62rem;
+  font-weight: var(--weight-bold);
+  border: 1px solid transparent;
+}
+.threadcard-pill svg { width: 0.66rem; height: 0.66rem; }
+/* Voto estratto dal preview recensione: deve leggersi come rating, non testo. */
+.threadcard-vote {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 9px;
+  border-radius: var(--radius-pill);
+  background: rgba(233, 30, 99, 0.14);
+  color: var(--brand-primary);
+  font-size: 0.7rem;
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.01em;
+}
+.threadcard-pill-accent { color: var(--accent); background: rgba(0, 217, 255, 0.16); }
+.threadcard-pill-warm { color: var(--warning); background: rgba(255, 179, 0, 0.16); }
+.threadcard-pill-muted { color: var(--text-secondary); background: rgba(255, 255, 255, 0.06); }
+.threadcard-pill.is-outlined {
+  background: transparent;
+  border-color: currentColor;
+}
+.threadcard-pill-muted.is-outlined { border-color: var(--border-medium); }
+
+.threadcard-preview {
+  margin: 0;
+  font-size: var(--text-xs);
+  line-height: var(--leading-normal);
+  color: var(--text-secondary);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Foot ── */
+.threadcard-foot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.threadcard-foot-spacer { flex: 1; }
+
+.threadcard-avatars {
+  display: flex;
+  align-items: center;
+}
+.threadcard-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-pill);
+  background: var(--panel-strong);
+  border: 2px solid var(--bg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-size: 0.6rem;
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+}
+.threadcard-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.threadcard-avatar:not(:first-child) { margin-left: -8px; }
+.threadcard-avatar-extra {
+  margin-left: 4px !important;
+  width: auto;
+  min-width: 22px;
+  padding: 0 6px;
+  border: 1px solid var(--border);
+  background: var(--panel-strong);
+}
+
+.threadcard-date {
+  font-size: 0.66rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.threadcard-chevron {
+  width: 0.7rem;
+  height: 0.7rem;
+  flex: 0 0 auto;
+  color: var(--text-muted);
+}
+
+/* ============================================
+   THREAD DETAIL (thread.html)
+   Mirror: ThreadDetailView
+   ============================================ */
+
+/* ── Full-height page shell ──
+   .page (base.css) is `box-sizing:border-box` and ALREADY reserves the
+   fixed header via padding-top and the fixed tabbar via padding-bottom,
+   with min-height:100dvh. So `100dvh` here is enough: the content-box
+   (border-box minus those paddings) equals exactly the gap between header
+   and tabbar, and #threadApp (flex:1) fills it → composer pinned at the
+   true bottom.
+   ⚠️ Do NOT re-subtract header/tabbar in this min-height: with border-box
+   it double-counts the paddings, shrinking the content-box by ~2×tabbar
+   and leaving the composer floating mid-page (was the bug). */
+.thread-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* ── Thread slim header (compact bar: back + name/episode + menu) ── */
+.thread-slim-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+  margin: 0 0 var(--space-sm);
+  padding: 8px 4px;
+}
+
+.thread-slim-back,
+.thread-slim-menu-btn {
+  width: 2rem;
+  height: 2rem;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--panel-strong);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: transform var(--transition-fast), background var(--transition-base);
+}
+.thread-slim-back svg,
+.thread-slim-menu-btn svg { width: 1.05rem; height: 1.05rem; }
+.thread-slim-back:active,
+.thread-slim-menu-btn:active { transform: scale(0.92); }
+
+.thread-slim-titlelink {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+}
+
+.thread-slim-name {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--text-base);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.thread-slim-sub {
+  margin-top: 1px;
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Header menu popover */
+.thread-menu-pop {
+  position: absolute;
+  z-index: var(--z-modal);
+  min-width: 13rem;
+  padding: 6px;
+  border-radius: var(--radius-lg);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+}
+.thread-menu-pop button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.6rem 0.65rem;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  text-align: left;
+  cursor: pointer;
+}
+.thread-menu-pop button:hover { background: var(--panel); }
+.thread-menu-pop button svg { width: 1.05rem; height: 1.05rem; color: var(--text-secondary); flex: 0 0 auto; }
+.thread-menu-pop button.is-danger { color: var(--danger); }
+.thread-menu-pop button.is-danger svg { color: var(--danger); }
+
+/* ── Group info box ── */
+.group-info-box {
+  margin-bottom: var(--space-md);
+  padding: 0.85rem 0.9rem;
+  border-radius: var(--radius-lg);
+  background: var(--panel);
+  border: 1px solid var(--border);
+}
+.group-info-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 0.6rem;
+}
+.group-info-label {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  font-weight: var(--weight-bold);
+}
+.group-participants {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.participant-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.22rem 0.6rem 0.22rem 0.22rem;
+  border-radius: var(--radius-pill);
+  background: var(--panel-strong);
+  border: 1px solid var(--border);
+  font-size: var(--text-sm);
+}
+.participant-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-pill);
+  background: rgba(233, 30, 99, 0.14);
+  border: 1px solid rgba(233, 30, 99, 0.22);
+  font-size: 11px;
+  font-weight: var(--weight-bold);
+  overflow: hidden;
+}
+
+/* ── Safety gate / blocked notice ── */
+.thread-safety-gate { margin-bottom: var(--space-md); }
+.thread-safety-gate h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 var(--space-xs);
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+}
+.thread-safety-gate h2 svg { width: 1.25rem; height: 1.25rem; color: var(--success); }
+.thread-safety-gate p {
+  margin: 0 0 var(--space-md);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: var(--leading-normal);
+}
+.thread-safety-actions {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: var(--space-md);
+}
+
+/* ── Episode spoiler entry gate (episode threads only, shown once per open) ── */
+.episode-spoiler-gate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.35rem;
+  padding: var(--space-2xl) var(--space-md);
+  min-height: 50vh;
+  justify-content: center;
+}
+.episode-spoiler-gate-icon {
+  width: 3.2rem;
+  height: 3.2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 179, 0, 0.12);
+  font-size: 1.6rem;
+  margin-bottom: var(--space-xs);
+}
+.episode-spoiler-gate-title {
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+}
+.episode-spoiler-gate-text {
+  margin: 0;
+  max-width: 26rem;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: var(--leading-normal);
+}
+.episode-spoiler-gate-actions {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: var(--space-md);
+}
+
+/* ── Messages area ──
+   #threadApp fills the remaining height under the slim header (and, when
+   present, the group-info box / auth gate) and stretches down to the
+   composer, which is pinned as the last flex item — never floating
+   mid-page. #messages is the only scrollable region so long threads
+   scroll internally instead of growing the whole document. */
+.thread-app {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 0 12px;
+}
+
+.msg {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 82%;
+  align-self: flex-start;
+}
+.msg.me {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.msg .sender-name {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: var(--text-secondary);
+  padding: 0 0.25rem;
+}
+.msg.me .sender-name { color: var(--accent); }
+
+.msg .bubble {
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  line-height: var(--leading-normal);
+  font-size: var(--text-base);
+  color: var(--text-primary);
+  word-break: break-word;
+}
+.msg.me .bubble {
+  background: rgba(233, 30, 99, 0.28);
+  border-color: transparent;
+}
+
+.msg .meta {
+  font-size: 0.66rem;
+  color: var(--text-muted);
+  padding: 0 0.25rem;
+}
+
+/* ── Rating-review message (voto+recensione sincronizzato da un voto) ──
+   Testo "N/10 — …" reso come card: persona cliccabile (avatar+nome → profilo)
+   + numero voto stiloso in gradiente brand, SENZA "/10". */
+.msg-rating { max-width: 92%; }
+.msg-rating-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 0.15rem;
+}
+.msg-person {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  text-decoration: none;
+  color: inherit;
+}
+.msg-person-avatar {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--panel-strong);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  transition: transform var(--transition-fast);
+}
+.msg-person-name {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.msg-person:active .msg-person-avatar { transform: scale(0.94); }
+/* "con Anna, Marco": accompagna il voto, non deve competere col nome autore. */
+.msg-rating-people {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+/* La bolla ospita il voto: numero stiloso in basso a destra, dentro il box. */
+.msg-rating .msg-rating-bubble {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 2px;
+  padding-bottom: 2rem;              /* banda riservata al voto, niente overlap col testo */
+  min-height: 2.6rem;                /* voto-solo (senza recensione) non collassa */
+}
+.msg-rating-text { word-break: break-word; }
+.msg-rating-score {
+  position: absolute;
+  right: 14px;
+  bottom: 7px;
+  font-size: 1.55rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -1px;
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ── Typing indicator ── */
+.typing-indicator {
+  display: none;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.2rem 0.5rem;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--text-secondary);
+}
+.typing-indicator.visible { display: flex; }
+.typing-dots {
+  display: inline-flex;
+  gap: 3px;
+  align-items: center;
+}
+.typing-dots span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--text-secondary);
+  animation: typingBounce 0.9s ease-in-out infinite;
+}
+.typing-dots span:nth-child(2) { animation-delay: 0.15s; }
+.typing-dots span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+/* ── Skeleton loading ── */
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.skeleton-msg {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 72%;
+}
+.skeleton-msg.right { align-self: flex-end; }
+.skeleton-bubble {
+  height: 44px;
+  border-radius: 18px;
+  background: var(--panel);
+  background-image: linear-gradient(90deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.12) 40%, rgba(255,255,255,0.04) 80%);
+  background-size: 400px 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+.skeleton-msg:nth-child(1) .skeleton-bubble { width: 65%; }
+.skeleton-msg:nth-child(2) .skeleton-bubble { width: 45%; }
+.skeleton-msg:nth-child(3) .skeleton-bubble { width: 55%; }
+.skeleton-msg:nth-child(4) .skeleton-bubble { width: 35%; }
+.skeleton-meta {
+  width: 48px;
+  height: 10px;
+  border-radius: 5px;
+  background: rgba(255,255,255,0.04);
+  background-image: linear-gradient(90deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.08) 40%, rgba(255,255,255,0.04) 80%);
+  background-size: 400px 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+.skeleton-msg.right .skeleton-meta { align-self: flex-end; }
+
+/* ── Empty state ──
+   Same flex slot as #messages (JS toggles display:none/flex between the
+   two) so the composer stays pinned to the bottom instead of sitting
+   right under a short empty-state block. */
+.messages-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  flex: 1;
+  min-height: 0;
+  text-align: center;
+  padding: var(--space-2xl) var(--space-md);
+}
+.messages-empty .empty-icon {
+  width: 3.2rem;
+  height: 3.2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  background: rgba(0, 217, 255, 0.12);
+  color: var(--accent);
+  font-size: 1.6rem;
+  margin-bottom: var(--space-xs);
+}
+.messages-empty .empty-text {
+  font-size: var(--text-base);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+}
+.messages-empty .empty-cta {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: var(--leading-normal);
+  max-width: 22rem;
+}
+
+/* ── Composer (glass, pinned above the shared tab bar) ──
+   Last flex item in #threadApp, which fills the page from the slim
+   header down to the tabbar — this alone pins the composer to the
+   bottom. `position: sticky` is kept as a defensive fallback only
+   (harmless no-op in normal flow; guards against edge cases where the
+   document ends up taller than the viewport, e.g. very small screens
+   or transient layout during load). */
+.composer-wrap {
+  position: sticky;
+  bottom: var(--tabbar-height);
+  flex: 0 0 auto;
+  margin: 0.4rem calc(-1 * var(--container-padding)) 0;
+  padding: 0.7rem var(--container-padding) 0.8rem;
+  background: rgba(16, 16, 22, 0.92);
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  border-top: 1px solid var(--border);
+}
+.composer {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+/* Avviso "finisce nel feed": riga sottile sopra il composer, stesso posto del
+   toggle spoiler. Deve informare, non gridare. */
+.composer-feed-notice {
+  margin-bottom: 0.45rem;
+  font-size: 0.72rem;
+  line-height: 1.3;
+  color: var(--text-muted);
+}
+
+/* "Contiene spoiler" sits ABOVE the input row (mounted into .composer-wrap
+   before .composer), not inside the flex row — so the textarea keeps full
+   width. Strip the shared boxed styling here: just a compact toggle line. */
+.composer-wrap .spoiler-composer {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin-bottom: 0.55rem;
+  gap: 6px;
+}
+.composer-wrap .spoiler-composer-toggle { font-size: 12px; }
+.composer-textarea {
+  flex: 1;
+  resize: none !important;
+  overflow-y: auto;
+  min-height: 42px !important;
+  max-height: 132px;
+  line-height: 1.4;
+  padding: 0.6rem 0.85rem;
+  border-radius: 18px !important;
+  background: var(--panel) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-primary);
+  font-size: 16px;
+  scrollbar-width: thin;
+}
+.composer-textarea::placeholder { color: var(--text-muted); }
+.composer-send-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: var(--radius-pill);
+  border: none;
+  background: var(--brand-gradient);
+  color: #fff;
+  box-shadow: var(--shadow-brand);
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+.composer-send-btn svg { width: 1.2rem; height: 1.2rem; }
+.composer-send-btn:active { transform: scale(0.92); }
+.composer-send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ── Tags in messages ── */
+.msg-title-tag,
+.msg-people-tag {
+  color: var(--brand-primary);
+  text-decoration: none;
+  font-weight: var(--weight-semibold);
+  border-bottom: 1px dashed var(--brand-primary);
+}
+.msg-user-tag {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: var(--weight-bold);
+  border-bottom: 1px dashed rgba(0, 217, 255, 0.5);
+}
+
+.msg-link {
+  color: var(--accent);
+  text-decoration: underline;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* ── Mention dropdown ── */
+.mention-dropdown {
+  position: absolute;
+  bottom: 100%;
+  left: var(--container-padding);
+  right: var(--container-padding);
+  max-height: 220px;
+  overflow-y: auto;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.45);
+  z-index: var(--z-modal);
+  margin-bottom: 0.4rem;
+}
+.mention-item {
+  padding: 0.6rem 0.75rem;
+  cursor: pointer;
+  font-size: var(--text-sm);
+  transition: background var(--transition-fast);
+}
+.mention-item:hover,
+.mention-item.selected { background: var(--panel); }
+
+/* ── Add member modal ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.62);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.modal-box {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: var(--space-lg);
+  width: 92%;
+  max-width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+}
+.modal-header h3 {
+  margin: 0;
+  font-size: var(--text-md);
+}
+.add-member-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.add-member-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.5rem 0.65rem;
+  border-radius: var(--radius-md);
+  background: var(--panel);
+  border: 1px solid var(--border);
+}
+.add-member-row .name {
+  flex: 1;
+  font-size: var(--text-sm);
+}
+
+/* ── Reactions ── */
+.reactions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+  padding: 0 0.2rem;
+  align-items: center;
+}
+.msg.me .reactions-row { justify-content: flex-end; }
+.reaction-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.reaction-pill:hover { background: var(--panel-strong); }
+.reaction-pill.mine {
+  border-color: var(--brand-primary);
+  background: rgba(233, 30, 99, 0.12);
+  color: var(--text-primary);
+}
+.reaction-count {
+  font-size: 11px;
+  font-weight: var(--weight-semibold);
+}
+.reaction-add-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-pill);
+  border: 1px dashed var(--border-medium);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  opacity: 0;
+}
+.msg:hover .reaction-add-btn,
+.msg .reaction-add-btn:focus { opacity: 1; }
+.reaction-add-btn:hover {
+  background: var(--panel-strong);
+  color: var(--text-primary);
+}
+.reaction-picker {
+  display: none;
+  gap: 2px;
+  padding: 4px 6px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  margin-top: 4px;
+  width: fit-content;
+}
+.reaction-picker.open { display: inline-flex; }
+.msg.me .reaction-picker { margin-left: auto; }
+.reaction-picker-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-pill);
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform 0.12s, background 0.12s;
+}
+.reaction-picker-item:hover {
+  background: var(--panel-strong);
+  transform: scale(1.18);
+}
+.reaction-picker-item:active { transform: scale(0.95); }
+
+/* ── GIF messages ── */
+.msg-gif {
+  display: block;
+  width: auto;
+  max-width: min(240px, 100%);
+  height: auto;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  object-fit: cover;
+}
+.msg-gif-caption {
+  margin-top: 6px;
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  line-height: var(--leading-normal);
+  word-break: break-word;
+}
+
+/* ── Composer GIF button (accanto al tasto Invia) ── */
+.composer-gif-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  padding: 0 12px;
+  flex-shrink: 0;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-medium);
+  background: var(--panel);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: transform var(--transition-fast), background var(--transition-base), color var(--transition-base);
+}
+.composer-gif-btn:hover {
+  background: var(--panel-strong);
+  color: var(--text-primary);
+}
+.composer-gif-btn:active { transform: scale(0.92); }
+
+/* ── GIF picker modal (Giphy) ── */
+.gif-picker-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.62);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.gif-picker-box {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  width: 100%;
+  max-width: 480px;
+  max-height: 78vh;
+  padding: var(--space-md);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+  box-shadow: var(--shadow-lg);
+}
+@media (min-width: 560px) {
+  .gif-picker-overlay { align-items: center; }
+  .gif-picker-box {
+    border-radius: var(--radius-card);
+    max-height: 70vh;
+  }
+}
+.gif-picker-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.gif-picker-search {
+  flex: 1;
+  min-width: 0;
+  height: 40px;
+  padding: 0 0.9rem;
+  border-radius: var(--radius-pill);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-size: 16px;
+}
+.gif-picker-search::placeholder { color: var(--text-muted); }
+.gif-picker-close {
+  flex: 0 0 auto;
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  cursor: pointer;
+  padding: 6px 4px;
+}
+.gif-picker-status {
+  padding: var(--space-lg) var(--space-md);
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+.gif-picker-grid {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  align-content: start;
+}
+@media (min-width: 420px) {
+  .gif-picker-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.gif-picker-item {
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--panel);
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 1 / 1;
+  transition: transform var(--transition-fast), border-color var(--transition-base);
+}
+.gif-picker-item:hover { border-color: var(--accent); }
+.gif-picker-item:active { transform: scale(0.96); }
+.gif-picker-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.gif-picker-attribution {
+  text-align: center;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}

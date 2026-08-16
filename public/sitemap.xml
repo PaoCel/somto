@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://somto.it/sitemap-pages.xml</loc>
+    <lastmod>2026-07-29</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://somto.it/sitemap-titoli.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://somto.it/sitemap-quiz.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://somto.it/sitemap-lista.xml</loc>
+  </sitemap>
+</sitemapindex>

@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "gia-visto",
+    "prod": "gia-visto",
+    "production": "gia-visto",
+    "staging": "somto-staging"
+  }
+}

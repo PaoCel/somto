@@ -1,0 +1,41 @@
+/* TOAST.CSS – Top Slide Notifications */
+.toast-container,
+.toast-wrap {
+  position: fixed; top: var(--space-lg); left: 50%; transform: translateX(-50%);
+  z-index: var(--z-toast); width: min(420px, calc(100% - 2rem));
+  display: flex; flex-direction: column; gap: var(--space-sm); pointer-events: none;
+}
+.toast {
+  display: flex; align-items: center; gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md); border-radius: var(--radius-lg);
+  background: rgba(30, 30, 30, 0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  color: var(--text); font-size: var(--text-sm); font-weight: var(--weight-semibold);
+  pointer-events: auto; animation: slideInFromTop 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes slideInFromTop { from { opacity: 0; transform: translateY(-16px) scale(0.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.toast.removing { animation: slideOutTop 0.25s ease-in forwards; }
+@keyframes slideOutTop { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-16px); } }
+
+.toast-badge { width: 2.25rem; height: 2.25rem; border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1rem; }
+.toast.success .toast-badge { background: linear-gradient(135deg, #00C853, #00E676); color: #fff; }
+.toast.error .toast-badge { background: linear-gradient(135deg, #D50000, #FF1744); color: #fff; }
+.toast.warning .toast-badge { background: linear-gradient(135deg, #FF8F00, #FFB300); color: #fff; }
+.toast.info .toast-badge { background: linear-gradient(135deg, #0091EA, #00D9FF); color: #fff; }
+.toast-message { flex: 1; min-width: 0; line-height: var(--leading-normal); }
+.toast-title { color: var(--text-primary, #fff); font-weight: var(--weight-bold); }
+.toast-body { margin-top: 0.1rem; color: var(--text-secondary, rgba(255, 255, 255, 0.78)); font-weight: var(--weight-medium); }
+.toast-close { background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 0.25rem; font-size: 1.1rem; }
+.toast-close:hover { color: var(--text); }
+
+/* Nessun override light: tema dark unico, --text resta chiaro (testo invisibile su bianco). */
+
+@media (max-width: 520px) {
+  .toast-container,
+  .toast-wrap { top: max(var(--space-md), env(safe-area-inset-top)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast { animation-duration: 0.01ms; }
+  .toast.removing { animation-duration: 0.01ms; }
+}

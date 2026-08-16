@@ -1,0 +1,244 @@
+name: TwoWatch
+options:
+  minimumXcodeGenVersion: 2.38.0
+  bundleIdPrefix: com.paolocelestini
+  # La lingua base dell'app e' l'italiano: tutte le stringhe sorgente lo sono, e
+  # `sourceLanguage` del String Catalog e' "it". Finora il progetto dichiarava
+  # `en` (default di XcodeGen) e l'app si presentava allo Store e al sistema
+  # come inglese pur avendo l'interfaccia interamente in italiano.
+  developmentLanguage: it
+  # Serve da quando esiste il target SomtoWidgets, che condivide tre file con
+  # l'app (i token del design system). Senza gruppi intermedi XcodeGen creerebbe
+  # un secondo gruppo a radice per quelle cartelle, e xcodebuild avviserebbe a
+  # ogni build che il progetto e' malformato ("member of multiple groups").
+  # Cambia solo l'albero del navigator, non i target ne' la build.
+  createIntermediateGroups: true
+settings:
+  base:
+    PRODUCT_BUNDLE_IDENTIFIER: com.paolocelestini.twowatch.ios
+    PRODUCT_NAME: Somto
+    MARKETING_VERSION: 1.7.1
+    CURRENT_PROJECT_VERSION: 2026081601
+    IPHONEOS_DEPLOYMENT_TARGET: 17.0
+    SWIFT_VERSION: 6.0
+    TARGETED_DEVICE_FAMILY: 1
+    CODE_SIGN_STYLE: Automatic
+    DEVELOPMENT_TEAM: "787YK9YUB3"
+    ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+    ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+    GENERATE_INFOPLIST_FILE: NO
+    # Estrazione automatica delle stringhe localizzabili a build time. Senza
+    # questo, il compilatore non emette gli `.stringsdata` dell'app (a verifica:
+    # ne uscivano 12, tutti di App Intents, nessuno dell'UI) e ogni chiave va
+    # messa nel catalogo a mano. Con questo, la Fase 1 su iOS diventa in gran
+    # parte meccanica: la build elenca le chiavi, uno script le fonde nel
+    # catalogo, resta da tradurre.
+    SWIFT_EMIT_LOC_STRINGS: YES
+    INFOPLIST_FILE: TwoWatch/Resources/Info.plist
+    CODE_SIGN_ENTITLEMENTS: TwoWatch/Resources/Somto.entitlements
+    SUPPORTS_MACCATALYST: NO
+  configs:
+    Debug:
+      APS_ENVIRONMENT: development
+    Release:
+      APS_ENVIRONMENT: production
+packages:
+  Firebase:
+    url: https://github.com/firebase/firebase-ios-sdk.git
+    from: 11.0.0
+  GoogleSignIn:
+    url: https://github.com/google/GoogleSignIn-iOS.git
+    from: 9.1.0
+targets:
+  TwoWatch:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    settings:
+      base:
+        TARGETED_DEVICE_FAMILY: 1
+    sources:
+      - path: TwoWatch
+        excludes:
+          - Resources/**
+      - path: TwoWatch/Resources/Assets.xcassets
+        buildPhase: resources
+      # String Catalog. Era nel repo dal primo commit ma `excludes: Resources/**`
+      # lo teneva fuori dal target: non veniva mai compilato ne' imbustato, e le
+      # sue 339 chiavi gia' tradotte in EN/ES non arrivavano al binario.
+      # Verifica: `Localizable.strings` deve comparire dentro <App>.app/<lang>.lproj.
+      - path: TwoWatch/Resources/Localizable.xcstrings
+        buildPhase: resources
+    preBuildScripts:
+      - name: Sync PWA App Icon
+        # inputFiles/outputFiles servono a dichiarare la dipendenza: senza,
+        # Xcode riesegue la script phase a OGNI build (anche incrementale) e
+        # avvisa "will be run during every build". Con la dipendenza dichiarata
+        # gira solo quando l'icona sorgente cambia davvero.
+        inputFiles:
+          - $(PROJECT_DIR)/../public/icons/icon-1024.png
+        outputFiles:
+          - $(PROJECT_DIR)/TwoWatch/Resources/Assets.xcassets/AppIcon.appiconset/somto.icon.png
+        script: |
+          set -euo pipefail
+          SOURCE_ICON="${PROJECT_DIR}/../public/icons/icon-1024.png"
+          RESIZED_ICON="${PROJECT_TEMP_DIR}/Somto-AppIcon-1024.png"
+          DEST_ICON="${PROJECT_DIR}/TwoWatch/Resources/Assets.xcassets/AppIcon.appiconset/somto.icon.png"
+          SIPS_BIN="/usr/bin/sips"
+
+          if [ -f "${SOURCE_ICON}" ] && [ -x "${SIPS_BIN}" ]; then
+            "${SIPS_BIN}" -z 1024 1024 "${SOURCE_ICON}" --out "${RESIZED_ICON}" >/dev/null
+            cp "${RESIZED_ICON}" "${DEST_ICON}"
+          fi
+    postBuildScripts:
+      - name: Copy Firebase Config Plists
+        # Come sopra: senza output dichiarati la copia rigira a ogni build.
+        #
+        # I due plist SONO nel repo, tracciati di proposito (il perche' sta
+        # nella sezione "Firebase config" di .gitignore: non sono segreti,
+        # finiscono nel binario di ogni app pubblicata). Il commento qui diceva
+        # l'opposto — "NON sono nel repo, sono segreti" — ed era falso
+        # (constatato il 2026-08-12): pericoloso, perche' invitava a considerare
+        # questa cartella ignorata da git.
+        #
+        # Il guard `if [ -f ]` resta: serve a un clone che non li abbia ancora.
+        inputFiles:
+          - $(PROJECT_DIR)/TwoWatch/Resources/FirebaseConfig.plist
+          - $(PROJECT_DIR)/TwoWatch/Resources/GoogleService-Info.plist
+        outputFiles:
+          - $(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/FirebaseConfig.plist
+          - $(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist
+        script: |
+          set -euo pipefail
+          DEST="${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
+          SRC_DIR="${PROJECT_DIR}/TwoWatch/Resources"
+
+          mkdir -p "${DEST}"
+
+          for file in FirebaseConfig.plist GoogleService-Info.plist; do
+            if [ -f "${SRC_DIR}/${file}" ]; then
+              cp "${SRC_DIR}/${file}" "${DEST}/${file}"
+            fi
+          done
+    dependencies:
+      - package: Firebase
+        product: FirebaseAnalytics
+      - package: Firebase
+        product: FirebaseAppCheck
+      - package: Firebase
+        product: FirebaseCore
+      - package: Firebase
+        product: FirebaseAuth
+      - package: Firebase
+        product: FirebaseCrashlytics
+      - package: Firebase
+        product: FirebaseFirestore
+      - package: Firebase
+        product: FirebaseFunctions
+      - package: Firebase
+        product: FirebaseMessaging
+      - package: Firebase
+        product: FirebaseStorage
+      - package: GoogleSignIn
+        product: GoogleSignIn
+      # L'estensione widget. Va dichiarata qui perche' e' l'app che la imbusta
+      # (fase "Embed App Extensions"): senza questa riga il .appex si compila e
+      # non finisce dentro Somto.app.
+      #
+      # Effetto collaterale voluto: `scripts/ios-ci.sh` compila lo schema
+      # TwoWatch, quindi il gate compila anche il widget.
+      - target: SomtoWidgets
+    scheme:
+      testTargets:
+        - TwoWatchTests
+  # Estensione widget. NON dipende da Firebase ne' da GoogleSignIn, e non e' una
+  # svista: `FirebaseBootstrap` cerca la config con `Bundle.main` (in
+  # un'estensione e' il `.appex` → fatalError), il keychain non e' condiviso, e
+  # FirebaseFirestore trascina gRPC/BoringSSL, cioe' la dipendenza che da sola
+  # domina il budget di memoria di un widget. I dati delle uscite sono pubblici:
+  # si leggono da un endpoint HTTPS con URLSession.
+  SomtoWidgets:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: SomtoWidgets
+        excludes:
+          - Resources/**
+      # Token del design system condivisi con l'app: il widget riusa colori,
+      # spaziature e raggi invece di reinventarli. Sono tre file senza
+      # dipendenze (SwiftUI e basta), quindi compilarli due volte non porta
+      # dentro nient'altro.
+      - path: TwoWatch/DesignSystem/Theme/TwoWatchTheme.swift
+      - path: TwoWatch/DesignSystem/Theme/SomtoTokens.swift
+      - path: TwoWatch/Core/Extensions/Color+Hex.swift
+      # Il contratto del widget "Watchlist": modello del riassunto e lettura
+      # dall'App Group. Sta nell'app perche' e' l'app a scriverlo, e viene
+      # compilato anche qui perche' e' il widget a leggerlo — un file solo, cosi'
+      # le due parti non possono divergere. Non tira dentro nient'altro: sopra
+      # ci sono Foundation e WidgetKit, non i modelli di dominio (quelli stanno
+      # in `WatchlistWidgetSnapshotBuilder.swift`, che resta solo nell'app).
+      - path: TwoWatch/Domain/Services/WatchlistWidgetSnapshot.swift
+      # Il ponte che permette al bottone "episodio visto" di scrivere: keychain
+      # condiviso, scambio del refresh token, chiamata alla callable. Stesso
+      # motivo del file sopra — lo scrive l'app, lo usa l'estensione, quindi e'
+      # uno solo. Dipende da Foundation e Security, non da Firebase.
+      - path: TwoWatch/Domain/Services/WidgetAuthBridge.swift
+      # Dove porta il tasto "guarda". E' il livello unico usato anche dalla
+      # scheda titolo: link diretto se il server l'ha risolto, altrimenti
+      # ricerca nell'app della piattaforma, altrimenti pagina TMDB.
+      - path: TwoWatch/Domain/Services/StreamingDestination.swift
+      # Catalogo stringhe condiviso. In un'estensione `Bundle.main` e' il
+      # `.appex`: senza questa riga il widget mostrerebbe le chiavi italiane
+      # anche a un utente inglese, perche' il catalogo dell'app non e' visibile
+      # da qui.
+      - path: TwoWatch/Resources/Localizable.xcstrings
+        buildPhase: resources
+    settings:
+      base:
+        # ATTENZIONE: INFOPLIST_FILE, CODE_SIGN_ENTITLEMENTS e
+        # GENERATE_INFOPLIST_FILE stanno in `settings.base` del progetto, quindi
+        # ogni target li EREDITA — e' lo stesso motivo per cui TwoWatchTests
+        # deve rimettere GENERATE_INFOPLIST_FILE a YES.
+        # Qui i primi due vanno sovrascritti: un'estensione che imbustasse
+        # l'Info.plist dell'app avrebbe il bundle id sbagliato e nessun
+        # NSExtension, e una che ne ereditasse gli entitlement fallirebbe in
+        # FIRMA, non in build (l'App ID del widget non ha push, Sign in with
+        # Apple, associated domains, App Attest) — cioe' il giorno dell'archive.
+        # GENERATE_INFOPLIST_FILE: NO invece si eredita ed e' gia' giusto: il
+        # plist ce l'abbiamo, non va generato.
+        INFOPLIST_FILE: SomtoWidgets/Resources/Info.plist
+        CODE_SIGN_ENTITLEMENTS: SomtoWidgets/Resources/SomtoWidgets.entitlements
+        PRODUCT_BUNDLE_IDENTIFIER: com.paolocelestini.twowatch.ios.widgets
+        PRODUCT_NAME: SomtoWidgets
+        PRODUCT_MODULE_NAME: SomtoWidgets
+        # L'estensione viaggia dentro l'app, non si installa da sola.
+        SKIP_INSTALL: YES
+        # Rovescio dello stesso problema: qui `settings.base` NON vince.
+        # XcodeGen scrive di suo `TARGETED_DEVICE_FAMILY = "1,2"` sui target che
+        # non sono applicazioni, e un'estensione che dichiara piu' famiglie
+        # dell'app che la imbusta e' un rifiuto in validazione App Store.
+        # Verificato: senza questa riga il .appex esce con UIDeviceFamily [1,2]
+        # mentre Somto.app ha [1].
+        TARGETED_DEVICE_FAMILY: 1
+        # Il widget non ha un asset catalog: senza questi due azzeramenti
+        # ereditati dal progetto, actool cercherebbe AppIcon/AccentColor qui.
+        ASSETCATALOG_COMPILER_APPICON_NAME: ""
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: ""
+
+  TwoWatchTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: TwoWatchTests
+    dependencies:
+      - target: TwoWatch
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.paolocelestini.twowatch.ios.tests
+        PRODUCT_NAME: TwoWatchTests
+        PRODUCT_MODULE_NAME: TwoWatchTests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/Somto.app/Somto"
+        BUNDLE_LOADER: "$(TEST_HOST)"

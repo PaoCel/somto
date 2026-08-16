@@ -1,0 +1,144 @@
+# Audit wave2 + family-classics — report fix
+
+Findings univoci: 98. Index-fix: 4. Flagged: 37. Minor backlog: 57.
+
+## Risposta corretta corretta (index-fix)
+- **q_155_22** → index 2. La domanda chiede quale tipo di strega sia Agatha Harkness 'secondo la profezia del Darkhold', ma la profezia del Darkhold riguarda la Scarlet Witch (Wanda), non Agatha. Agatha pra
+- **q_159_12** → index 0. Il correctAnswerIndex=1 (Leonard Peabody) è sbagliato. Il 'vero nome' (nome di nascita) dell'antagonista è Harold Jenkins; Leonard Peabody è il nome falso/alias che adotta dopo ess
+- **family_classics_un_medico_020** → index 3. La domanda chiede 'il figlio maschio di Lele e Alice' e indica Ciccio come risposta corretta. Ma Ciccio (Francesco) è figlio di Lele e ELENA SOLARI (prima moglie, deceduta), non di
+- **family_classics_un_medico_067** → index 2. correctAnswerIndex=1 indica 'Sua madre', ma la spiegazione stessa contraddice questa risposta: 'Jonathan è figlio di Marco, quindi Sara è sua zia'. Sara Levi è la sorella di Marco 
+
+## Domande flaggate (fuori dal pool)
+- **q_131_49**. Il testo della domanda è incomprensibile: 'Quale personaggio di Hunter x Hunter presta la sua voce all'amico d'infanzia Pietro di Leorio...' usa un'espressione da doppiaggio ('presta la sua voce') che
+  - fix: Riscrivere la domanda: 'Qual è il destino dell'amico d'infanzia di Leorio, la cui storia è la motivazione principale per diventare medico?' oppure 'Come si conc
+- **q_133_34**. L'explanation afferma che Emma e Mikey 'condividono lo stesso padre (Mansaku Sano)', ma Mansaku Sano è il NONNO di Mikey ed Emma, non il padre. Il padre di entrambi è Makoto Sano (deceduto). L'answer 
+  - fix: Correggere l'explanation: 'Emma Sano è la sorellastra di Mikey: condividono lo stesso padre, Makoto Sano. Emma è figlia di Makoto e di Karen Kurokawa, e fu affi
+- **q_134_34**. La domanda chiede il numero di soggetto di Anya 'nel Project Apple', ma Anya NON faceva parte del Project Apple. Il Project Apple era un programma militare ostaniano focalizzato su animali (di cui Bon
+  - fix: Correggere il testo della domanda eliminando il riferimento a 'Project Apple': es. 'Quale numero di soggetto sperimentale era assegnato ad Anya durante gli espe
+- **q_138_49**. La premessa della domanda è sbagliata: dice 'nella Stagione 2' ma la sconfitta del Karasuno contro l'Aoba Johsai nel campionato Inter-Liceo (Inter-High) avviene nella Stagione 1 (episodi 19-24). Nella
+  - fix: Correggere il testo della domanda da 'nella Stagione 2' a 'nella Stagione 1'. Aggiornare anche l'explanation: la sconfitta avviene nel campionato Inter-Liceo (S
+- **q_139_21**. La risposta segnata (indice 2, 'Kyoto') è errata. Hyoma Chigiri proviene dalla prefettura di Kagoshima, non da Kyoto. Confermato da Blue Lock Wiki Fandom, ORICON News, Universal Warriors Wiki e altre 
+  - fix: Sostituire la risposta corretta con 'Kagoshima' (index 3 o aggiornare l'array): portare la risposta 'Kagoshima' al posto di 'Kyoto' e aggiornare correctAnswerIn
+- **q_146_37**. Alessandro Borghi è apparso nella SETTIMA stagione (episodio 6 'Numeri primi', 24 settembre 2009), non nella quinta. Fonti: IMDB, tvserial.it, tvblog. La quinta stagione è del 2006, la settima del 200
+  - fix: Sostituire 'quinta stagione' con 'settima stagione' nel questionText e nell'explanation.
+- **q_147_47**. Il testo della domanda afferma che il premio è stato vinto 'nel 2021', ma il Globo d'oro alla miglior serie TV è stato assegnato nel 2022 (cerimonia 62a edizione). Inoltre la domanda definisce il Glob
+  - fix: Correggere il testo della domanda: 'Quale premio ha vinto Strappare lungo i bordi nel 2022 per la miglior serie TV?' oppure 'Quale riconoscimento italiano ha vi
+- **q_149_46**. La domanda chiede quale personaggio si rivela essere il 'figlio biologico' di Suor Angela nella prima stagione, indicando come risposta corretta Marco Ferrari. È un fatto falso: Marco Ferrari NON è il
+  - fix: Riscrivere la domanda per riflettere il vero rapporto: 'Per quale motivo Suor Angela protegge l'ispettore Marco Ferrari nella prima stagione?' con risposta corr
+- **q_150_37**. L'explanation afferma 'perde la vita anche Romaniello', ma Romaniello NON muore nell'attentato. Nella stagione 3 si scopre che è sopravvissuto e che la sua morte era simulata: era stato messo sotto pr
+  - fix: Correggere l'explanation: 'Alla fine della stagione 2, sia Calogiuri che Romaniello vengono colpiti nell'agguato. Calogiuri entra in coma per mesi. Romaniello s
+- **q_150_39**. Sia la domanda che l'explanation descrivono Francesco Calenzano come 'un antico amore di Imma', ma Calenzano era un vecchio amore di STELLA PISICCHIO, non di Imma Tataranni. Imma lo conosceva perché f
+  - fix: Correggere sia la risposta che l'explanation: 'L'ex compagna di classe Stella Pisicchio, uccisa da Francesco Calenzano, un vecchio amore di STELLA (non di Imma)
+- **q_152_24**. L'explanation afferma che 60/60 è 'il voto minimo nell'antico sistema sessantesimale pre-1998, che i protagonisti credono erroneamente sia il massimo'. È il contrario: nel vecchio sistema della maturi
+  - fix: Correggere l'explanation: '60/60 era il MASSIMO nell'antico sistema sessantesimale (il minimo per essere promossi era 36/60). Poiché i protagonisti non sanno ch
+- **q_152_42**. Stesso errore fattuale di q_152_24: l'explanation ripete che i protagonisti 'vengono promossi con 60/60 (il minimo nell'antico sistema sessantesimale)', ma 60/60 era il MASSIMO, non il minimo. Il mini
+  - fix: Correggere l'explanation rimuovendo '(il minimo nell'antico sistema sessantesimale)' e sostituendo con '(il massimo nell'antico sistema sessantesimale, equivale
+- **q_153_23**. Il testo della domanda dice 'alla fine del primo episodio della stagione 1', ma il Darksaber compare solo nel FINALE della stagione 1 (Capitolo 8, non nel primo episodio). Il primo episodio non contie
+  - fix: Correggere il testo in: 'Chi detiene il Darksaber nella scena finale della prima stagione di The Mandalorian?' (o 'alla fine del Capitolo 8').
+- **q_153_50**. L'explanation afferma che 'Din Djarin, che lo aveva vinto in battaglia, lo cede a Bo-Katan affinché guidi il suo popolo' nel finale della stagione 3. Questo è factualmente sbagliato: nel finale (Capit
+  - fix: Correggere l'explanation: 'Nel finale della stagione 3, Bo-Katan brandisce il Darksaber nella battaglia contro Moff Gideon, il quale però lo distrugge stringend
+- **q_154_8**. La domanda chiede quale sia il titolo del primo episodio di ENTRAMBE le stagioni, come se fosse uguale. Ma S1E1 si intitola 'Glorious Purpose' mentre S2E1 si intitola 'Ouroboros': i due primi episodi 
+  - fix: Riformulare la domanda in modo corretto, ad esempio: 'Quale titolo condividono il primo episodio della stagione 1 e il finale della stagione 2 di Loki?' oppure 
+- **q_155_40**. La domanda afferma che lo spot del Nexus appare nel 'quinto episodio', ma è errato: il commercial Nexus appare nel settimo episodio ('Breaking the Fourth Wall'), come confermato da Screen Rant, ComicB
+  - fix: Correggere il testo della domanda da 'Nel quinto episodio' a 'Nel settimo episodio'. Il correctAnswerIndex rimane 2 (Nexus).
+- **q_156_26**. La domanda e la risposta corretta dicono 'si rompe volontariamente un braccio' (arm), ma Jackson si rompe la MANO (hand), non il braccio. Tutte le fonti (Sex Education Wiki Fandom, ScreenRant, Collide
+  - fix: Sostituire 'un braccio' con 'una mano' nella risposta corretta (index 1) e nell'explanation.
+- **q_157_11**. L'explanation afferma 'Entrambi sono stati adottati dalla famiglia Nunier', ma è FALSO: solo Guzmán è adottato. Marina è la figlia BIOLOGICA di Laura Osuna e Ventura Nunier. La risposta segnata (indic
+  - fix: Correggere l'explanation: 'Marina è la sorella adottiva di Guzmán: solo Guzmán è stato adottato dai Nunier dopo la morte per overdose dei suoi genitori biologic
+- **q_157_22**. La risposta segnata come corretta (indice 1: 'I suoi genitori biologici, che erano tossicodipendenti poveri, morirono per overdose') NON è la ragione dell'ostilità di Guzmán verso i borsisti. La vera 
+  - fix: Riscrivere la domanda o sostituire le opzioni di risposta. La risposta corretta dovrebbe essere: 'Un precedente borsista aveva infettato sua sorella Marina con 
+- **q_158_28**. L'explanation cita 'Cobra Kai S2E5 recap TV Tropes' come fonte, ma la scena in cui Hawk rompe il braccio a Demetri al Golf N' Stuff avviene in Stagione 3, Episodio 5 ('Miyagi-Do'), non in S2E5. Il fat
+  - fix: Correggere il riferimento nella explanation da 'S2E5' a 'S3E5'. Il testo corretto: 'Hawk rompe il braccio a Demetri durante uno scontro al Golf N' Stuff, nella 
+- **q_159_13**. L'opzione corretta (index 2) afferma che la seconda stagione si svolge 'a Dallas durante la crisi dei missili di Cuba'. La crisi dei missili cubani avvenne nell'ottobre 1962, mentre la stagione 2 è am
+  - fix: Correggere il testo dell'opzione 2 in: '1963, a Dallas nei giorni intorno all'assassinio di Kennedy'. Aggiornare la spiegazione rimuovendo il riferimento alla '
+- **q_165_43**. La risposta segnata come corretta (indice 2) afferma che la causa dell'incendio non è mai spiegata esplicitamente, ma è FALSO: nell'episodio S7E24 'The Status Quo Combustion' Stuart spiega che l'incen
+  - fix: Riscrivere le opzioni includendo la causa vera: 'Un incidente con la piastra elettrica (hotplate) di Stuart'. Esempio di opzioni corrette: (0) Una piastra elett
+- **q_167_40**. Il conteggio della parola 'fuck' indicato (252 volte) è errato. Secondo Wikipedia (List of films that most frequently use the word fuck), Indiewire e altre fonti concordanti, la parola appare 269 volt
+  - fix: Correggere l'opzione A da '252 volte' a '269 volte' e aggiornare l'explanation di conseguenza. In alternativa, eliminare la domanda poiché il dato specifico è c
+- **q_170_44**. L'explanation contiene un fatto falso: scrive 'La Stangata (The French Connection, 1971)'. Ma 'La Stangata' è il titolo italiano di 'The Sting' (1973), NON di 'The French Connection'. 'The French Conn
+  - fix: Correggere l'explanation sostituendo 'La Stangata (The French Connection, 1971)' con 'The French Connection (Il braccio violento della legge, 1971)'. Oppure, se
+- **q_171_1**. L'explanation afferma che Spielberg rifiutò la regia per 'dedicarsi ad A.I. - Intelligenza Artificiale'. Falso: Spielberg dichiarò di aver rifiutato per trascorrere più tempo con la famiglia e perché 
+  - fix: Correggere l'explanation rimuovendo il riferimento ad A.I.: 'Spielberg rifiutò la regia dichiarando di voler trascorrere più tempo con la famiglia e di non sent
+- **q_171_2**. L'explanation chiama Chris Columbus 'il produttore'. Columbus è il REGISTA, non il produttore. Il produttore del film è David Heyman. Fatto falso nell'explanation, la risposta corretta (Daniel Radclif
+  - fix: Correggere 'il produttore Chris Columbus' → 'il regista Chris Columbus'. Il produttore era David Heyman, che incontrò Radcliffe a teatro con il padre.
+- **q_171_38**. L'explanation afferma che Tom Felton 'aveva in precedenza recitato in Il Gladiatore e Tornando a casa per Natale'. Completamente falso: Tom Felton non appare in nessuno dei due film. In 'Il Gladiatore
+  - fix: Correggere l'explanation: 'Tom Felton, prima di Harry Potter, aveva recitato in The Borrowers (1997) come Peagreen Clock e in Anna and the King (1999) nel ruolo
+- **q_171_41**. Il poltergeist tagliato dal film si chiama 'Pix' in italiano (o 'Peeves' nelle edizioni più recenti), NON 'Piton il Poltergeist'. In italiano 'Piton' è il professor Severus Snape: usare 'Piton' per il
+  - fix: Correggere 'Piton il Poltergeist (Peeves)' → 'Pix (Peeves) il Poltergeist' nella domanda e nell'explanation.
+- **q_172_23**. L'explanation inverte le multe dei sindacati: afferma 'la WGA multò Lucas di 250.000 dollari e la DGA multò Kershner di 25.000 dollari'. In realtà fu la DGA (Directors Guild of America) a multare Luca
+  - fix: Correggere l'explanation: 'Lucas volle mettere tutti i titoli di testa alla fine del film. Questo violava le regole dei sindacati: la DGA (Directors Guild of Am
+- **q_172_50**. L'explanation elenca le 3 nomination come 'Migliori effetti visivi, Miglior sonoro e un Oscar speciale per il lavoro di Brian Johnson e Richard Edlund'. Questo è errato: le 3 nomination competitive er
+  - fix: Correggere l'explanation: 'Il film ottenne 3 nomination agli Oscar (53a cerimonia): Miglior Sonoro (vinto), Migliore Scenografia e Migliore Colonna Sonora Origi
+- **q_173_46**. Il testo della domanda dice che il personaggio 'muore colpito sulla Morte Nera', ma Arvel Crynyd muore schiantando il suo A-wing sul ponte di comando dell'Executor (Super Star Destroyer), non sulla Mo
+  - fix: Correggere il testo della domanda in: 'Quale personaggio dell'Alleanza abbatte l'Executor schiantandosi contro il suo ponte di comando durante la battaglia di E
+- **q_176_40**. La domanda pone Quentin Tarantino 'alla premiere di Cannes' mentre elogiava il film, ma il commento 'fantastico' di Tarantino fu fatto durante il podcast ReelBlend (agosto 2022), non alla premiere di 
+  - fix: Riscrivere la domanda eliminando il riferimento a Cannes. Esempio: 'Su quale film Quentin Tarantino ha dichiarato pubblicamente di averlo trovato fantastico, de
+- **family_classics_cesaroni_061**. Il titolo dell'ultimo episodio della terza stagione (ep.29) è 'Ovunque andrai', NON 'Io e te per sempre'. 'Io e te per sempre' è il penultimo episodio (ep.28). Nessuna delle opzioni riporta il titolo 
+  - fix: Sostituire l'opzione 0 'Io e te per sempre' con 'Ovunque andrai' e mantenere correctAnswerIndex: 0, oppure riformulare la domanda sull'ep.28 chiedendo 'Qual è i
+- **family_classics_cesaroni_068**. L'episodio 18 della quinta stagione si intitola 'Senza mezze misure', NON 'Scommesse'. 'Scommesse' è l'episodio 22 della stessa stagione. La risposta segnata (index 1 = 'Scommesse') è sbagliata; la ri
+  - fix: Sostituire l'opzione 1 'Scommesse' con 'Senza mezze misure' e mantenere correctAnswerIndex: 1. In alternativa, se si vuole usare 'Scommesse', riformulare la dom
+- **family_classics_cesaroni_069**. L'episodio 24 della quinta stagione si intitola 'La ricetta perfetta', NON 'Un vero dramma'. 'Un vero dramma' è l'episodio 28 della stessa stagione. La risposta segnata (index 1 = 'Un vero dramma') è 
+  - fix: Sostituire l'opzione 1 'Un vero dramma' con 'La ricetta perfetta' e mantenere correctAnswerIndex: 1. In alternativa, riformulare come 'Qual è il titolo dell'epi
+- **family_classics_cesaroni_096**. La risposta corretta segnata è 'Nessuno, è figlia unica' (index 1), ma la stessa explanation corregge questa affermazione dicendo che Nina ha due fratelli minori (Irene e Ivan). Nina NON è figlia unic
+  - fix: Sostituire l'opzione 1 con 'Nessuno: Nina è la maggiore dei figli di Sofia' oppure riformulare come 'Nina è la figlia maggiore o minore di Sofia?' con risposta 
+- **family_classics_una_grande_famiglia_036**. La domanda chiede cosa decide di fare 'Ernesto' con le quote societarie, ma secondo Wikipedia è Eleonora (non Ernesto) che prende questa decisione: 'Eleonora decide di rinunciare alle sue quote e di d
+  - fix: Cambiare il testo della domanda da 'Che cosa decide di fare Ernesto con le quote societarie alla fine?' a 'Che cosa decide di fare Eleonora con le sue quote soc
+
+## Minor (backlog, 57)
+- q_131_44: L'explanation implica che Cheadle diventi la 13ª Presidente, ma in realtà Pariston è eletto 13° Presidente e abdica immediatamente
+- q_134_45: L'explanation afferma che Anya e Bond 'sono probabilmente stati soggetti dello stesso Project Apple'. Questa è un'inesattezza: Bon
+- q_136_33: L'explanation inverte la logica della toppa di Kenpachi: dice 'togliendo la toppa dall'occhio per limitarsi', ma nella lore di Ble
+- q_140_21: L'explanation afferma che Thorkell è prozio di Thorfinn 'essendo lo zio del defunto Thors'. FALSO: Thorkell è prozio di Thorfinn p
+- q_141_1: L'explanation cita solo 'Cattleya e Rai Fiction' come co-produttori, omettendo Bartleby Film, che risulta dalla prima stagione com
+- q_141_27: L'explanation afferma che Piotta 'ha firmato l'intera colonna sonora originale della terza stagione', ma il testo della domanda di
+- q_141_35: L'explanation dice 'Rai Fiction, che ha partecipato alla produzione nelle prime due stagioni', ma la domanda chiede solo della pri
+- q_142_7: L'explanation dice che lo scandalo 'divenne di pubblico dominio attorno al 2014', ma il caso esplose nell'ottobre 2013 (non 2014).
+- q_142_40: La domanda e la risposta corretta affermano che Baby era la 'terza produzione originale italiana Netflix'. TvBlog e altre fonti la
+- q_143_49: Il testo della domanda indica che Fernando getta Lila dalla finestra perché 'vuole andare al ginnasio e studia di nascosto'. L'epi
+- q_144_29: L'explanation definisce Paolo Buonvino 'compositore catanese': in realtà è nato a Scordia, comune della provincia di Catania, non 
+- q_144_31: L'explanation dice che Martina 'non ha realmente conseguito la laurea e deve quindi ripetere gli esami universitari'. In realtà le
+- q_144_42: Il questionText dice che Gabriel 'lascia definitivamente l'Italia', ma nella serie la sua partenza non è definitiva: decide di tor
+- q_145_28: L'explanation descrive Padre Gabrielli come 'il consigliere spirituale di Mariano'. In realtà Padre Gabrielli è l'agente di Marian
+- q_145_35: L'explanation dice che René gira 'di nascosto' Gli occhi del cuore 3 usando il materiale di Medical Dimension. In realtà René usa 
+- q_146_39: L'explanation afferma 'È soprannominato Pippo come diminutivo di Giuseppe', ma nella stessa stagione 10 (ep. 10x01) il personaggio
+- q_146_23: Il questionText chiede di quale 'sorella' si tratta ('sorella di quale celebre DJ'), ma Nathalie Guetta è in realtà FRATELLASTRO d
+- q_147_10: L'explanation descrive Giancane come 'ex cantante del Muro del Canto' (o con wording equivalente implicante il canto). In realtà G
+- q_148_40: L'explanation chiama l'arma 'fucile a salve' ma nel romanzo/episodio 'Rondini d'inverno' si tratta di una pistola di scena (pistol
+- q_153_48: Il testo della domanda indica il finale della stagione 1 come 'Il Salvataggio', ma 'Il Salvataggio' (The Rescue) è il titolo del f
+- q_154_34: L'explanation afferma che Mobius 'guida una moto d'acqua' in S2E5, ma in realtà nella scena lui è seduto su una moto d'acqua ferma
+- q_155_39: La domanda chiede qual è la prima parola pronunciata in assoluto nella serie. Il file stesso la segnala come confidence:medium / s
+- q_156_46: La risposta corretta (index 1) e l'explanation descrivono il video come 'Jean parla di sesso con Otis', ma in realtà è un video pr
+- q_156_7: La domanda specifica 'i bagni abbandonati della palestra scolastica' (gym bathrooms), ma le fonti confermano che era un vecchio bl
+- q_158_35: L'explanation afferma che il Sekai Taikai 'viene disputato a Barcellona', ma nella realtà della serie i round iniziali si svolgono
+- q_159_23: La domanda chiede 'In quale guerra combatte Klaus nella seconda stagione', ma Klaus combatte in Vietnam durante la stagione 1 (vie
+- q_159_47: La spiegazione afferma 'Vinse l'Eisner Award 2007 come miglior serie limitata'. L'Eisner Award fu assegnato nel 2008 (per opere pu
+- q_161_27: L'explanation dice che gli interni sono stati costruiti 'su tre set in un teatro di posa nel Bronx'. York Studios nel Bronx dispon
+- q_161_3: L'explanation afferma che Erickson 'concepì l'idea durante un periodo di depressione mentre lavorava in una fabbrica di porte'. Le
+- q_162_30: L'explanation indica 'nel quarto episodio Connor's Wedding', ma l'episodio è il TERZO della stagione 4 (S4E03), non il quarto.
+- q_162_32: L'explanation dice 'Shiv si astiene', ma nel finale di serie Shiv NON si astiene: vota attivamente SÌ all'accordo GoJo, diventando
+- q_163_13: La domanda afferma che Roy Petty indaga sui Byrde 'nella seconda stagione', ma Roy Petty appare in ENTRAMBE le stagioni 1 e 2: deb
+- q_164_17: L'explanation attribuisce al vero D.B. Cooper storico un bottino di '5 milioni di dollari', ma il vero D.B. Cooper nel 1971 ottenn
+- q_164_35: L'explanation afferma che Veronica Donovan 'viene uccisa dall'agente Kellerman' nel primo episodio della seconda stagione. In real
+- q_165_26: L'explanation afferma che 'Sheldon aveva proposto nel premiere della stessa stagione' (S11), ma la proposta di matrimonio è avvenu
+- q_166_5: L'explanation afferma che Cristina 'È stata mentore di Preston Burke' — il rapporto è invertito. Burke era l'attending (superiore)
+- q_166_38: L'explanation indica '(episodio 2x06)' ma la scena 'Pick me, choose me, love me' è nell'episodio 2x05 ('Bring the Pain'), non il 2
+- q_166_41: L'answer corretta elenca solo 'Derek, George, Lexie, Mark e DeLuca', ma sulla spiaggia immaginaria di Meredith nella stagione 17 a
+- q_166_43: Nella risposta e nell'explanation l'anno indicato è '(2005)' ma il 63° Golden Globe si tenne il 16 gennaio 2006 (non 2005). Il pre
+- q_168_24: L'explanation afferma che Kirsten Dunst 'aveva 18 anni' al momento del film. In realtà Dunst è nata il 30 aprile 1982 e il film è 
+- q_169_44: L'explanation afferma che 'Osterley Park House fu usata per gli interni' di Wayne Manor in Batman Begins. È falso: gli interni di 
+- q_170_15: L'answer option recita 'Con i denti di un ratto in una gabbia' (singolare), ma nel film molteplici ratti rosicchiano il volto di P
+- q_170_32: Il testo della domanda descrive il nome del sito come 'in spagnolo "topo alato"'. Ma 'rata alada' in spagnolo significa 'ratto ala
+- q_171_13: La domanda chiede chi porta Harry 'a Diagon Alley e poi al Binario 9 e 3/4'. Hagrid porta Harry a Diagon Alley ✓, ma non al Binari
+- q_172_9: L'explanation afferma che Boba Fett era 'incaricato da Jabba the Hutt di catturare Han Solo'. Nel film, Boba Fett è uno dei caccia
+- q_173_4: La spiegazione dice che Warwick Davis era 'allora undicenne' (11 anni) durante le riprese. Le riprese principali si svolsero dal 1
+- q_174_7: Il testo della domanda dice 'la celebre battuta che pronuncia mentre fa il gesto di commiato', ma 'Hasta la vista, baby' non è pro
+- q_174_50: Domanda quasi identica a q_174_23: entrambe chiedono della frase 'NO FATE' incisa da Sarah Connor su un tavolo e hanno la stessa r
+- q_175_9: La domanda chiede 'Come si chiama il gatto' e presenta sia 'Jones' (idx 0, segnata corretta) sia 'Jonesy' (idx 2) come opzioni. Il
+- q_176_31: L'explanation afferma 'Sei caccia francesi hanno sorvolato il Palais dei Festival', ma fonti multiple confermano che i jet frances
+- q_177_29: L'explanation elenca 'Batman Begins, The Dark Knight, Inception, Dunkirk, Tenet' come i 5 film di Murphy con Nolan prima di Oppenh
+- q_178_1: L'explanation chiama Noah Baumbach 'il marito' di Greta Gerwig, ma i due si sono sposati solo nel dicembre 2023, dopo l'uscita del
+- q_178_30: L'explanation chiama Noah Baumbach 'marito di Greta Gerwig': come per q_178_1, al momento della scrittura della sceneggiatura non 
+- q_178_41: Le opzioni answers[0] e answers[3] sono sostanzialmente la stessa opera: 'Il misticismo femminile di Betty Friedan' è la traduzion
+- q_179_24: La domanda indica 'Giordania (Wadi Rum)' come il paesaggio desertico principale di Arrakis, ma la fonte primaria per le distese di
+- q_180_22: L'explanation afferma che Buzz cadde dalla finestra 'accidentalmente usando RC', ma in realtà la caduta fu causata da una reazione
+- q_180_36: Nessuna delle 4 opzioni rispecchia la citazione reale e iconica di Woody a Sid ('We toys can see everything! So play nice!' / 'I g

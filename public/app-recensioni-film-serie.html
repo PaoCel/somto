@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>App per segnare i film visti e recensirli, gratis — Somto</title>
+  <meta name="description" content="L'app gratuita per segnare i film e le serie che hai visto, votarli da 1 a 10 e scrivere recensioni. Costruisci il catalogo di tutto quello che hai guardato, su web e iOS, in italiano.">
+  <link rel="canonical" href="https://somto.it/app-recensioni-film-serie.html">
+  <link rel="alternate" hreflang="it-IT" href="https://somto.it/app-recensioni-film-serie.html">
+  <link rel="alternate" hreflang="en" href="https://somto.it/en/app-recensioni-film-serie.html">
+  <link rel="alternate" hreflang="x-default" href="https://somto.it/app-recensioni-film-serie.html">
+<meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="author" content="Somto">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Somto">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:url" content="https://somto.it/app-recensioni-film-serie.html">
+  <meta property="og:title" content="App per votare e recensire film e serie TV — Somto">
+  <meta property="og:description" content="Vota i film e le serie TV che guardi, tieni traccia di cosa hai visto e costruisci il tuo profilo da cinefilo con Somto.">
+  <meta property="og:image" content="https://somto.it/og/recensioni.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="Vota e recensisci film e serie TV su Somto">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="App per votare e recensire film e serie TV — Somto">
+  <meta name="twitter:description" content="Vota i film e le serie TV che guardi e costruisci il tuo profilo da cinefilo con Somto.">
+  <meta name="twitter:image" content="https://somto.it/og/recensioni.png">
+
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://identitytoolkit.googleapis.com" crossorigin>
+
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+
+  <link rel="stylesheet" href="/css/landing.bundle.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://somto.it/" },
+      { "@type": "ListItem", "position": 2, "name": "App recensioni film e serie TV", "item": "https://somto.it/app-recensioni-film-serie.html" }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Come si vota un film o una serie TV su Somto?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Su Somto dai a ogni film o serie TV un voto da 1 a 10. Segni il titolo come visto e il voto entra subito nel tuo catalogo personale, dove ritrovi in ordine tutto quello che hai guardato."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "I miei voti e le mie recensioni sono pubblici?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "I tuoi voti alimentano il tuo profilo e possono essere visti dagli amici che ti seguono, così possono farsi un'idea dei tuoi gusti. Servono anche alla community per capire se un titolo vale la serata."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Somto mostra statistiche sui titoli che ho visto?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sì. Dal tuo profilo vedi ore viste, generi preferiti e numero di titoli votati: statistiche che ti raccontano che tipo di spettatore sei e come cambia nel tempo il tuo gusto."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "L'app per votare film e serie di Somto è gratuita?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sì, votare e recensire film e serie TV su Somto è completamente gratuito. Somto è disponibile come web app e su iOS, con il catalogo sincronizzato su entrambi."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="lp-body" data-no-shell>
+
+  <header class="lp-nav" id="lpNav">
+    <div class="lp-nav-inner">
+      <a class="lp-nav-logo" href="/" aria-label="Somto — home">
+        <img src="/icons/somto-wordmark.png" alt="Somto">
+      </a>
+      <a class="lp-nav-cta" href="/login.html?next=/home.html">Entra</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="lp-hero">
+      <div class="lp-hero-glow g1"></div>
+      <div class="lp-hero-glow g2"></div>
+      <div class="lp-hero-glow g3"></div>
+      <div class="lp-hero-inner">
+        <span class="lp-eyebrow">Voti · Recensioni</span>
+        <h1>L'app per <span class="lp-grad-text">votare e recensire</span> film e serie TV</h1>
+        <p class="lp-hero-sub">
+          Dai un voto a ogni film e serie TV che guardi, tieni traccia di tutto
+          quello che hai visto e costruisci il tuo profilo da vero cinefilo.
+        </p>
+        <div class="lp-cta-row">
+          <a class="lp-btn lp-btn-primary" href="/login.html?next=/home.html">Inizia a votare</a>
+          <a class="lp-btn lp-btn-ghost" href="/">Vai alla home</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">A cosa serve</span>
+          <h2 class="lp-h2">Ogni titolo che guardi, registrato e votato</h2>
+          <p class="lp-lead">Il tuo gusto cinematografico merita un posto dove vivere, crescere e raccontare chi sei.</p>
+        </div>
+        <div class="lp-about-text">
+          <p>Su Somto ogni film e ogni serie TV che guardi diventa parte della tua libreria personale. Assegni un voto, segni il titolo come visto e in pochi secondi hai una traccia ordinata di tutto quello che hai guardato negli anni.</p>
+          <p>Le tue recensioni e i tuoi voti non restano fini a sé stessi: alimentano il tuo profilo, raccontano i tuoi gusti agli amici e aiutano la community a capire se un titolo vale o no la serata. Niente algoritmi opachi, solo opinioni vere di persone vere.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">Cosa puoi fare</span>
+          <h2 class="lp-h2">Voti, catalogo e statistiche</h2>
+        </div>
+        <div class="lp-grid">
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.6l2.9 5.9 6.5.95-4.7 4.58 1.1 6.47L12 17.96l-5.8 3.05 1.1-6.47L2.6 9.95l6.5-.95L12 2.6Z"/></svg></span>
+            <h3>Vota da 1 a 10</h3>
+            <p>Esprimi un giudizio chiaro su ogni film e serie TV, con un voto pensato per chi guarda davvero.</p>
+          </article>
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="3.2" y="6.6" width="12" height="14.2" rx="3"/><rect x="8.8" y="3.2" width="12" height="14.2" rx="3" fill-opacity="0.5"/></svg></span>
+            <h3>Catalogo personale</h3>
+            <p>Tutti i titoli visti raccolti in una libreria ordinata, sempre con te su web e iOS.</p>
+          </article>
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 20h3v-7H4zM10.5 20h3V4h-3zM17 20h3v-11h-3z"/></svg></span>
+            <h3>Le tue statistiche</h3>
+            <p>Ore viste, generi preferiti e titoli votati: scopri che tipo di spettatore sei.</p>
+          </article>
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 11.5a3.6 3.6 0 1 0 0-7.2 3.6 3.6 0 0 0 0 7.2Zm8 .5a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM9 13.2c-3.5 0-7 1.8-7 4.6V21h14v-3.2c0-2.8-3.5-4.6-7-4.6Zm8 .3c-.6 0-1.2.06-1.7.17 1.1 1 1.7 2.3 1.7 3.93V21h5v-2.7c0-2.5-2.9-3.8-5-3.8Z"/></svg></span>
+            <h3>Confronta con gli amici</h3>
+            <p>Vedi come hanno votato le persone che segui e trova chi ha i tuoi stessi gusti.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">Esplora Somto</span>
+          <h2 class="lp-h2">Dai voti, ottieni di più</h2>
+        </div>
+        <div class="lp-about-text">
+          <p>I tuoi voti diventano utili in tutta l'app: salva i prossimi titoli nella <a href="/watchlist-film-serie.html">watchlist di film e serie TV</a>, ricevi <a href="/consigli-film-serie-amici.html">consigli su cosa guardare dai tuoi amici</a> e metti alla prova le tue conoscenze con i <a href="/quiz-film-serie-tv.html">quiz su film e serie TV</a>.</p>
+          <p>Torna alla <a href="/">home di Somto</a> per vedere tutto quello che la piattaforma può fare.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">Domande frequenti</span>
+          <h2 class="lp-h2">Tutto su voti e recensioni</h2>
+        </div>
+        <div class="lp-faq">
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">Come si vota un film o una serie TV su Somto?</summary>
+            <div class="lp-faq-a"><p>Su Somto dai a ogni film o serie TV un voto da 1 a 10. Segni il titolo come visto e il voto entra subito nel tuo catalogo personale, dove ritrovi in ordine tutto quello che hai guardato.</p></div>
+          </details>
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">I miei voti e le mie recensioni sono pubblici?</summary>
+            <div class="lp-faq-a"><p>I tuoi voti alimentano il tuo profilo e possono essere visti dagli amici che ti seguono, così possono farsi un'idea dei tuoi gusti. Servono anche alla community per capire se un titolo vale la serata.</p></div>
+          </details>
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">Somto mostra statistiche sui titoli che ho visto?</summary>
+            <div class="lp-faq-a"><p>Sì. Dal tuo profilo vedi ore viste, generi preferiti e numero di titoli votati: statistiche che ti raccontano che tipo di spettatore sei e come cambia nel tempo il tuo gusto.</p></div>
+          </details>
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">L'app per votare film e serie di Somto è gratuita?</summary>
+            <div class="lp-faq-a"><p>Sì, votare e recensire film e serie TV su Somto è completamente gratuito. Somto è disponibile come web app e su iOS, con il catalogo sincronizzato su entrambi.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section lp-final">
+      <div class="lp-container">
+        <div class="lp-final-inner">
+          <h2>Vota il tuo primo titolo</h2>
+          <p>Gratis, su web e iOS. Inizia a costruire la tua libreria di film e serie TV.</p>
+          <a class="lp-btn lp-btn-primary" href="/login.html?next=/home.html">Entra su Somto</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="lp-footer">
+    <div class="lp-footer-inner">
+      <div class="lp-footer-brand">
+        <img src="/icons/somto-wordmark.png" alt="Somto">
+        <p>Il social per chi ama film e serie TV. Vota, scopri e decidi cosa guardare con gli amici.</p>
+      </div>
+      <nav class="lp-footer-cols" aria-label="Link del sito">
+        <div class="lp-footer-col">
+          <h4>Somto</h4>
+          <a href="/">Home</a>
+          <a href="/login.html?next=/home.html">Accedi</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Scopri</h4>
+          <a href="/watchlist-film-serie.html">Watchlist</a>
+          <a href="/app-recensioni-film-serie.html">Voti e recensioni</a>
+          <a href="/quiz-film-serie-tv.html">Quiz</a>
+          <a href="/consigli-film-serie-amici.html">Consigli tra amici</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Confronti</h4>
+          <a href="/somto-vs-letterboxd.html">Somto vs Letterboxd</a>
+          <a href="/somto-vs-justwatch.html">Somto vs JustWatch</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Legale</h4>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Termini</a>
+          <a href="/cookies.html">Cookie</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Supporto</h4>
+          <a href="/support.html">Centro assistenza</a>
+        </div>
+      </nav>
+    </div>
+    <div class="lp-footer-base">© 2026 Somto. Tutti i diritti riservati.</div>
+  </footer>
+
+  <script>
+    (function () {
+      var nav = document.getElementById("lpNav");
+      if (!nav) return;
+      var onScroll = function () { nav.classList.toggle("is-scrolled", window.scrollY > 12); };
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+    })();
+  </script>
+</body>
+</html>

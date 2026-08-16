@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Moderazione — Somto</title>
+  <meta name="robots" content="noindex,follow">
+  <meta name="description" content="Pannello di moderazione contenuti">
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Somto">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0A0A0A">
+  <style>
+    .stat-card{
+      padding: var(--space-md);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.03);
+    }
+    .stat-card-label{color:var(--text-muted);font-size:var(--text-sm);}
+    .stat-card-value{font-size:var(--text-2xl);font-weight:var(--weight-bold);}
+    .table{width:100%; border:1px solid var(--border); border-radius:12px; overflow:hidden;}
+    .table-head,.table-row{display:grid; grid-template-columns:1.4fr 1fr 0.8fr 0.8fr 0.8fr; gap:12px; align-items:center;}
+    .table-head{background:rgba(255,255,255,0.04); padding:12px; font-weight:600; font-size:var(--text-sm);}
+    .table-body{max-height:420px; overflow:auto;}
+    .table-row{padding:12px; border-top:1px solid var(--border);}
+    .table-row:nth-child(even){background:rgba(255,255,255,0.02);}
+    @media(max-width:720px){
+      .table-head{display:none;}
+      .table-row{grid-template-columns:1fr; border-top:1px solid var(--border); padding:10px;}
+      .table-row > div{display:flex; justify-content:space-between; gap:10px;}
+      .table-row > div::before{content: attr(data-label); color: var(--text-muted); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.04em;}
+      .mod-card{flex-direction:column;}
+      .mod-card-body{flex-direction:column; align-items:flex-start;}
+      .mod-actions{width:100%; display:flex; gap:8px; flex-wrap:wrap;}
+    }
+  </style>
+</head>
+<body>
+  <div id="appSplash" class="app-splash"><img class="splash-logo splash-wordmark" src="/icons/somto-wordmark.png" alt="Somto"><div class="splash-spinner"></div></div>
+  <main class="container page">
+    <div class="page-header">
+      <button class="icon-btn" onclick="history.back()" aria-label="Indietro">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+      </button>
+      <h1 style="margin:0;">Moderazione</h1>
+      <div class="spacer"></div>
+    </div>
+
+    <!-- Access Gate -->
+    <div id="gate" style="display:none; padding: var(--space-lg); border: 1px solid var(--border); border-radius: 16px; background: rgba(255,255,255,0.03);" role="alert">
+      <h2 style="margin:0 0 var(--space-xs); font-size: var(--text-lg);">Accesso negato</h2>
+      <p class="hint">Questa pagina è riservata a doctor/admin.</p>
+    </div>
+
+    <!-- Moderation Root -->
+    <div id="modRoot" style="display:none;">
+      <!-- Overview -->
+      <section style="margin-bottom: var(--space-lg);">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: var(--space-md); gap: var(--space-md);">
+          <div>
+            <h2 style="margin:0; font-size: var(--text-lg);">Overview</h2>
+            <p class="hint" style="margin-top:.25rem;">Stato rapido della moderazione</p>
+          </div>
+          <button id="btnRefreshOverview" class="btn small ghost" type="button">Aggiorna</button>
+        </div>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--space-md);">
+          <div class="stat-card">
+            <div class="stat-card-label">Pending Titles</div>
+            <div class="stat-card-value" id="badgePendingTitles">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-label">Pending Edits</div>
+            <div class="stat-card-value" id="badgePendingEdits">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-label">Titoli totali DB</div>
+            <div class="stat-card-value" id="badgeTotalTitles">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-label">Ultimo refresh</div>
+            <div class="stat-card-value" id="lastRefresh">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-label">Strumenti</div>
+            <div class="stat-card-value">
+              <a class="btn small ghost" href="/people_avatars.html">Avatar people</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Users Management -->
+      <section style="margin-bottom: var(--space-lg);">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: var(--space-md); gap: var(--space-md); flex-wrap: wrap;">
+          <div>
+            <h2 style="margin:0; font-size: var(--text-lg);">Users</h2>
+            <p class="hint" style="margin-top:.25rem;">Gestisci trusted e livelli</p>
+          </div>
+          <div style="display:flex; gap: var(--space-sm); flex-wrap: wrap; align-items:center;">
+            <input id="usersSearch" class="input" type="search" placeholder="Cerca nome..." style="min-width:160px;">
+            <select id="usersLevelFilter" class="input">
+              <option value="">Level: tutti</option>
+              <option value="base">base</option>
+              <option value="associate">associate</option>
+              <option value="doctor">doctor</option>
+            </select>
+            <select id="usersTrustedFilter" class="input">
+              <option value="">Trusted: tutti</option>
+              <option value="true">Solo trusted</option>
+              <option value="false">Solo non trusted</option>
+            </select>
+            <button id="btnReloadUsers" class="btn small ghost" type="button">Aggiorna</button>
+          </div>
+        </div>
+    <div class="table users-table">
+      <div class="table-head">
+        <div>Nome</div><div>UID</div><div>Trusted</div><div>Level</div><div>Azione</div>
+      </div>
+      <div id="usersBody" class="table-body"></div>
+        </div>
+      </section>
+
+      <!-- Titoli in Revisione -->
+      <section style="margin-bottom: var(--space-lg);">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: var(--space-md);">
+          <div>
+            <h2 style="margin:0; font-size: var(--text-lg);">Titoli in revisione</h2>
+            <p class="hint" style="margin-top:.25rem;">/titles con status = pending</p>
+          </div>
+          <button id="btnReloadTitles" class="btn small ghost" type="button">Aggiorna</button>
+        </div>
+
+        <div
+          id="pendingTitles"
+          class="mod-list"
+          role="region"
+          aria-live="polite"
+          aria-label="Titoli in attesa di approvazione"
+        ></div>
+      </section>
+
+      <!-- Proposte di Modifica -->
+      <section style="margin-bottom: var(--space-lg);">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: var(--space-md);">
+          <div>
+            <h2 style="margin:0; font-size: var(--text-lg);">Proposte di modifica</h2>
+            <p class="hint" style="margin-top:.25rem;">/title_edits con status = pending</p>
+          </div>
+          <button id="btnReloadEdits" class="btn small ghost" type="button">Aggiorna</button>
+        </div>
+
+        <div
+          id="pendingEdits"
+          class="mod-list"
+          role="region"
+          aria-live="polite"
+          aria-label="Modifiche in attesa di approvazione"
+        ></div>
+      </section>
+
+      <!-- Titles Manager -->
+      <section style="margin-bottom: var(--space-lg);">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: var(--space-md); gap: var(--space-md); flex-wrap: wrap;">
+          <div>
+            <h2 style="margin:0; font-size: var(--text-lg);">Titles Manager</h2>
+            <p class="hint" style="margin-top:.25rem;">Cerca e modifica titoli</p>
+          </div>
+          <div style="display:flex; gap: var(--space-sm); flex-wrap: wrap;">
+            <input id="tmSearch" class="input" type="search" placeholder="Cerca titolo..." style="min-width:200px;">
+            <button id="btnTmSearch" class="btn small ghost" type="button">Cerca</button>
+          </div>
+        </div>
+
+        <div id="tmResults" class="mod-list" style="margin-bottom: var(--space-md);" aria-live="polite"></div>
+
+        <div id="tmForm" style="display:none; padding: var(--space-md); border: 1px solid var(--border); border-radius: 16px; background: rgba(255,255,255,0.03);">
+          <div style="display:flex; gap: var(--space-md); flex-wrap: wrap;">
+            <div style="flex:1; min-width:220px;">
+              <label class="label">Titolo</label>
+              <input id="tmName" class="input" type="text">
+            </div>
+            <div style="width:120px;">
+              <label class="label">Anno</label>
+              <input id="tmYear" class="input" type="number" min="1800" max="2100">
+            </div>
+            <div style="width:160px;">
+              <label class="label">Status</label>
+              <select id="tmStatus" class="input">
+                <option value="approved">approved</option>
+                <option value="pending">pending</option>
+              </select>
+            </div>
+          </div>
+          <div style="margin-top: var(--space-md);">
+            <label class="label">Generi (comma)</label>
+            <input id="tmGenres" class="input" type="text" placeholder="drama, thriller">
+          </div>
+          <div style="margin-top: var(--space-md);">
+            <label class="label">Descrizione</label>
+            <textarea id="tmDesc" class="input" rows="4" placeholder="Overview..."></textarea>
+          </div>
+          <div style="margin-top: var(--space-md); display:flex; gap: var(--space-sm); justify-content:flex-end;">
+            <button id="btnTmSave" class="btn primary" type="button">Salva</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Toast Container -->
+  <div class="toast-wrap" id="toasts" role="status" aria-live="polite"></div>
+
+  <!-- Scripts -->
+  <script src="/firebaseConfig.js"></script>
+  <script type="module" src="/js/pages/moderation.page.js"></script>
+  <nav class="tabbar" aria-label="Navigazione">
+    <a href="/" class="tab-link" data-tab="home" aria-label="Home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+      <span class="tab-label">Home</span>
+    </a>
+    <a href="/match.html" class="tab-link" data-tab="match" aria-label="Match">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="10" height="13" rx="2"></rect><rect x="10" y="4" width="10" height="13" rx="2"></rect><path d="M12 13l2 2 4-4"></path></svg>
+      <span class="tab-label">Match</span>
+    </a>
+    <a href="/watchlist.html" class="tab-link" data-tab="watchlist" aria-label="Watchlist">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+      <span class="tab-label">Watchlist</span>
+    </a>
+    <a href="/notifications.html" class="tab-link" data-tab="notifications" aria-label="Notifiche">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+      <span class="tab-badge" data-badge-kind="notifications" hidden>0</span>
+      <span class="tab-label">Notifiche</span>
+    </a>
+    <a href="/account.html" class="tab-link" data-tab="account" aria-label="Profilo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span class="tab-label">Profilo</span>
+    </a>
+  </nav>
+
+  <script type="module" src="/js/utils/tabbar.bootstrap.js"></script>
+
+  <script src="/js/pwa.js" defer></script>
+</body>
+</html>

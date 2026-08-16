@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Help center — Somto</title>
+  <meta name="description" content="Contact Somto support and find answers about your account, privacy, community safety, and using the app.">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#0A0A0A">
+  <link rel="canonical" href="https://somto.it/en/support.html">
+  <link rel="alternate" hreflang="it-IT" href="https://somto.it/support.html">
+  <link rel="alternate" hreflang="en" href="https://somto.it/en/support.html">
+  <link rel="alternate" hreflang="x-default" href="https://somto.it/support.html">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+  <link rel="stylesheet" href="/css/landing.bundle.css">
+  <link rel="stylesheet" href="/css/pages/support.css">
+</head>
+<body class="lp-body support-page" data-no-shell>
+  <header class="lp-nav is-scrolled">
+    <div class="lp-nav-inner">
+      <a class="lp-nav-logo" href="/en/" aria-label="Somto — home">
+        <img src="/icons/somto-wordmark.png" alt="Somto">
+      </a>
+
+      <div class="lp-nav-actions">
+        <nav class="support-nav-links" aria-label="Main menu">
+          <a class="lp-nav-link" href="/en/">Home</a>
+          <a class="lp-nav-link" href="/en/#funzionalita">Explore</a>
+          <a class="lp-nav-link" href="/blog/">Blog</a>
+        </nav>
+
+        <details class="support-menu">
+          <summary>Menu</summary>
+          <nav aria-label="Mobile main menu">
+            <a href="/en/">Home</a>
+            <a href="/en/#funzionalita">Explore Somto</a>
+            <a href="/blog/">Blog</a>
+            <a href="/en/android.html">Somto on Android</a>
+            <a href="/support.html" hreflang="it" lang="it">Italiano</a>
+          </nav>
+        </details>
+
+        <nav class="lp-lang" aria-label="Site language">
+          <a href="/support.html" hreflang="it" lang="it">IT</a>
+          <a href="/en/support.html" hreflang="en" aria-current="true">EN</a>
+        </nav>
+        <a class="lp-nav-cta" href="/login.html?next=/home.html">Sign in</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="support-hero">
+      <div class="support-glow support-glow-one" aria-hidden="true"></div>
+      <div class="support-glow support-glow-two" aria-hidden="true"></div>
+      <div class="support-container support-hero-inner">
+        <span class="lp-eyebrow">Help center</span>
+        <h1>How can we help?</h1>
+        <p>Find the right path or get in touch. For requests about your account, use the email address you use to sign in to Somto.</p>
+        <div class="support-actions">
+          <a class="lp-btn lp-btn-primary" href="mailto:support@somto.it">Email support@somto.it</a>
+          <a class="lp-btn lp-btn-ghost" href="/home.html">Open Somto</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="support-section" aria-labelledby="support-topics-title">
+      <div class="support-container">
+        <div class="support-section-head">
+          <span class="lp-eyebrow">Get to the point</span>
+          <h2 id="support-topics-title">What do you need?</h2>
+        </div>
+
+        <div class="support-topic-grid">
+          <a class="support-topic" href="/settings.html">
+            <span class="support-topic-kicker">Account</span>
+            <h3>Settings and sign-in</h3>
+            <p>Manage your profile, notifications, language, and preferences.</p>
+            <span class="support-topic-link">Open settings <span aria-hidden="true">→</span></span>
+          </a>
+          <a class="support-topic" href="/privacy.html">
+            <span class="support-topic-kicker">Data</span>
+            <h3>Privacy and rights</h3>
+            <p>Learn what data we use and how to exercise your rights.</p>
+            <span class="support-topic-link">Read the privacy policy <span aria-hidden="true">→</span></span>
+          </a>
+          <a class="support-topic" href="#safety">
+            <span class="support-topic-kicker">Community</span>
+            <h3>Safety and reports</h3>
+            <p>Report content, harassment, spam, or abusive behavior.</p>
+            <span class="support-topic-link">See what to do <span aria-hidden="true">↓</span></span>
+          </a>
+          <a class="support-topic" href="/en/android.html">
+            <span class="support-topic-kicker">Devices</span>
+            <h3>Somto on Android</h3>
+            <p>Install the web app and use it like an app on your phone.</p>
+            <span class="support-topic-link">Android guide <span aria-hidden="true">→</span></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="support-section support-chat-section" id="chat" aria-labelledby="support-chat-title">
+      <div class="support-container">
+        <div class="support-section-head">
+          <span class="lp-eyebrow">Support chat</span>
+          <h2 id="support-chat-title">Write here. The reply arrives here.</h2>
+          <p>The conversation updates in real time. You never need to refresh the page.</p>
+        </div>
+
+        <div class="support-chat" id="supportChat">
+          <header class="support-chat-header">
+            <div>
+              <strong>Somto Support</strong>
+              <span>Private conversation</span>
+            </div>
+            <span class="support-chat-status" id="supportChatStatus" data-mode="connecting">Connecting…</span>
+          </header>
+
+          <div class="support-chat-loading" id="supportChatLoading">Opening your support chat…</div>
+
+          <div class="support-chat-signed-out" id="supportChatSignedOut" hidden>
+            <span class="support-chat-lock" aria-hidden="true">Private</span>
+            <h3 id="supportChatSignedOutTitle">Sign in to start the chat</h3>
+            <p id="supportChatSignedOutBody">Your conversation stays private and follows you across your devices.</p>
+            <a class="lp-btn lp-btn-primary" id="supportChatSignIn" href="/login.html?next=%2Fen%2Fsupport.html%23chat">Sign in to chat</a>
+            <a class="support-chat-email" href="mailto:support@somto.it">Having trouble signing in? Send an email.</a>
+          </div>
+
+          <div class="support-chat-conversation" id="supportChatConversation" hidden>
+            <div class="support-chat-messages" id="supportChatMessages" role="log" aria-live="polite" aria-relevant="additions text"></div>
+            <p class="support-chat-error" id="supportChatError" role="alert" hidden></p>
+            <form class="support-chat-form" id="supportChatForm">
+              <label class="support-chat-label" for="supportChatInput">Message</label>
+              <textarea id="supportChatInput" rows="1" maxlength="2000" placeholder="Write a message…" required></textarea>
+              <button class="support-chat-send" id="supportChatSend" type="submit">Send</button>
+            </form>
+            <a class="support-chat-handoff" id="supportChatHandoff" href="/threads.html?filter=support">
+              <span>Open in Somto</span>
+              <small>Find it in Messages → Support. Without the app, you can continue on the website.</small>
+            </a>
+            <p class="support-chat-note">Never share passwords or payment details.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="support-section support-contact-section" aria-labelledby="support-contact-title">
+      <div class="support-container support-contact-grid">
+        <div class="support-contact-copy">
+          <span class="lp-eyebrow">Talk to us</span>
+          <h2 id="support-contact-title">A person, not a maze.</h2>
+          <p>If you cannot find the answer, email <a href="mailto:support@somto.it">support@somto.it</a>. Tell us what you were doing and what happened.</p>
+          <a class="support-inline-link" href="mailto:support@somto.it">Contact support <span aria-hidden="true">→</span></a>
+        </div>
+
+        <aside class="support-checklist" aria-label="Useful information for getting support">
+          <h3>Help us solve it faster</h3>
+          <ul>
+            <li>Tell us if you use Somto on the web, iPhone, or Android.</li>
+            <li>Describe the steps that caused the problem.</li>
+            <li>Attach a screenshot if it contains no sensitive data.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="support-section" id="safety" aria-labelledby="support-safety-title">
+      <div class="support-container">
+        <div class="support-safety">
+          <div>
+            <span class="support-safety-label">Community safety</span>
+            <h2 id="support-safety-title">Report. Block. Tell us.</h2>
+            <p>Somto does not tolerate harassment, threats, spam, or offensive content. You can report messages and discussions and block users directly in the app.</p>
+            <p>Safety reports are handled within 24 hours. For an escalation, email <a href="mailto:support@somto.it?subject=Somto%20safety%20report">support@somto.it</a>.</p>
+          </div>
+          <a class="lp-btn lp-btn-primary" href="mailto:support@somto.it?subject=Somto%20safety%20report">Send a report</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="support-section support-links-section" aria-labelledby="support-links-title">
+      <div class="support-container">
+        <div class="support-section-head">
+          <span class="lp-eyebrow">Resources</span>
+          <h2 id="support-links-title">Useful links</h2>
+        </div>
+        <nav class="support-resource-list" aria-label="Support resources">
+          <a href="/threads.html"><span>Community and threads</span><small>Talk with the Somto community</small></a>
+          <a href="/consent.html"><span>Consent management</span><small>Review your analytics preferences</small></a>
+          <a href="/privacy.html"><span>Privacy policy</span><small>Information about personal data</small></a>
+          <a href="/terms.html"><span>Terms of service</span><small>Rules and conditions of use</small></a>
+        </nav>
+      </div>
+    </section>
+  </main>
+
+  <footer class="lp-footer">
+    <div class="lp-footer-inner">
+      <div class="lp-footer-brand">
+        <a href="/en/" aria-label="Somto — home"><img src="/icons/somto-wordmark.png" alt="Somto"></a>
+        <p>The social app for people who love movies and TV shows. Rate, discover, and decide what to watch with friends.</p>
+      </div>
+      <nav class="lp-footer-cols" aria-label="Site links">
+        <div class="lp-footer-col">
+          <h4>Product</h4>
+          <a href="/en/#funzionalita">Features</a>
+          <a href="/en/#come-funziona">How it works</a>
+          <a href="/blog/">Blog</a>
+          <a href="/login.html?next=/home.html">Sign in</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Explore</h4>
+          <a href="/en/watchlist-film-serie.html">Watchlist</a>
+          <a href="/en/app-recensioni-film-serie.html">Ratings and reviews</a>
+          <a href="/en/quiz-film-serie-tv.html">Quiz</a>
+          <a href="/en/consigli-film-serie-amici.html">Recommendations</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/cookies.html">Cookies</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Support</h4>
+          <a href="/en/support.html" aria-current="page">Help center</a>
+          <a href="/en/android.html">Somto on Android</a>
+        </div>
+      </nav>
+    </div>
+    <div class="lp-footer-base">© 2026 Somto. All rights reserved.</div>
+  </footer>
+
+  <script src="/firebaseConfig.js"></script>
+  <script type="module" src="/js/pages/support.page.js"></script>
+  <script src="/js/pwa.js" defer></script>
+</body>
+</html>

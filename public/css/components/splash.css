@@ -1,0 +1,54 @@
+/* ============================================
+   SPLASH.CSS – Auth Loading Screen
+   Copre il contenuto finché onAuth() non si risolve.
+   ============================================ */
+
+/* Overlay che nasconde tutto */
+.app-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(420px 420px at 70% 8%, rgba(247, 119, 55, 0.18), transparent 70%),
+    radial-gradient(460px 460px at 18% 92%, rgba(156, 39, 176, 0.18), transparent 70%),
+    var(--screen-gradient);
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.app-splash[hidden] {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Logo */
+.app-splash .splash-logo {
+  width: min(190px, 58vw);
+  height: auto;
+  display: block;
+}
+
+/* Spinner brandizzato */
+.app-splash .splash-spinner {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.10);
+  border-top-color: var(--brand-primary);
+  border-right-color: var(--brand-warm);
+  animation: splashSpin 0.8s cubic-bezier(0.5, 0.1, 0.3, 1) infinite;
+}
+
+@keyframes splashSpin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-splash .splash-spinner { animation-duration: 1.6s; }
+}

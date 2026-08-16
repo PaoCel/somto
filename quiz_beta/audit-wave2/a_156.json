@@ -1,0 +1,23 @@
+[
+  {
+    "questionId": "q_156_26",
+    "severity": "critical",
+    "problem": "La domanda e la risposta corretta dicono 'si rompe volontariamente un braccio' (arm), ma Jackson si rompe la MANO (hand), non il braccio. Tutte le fonti (Sex Education Wiki Fandom, ScreenRant, Collider) confermano che Jackson schiaccia la mano sotto i pesi in palestra.",
+    "fix": "Sostituire 'un braccio' con 'una mano' nella risposta corretta (index 1) e nell'explanation.",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_156_46",
+    "severity": "minor",
+    "problem": "La risposta corretta (index 1) e l'explanation descrivono il video come 'Jean parla di sesso con Otis', ma in realtà è un video professionale di Jean che dimostra la masturbazione con una melanzana (eggplant), condiviso da Adam durante una lezione di scienze (episodio 1 o 4, S1). Non è un dialogo madre-figlio. La domanda chiede 'in quale occasione' Otis scopre la professione della madre in modo imbarazzante, e la risposta generica 'circola un video' è sostanzialmente corretta, ma la descrizione del contenuto del video nell'answer text e nell'explanation è imprecisa.",
+    "fix": "Correggere il testo della risposta e l'explanation: il video non è 'Jean che parla di sesso con Otis' ma un video educativo/professionale di Jean che dimostra la masturbazione con una melanzana, condiviso da Adam in classe.",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_156_7",
+    "severity": "minor",
+    "problem": "La domanda specifica 'i bagni abbandonati della palestra scolastica' (gym bathrooms), ma le fonti confermano che era un vecchio blocco di bagni abbandonati sul terreno della scuola (old toilet block on school grounds), non specificamente della palestra. Il dettaglio 'della palestra' è un'aggiunta non verificata.",
+    "fix": "Rimuovere 'della palestra' dalla domanda e dall'explanation: scrivere 'i bagni abbandonati del cortile/comprensorio scolastico' o semplicemente 'il vecchio blocco dei bagni della scuola'.",
+    "correctIndexShouldBe": -1
+  }
+]

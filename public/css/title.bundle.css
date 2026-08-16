@@ -1,0 +1,14 @@
+/* Bundle specifico per pagina titolo */
+@import url('./reset.css');
+@import url('./variables.css');
+@import url('./base.css');
+@import url('./components/button.css');
+@import url('./components/card.css');
+@import url('./components/form.css');
+@import url('./components/toast.css');
+@import url('./components/confirm.css');
+@import url('./components/utilities.css');
+@import url('./components/social.css');
+@import url('./components/splash.css');
+@import url('./pages.css');
+@import url('./pages/title.css');

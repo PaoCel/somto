@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# Somto pre-commit guard.
+#
+# Footgun controllati su Swift in staging:
+#   1. Dictionary(uniqueKeysWithValues:) — crash su chiavi duplicate.
+#      Permesso solo su doc id Firestore (.id / .titleId / .uid /
+#      .documentID). Su chiavi derivate (lowercased, normalize, hash,
+#      slug, name) forza l'autore a usare Dictionary(_:uniquingKeysWith:).
+#
+# Per attivare: scripts/hooks/install.sh (set core.hooksPath).
+
+set -u
+
+red()   { printf '\033[31m%s\033[0m\n' "$*"; }
+yellow(){ printf '\033[33m%s\033[0m\n' "$*"; }
+
+staged_swift=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.swift$' || true)
+
+# La logica vive in scripts/check-swift-footguns.mjs, condivisa con la CI
+# (job swift-guards) e con scripts/ios-ci.sh. Qui si delega e basta.
+#
+# Prima questo hook aveva la sua copia della regola, e quella copia NON
+# saltava i commenti: segnalava le righe che SPIEGANO perche' il pattern e'
+# evitato, cioe' puniva la documentazione del footgun. Due implementazioni
+# della stessa regola divergono sempre — e' gia' successo con l'i18n.
+if [ -n "${staged_swift}" ] && command -v node >/dev/null 2>&1; then
+  # shellcheck disable=SC2086
+  if ! node "$(git rev-parse --show-toplevel)/scripts/check-swift-footguns.mjs" ${staged_swift}; then
+    red   "Commit bloccato: footgun Swift nei file in staging."
+    yellow "Override (sconsigliato): git commit --no-verify"
+    exit 1
+  fi
+fi
+
+# ---------------------------------------------------------------------------
+# 2. Regressione i18n: stringa italiana hardcoded in un file GIA' migrato.
+#
+# La logica vive in scripts/check-i18n-regressions.mjs, che gira anche in CI:
+# tenerne due copie le fa divergere (e' gia' successo). Qui si delega e basta.
+# ---------------------------------------------------------------------------
+
+if command -v node >/dev/null 2>&1; then
+  if ! node "$(git rev-parse --show-toplevel)/scripts/check-i18n-regressions.mjs"; then
+    red   "Commit bloccato: regressione i18n."
+    yellow "Override (sconsigliato): git commit --no-verify"
+    exit 1
+  fi
+fi
+
+exit 0

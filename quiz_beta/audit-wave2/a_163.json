@@ -1,0 +1,9 @@
+[
+  {
+    "questionId": "q_163_13",
+    "severity": "minor",
+    "problem": "La domanda afferma che Roy Petty indaga sui Byrde 'nella seconda stagione', ma Roy Petty appare in ENTRAMBE le stagioni 1 e 2: debutta nell'episodio pilota (S1E1) e recluta Rachel Garrison come informatrice già nella stagione 1. L'attribuzione esclusiva alla seconda stagione è imprecisa. L'explanation corregge parzialmente dicendo 'prime due stagioni', ma la domanda stessa pone una premessa falsa. La risposta corretta (Roy Petty) rimane valida.",
+    "fix": "Cambiare il testo della domanda da 'nella seconda stagione' a 'nelle prime due stagioni' (o 'dalla prima stagione in poi') per riflettere accuratamente le sue apparizioni.",
+    "correctIndexShouldBe": -1
+  }
+]

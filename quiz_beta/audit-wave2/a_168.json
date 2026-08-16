@@ -1,0 +1,9 @@
+[
+  {
+    "questionId": "q_168_24",
+    "severity": "minor",
+    "problem": "L'explanation afferma che Kirsten Dunst 'aveva 18 anni' al momento del film. In realtà Dunst è nata il 30 aprile 1982 e il film è uscito il 3 maggio 2002: aveva appena compiuto 20 anni (non 18). L'età di Banks (28 anni) è corretta. La risposta corretta (Elizabeth Banks) rimane valida.",
+    "fix": "Correggere 'aveva 28 anni, contro i 18 di Kirsten Dunst' in 'aveva 28 anni, contro i 20 di Kirsten Dunst'.",
+    "correctIndexShouldBe": -1
+  }
+]

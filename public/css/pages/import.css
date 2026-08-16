@@ -1,0 +1,836 @@
+/* import.css — Import cronologia visioni (Netflix CSV).
+   URL: /import.html (in-app, auth). Riusa variabili design system. */
+
+.imp-page-header {
+  padding: var(--space-lg) 0 var(--space-md);
+}
+.imp-page-header h1 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0 0 var(--space-xs);
+}
+.imp-page-header p {
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.imp-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-md);
+}
+
+.imp-source-note {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+  padding: 0.72rem 0.85rem;
+  border: 1px solid rgba(233, 30, 99, 0.18);
+  border-radius: var(--radius-md);
+  background: rgba(233, 30, 99, 0.08);
+}
+.imp-source-note strong {
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+.imp-source-note span {
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  text-align: right;
+}
+
+/* ─── Source selector (Netflix / TV Time) ────────────────────────── */
+.imp-source-selector {
+  display: flex;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+  /* Da 4 sorgenti in su su 375px i tab si strizzano e le etichette vanno a
+     capo: meglio una riga che scorre, con i tab a larghezza minima leggibile. */
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+}
+.imp-source-selector::-webkit-scrollbar { display: none; }
+.imp-source-tab {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  /* Riga sola: logo + nome. Prima era una colonna con testo centrato che su
+     375px, con 4 sorgenti, mandava le etichette a capo. */
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.45rem;
+  white-space: nowrap;
+  padding: 0.5rem 0.85rem 0.5rem 0.55rem;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-pill);
+  background: var(--panel-strong);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+.imp-source-logo {
+  display: flex;
+  width: 26px;
+  height: 26px;
+  flex: none;
+}
+.imp-source-logo svg {
+  display: block;
+  width: 26px;
+  height: 26px;
+}
+.imp-source-tab strong {
+  font-size: 0.92rem;
+  color: inherit;
+}
+.imp-source-tab-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--brand-primary);
+  line-height: 1.2;
+}
+.imp-source-tab strong { white-space: nowrap; }
+.imp-source-tab.is-active {
+  border-color: var(--brand-primary);
+  background: rgba(233, 30, 99, 0.1);
+  color: var(--text-primary);
+}
+.imp-source-tab:not(.is-active):hover {
+  border-color: var(--border-strong, var(--border-medium));
+}
+
+/* ─── Step numerati guidati (Netflix/TV Time) ───────────────────────── */
+.imp-steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+.imp-step-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+}
+.imp-step-number {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  background: var(--brand-gradient);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+.imp-step-copy {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.imp-step-copy p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+.imp-step-copy strong {
+  color: var(--text-primary);
+}
+.imp-step-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.3rem;
+  color: var(--brand-primary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: underline;
+}
+.imp-step-inline-link {
+  color: var(--brand-primary);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* ─── Nota account social TV Time (password mancante) ───────────────── */
+.imp-social-account-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  margin-top: var(--space-xs);
+  padding: 0.65rem 0.8rem;
+  border: 1px solid rgba(233, 30, 99, 0.24);
+  border-radius: var(--radius-md);
+  background: rgba(233, 30, 99, 0.08);
+}
+.imp-social-account-note p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+.imp-social-account-note strong {
+  color: var(--text-primary);
+}
+
+/* ─── Nota conversione voti TV Time → decimi ────────────────────────── */
+.imp-rating-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+  padding: 0.72rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--panel-strong);
+}
+.imp-rating-note p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+.imp-rating-note strong {
+  color: var(--text-primary);
+}
+
+/* ─── Link chat supporto ─────────────────────────────────────────────── */
+.imp-support-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: var(--space-md);
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-align: center;
+}
+.imp-support-link[aria-busy="true"] {
+  pointer-events: none;
+  opacity: 0.72;
+}
+
+/* ─── Privacy note ────────────────────────────────────────────────── */
+.imp-privacy-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+  padding: 0.72rem 0.85rem;
+  border: 1px solid rgba(76, 175, 80, 0.24);
+  border-radius: var(--radius-md);
+  background: rgba(76, 175, 80, 0.08);
+}
+.imp-privacy-icon {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+.imp-privacy-note p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+.imp-privacy-note strong {
+  color: var(--text-primary);
+}
+
+/* ─── Fallback manual CSV upload (TV Time ZIP extraction failed) ─── */
+.imp-fallback-link {
+  display: inline-block;
+  margin-top: var(--space-sm);
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--brand-primary);
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.imp-fallback-box {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+  padding: var(--space-sm);
+  border: 1px dashed var(--border-medium);
+  border-radius: var(--radius-md);
+}
+.imp-fallback-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+.imp-fallback-row input[type="file"] {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+/* ─── Dropzone / file picker ─────────────────────────────────────── */
+.imp-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  text-align: center;
+  padding: var(--space-lg) var(--space-md);
+  border: 1.5px dashed var(--border-medium);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.imp-dropzone:hover,
+.imp-dropzone:focus-within {
+  border-color: var(--brand-primary);
+  background: rgba(233, 30, 99, 0.06);
+}
+.imp-dropzone-icon {
+  font-size: 1.6rem;
+  color: var(--brand-primary);
+}
+.imp-dropzone strong {
+  font-size: 1rem;
+}
+.imp-dropzone small {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.imp-preview {
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  background: var(--panel-strong);
+  font-size: 0.9rem;
+}
+.imp-preview p { margin: 0 0 var(--space-xxs); }
+.imp-preview p:last-child { margin-bottom: 0; }
+.imp-preview-error { color: var(--danger); }
+.imp-preview-hint { color: var(--text-muted); font-size: 0.78rem; }
+
+.imp-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+.imp-toggle {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-sm);
+  align-items: start;
+  padding: var(--space-sm);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--panel-strong);
+  cursor: pointer;
+}
+.imp-toggle input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.imp-toggle-ui {
+  width: 2.55rem;
+  height: 1.42rem;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--border-medium);
+  position: relative;
+  margin-top: 0.08rem;
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+.imp-toggle-ui::after {
+  content: "";
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  left: 0.18rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: var(--text-muted);
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+.imp-toggle input:checked + .imp-toggle-ui {
+  background: rgba(233, 30, 99, 0.22);
+  border-color: rgba(233, 30, 99, 0.42);
+}
+.imp-toggle input:checked + .imp-toggle-ui::after {
+  transform: translate(1.06rem, -50%);
+  background: var(--brand-primary);
+}
+.imp-toggle input:focus-visible + .imp-toggle-ui {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+}
+.imp-toggle-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.16rem;
+}
+.imp-toggle-copy strong {
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+.imp-toggle-copy small {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+.imp-options-note {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+/* ─── Actions / buttons ──────────────────────────────────────────── */
+.imp-actions {
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+.imp-actions-wrap {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.imp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xxs);
+  border-radius: var(--radius-pill);
+  padding: 0.75rem 1.4rem;
+  font-weight: 700;
+  font-size: 0.92rem;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+}
+.imp-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.imp-btn-primary {
+  background: var(--brand-gradient);
+  color: #fff;
+  box-shadow: var(--shadow-brand);
+}
+.imp-btn-primary:not(:disabled):active { transform: scale(0.98); }
+.imp-btn-ghost {
+  background: var(--panel-strong);
+  color: var(--text-primary);
+  border: 1px solid var(--border-medium);
+}
+.imp-btn-small {
+  padding: 0.5rem 0.9rem;
+  font-size: 0.82rem;
+}
+/* Azione secondaria "meno invadente" della coda di conferma (skip riga):
+   testo semplice, niente chip pieno, così non compete con il campo ricerca. */
+.imp-btn-link {
+  background: none;
+  border: none;
+  padding: 0.3rem 0.2rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.imp-btn-link:hover {
+  color: var(--text-secondary);
+}
+
+/* ─── Progress ───────────────────────────────────────────────────── */
+.imp-progress-card { text-align: center; }
+.imp-progress-bar {
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--panel-strong);
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+.imp-progress-fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--brand-gradient);
+  transition: width 0.3s ease;
+}
+.imp-progress-label {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* ─── Summary ────────────────────────────────────────────────────── */
+.imp-summary-line {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ─── Schermata A: CTA rapida "Importa i titoli trovati" ────────────── */
+.imp-help-text {
+  margin: var(--space-xs) 0 0;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+/* ─── Confirmation queue: toolbar bulk + contatore ──────────────────── */
+.imp-queue-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-sm);
+}
+.imp-queue-tally {
+  margin: 0 0 var(--space-md);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* ─── Confirmation queue ─────────────────────────────────────────── */
+.imp-queue h2 {
+  font-size: 1.05rem;
+  margin: 0 0 var(--space-xs);
+}
+.imp-queue-hint {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  margin: 0 0 var(--space-md);
+}
+.imp-queue-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.imp-queue-row {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--panel-strong);
+}
+.imp-queue-row.is-resolved {
+  border-color: var(--success);
+}
+.imp-queue-row.is-skipped {
+  opacity: 0.55;
+}
+.imp-queue-row-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-xs);
+}
+.imp-queue-kind {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--brand-primary);
+  font-weight: 700;
+}
+.imp-queue-row-head strong {
+  font-size: 0.95rem;
+}
+.imp-queue-row-head small {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+.imp-queue-not-found {
+  margin: 0 0 var(--space-xs);
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+.imp-queue-not-found strong {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+/* One-tap sul miglior tentativo del matcher (accept-suggestion). */
+.imp-queue-suggestion-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin: 0 0 var(--space-xs);
+  padding: 0.4rem 0.75rem;
+  border: 1px solid rgba(233, 30, 99, 0.32);
+  border-radius: var(--radius-pill);
+  background: rgba(233, 30, 99, 0.1);
+  color: var(--brand-primary);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.imp-queue-suggestion-chip:hover {
+  background: rgba(233, 30, 99, 0.16);
+}
+
+.imp-queue-search {
+  position: relative;
+}
+.imp-queue-input {
+  width: 100%;
+  padding: 0.6rem 2.2rem 0.6rem 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-medium);
+  background: #1f1f22;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-text-fill-color: var(--text-primary);
+  caret-color: var(--brand-primary);
+}
+/* type="search" su WebKit ignora `background`/`color` a meno di rimuovere il
+   chrome nativo (altrimenti: campo bianco fisso -> testo chiaro invisibile). */
+.imp-queue-input::-webkit-search-decoration,
+.imp-queue-input::-webkit-search-cancel-button,
+.imp-queue-input::-webkit-search-results-button,
+.imp-queue-input::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+}
+.imp-queue-input::placeholder { color: var(--text-muted); }
+.imp-queue-input:focus {
+  outline: none;
+  border-color: var(--brand-primary);
+  background: #242428;
+}
+.imp-queue-clear {
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  transform: translateY(-50%);
+  width: 1.6rem;
+  height: 1.6rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: var(--panel-strong);
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.imp-queue-clear:hover {
+  color: var(--text-primary);
+  background: var(--border-medium);
+}
+.imp-queue-results {
+  margin-top: var(--space-xs);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--bg-secondary);
+}
+.imp-queue-result {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.55rem 0.8rem;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.88rem;
+}
+.imp-queue-result:last-child { border-bottom: none; }
+.imp-queue-result:hover { background: var(--panel-strong); }
+.imp-queue-result small { color: var(--text-muted); }
+.imp-queue-result-hint {
+  padding: 0.6rem 0.8rem;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+.imp-queue-picked {
+  margin-top: var(--space-xs);
+  color: var(--success);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.imp-queue-row-actions {
+  margin-top: var(--space-xs);
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ─── Trakt (OAuth device flow) ──────────────────────────────────── */
+.imp-trakt-box {
+  margin-top: var(--space-md);
+}
+.imp-trakt-code-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  text-align: center;
+  padding: var(--space-md);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--panel-strong);
+}
+.imp-trakt-code-label {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+}
+.imp-trakt-code {
+  margin: 0 0 var(--space-xs);
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--text-primary);
+}
+.imp-trakt-code-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  margin: 0 0 var(--space-xs);
+}
+.imp-trakt-code-row .imp-trakt-code {
+  margin: 0;
+}
+.imp-trakt-copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+.imp-trakt-copy:hover {
+  background: var(--panel-strong);
+  color: var(--text-primary);
+}
+.imp-trakt-copy:active {
+  transform: scale(0.94);
+}
+.imp-trakt-copy.is-copied {
+  color: var(--success);
+  border-color: var(--success);
+}
+.imp-trakt-hint {
+  margin: var(--space-xs) 0 0;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+.imp-trakt-status {
+  margin: var(--space-xs) 0 0;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.imp-trakt-status.is-error {
+  color: var(--danger);
+}
+.imp-trakt-status.is-success {
+  color: var(--success);
+}
+
+/* ─── Final summary ──────────────────────────────────────────────── */
+.imp-final { text-align: center; }
+.imp-final-headline {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin: 0 0 var(--space-xs);
+}
+
+/* Cosa non e' arrivato: visibile ma non allarmante — l'import e' riuscito,
+   questo e' il pezzo che manca e che si puo' ancora recuperare. */
+.imp-final-warning {
+  background: color-mix(in srgb, var(--warning) 12%, transparent);
+  border-left: 3px solid var(--warning);
+  border-radius: var(--radius-sm, 8px);
+  margin: var(--space-sm) 0 0;
+  padding: var(--space-sm);
+}
+
+@media (max-width: 520px) {
+  .imp-source-note {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .imp-source-note span {
+    text-align: left;
+  }
+}
+
+/* ---------------------- Letterboxd (upload zip grezzo) ----------------------
+   Fase 1: raccogliamo gli export veri prima di scrivere il parser. */
+
+.imp-lbx-chip {
+  margin: var(--space-sm) 0 0;
+  padding: 0.55rem 0.8rem;
+  border-radius: var(--radius-input);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  word-break: break-all;
+}
+.imp-lbx-chip[hidden] { display: none; }
+
+.imp-lbx-error {
+  margin: var(--space-sm) 0 0;
+  font-size: 0.85rem;
+  color: #FF6B8A;
+}
+.imp-lbx-error[hidden] { display: none; }
+
+.imp-progress-bar[hidden] { display: none; }
+
+.imp-inline-link {
+  color: var(--brand-primary);
+  font-weight: var(--weight-semibold);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  word-break: break-all;
+}
+
+.imp-note strong { display: block; }
+
+.imp-done {
+  text-align: center;
+  padding: var(--space-xl) var(--space-md);
+}
+.imp-done h2 {
+  font-family: var(--font-display);
+  font-size: var(--h2);
+  font-weight: var(--weight-extrabold);
+  margin-bottom: var(--space-xs);
+}
+.imp-done p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: var(--leading-relaxed);
+}

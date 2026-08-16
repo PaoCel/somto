@@ -1,0 +1,80 @@
+{
+  "generatedAtMs": 1785682692178,
+  "dataset": "/tmp/somto-reco-2026-08-02-corrected.json",
+  "datasetSource": "gia-visto",
+  "cutoffMs": 0,
+  "split": "holdout",
+  "signal": "both",
+  "collabSeeds": 8,
+  "minCoOcc": 2,
+  "collabWeight": 6,
+  "temporal": false,
+  "k": 10,
+  "seed": 1337,
+  "pool": "production-like",
+  "levels": "all",
+  "users": 128,
+  "catalogSize": 20653,
+  "models": {
+    "popularity": {
+      "users": 128,
+      "recall@10": 0.03560659062956798,
+      "precision@10": 0.15703125000000018,
+      "ndcg@10": 0.16910318997402263,
+      "map@10": 0.08128968253968255,
+      "hitRate": 0.6796875,
+      "coverage": 0.0018883455188108266,
+      "diversity": 0.7999479166666666,
+      "novelty": 1.6249901696482045,
+      "emptyLists": 0
+    },
+    "somto": {
+      "users": 128,
+      "recall@10": 0.0346504659216897,
+      "precision@10": 0.08515624999999992,
+      "ndcg@10": 0.0971124251636255,
+      "map@10": 0.040709247891865065,
+      "hitRate": 0.5546875,
+      "coverage": 0.014816249455284947,
+      "diversity": 0.6529567394411145,
+      "novelty": 3.3110055367418765,
+      "emptyLists": 0
+    },
+    "somto-top": {
+      "users": 128,
+      "recall@10": 0.03587352253766543,
+      "precision@10": 0.09374999999999989,
+      "ndcg@10": 0.10678532525192219,
+      "map@10": 0.046855778769841254,
+      "hitRate": 0.5625,
+      "coverage": 0.011717426039800513,
+      "diversity": 0.5735051994687412,
+      "novelty": 3.279033339449206,
+      "emptyLists": 0
+    },
+    "itemknn": {
+      "users": 128,
+      "recall@10": 0.05189342103450656,
+      "precision@10": 0.15625000000000006,
+      "ndcg@10": 0.17648952012120453,
+      "map@10": 0.08830791170634923,
+      "hitRate": 0.6484375,
+      "coverage": 0.017963491986636323,
+      "diversity": 0.7052878102524682,
+      "novelty": 2.28276736316196,
+      "emptyLists": 0
+    },
+    "hybrid": {
+      "users": 128,
+      "recall@10": 0.048214910188548635,
+      "precision@10": 0.12499999999999982,
+      "ndcg@10": 0.14650870704000313,
+      "map@10": 0.0671499875992063,
+      "hitRate": 0.71875,
+      "coverage": 0.016171984699559386,
+      "diversity": 0.6791173202761743,
+      "novelty": 2.853472720227646,
+      "emptyLists": 0
+    }
+  }
+}

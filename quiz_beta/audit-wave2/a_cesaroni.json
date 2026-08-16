@@ -1,0 +1,30 @@
+[
+  {
+    "questionId": "family_classics_cesaroni_061",
+    "severity": "critical",
+    "problem": "Il titolo dell'ultimo episodio della terza stagione (ep.29) è 'Ovunque andrai', NON 'Io e te per sempre'. 'Io e te per sempre' è il penultimo episodio (ep.28). Nessuna delle opzioni riporta il titolo corretto ('Ovunque andrai' non è tra le risposte), quindi la domanda è strutturalmente sbagliata: la risposta corretta non esiste tra le opzioni.",
+    "fix": "Sostituire l'opzione 0 'Io e te per sempre' con 'Ovunque andrai' e mantenere correctAnswerIndex: 0, oppure riformulare la domanda sull'ep.28 chiedendo 'Qual è il titolo del penultimo episodio della terza stagione?' con risposta 'Io e te per sempre'.",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "family_classics_cesaroni_068",
+    "severity": "critical",
+    "problem": "L'episodio 18 della quinta stagione si intitola 'Senza mezze misure', NON 'Scommesse'. 'Scommesse' è l'episodio 22 della stessa stagione. La risposta segnata (index 1 = 'Scommesse') è sbagliata; la risposta corretta 'Senza mezze misure' non figura tra le opzioni.",
+    "fix": "Sostituire l'opzione 1 'Scommesse' con 'Senza mezze misure' e mantenere correctAnswerIndex: 1. In alternativa, se si vuole usare 'Scommesse', riformulare la domanda come 'Qual è il titolo dell'episodio 22 della quinta stagione?'.",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "family_classics_cesaroni_069",
+    "severity": "critical",
+    "problem": "L'episodio 24 della quinta stagione si intitola 'La ricetta perfetta', NON 'Un vero dramma'. 'Un vero dramma' è l'episodio 28 della stessa stagione. La risposta segnata (index 1 = 'Un vero dramma') è sbagliata; la risposta corretta 'La ricetta perfetta' non figura tra le opzioni.",
+    "fix": "Sostituire l'opzione 1 'Un vero dramma' con 'La ricetta perfetta' e mantenere correctAnswerIndex: 1. In alternativa, riformulare come 'Qual è il titolo dell'episodio 28 della quinta stagione?' con risposta 'Un vero dramma'.",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "family_classics_cesaroni_096",
+    "severity": "critical",
+    "problem": "La risposta corretta segnata è 'Nessuno, è figlia unica' (index 1), ma la stessa explanation corregge questa affermazione dicendo che Nina ha due fratelli minori (Irene e Ivan). Nina NON è figlia unica: è la maggiore dei figli di Sofia. L'opzione è fattualmente falsa (contraddice l'explanation stessa).",
+    "fix": "Sostituire l'opzione 1 con 'Nessuno: Nina è la maggiore dei figli di Sofia' oppure riformulare come 'Nina è la figlia maggiore o minore di Sofia?' con risposta appropriata. La frase 'è figlia unica' deve essere rimossa perché falsa.",
+    "correctIndexShouldBe": -1
+  }
+]

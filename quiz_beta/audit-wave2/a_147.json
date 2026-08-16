@@ -1,0 +1,16 @@
+[
+  {
+    "questionId": "q_147_47",
+    "severity": "critical",
+    "problem": "Il testo della domanda afferma che il premio è stato vinto 'nel 2021', ma il Globo d'oro alla miglior serie TV è stato assegnato nel 2022 (cerimonia 62a edizione). Inoltre la domanda definisce il Globo d'oro un 'premio internazionale' ma è un premio italiano (assegnato dalla stampa estera accreditata in Italia). Il correctAnswerIndex=1 (Globo d'oro) è comunque la risposta più corretta tra le opzioni, poiché Emmy, BAFTA e Annie Award non risultano vinti dalla serie; tuttavia la premessa fattuale è sbagliata.",
+    "fix": "Correggere il testo della domanda: 'Quale premio ha vinto Strappare lungo i bordi nel 2022 per la miglior serie TV?' oppure 'Quale riconoscimento italiano ha vinto la serie nel 2022 per la miglior serie TV?'. Rimuovere l'aggettivo 'internazionale' dalla domanda. L'explanation può restare (già dice 2022 correttamente).",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_147_10",
+    "severity": "minor",
+    "problem": "L'explanation descrive Giancane come 'ex cantante del Muro del Canto' (o con wording equivalente implicante il canto). In realtà Giancane (Giancarlo Barbati Bonanni) era il chitarrista, non il cantante, de Il Muro del Canto. La risposta corretta (correctAnswerIndex=1) è confermata.",
+    "fix": "Correggere l'explanation in: 'La colonna sonora originale è stata composta da Giancane (Giancarlo Barbati Bonanni), ex chitarrista de Il Muro del Canto, raccolta nell'album Strappati lungo i bordi, pubblicato contemporaneamente alla serie.'",
+    "correctIndexShouldBe": -1
+  }
+]

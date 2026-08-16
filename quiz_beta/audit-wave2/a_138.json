@@ -1,0 +1,9 @@
+[
+  {
+    "questionId": "q_138_49",
+    "severity": "critical",
+    "problem": "La premessa della domanda è sbagliata: dice 'nella Stagione 2' ma la sconfitta del Karasuno contro l'Aoba Johsai nel campionato Inter-Liceo (Inter-High) avviene nella Stagione 1 (episodi 19-24). Nella Stagione 2 il Karasuno disputa il torneo primaverile (Spring High) e in quella competizione *batte* l'Aoba Johsai, avanzando fino alla finale contro lo Shiratorizawa.",
+    "fix": "Correggere il testo della domanda da 'nella Stagione 2' a 'nella Stagione 1'. Aggiornare anche l'explanation: la sconfitta avviene nel campionato Inter-Liceo (Stagione 1), non nel torneo primaverile. Testo suggerito: 'Quale squadra sconfigge il Karasuno nel campionato Inter-Liceo nella Stagione 1, eliminandoli dalla competizione?' Explanation: 'Nella Stagione 1, il Karasuno viene eliminato dall'Aoba Johsai (Seijoh) nelle semifinali del campionato Inter-Liceo prefettizio di Miyagi. Nella Stagione 2 (torneo primaverile) il Karasuno si riscatterà battendo l'Aoba Johsai e avanzando fino alla finale contro lo Shiratorizawa.'",
+    "correctIndexShouldBe": -1
+  }
+]

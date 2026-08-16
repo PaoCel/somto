@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Entitlement dell'estensione widget: VUOTO, e deve restarlo.
+
+  Non e' una dimenticanza. `CODE_SIGN_ENTITLEMENTS` vive in `settings.base` di
+  project.yml, quindi senza questo file l'estensione EREDITEREBBE quelli
+  dell'app (`aps-environment`, `com.apple.developer.applesignin`,
+  `associated-domains`, App Attest). L'App ID del widget non ha nessuna di
+  quelle capability: la firma fallirebbe in archive, non in build — cioe' il
+  giorno del rilascio.
+
+  L'unica cosa che serve e' l'App Group: il widget "Watchlist" legge il
+  riassunto che l'app lascia li'. Va dichiarato in ENTRAMBI i target — se manca
+  da uno, `containerURL(forSecurityApplicationGroupIdentifier:)` torna nil e il
+  widget resta sullo stato "apri Somto", senza errori e senza dati.
+
+  Nient'altro: le prossime uscite arrivano da un endpoint HTTPS pubblico.
+-->
+<plist version="1.0">
+<dict>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>$(AppIdentifierPrefix)com.paolocelestini.twowatch.shared</string>
+	</array>
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>group.com.paolocelestini.twowatch.ios</string>
+	</array>
+</dict>
+</plist>

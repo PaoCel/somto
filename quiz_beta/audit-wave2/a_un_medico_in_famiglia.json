@@ -1,0 +1,16 @@
+[
+  {
+    "questionId": "family_classics_un_medico_020",
+    "severity": "critical",
+    "problem": "La domanda chiede 'il figlio maschio di Lele e Alice' e indica Ciccio come risposta corretta. Ma Ciccio (Francesco) è figlio di Lele e ELENA SOLARI (prima moglie, deceduta), non di Alice. Il figlio maschio di Lele e Alice è Bobò (Libero Martini Junior), il gemello di Elena nati nel finale della 2ª stagione.",
+    "fix": "Cambiare la domanda in 'Come si chiama il figlio maschio di Lele e la sua prima moglie Elena?' (risposta corretta rimane Ciccio, index 2), oppure mantenere 'figlio maschio di Lele e Alice' e cambiare la risposta corretta in Bobò (index 3).",
+    "correctIndexShouldBe": 3
+  },
+  {
+    "questionId": "family_classics_un_medico_067",
+    "severity": "critical",
+    "problem": "correctAnswerIndex=1 indica 'Sua madre', ma la spiegazione stessa contraddice questa risposta: 'Jonathan è figlio di Marco, quindi Sara è sua zia'. Sara Levi è la sorella di Marco Levi, non la madre di Jonathan. La madre di Jonathan è Micol, l'ex di Marco.",
+    "fix": "Cambiare correctAnswerIndex a 2 ('Sua zia'). La risposta corretta alla domanda è 'Sua zia', coerente con l'explanation già presente.",
+    "correctIndexShouldBe": 2
+  }
+]

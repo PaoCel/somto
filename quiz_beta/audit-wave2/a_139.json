@@ -1,0 +1,9 @@
+[
+  {
+    "questionId": "q_139_21",
+    "severity": "critical",
+    "problem": "La risposta segnata (indice 2, 'Kyoto') è errata. Hyoma Chigiri proviene dalla prefettura di Kagoshima, non da Kyoto. Confermato da Blue Lock Wiki Fandom, ORICON News, Universal Warriors Wiki e altre fonti. Anche l'explanation riporta Kyoto come fatto falso.",
+    "fix": "Sostituire la risposta corretta con 'Kagoshima' (index 3 o aggiornare l'array): portare la risposta 'Kagoshima' al posto di 'Kyoto' e aggiornare correctAnswerIndex di conseguenza. L'explanation va corretta in 'Hyoma Chigiri proviene dalla prefettura di Kagoshima'.",
+    "correctIndexShouldBe": -1
+  }
+]

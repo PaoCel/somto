@@ -1,0 +1,23 @@
+[
+  {
+    "questionId": "q_144_29",
+    "severity": "minor",
+    "problem": "L'explanation definisce Paolo Buonvino 'compositore catanese': in realtà è nato a Scordia, comune della provincia di Catania, non nella città di Catania. La risposta corretta (Tony Brundo, index 2) è giusta. Imprecisione geografica nell'explanation.",
+    "fix": "Sostituire 'compositore catanese' con 'compositore siciliano' (o 'nato a Scordia, in provincia di Catania').",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_144_31",
+    "severity": "minor",
+    "problem": "L'explanation dice che Martina 'non ha realmente conseguito la laurea e deve quindi ripetere gli esami universitari'. In realtà le manca un solo esame (non un insieme di esami da ripetere): si è fermata a un esame dalla laurea. La risposta scelta (index 1) è comunque quella più corretta tra le opzioni.",
+    "fix": "Correggere l'explanation: 'le manca un solo esame per completare il percorso accademico e conseguire la laurea in medicina'.",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_144_42",
+    "severity": "minor",
+    "problem": "Il questionText dice che Gabriel 'lascia definitivamente l'Italia', ma nella serie la sua partenza non è definitiva: decide di tornare in Etiopia ma poi torna a Milano. Il termine 'definitivamente' è fuorviante. La risposta marcata (index 1) descrive però correttamente la sua decisione iniziale.",
+    "fix": "Riformulare il questionText rimuovendo 'definitivamente': es. 'Cosa decide di fare Gabriel Kidane nel corso della seconda stagione dopo la sua crisi psicologica?'.",
+    "correctIndexShouldBe": -1
+  }
+]

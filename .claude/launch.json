@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "pwa",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["http-server", "public", "-c-1", "--cors"],
+      "port": 5174,
+      "autoPort": true
+    }
+  ]
+}

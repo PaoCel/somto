@@ -1,0 +1,23 @@
+[
+  {
+    "questionId": "q_178_1",
+    "severity": "minor",
+    "problem": "L'explanation chiama Noah Baumbach 'il marito' di Greta Gerwig, ma i due si sono sposati solo nel dicembre 2023, dopo l'uscita del film e durante la scrittura della sceneggiatura (avvenuta nel 2020-2022) erano conviventi/partner, non ancora sposati.",
+    "fix": "Sostituire 'il marito Noah Baumbach' con 'il compagno Noah Baumbach' oppure 'Noah Baumbach (con cui si è poi sposata nel 2023)'.",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_178_30",
+    "severity": "minor",
+    "problem": "L'explanation chiama Noah Baumbach 'marito di Greta Gerwig': come per q_178_1, al momento della scrittura della sceneggiatura non erano ancora sposati (matrimonio dicembre 2023, dopo l'uscita del film).",
+    "fix": "Sostituire 'marito di Greta Gerwig' con 'compagno di Greta Gerwig' o 'partner di Greta Gerwig (si sono sposati nel dicembre 2023)'.",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_178_41",
+    "severity": "minor",
+    "problem": "Le opzioni answers[0] e answers[3] sono sostanzialmente la stessa opera: 'Il misticismo femminile di Betty Friedan' è la traduzione italiana di 'The Feminine Mystique di Betty Friedan' (answers[3]). Avere due distrattori che si riferiscono allo stesso libro crea confusione e indebolisce la domanda.",
+    "fix": "Sostituire uno dei due distrattori duplicati con un'opera diversa, ad esempio 'Femminismo senza frontiere di Chandra Mohanty' o 'Una stanza tutta per sé di Virginia Woolf'.",
+    "correctIndexShouldBe": -1
+  }
+]

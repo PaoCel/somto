@@ -1,0 +1,135 @@
+/* ============================================
+   BUTTON.CSS – Pill Buttons with Gradient
+   Dark-first Instagram / TikTok aesthetic
+   ============================================ */
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-xs);
+  padding: 0.7rem 1.4rem; border: none; border-radius: var(--radius-full);
+  font-size: var(--text-sm); font-weight: var(--weight-bold); line-height: 1;
+  letter-spacing: 0.01em; white-space: nowrap; text-decoration: none;
+  cursor: pointer; user-select: none; transition: all var(--transition-fast);
+  position: relative; overflow: hidden;
+  background: transparent; color: var(--text); border: 1.5px solid var(--border-medium);
+}
+
+.btn-primary, .btn.primary {
+  background: var(--brand-gradient); color: #fff; border: none;
+  box-shadow: var(--shadow-brand);
+}
+.btn-primary::before, .btn.primary::before {
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+  transform: translateX(-100%); transition: transform 0.5s ease;
+}
+.btn-primary:hover::before, .btn.primary:hover::before { transform: translateX(100%); }
+.btn-primary:active, .btn.primary:active { transform: scale(0.97); box-shadow: 0 2px 8px rgba(233, 30, 99, 0.2); }
+
+.btn-ghost, .btn.ghost { background: transparent; color: var(--text); border: 1.5px solid var(--border-medium); }
+.btn-ghost:hover, .btn.ghost:hover { background: rgba(255, 255, 255, 0.06); border-color: var(--border-strong); }
+.btn-ghost:active, .btn.ghost:active { transform: scale(0.97); }
+
+.btn-secondary, .btn.secondary { background: rgba(255, 255, 255, 0.06); color: var(--text); border: 1px solid var(--border-medium); }
+.btn-secondary:hover, .btn.secondary:hover { background: rgba(255, 255, 255, 0.10); border-color: var(--border-strong); }
+.btn-secondary:active, .btn.secondary:active { transform: scale(0.97); }
+
+.btn-danger, .btn.danger { background: rgba(255, 23, 68, 0.12); color: var(--danger); border: 1px solid rgba(255, 23, 68, 0.25); }
+.btn-danger:hover, .btn.danger:hover { background: rgba(255, 23, 68, 0.18); box-shadow: 0 0 16px rgba(255, 23, 68, 0.15); }
+
+.btn-success, .btn.success { background: rgba(0, 230, 118, 0.12); color: var(--success); border: 1px solid rgba(0, 230, 118, 0.25); }
+.btn-success:hover, .btn.success:hover { background: rgba(0, 230, 118, 0.18); }
+
+.btn-xs, .btn.xs { padding: 0.35rem 0.75rem; font-size: var(--text-xs); }
+.btn-sm, .btn.sm, .btn.small { padding: 0.5rem 1rem; font-size: var(--text-sm); }
+.btn-lg, .btn.lg { padding: 0.9rem 1.8rem; font-size: var(--text-md); }
+.btn.full { width: 100%; justify-content: center; }
+
+/* Icone inline (es. ${ICONS.play} + testo): senza width/height esplicite gli SVG
+   con solo viewBox si espandono. Vincola le icone dentro i pill button con testo.
+   I button-icona dedicati (.btn-icon/.icon-btn/.btn.icon) gestiscono la propria. */
+.btn:not(.btn-icon):not(.icon-btn):not(.icon) > svg { width: 1.15em; height: 1.15em; flex: 0 0 auto; }
+
+
+/* Stato attivo (per tabs / toggle) */
+.btn.active:not(.primary):not(.btn-primary) {
+  background: rgba(233, 30, 99, 0.12);
+  border-color: rgba(233, 30, 99, 0.30);
+  color: var(--brand-primary);
+  box-shadow: 0 0 0 1px rgba(233, 30, 99, 0.06), 0 8px 20px rgba(0,0,0,0.25);
+}
+.btn-icon, .icon-btn, .btn.icon {
+  width: 40px; height: 40px; padding: 0; border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.06); border: 1px solid var(--border);
+  color: var(--text); display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all var(--transition-fast); flex-shrink: 0;
+}
+.btn-icon:hover, .icon-btn:hover { background: rgba(255, 255, 255, 0.10); }
+.btn-icon:active, .icon-btn:active { transform: scale(0.95); }
+
+.btn:disabled, .btn[disabled] { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+.btn-link { background: none; border: none; padding: 0; color: var(--brand-primary); font-weight: var(--weight-semibold); cursor: pointer; }
+.btn-link:hover { opacity: 0.8; }
+
+.btn[data-loading="true"],
+button[data-loading="true"] {
+  position: relative;
+  color: transparent !important;
+}
+
+.btn[data-loading="true"]::after,
+button[data-loading="true"]::after {
+  content: "";
+  position: absolute;
+  width: 1.1em;
+  height: 1.1em;
+  border-radius: 999px;
+  border: 2px solid var(--brand-primary);
+  border-right-color: transparent;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+  animation: btnSpin 0.9s linear infinite;
+}
+
+.btn.ghost[data-loading=\"true\"], .btn-ghost[data-loading=\"true\"], .btn.secondary[data-loading=\"true\"], .btn-secondary[data-loading=\"true\"] {
+  color: transparent !important;
+}
+
+@keyframes btnSpin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.btn:focus-visible,
+button:focus-visible,
+a.btn:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.28);
+}
+
+/* ===== FAB – Floating Action Button ===== */
+.fab {
+  position: fixed;
+  bottom: calc(var(--tabbar-height) + 1rem);
+  right: 1.25rem;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--brand-gradient);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(233, 30, 99, 0.45);
+  z-index: 49;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  display: none !important;
+}
+.fab:active {
+  transform: scale(0.93);
+  box-shadow: 0 2px 10px rgba(233, 30, 99, 0.3);
+}

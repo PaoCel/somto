@@ -1,0 +1,123 @@
+/* ============================================
+   RESET.CSS - Reset Moderno e Accessibile
+   ============================================ */
+
+/* Box sizing universale */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Reset margini/padding */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* HTML e Body */
+html {
+  height: 100%;
+  /* Smooth scrolling nativo */
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  /* Text rendering ottimizzato */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Immagini responsive */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Form elements ereditano font */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+/* Rimuovi default appearance */
+button,
+input,
+select,
+textarea {
+  background: none;
+  border: none;
+}
+
+/* Link senza stili */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Tabelle */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Liste */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+/* Paragrafi */
+p {
+  overflow-wrap: break-word;
+}
+
+/* Prevenire overflow testo */
+h1, h2, h3, h4, h5, h6, p {
+  overflow-wrap: break-word;
+}
+
+/* Focus accessibile */
+:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+}
+
+/* Rimuovi outline default (sostituito da :focus-visible) */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Scroll smooth solo se non preferisce reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

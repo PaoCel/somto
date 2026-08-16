@@ -1,0 +1,164 @@
+/* ============================================
+   ADD_TITLE.CSS - Stili Pagina Add Title
+   (Opzionale - la maggior parte è in pages.css)
+   ============================================ */
+
+/* Poster preview nella form */
+.poster-preview {
+  width: 120px;
+  aspect-ratio: 2 / 3;
+  background: rgba(243, 244, 246, 0.02);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: border-color var(--transition-base);
+}
+
+.poster-preview:hover {
+  border-color: var(--border-medium);
+}
+
+.poster-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.poster-preview .poster-ph {
+  font-size: 2rem;
+  color: var(--text-subtle);
+  opacity: 0.3;
+}
+
+/* File input styling */
+input[type="file"] {
+  padding: var(--space-sm) 0;
+  cursor: pointer;
+}
+
+input[type="file"]::file-selector-button {
+  padding: var(--space-xs) var(--space-md);
+  margin-right: var(--space-sm);
+  background: rgba(243, 244, 246, 0.08);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+input[type="file"]::file-selector-button:hover {
+  background: rgba(243, 244, 246, 0.12);
+  border-color: var(--border-medium);
+}
+
+/* Genre chips selezionabili */
+.chips .chip.selected {
+  background: rgba(233, 30, 99, 0.12);
+  border-color: rgba(233, 30, 99, 0.30);
+  color: var(--brand-primary);
+}
+
+.chips .chip input:checked ~ * {
+  color: var(--brand-primary);
+}
+
+/* Row per poster + info */
+.poster-row {
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
+}
+
+@media (max-width: 640px) {
+  .poster-row {
+    flex-direction: column;
+  }
+  
+  .poster-preview {
+    width: 100px;
+  }
+}
+
+/* Helper per campi full width in grid */
+.field.full,
+.full {
+  grid-column: 1 / -1;
+}
+
+/* =========================================
+   People picker (directors / cast)
+========================================= */
+.people-picker{ position: relative; }
+
+.people-selected{
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem;
+  margin-bottom: .35rem;
+}
+
+.person-chip{
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .28rem .55rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  font-size: var(--text-sm);
+  color: var(--text);
+}
+
+.person-chip button{
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0 2px;
+}
+
+.people-results{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + .35rem);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 18px 60px rgba(0,0,0,0.35);
+  z-index: 25;
+  max-height: 15rem;
+  overflow-y: auto;
+
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+
+.people-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  padding: .65rem .75rem;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.people-item:last-child{ border-bottom: none; }
+.people-item:hover{ background: rgba(255,255,255,0.06); }
+
+.people-item .name{ font-weight: var(--weight-semibold); font-size: var(--text-sm); }
+.people-item .meta{ font-size: var(--text-sm); color: var(--text-secondary); }

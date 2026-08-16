@@ -1,0 +1,148 @@
+/* profile-community.css — Tab Community su Profile (timeline unificato:
+   recensioni a ogni livello + emozioni + post pubblici). Riusa i token del
+   design system (variables.css) e ricalca il look di .profile-review-card
+   (profile-tabs.css), rimasto per il tab Taste. */
+
+.profile-community-list {
+  display: flex; flex-direction: column; gap: 0.7rem;
+  padding: 0.7rem 0;
+}
+
+.profile-community-card {
+  display: flex; gap: 0.85rem;
+  padding: 0.85rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+.profile-community-card.is-static { cursor: default; }
+
+.profile-community-poster {
+  width: 62px; height: 92px;
+  border-radius: 14px;
+  object-fit: cover;
+  flex: 0 0 auto;
+  background: var(--panel-strong);
+}
+.profile-community-poster.placeholder {
+  background: linear-gradient(135deg, color-mix(in oklab, var(--brand-primary) 25%, transparent), var(--panel-strong));
+}
+.profile-community-poster.post-icon {
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted);
+}
+.profile-community-poster.post-icon svg { width: 24px; height: 24px; }
+
+.profile-community-main {
+  min-width: 0; flex: 1;
+  display: flex; flex-direction: column; gap: 0.4rem;
+}
+
+.profile-community-head {
+  display: flex; align-items: center; flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+/* Type chip: variante colore per fonte (review/emotion/post) */
+.profile-community-typechip {
+  display: inline-flex; align-items: center;
+  padding: 0.16rem 0.5rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.68rem;
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  flex: 0 0 auto;
+}
+.profile-community-typechip.type-review {
+  background: color-mix(in oklab, var(--brand-primary) 16%, transparent);
+  color: var(--brand-primary);
+}
+.profile-community-typechip.type-emotion {
+  background: color-mix(in oklab, var(--brand-warm) 18%, transparent);
+  color: var(--brand-warm);
+}
+.profile-community-typechip.type-post {
+  background: color-mix(in oklab, var(--accent) 16%, transparent);
+  color: var(--accent);
+}
+
+.profile-community-levelchip {
+  display: inline-flex; align-items: center;
+  padding: 0.14rem 0.5rem;
+  border-radius: var(--radius-pill);
+  background: var(--panel-strong);
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  font-weight: var(--weight-semibold);
+  max-width: 100%;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+.profile-community-rating {
+  display: inline-flex; align-items: center; gap: 0.2rem;
+  padding: 0.16rem 0.45rem;
+  border-radius: var(--radius-pill);
+  background: color-mix(in oklab, var(--brand-primary) 12%, transparent);
+  color: var(--brand-primary);
+  font-size: 0.78rem;
+  font-weight: var(--weight-bold);
+  font-variant-numeric: tabular-nums;
+  margin-left: auto;
+  flex: 0 0 auto;
+}
+.profile-community-rating svg { width: 11px; height: 11px; }
+
+.profile-community-title {
+  margin: 0; font-size: 0.94rem; font-weight: var(--weight-bold);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.profile-community-meta {
+  display: flex; gap: 0.5rem; flex-wrap: wrap;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+.profile-community-meta span:not(:last-child)::after {
+  content: " ·";
+  margin-left: 0.1rem;
+  color: var(--text-muted);
+}
+
+.profile-community-body {
+  margin: 0; font-size: 0.86rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.profile-community-toggle {
+  align-self: flex-start;
+  appearance: none; background: none; border: 0;
+  color: var(--brand-primary);
+  font-size: 0.8rem;
+  font-weight: var(--weight-semibold);
+  cursor: pointer;
+  padding: 0;
+}
+
+.profile-community-emotions {
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+}
+.profile-community-emotion {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  padding: 0.24rem 0.55rem;
+  border-radius: var(--radius-pill);
+  background: var(--panel-strong);
+  font-size: 0.78rem;
+  font-weight: var(--weight-medium);
+  color: var(--text-primary);
+}
+.profile-community-emotion .emoji { font-size: 0.92rem; line-height: 1; }
+
+@media (max-width: 420px) {
+  .profile-community-poster { width: 52px; height: 78px; }
+  .profile-community-title { font-size: 0.88rem; }
+}
