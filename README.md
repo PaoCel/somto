@@ -12,6 +12,12 @@ Il codice è pubblico per trasparenza e collaborazione. Il repository non
 include credenziali, accesso ai progetti Firebase Somto o diritti sul nome,
 sul logo e sugli asset di terze parti.
 
+Sviluppato in un repository privato (oltre 1200 commit) da febbraio 2026.
+Questo repo è pubblicato come snapshot dello stato attuale, non come
+mirror della history: la cronologia privata contiene dati operativi non
+adatti a un repository pubblico (vedi [SECURITY.md](SECURITY.md) per come
+segnalare un problema, non per rivivere quella storia).
+
 ## Stack
 
 - PWA multipagina in JavaScript, HTML e CSS, senza framework runtime.
