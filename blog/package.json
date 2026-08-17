@@ -9,6 +9,6 @@
     "clean": "rm -rf ../public/blog"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^3.1.5"
+    "@11ty/eleventy": "^3.1.6"
   }
 }
