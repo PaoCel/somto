@@ -35,14 +35,14 @@
   "author": "Paolo Celestini",
   "license": "Apache-2.0",
   "dependencies": {
-    "csv-parser": "^3.2.0",
+    "csv-parser": "^3.2.1",
     "firebase-admin": "^13.4.0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.52.0",
+    "@playwright/test": "^1.62.1",
     "@resvg/resvg-js": "^2.6.2",
     "esbuild": "^0.28.2",
     "gray-matter": "^4.0.3",
-    "satori": "^0.10.14"
+    "satori": "^0.29.0"
   }
 }
