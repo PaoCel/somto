@@ -38,8 +38,8 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "@firebase/rules-unit-testing": "^5.0.1",
-    "firebase": "^12.17.1",
+    "@firebase/rules-unit-testing": "^5.0.2",
+    "firebase": "^12.18.0",
     "firebase-functions-test": "^3.5.0"
   },
   "private": true
