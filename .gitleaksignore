@@ -1,0 +1,6 @@
+# Rotated TMDB credential removed from the current tree. Keeping the exact
+# fingerprints documents the accepted historical findings without suppressing
+# future detections in the same files or commits.
+c05b18fe35daa48eb1850d077c58b1b0524d1f91:functions/scripts/enrich-tmdb.js:generic-api-key:27
+c05b18fe35daa48eb1850d077c58b1b0524d1f91:functions/scripts/fix-remaining.js:generic-api-key:15
+c05b18fe35daa48eb1850d077c58b1b0524d1f91:functions/index.js:generic-api-key:490

@@ -1,0 +1,1202 @@
+[
+  {
+    "rank": 21,
+    "titleId": "EbSt5Fmg8st2IVUBmWSG",
+    "tmdbId": "299536",
+    "mediaType": "movie",
+    "title": "Avengers: Infinity War",
+    "originalTitle": "Avengers: Infinity War",
+    "year": "2018",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 6,
+    "ratingsCount": 3,
+    "averageRating": 9.5,
+    "reviewsCount": 2,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 22,
+    "titleId": "quo-vado-2016",
+    "tmdbId": "374416",
+    "mediaType": "movie",
+    "title": "Quo vado?",
+    "originalTitle": "Quo vado?",
+    "year": "2016",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 6,
+    "ratingsCount": 3,
+    "averageRating": 8.67,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 23,
+    "titleId": "jaYlUwKfH1vr9LbDc5ct",
+    "tmdbId": "271110",
+    "mediaType": "movie",
+    "title": "Captain America: Civil War",
+    "originalTitle": "Captain America: Civil War",
+    "year": "2016",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 6,
+    "ratingsCount": 3,
+    "averageRating": 8.67,
+    "reviewsCount": 1,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 24,
+    "titleId": "erJj0AxaAwYFzwgjTgrc",
+    "tmdbId": "634649",
+    "mediaType": "movie",
+    "title": "Spiderman No Way Home",
+    "originalTitle": "",
+    "year": "2021",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 6,
+    "ratingsCount": 3,
+    "averageRating": 8.58,
+    "reviewsCount": 1,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 25,
+    "titleId": "Iw10gRF6spKIj7TTfqI7",
+    "tmdbId": "66732",
+    "mediaType": "tv",
+    "title": "Stranger Things",
+    "originalTitle": "Stranger Things",
+    "year": "2016",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 6,
+    "ratingsCount": 3,
+    "averageRating": 8.5,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 26,
+    "titleId": "szd940awz1QStBrRdsrK",
+    "tmdbId": "299537",
+    "mediaType": "movie",
+    "title": "Captain Marvel",
+    "originalTitle": "Captain Marvel",
+    "year": "2019",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 6,
+    "ratingsCount": 3,
+    "averageRating": 8.42,
+    "reviewsCount": 2,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 27,
+    "titleId": "vx1lDhBGcYtWFOHorkNS",
+    "tmdbId": "533535",
+    "mediaType": "movie",
+    "title": "Deadpool & Wolverine",
+    "originalTitle": "",
+    "year": "2024",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 6,
+    "ratingsCount": 3,
+    "averageRating": 8.33,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 28,
+    "titleId": "tmdb_movie_1472638",
+    "tmdbId": "1472638",
+    "mediaType": "movie",
+    "title": "Buen Camino",
+    "originalTitle": "Buen Camino",
+    "year": "2025",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 6,
+    "ratingsCount": 3,
+    "averageRating": 8.33,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 29,
+    "titleId": "CdhT1DVQVoj3JAdlm69O",
+    "tmdbId": "284052",
+    "mediaType": "movie",
+    "title": "Doctor Strange",
+    "originalTitle": "Doctor Strange",
+    "year": "2016",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 6,
+    "ratingsCount": 3,
+    "averageRating": 8.33,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 30,
+    "titleId": "OriQsuc6ynvyf9akXncH",
+    "tmdbId": "100402",
+    "mediaType": "movie",
+    "title": "Captain America: The Winter Soldier",
+    "originalTitle": "Captain America: The Winter Soldier",
+    "year": "2014",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 6,
+    "ratingsCount": 3,
+    "averageRating": 8.33,
+    "reviewsCount": 1,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 31,
+    "titleId": "AZAClrGmOupe2K4DhuTU",
+    "tmdbId": "64682",
+    "mediaType": "movie",
+    "title": "Il grande Gatsby",
+    "originalTitle": "The Great Gatsby",
+    "year": "2013",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 6,
+    "ratingsCount": 3,
+    "averageRating": 8.17,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 32,
+    "titleId": "gE9O24xYJX3GW6mUgZ28",
+    "tmdbId": "10195",
+    "mediaType": "movie",
+    "title": "Thor",
+    "originalTitle": "Thor",
+    "year": "2011",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 6,
+    "ratingsCount": 3,
+    "averageRating": 8.17,
+    "reviewsCount": 1,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 33,
+    "titleId": "GYiDJJNsFx85TnQ05q4x",
+    "tmdbId": "10138",
+    "mediaType": "movie",
+    "title": "Iron Man 2",
+    "originalTitle": "Iron Man 2",
+    "year": "2010",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 6,
+    "ratingsCount": 3,
+    "averageRating": 8,
+    "reviewsCount": 1,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 34,
+    "titleId": "qByadDJEhqqF4UEdQwqt",
+    "tmdbId": "50546",
+    "mediaType": "movie",
+    "title": "Mia moglie per finta",
+    "originalTitle": "Just Go with It",
+    "year": "2011",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 6,
+    "ratingsCount": 3,
+    "averageRating": 8,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 35,
+    "titleId": "tmdb_tv_225171",
+    "tmdbId": "225171",
+    "mediaType": "tv",
+    "title": "Pluribus",
+    "originalTitle": "Pluribus",
+    "year": "2025",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 6,
+    "ratingsCount": 3,
+    "averageRating": 7.92,
+    "reviewsCount": 2,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 36,
+    "titleId": "q9WD3XX9n9FZGTEboQs7",
+    "tmdbId": "18165",
+    "mediaType": "tv",
+    "title": "The Vampire Diaries",
+    "originalTitle": "",
+    "year": "2009",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 6,
+    "ratingsCount": 3,
+    "averageRating": 7.83,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 37,
+    "titleId": "tmdb_tv_259731",
+    "tmdbId": "259731",
+    "mediaType": "tv",
+    "title": "La sua verità",
+    "originalTitle": "HIS & HERS",
+    "year": "2026",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 6,
+    "ratingsCount": 3,
+    "averageRating": 7.67,
+    "reviewsCount": 1,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 38,
+    "titleId": "ej3745lrFsdaa0hm8yjH",
+    "tmdbId": "66573",
+    "mediaType": "tv",
+    "title": "The Good Place",
+    "originalTitle": "The Good Place",
+    "year": "2016",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 6,
+    "ratingsCount": 3,
+    "averageRating": 7.58,
+    "reviewsCount": 1,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 39,
+    "titleId": "8oFbZQEOR09dhActfvoG",
+    "tmdbId": "10115",
+    "mediaType": "movie",
+    "title": "Stick it - Sfida e conquista",
+    "originalTitle": "Stick It",
+    "year": "2006",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 6,
+    "ratingsCount": 3,
+    "averageRating": 7.5,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 40,
+    "titleId": "odzIfRliBUUKCyvDmmaw",
+    "tmdbId": "76338",
+    "mediaType": "movie",
+    "title": "Thor: The Dark World",
+    "originalTitle": "Thor: The Dark World",
+    "year": "2013",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 6,
+    "ratingsCount": 3,
+    "averageRating": 7.42,
+    "reviewsCount": 1,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 41,
+    "titleId": "tmdb_movie_1368166",
+    "tmdbId": "1368166",
+    "mediaType": "movie",
+    "title": "Una di famiglia",
+    "originalTitle": "The Housemaid",
+    "year": "2025",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 6,
+    "ratingsCount": 3,
+    "averageRating": 7.33,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 42,
+    "titleId": "UpVSI3B4o9cCZltZYLkr",
+    "tmdbId": "363088",
+    "mediaType": "movie",
+    "title": "Ant-Man and the Wasp",
+    "originalTitle": "Ant-Man and the Wasp",
+    "year": "2018",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 6,
+    "ratingsCount": 3,
+    "averageRating": 7.17,
+    "reviewsCount": 1,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 43,
+    "titleId": "U8zGnSNTJTE771fKnd8p",
+    "tmdbId": "787699",
+    "mediaType": "movie",
+    "title": "Wonka",
+    "originalTitle": "",
+    "year": "2023",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 6,
+    "ratingsCount": 3,
+    "averageRating": 6.83,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 44,
+    "titleId": "WAn2mgcCiJxtf69oVExi",
+    "tmdbId": "87739",
+    "mediaType": "tv",
+    "title": "La regina degli scacchi",
+    "originalTitle": "The queen’s gambit",
+    "year": "2020",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 6,
+    "ratingsCount": 3,
+    "averageRating": 6.83,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 45,
+    "titleId": "QWI2sEuTzDLZ2tmCUOPr",
+    "tmdbId": "78191",
+    "mediaType": "tv",
+    "title": "You",
+    "originalTitle": "",
+    "year": "2018",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 6,
+    "ratingsCount": 3,
+    "averageRating": 6.67,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 46,
+    "titleId": "harry-potter-e-i-doni-della-morte-parte-1-2010",
+    "tmdbId": "12444",
+    "mediaType": "movie",
+    "title": "Harry Potter e i Doni della Morte - Parte 1",
+    "originalTitle": "Harry Potter and the Deathly Hallows: Part 1",
+    "year": "2010",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 5,
+    "ratingsCount": 2,
+    "averageRating": 9.25,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 47,
+    "titleId": "harry-potter-e-il-principe-mezzosangue-2009",
+    "tmdbId": "767",
+    "mediaType": "movie",
+    "title": "Harry Potter e il principe mezzosangue",
+    "originalTitle": "Harry Potter and the Half-Blood Prince",
+    "year": "2009",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 5,
+    "ratingsCount": 2,
+    "averageRating": 9,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 48,
+    "titleId": "tmdb_movie_1724",
+    "tmdbId": "1724",
+    "mediaType": "movie",
+    "title": "L'incredibile Hulk",
+    "originalTitle": "The Incredible Hulk",
+    "year": "2008",
+    "watchedByUniqueUsers": 3,
+    "totalWatchedEvents": 5,
+    "ratingsCount": 2,
+    "averageRating": 5.88,
+    "reviewsCount": 2,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 49,
+    "titleId": "tmdb_tv_279601",
+    "tmdbId": "279601",
+    "mediaType": "tv",
+    "title": "Man vs Baby",
+    "originalTitle": "Man vs Baby",
+    "year": "2025",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 5,
+    "ratingsCount": 3,
+    "averageRating": 6.08,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 50,
+    "titleId": "6rpUwZubtWYggclfnDYH",
+    "tmdbId": "537116",
+    "mediaType": "movie",
+    "title": "tick, tick... BOOM!",
+    "originalTitle": "tick, tick... BOOM!",
+    "year": "2021",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 10,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 51,
+    "titleId": "qQ4r5r9cMIHAqPvxHZdP",
+    "tmdbId": "299534",
+    "mediaType": "movie",
+    "title": "Avengers: Endgame",
+    "originalTitle": "",
+    "year": "2019",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 10,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 52,
+    "titleId": "avatar-fuoco-e-cenere-2025",
+    "tmdbId": "83533",
+    "mediaType": "movie",
+    "title": "Avatar: Fuoco e Cenere",
+    "originalTitle": "Avatar: Fire and Ash",
+    "year": "2025",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 10,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 53,
+    "titleId": "gD1QsiLbX4tmLiD83m16",
+    "tmdbId": "11036",
+    "mediaType": "movie",
+    "title": "Le pagine della nostra vita",
+    "originalTitle": "The note book",
+    "year": "2004",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 10,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 54,
+    "titleId": "la-ricerca-della-felicita-2006",
+    "tmdbId": "1402",
+    "mediaType": "movie",
+    "title": "La ricerca della felicità",
+    "originalTitle": "The Pursuit of Happyness",
+    "year": "2006",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 10,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 55,
+    "titleId": "la-vita-e-bella-1997",
+    "tmdbId": "637",
+    "mediaType": "movie",
+    "title": "La vita è bella",
+    "originalTitle": "La vita è bella",
+    "year": "1997",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 10,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 56,
+    "titleId": "avatar-la-via-dellacqua-2022",
+    "tmdbId": "76600",
+    "mediaType": "movie",
+    "title": "Avatar: La via dell'acqua",
+    "originalTitle": "Avatar: The Way of Water",
+    "year": "2022",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 9.75,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 57,
+    "titleId": "harry-potter-e-i-doni-della-morte-parte-2-2011",
+    "tmdbId": "12445",
+    "mediaType": "movie",
+    "title": "Harry Potter e i Doni della Morte - Parte 2",
+    "originalTitle": "Harry Potter and the Deathly Hallows: Part 2",
+    "year": "2011",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 9.75,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 58,
+    "titleId": "quasi-amici-intouchables-2011",
+    "tmdbId": "77338",
+    "mediaType": "movie",
+    "title": "Quasi amici - Intouchables",
+    "originalTitle": "Intouchables",
+    "year": "2011",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 9.75,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 59,
+    "titleId": "K68O6CK0w95sWaQ54NJs",
+    "tmdbId": "27205",
+    "mediaType": "movie",
+    "title": "Inception",
+    "originalTitle": "Inception",
+    "year": "2010",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 9.5,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 60,
+    "titleId": "avatar-2009",
+    "tmdbId": "19995",
+    "mediaType": "movie",
+    "title": "Avatar",
+    "originalTitle": "Avatar",
+    "year": "2009",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 9.5,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 61,
+    "titleId": "il-bambino-con-il-pigiama-a-righe-2008",
+    "tmdbId": "14574",
+    "mediaType": "movie",
+    "title": "Il bambino con il pigiama a righe",
+    "originalTitle": "",
+    "year": "2008",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 9.5,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 62,
+    "titleId": "KiNPNjk4kqVYVijCu2Ub",
+    "tmdbId": "196454",
+    "mediaType": "tv",
+    "title": "La regina Carlotta: Una storia di Bridgerton",
+    "originalTitle": "Queen Charlotte: A Bridgerton Story",
+    "year": "2023",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 9.5,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 63,
+    "titleId": "ZT88OGiYjMeE81jR0GhJ",
+    "tmdbId": "113988",
+    "mediaType": "tv",
+    "title": "Dahmer mostro: la storia di jeffrey dhamer",
+    "originalTitle": "",
+    "year": "2022",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 9.25,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 64,
+    "titleId": "shutter-island-2010",
+    "tmdbId": "11324",
+    "mediaType": "movie",
+    "title": "Shutter Island",
+    "originalTitle": "Shutter Island",
+    "year": "2010",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 9.25,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 65,
+    "titleId": "benvenuti-al-sud-2010",
+    "tmdbId": "48415",
+    "mediaType": "movie",
+    "title": "Benvenuti al Sud",
+    "originalTitle": "Benvenuti al Sud",
+    "year": "2010",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 9.25,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 66,
+    "titleId": "pI9EQI7UHaJS0NhsS86u",
+    "tmdbId": "1100",
+    "mediaType": "tv",
+    "title": "How I Met Your Mother",
+    "originalTitle": "How i met your mother",
+    "year": "2005",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 9.25,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 67,
+    "titleId": "sette-anime-2008",
+    "tmdbId": "11321",
+    "mediaType": "movie",
+    "title": "Sette anime",
+    "originalTitle": "Seven Pounds",
+    "year": "2008",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 9.25,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 68,
+    "titleId": "Xy8WBxdwftwPEJ5RCrhS",
+    "tmdbId": "4586",
+    "mediaType": "tv",
+    "title": "Una mamma per amica",
+    "originalTitle": "Gilmore girls",
+    "year": "2000",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 9,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 69,
+    "titleId": "OStc1IexcpSNIcOGW2vc",
+    "tmdbId": "136311",
+    "mediaType": "tv",
+    "title": "Shrinking",
+    "originalTitle": "",
+    "year": "2023",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 9,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 70,
+    "titleId": "berlino",
+    "tmdbId": "146176",
+    "mediaType": "tv",
+    "title": "Berlino",
+    "originalTitle": "Berlín",
+    "year": "2023",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 9,
+    "reviewsCount": 1,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 71,
+    "titleId": "harry-potter-e-il-prigioniero-di-azkaban-2004",
+    "tmdbId": "673",
+    "mediaType": "movie",
+    "title": "Harry Potter e il prigioniero di Azkaban",
+    "originalTitle": "Harry Potter and the Prisoner of Azkaban",
+    "year": "2004",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 9,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 72,
+    "titleId": "z3rLPYOstLsgH50OJ804",
+    "tmdbId": "41280",
+    "mediaType": "tv",
+    "title": "I Cesaroni",
+    "originalTitle": "I Cesaroni",
+    "year": "2006",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 9,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 73,
+    "titleId": "WTYZNIjBwbqveccPbuPf",
+    "tmdbId": "372058",
+    "mediaType": "movie",
+    "title": "Your Name.",
+    "originalTitle": "",
+    "year": "2016",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 8.75,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 74,
+    "titleId": "bridgerton",
+    "tmdbId": "91239",
+    "mediaType": "tv",
+    "title": "Bridgerton",
+    "originalTitle": "Bridgerton",
+    "year": "2020",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 8.75,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 75,
+    "titleId": "il-grinch-2000",
+    "tmdbId": "8871",
+    "mediaType": "movie",
+    "title": "Il Grinch",
+    "originalTitle": "Dr. Seuss' How the Grinch Stole Christmas",
+    "year": "2000",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 8.75,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 76,
+    "titleId": "lora-legale-2017",
+    "tmdbId": "435921",
+    "mediaType": "movie",
+    "title": "L'ora legale",
+    "originalTitle": "L'ora legale",
+    "year": "2017",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 8.75,
+    "reviewsCount": 1,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 77,
+    "titleId": "tmdb_tv_255661",
+    "tmdbId": "255661",
+    "mediaType": "tv",
+    "title": "Young Sherlock",
+    "originalTitle": "Young Sherlock",
+    "year": "2026",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 8.75,
+    "reviewsCount": 1,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 78,
+    "titleId": "il-7-e-l8-2007",
+    "tmdbId": "48175",
+    "mediaType": "movie",
+    "title": "Il 7 e l'8",
+    "originalTitle": "Il 7 e l'8",
+    "year": "2007",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 8.63,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 79,
+    "titleId": "cado-dalle-nubi-2009",
+    "tmdbId": "35554",
+    "mediaType": "movie",
+    "title": "Cado dalle nubi",
+    "originalTitle": "Cado dalle nubi",
+    "year": "2009",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 8.5,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  },
+  {
+    "rank": 80,
+    "titleId": "modern-family",
+    "tmdbId": "1421",
+    "mediaType": "tv",
+    "title": "Modern Family",
+    "originalTitle": "Modern Family",
+    "year": "2009",
+    "watchedByUniqueUsers": 2,
+    "totalWatchedEvents": 4,
+    "ratingsCount": 2,
+    "averageRating": 8.5,
+    "reviewsCount": 0,
+    "sourcePathsUsed": [
+      "ratings (level=\"title\") — count utenti unici e medie voto",
+      "users/{uid}/library/{titleId} (collectionGroup) — verifica presenza titolo in libreria personale (= visto)",
+      "titles/{titleId} — metadati canonici (name, type, year, tmdbId)"
+    ],
+    "notes": "Conteggio \"visto\" basato su presenza in ratings/library; userLists \"Da Vedere\" esclusa esplicitamente."
+  }
+]

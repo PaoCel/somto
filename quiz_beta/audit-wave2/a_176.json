@@ -1,0 +1,16 @@
+[
+  {
+    "questionId": "q_176_31",
+    "severity": "minor",
+    "problem": "L'explanation afferma 'Sei caccia francesi hanno sorvolato il Palais dei Festival', ma fonti multiple confermano che i jet francesi erano 8 (non 6). La risposta corretta (Palma d'Oro Onoraria) è giusta.",
+    "fix": "Correggere 'Sei caccia francesi' → 'Otto caccia francesi' nell'explanation.",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_176_40",
+    "severity": "critical",
+    "problem": "La domanda pone Quentin Tarantino 'alla premiere di Cannes' mentre elogiava il film, ma il commento 'fantastico' di Tarantino fu fatto durante il podcast ReelBlend (agosto 2022), non alla premiere di Cannes. Il testo della domanda contiene una premessa fattuale falsa: Tarantino non era presente alla premiere di Cannes né vi fece quella dichiarazione. Inoltre la struttura della domanda è grammaticalmente sconnessa ('Quale regista, alla premiereat Cannes, Quentin Tarantino ha pubblicamente elogiato come fantastico').",
+    "fix": "Riscrivere la domanda eliminando il riferimento a Cannes. Esempio: 'Su quale film Quentin Tarantino ha dichiarato pubblicamente di averlo trovato fantastico, definendolo come il più vicino a un film di Tony Scott che vedremo mai?' oppure eliminare la domanda e sostituirla con una più verificabile su Tarantino e il film.",
+    "correctIndexShouldBe": -1
+  }
+]

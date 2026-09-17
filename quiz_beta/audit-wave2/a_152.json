@@ -1,0 +1,16 @@
+[
+  {
+    "questionId": "q_152_24",
+    "severity": "critical",
+    "problem": "L'explanation afferma che 60/60 è 'il voto minimo nell'antico sistema sessantesimale pre-1998, che i protagonisti credono erroneamente sia il massimo'. È il contrario: nel vecchio sistema della maturità italiana (fino al 1997-98), 60/60 era il MASSIMO (equivalente a 100/100 nell'attuale sistema centesimale) e il voto minimo per essere promossi era 36/60. Se i protagonisti prendono 60/60 e pensano sia il massimo, hanno RAGIONE, non torto. La risposta corretta (index 0: '60 su 60') è verificata da Wikipedia come il voto che i protagonisti ottengono nel film, ma il fatto che venga descritto come 'il minimo' è storicamente falso. Il gag del film funziona diversamente da come lo descrive questa spiegazione.",
+    "fix": "Correggere l'explanation: '60/60 era il MASSIMO nell'antico sistema sessantesimale (il minimo per essere promossi era 36/60). Poiché i protagonisti non sanno che il sistema è cambiato e oggi si usa il centesimale, rileggono il proprio vecchio voto come se fosse in centesimi: '60 su 100' — ovvero la sufficienza stretta — e si sorprendono di essere stati promossi così di misura, quando in realtà avevano preso il massimo.' (Verificare sul film la meccanica esatta del gag prima di aggiornare.)",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_152_42",
+    "severity": "critical",
+    "problem": "Stesso errore fattuale di q_152_24: l'explanation ripete che i protagonisti 'vengono promossi con 60/60 (il minimo nell'antico sistema sessantesimale)', ma 60/60 era il MASSIMO, non il minimo. Il minimo per superare l'esame era 36/60. La risposta corretta (index 0) descrive il malinteso in modo corretto ('credono che 60 sia il massimo'), ma l'explanation lo contraddice chiamandolo 'il minimo'.",
+    "fix": "Correggere l'explanation rimuovendo '(il minimo nell'antico sistema sessantesimale)' e sostituendo con '(il massimo nell'antico sistema sessantesimale, equivalente a 100/100 oggi; il minimo per la promozione era 36/60)'. Allineare poi la meccanica comica con quella verificata in q_152_24.",
+    "correctIndexShouldBe": -1
+  }
+]

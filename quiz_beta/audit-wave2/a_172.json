@@ -1,0 +1,23 @@
+[
+  {
+    "questionId": "q_172_9",
+    "severity": "minor",
+    "problem": "L'explanation afferma che Boba Fett era 'incaricato da Jabba the Hutt di catturare Han Solo'. Nel film, Boba Fett è uno dei cacciatori di taglie reclutati da DARTH VADER per rintracciare il Falcon. Jabba ha una taglia pre-esistente su Han, ma nell'ESB è Vader ad ingaggiare i cacciatori di taglie. La risposta corretta (indice 3, Boba Fett) è giusta; solo l'explanation contiene un fatto impreciso.",
+    "fix": "Correggere l'explanation: 'Boba Fett è il cacciatore di taglie ingaggiato da Darth Vader per rintracciare il Falcon dopo Hoth. Porta Han congelato nel carbonite a Jabba the Hutt, che aveva già una taglia su di lui, sulla sua nave Slave I.'",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_172_23",
+    "severity": "critical",
+    "problem": "L'explanation inverte le multe dei sindacati: afferma 'la WGA multò Lucas di 250.000 dollari e la DGA multò Kershner di 25.000 dollari'. In realtà fu la DGA (Directors Guild of America) a multare Lucas di 250.000 dollari (per non aver messo il credito al regista all'inizio); la DGA multò anche Kershner di 25.000 dollari (Lucas pagò la multa di Kershner). La WGA è coinvolta marginalmente. L'explanation attribuisce erroneamente la multa da 250k alla WGA invece che alla DGA.",
+    "fix": "Correggere l'explanation: 'Lucas volle mettere tutti i titoli di testa alla fine del film. Questo violava le regole dei sindacati: la DGA (Directors Guild of America) multò Lucas di 250.000 dollari e multò anche Kershner di 25.000 dollari (poi pagate da Lucas). Lucas pagò e si dimise dalla WGA, dalla DGA e dalla MPAA.'",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_172_50",
+    "severity": "critical",
+    "problem": "L'explanation elenca le 3 nomination come 'Migliori effetti visivi, Miglior sonoro e un Oscar speciale per il lavoro di Brian Johnson e Richard Edlund'. Questo è errato: le 3 nomination competitive erano Miglior Sonoro, Migliore Scenografia (Art Direction) e Migliore Colonna Sonora Originale (John Williams). Gli effetti visivi furono riconosciuti con un Premio Speciale non competitivo (Special Achievement Award), non come una delle 3 nomination. L'explanation confonde una nomination ordinaria con il premio speciale e omette Art Direction e Original Score.",
+    "fix": "Correggere l'explanation: 'Il film ottenne 3 nomination agli Oscar (53a cerimonia): Miglior Sonoro (vinto), Migliore Scenografia e Migliore Colonna Sonora Originale (John Williams). Gli effetti visivi furono riconosciuti con un Premio Speciale non competitivo della Board of Governors (Brian Johnson, Richard Edlund, Dennis Muren, Bruce Nicholson). In totale 2 riconoscimenti.'",
+    "correctIndexShouldBe": -1
+  }
+]

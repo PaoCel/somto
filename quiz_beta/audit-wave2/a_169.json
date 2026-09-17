@@ -1,0 +1,9 @@
+[
+  {
+    "questionId": "q_169_44",
+    "severity": "minor",
+    "problem": "L'explanation afferma che 'Osterley Park House fu usata per gli interni' di Wayne Manor in Batman Begins. È falso: gli interni di Wayne Manor in Batman Begins furono girati negli Shepperton Studios (Surrey), non a Osterley Park House. Osterley Park fu usata per gli interni del Wayne Manor ricostruito in The Dark Knight Rises, non in Batman Begins. La risposta corretta (Mentmore Towers per gli esterni) resta valida.",
+    "fix": "Correggere l'explanation: gli interni di Wayne Manor in Batman Begins furono ricostruiti in set agli Shepperton Studios in Surrey, non a Osterley Park House (quella location appartiene a The Dark Knight Rises).",
+    "correctIndexShouldBe": -1
+  }
+]

@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>App to rate and review movies and TV shows — Somto</title>
+  <meta name="description" content="Somto is the app to rate and review movies and TV shows: keep track of what you've watched, rate every title, and build your cinephile profile.">
+  <link rel="canonical" href="https://somto.it/en/app-recensioni-film-serie.html">
+  <link rel="alternate" hreflang="it-IT" href="https://somto.it/app-recensioni-film-serie.html">
+  <link rel="alternate" hreflang="en" href="https://somto.it/en/app-recensioni-film-serie.html">
+  <link rel="alternate" hreflang="x-default" href="https://somto.it/app-recensioni-film-serie.html">
+<meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="author" content="Somto">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Somto">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://somto.it/app-recensioni-film-serie.html">
+  <meta property="og:title" content="App to rate and review movies and TV shows — Somto">
+  <meta property="og:description" content="Rate the movies and TV shows you watch, keep track of what you've watched, and build your cinephile profile with Somto.">
+  <meta property="og:image" content="https://somto.it/og/recensioni.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="Rate and review movies and TV shows on Somto">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="App to rate and review movies and TV shows — Somto">
+  <meta name="twitter:description" content="Rate the movies and TV shows you watch and build your cinephile profile with Somto.">
+  <meta name="twitter:image" content="https://somto.it/og/recensioni.png">
+
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://identitytoolkit.googleapis.com" crossorigin>
+
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+
+  <link rel="stylesheet" href="/css/landing.bundle.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://somto.it/" },
+      { "@type": "ListItem", "position": 2, "name": "Movie and TV show ratings and reviews", "item": "https://somto.it/app-recensioni-film-serie.html" }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do you rate a movie or TV show on Somto?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "On Somto, you give every movie or TV show a rating from 1 to 10. Mark the title as watched and your rating goes straight into your personal catalog, where you'll find everything you've watched, all in order."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are my ratings and reviews public?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Your ratings feed your profile and can be seen by the friends who follow you, so they can get a sense of your taste. They also help the community figure out whether a title is worth the watch."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Somto show statistics on the titles I've watched?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. From your profile you can see hours watched, favorite genres, and the number of titles you've rated — stats that show what kind of viewer you are and how your taste changes over time."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Somto's app for rating movies and shows free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, rating and reviewing movies and TV shows on Somto is completely free. Somto is available as a web app and on iOS, with your catalog synced across both."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="lp-body" data-no-shell>
+
+  <header class="lp-nav" id="lpNav">
+    <div class="lp-nav-inner">
+      <a class="lp-nav-logo" href="/en/" aria-label="Somto — home">
+        <img src="/icons/somto-wordmark.png" alt="Somto">
+      </a>
+      <a class="lp-nav-cta" href="/login.html?next=/home.html">Sign In</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="lp-hero">
+      <div class="lp-hero-glow g1"></div>
+      <div class="lp-hero-glow g2"></div>
+      <div class="lp-hero-glow g3"></div>
+      <div class="lp-hero-inner">
+        <span class="lp-eyebrow">Ratings · Reviews</span>
+        <h1>The app to <span class="lp-grad-text">rate and review</span> movies and TV shows</h1>
+        <p class="lp-hero-sub">
+          Rate every movie and TV show you watch, keep track of everything
+          you've watched, and build your true cinephile profile.
+        </p>
+        <div class="lp-cta-row">
+          <a class="lp-btn lp-btn-primary" href="/login.html?next=/home.html">Start rating</a>
+          <a class="lp-btn lp-btn-ghost" href="/en/">Go to homepage</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">What it's for</span>
+          <h2 class="lp-h2">Every title you watch, logged and rated</h2>
+          <p class="lp-lead">Your taste in movies deserves a place to live, grow, and tell people who you are.</p>
+        </div>
+        <div class="lp-about-text">
+          <p>On Somto, every movie and every TV show you watch becomes part of your personal library. Give it a rating, mark the title as watched, and in seconds you have an organized record of everything you've watched over the years.</p>
+          <p>Your reviews and ratings don't just sit there: they feed your profile, tell your friends about your taste, and help the community figure out whether a title is worth watching or not. No opaque algorithms, just real opinions from real people.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">What you can do</span>
+          <h2 class="lp-h2">Ratings, catalog, and stats</h2>
+        </div>
+        <div class="lp-grid">
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.6l2.9 5.9 6.5.95-4.7 4.58 1.1 6.47L12 17.96l-5.8 3.05 1.1-6.47L2.6 9.95l6.5-.95L12 2.6Z"/></svg></span>
+            <h3>Rate from 1 to 10</h3>
+            <p>Give a clear verdict on every movie and TV show, with a rating built for people who actually watch.</p>
+          </article>
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="3.2" y="6.6" width="12" height="14.2" rx="3"/><rect x="8.8" y="3.2" width="12" height="14.2" rx="3" fill-opacity="0.5"/></svg></span>
+            <h3>Personal catalog</h3>
+            <p>Every title you've watched, gathered in one organized library, always with you on web and iOS.</p>
+          </article>
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 20h3v-7H4zM10.5 20h3V4h-3zM17 20h3v-11h-3z"/></svg></span>
+            <h3>Your stats</h3>
+            <p>Hours watched, favorite genres, and titles rated: find out what kind of viewer you are.</p>
+          </article>
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 11.5a3.6 3.6 0 1 0 0-7.2 3.6 3.6 0 0 0 0 7.2Zm8 .5a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM9 13.2c-3.5 0-7 1.8-7 4.6V21h14v-3.2c0-2.8-3.5-4.6-7-4.6Zm8 .3c-.6 0-1.2.06-1.7.17 1.1 1 1.7 2.3 1.7 3.93V21h5v-2.7c0-2.5-2.9-3.8-5-3.8Z"/></svg></span>
+            <h3>Compare with friends</h3>
+            <p>See how the people you follow rated the same titles, and find who shares your taste.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">Explore Somto</span>
+          <h2 class="lp-h2">Give ratings, get more</h2>
+        </div>
+        <div class="lp-about-text">
+          <p>Your ratings become useful across the whole app: save what's next in your <a href="/en/watchlist-film-serie.html">movies and TV shows watchlist</a>, get <a href="/en/consigli-film-serie-amici.html">recommendations on what to watch from your friends</a>, and put your knowledge to the test with <a href="/en/quiz-film-serie-tv.html">quizzes about movies and TV shows</a>.</p>
+          <p>Head back to the <a href="/en/">Somto homepage</a> to see everything the platform can do.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">Frequently asked questions</span>
+          <h2 class="lp-h2">Everything about ratings and reviews</h2>
+        </div>
+        <div class="lp-faq">
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">How do you rate a movie or TV show on Somto?</summary>
+            <div class="lp-faq-a"><p>On Somto, you give every movie or TV show a rating from 1 to 10. Mark the title as watched and your rating goes straight into your personal catalog, where you'll find everything you've watched, all in order.</p></div>
+          </details>
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">Are my ratings and reviews public?</summary>
+            <div class="lp-faq-a"><p>Your ratings feed your profile and can be seen by the friends who follow you, so they can get a sense of your taste. They also help the community figure out whether a title is worth the watch.</p></div>
+          </details>
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">Does Somto show statistics on the titles I've watched?</summary>
+            <div class="lp-faq-a"><p>Yes. From your profile you can see hours watched, favorite genres, and the number of titles you've rated — stats that show what kind of viewer you are and how your taste changes over time.</p></div>
+          </details>
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">Is Somto's app for rating movies and shows free?</summary>
+            <div class="lp-faq-a"><p>Yes, rating and reviewing movies and TV shows on Somto is completely free. Somto is available as a web app and on iOS, with your catalog synced across both.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section lp-final">
+      <div class="lp-container">
+        <div class="lp-final-inner">
+          <h2>Rate your first title</h2>
+          <p>Free, on web and iOS. Start building your library of movies and TV shows.</p>
+          <a class="lp-btn lp-btn-primary" href="/login.html?next=/home.html">Get started</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="lp-footer">
+    <div class="lp-footer-inner">
+      <div class="lp-footer-brand">
+        <img src="/icons/somto-wordmark.png" alt="Somto">
+        <p>The social app for people who love movies and TV shows. Rate, discover, and decide what to watch with friends.</p>
+      </div>
+      <nav class="lp-footer-cols" aria-label="Site links">
+        <div class="lp-footer-col">
+          <h4>Somto</h4>
+          <a href="/en/">Home</a>
+          <a href="/login.html?next=/home.html">Sign In</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Explore</h4>
+          <a href="/en/watchlist-film-serie.html">Watchlist</a>
+          <a href="/en/app-recensioni-film-serie.html">Ratings and reviews</a>
+          <a href="/en/quiz-film-serie-tv.html">Quiz</a>
+          <a href="/en/consigli-film-serie-amici.html">Recommendations from friends</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Comparisons</h4>
+          <a href="/en/somto-vs-letterboxd.html">Somto vs Letterboxd</a>
+          <a href="/en/somto-vs-justwatch.html">Somto vs JustWatch</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/cookies.html">Cookies</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Support</h4>
+          <a href="/en/support.html">Help center</a>
+        </div>
+      </nav>
+    </div>
+    <div class="lp-footer-base">© 2026 Somto. All rights reserved.</div>
+  </footer>
+
+  <script>
+    (function () {
+      var nav = document.getElementById("lpNav");
+      if (!nav) return;
+      var onScroll = function () { nav.classList.toggle("is-scrolled", window.scrollY > 12); };
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+    })();
+  </script>
+</body>
+</html>

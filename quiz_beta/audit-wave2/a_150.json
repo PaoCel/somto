@@ -1,0 +1,16 @@
+[
+  {
+    "questionId": "q_150_37",
+    "severity": "critical",
+    "problem": "L'explanation afferma 'perde la vita anche Romaniello', ma Romaniello NON muore nell'attentato. Nella stagione 3 si scopre che è sopravvissuto e che la sua morte era simulata: era stato messo sotto protezione e nascosto in un monastero. La stagione 3 ruota attorno all'indagine di Calogiuri per scoprire la verità sull'attentato e ritrova Romaniello vivo. Solo Calogiuri entra in coma.",
+    "fix": "Correggere l'explanation: 'Alla fine della stagione 2, sia Calogiuri che Romaniello vengono colpiti nell'agguato. Calogiuri entra in coma per mesi. Romaniello sopravvive ma la sua morte viene simulata per proteggerlo: si scoprirà nella stagione 3 che è tenuto nascosto in un monastero sotto protezione.'",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_150_39",
+    "severity": "critical",
+    "problem": "Sia la domanda che l'explanation descrivono Francesco Calenzano come 'un antico amore di Imma', ma Calenzano era un vecchio amore di STELLA PISICCHIO, non di Imma Tataranni. Imma lo conosceva perché frequentava la stessa cerchia sociale, ma non aveva con lui una relazione amorosa. Il movente è corretto (il ricatto/blackmail di Stella), ma la descrizione del legame con Imma è sbagliata.",
+    "fix": "Correggere sia la risposta che l'explanation: 'L'ex compagna di classe Stella Pisicchio, uccisa da Francesco Calenzano, un vecchio amore di STELLA (non di Imma) che lei ricattava minacciando di rivelare la loro relazione alla sua famiglia.' Il questionText va modificato eliminando 'antico amore di Imma'.",
+    "correctIndexShouldBe": -1
+  }
+]

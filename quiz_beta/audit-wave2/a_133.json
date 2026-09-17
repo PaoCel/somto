@@ -1,0 +1,9 @@
+[
+  {
+    "questionId": "q_133_34",
+    "severity": "critical",
+    "problem": "L'explanation afferma che Emma e Mikey 'condividono lo stesso padre (Mansaku Sano)', ma Mansaku Sano è il NONNO di Mikey ed Emma, non il padre. Il padre di entrambi è Makoto Sano (deceduto). L'answer index (sorellastra) è corretto, ma il fatto citato nell'explanation è falso.",
+    "fix": "Correggere l'explanation: 'Emma Sano è la sorellastra di Mikey: condividono lo stesso padre, Makoto Sano. Emma è figlia di Makoto e di Karen Kurokawa, e fu affidata alla famiglia Sano dal nonno Mansaku quando sua madre la abbandonò da bambina.'",
+    "correctIndexShouldBe": -1
+  }
+]

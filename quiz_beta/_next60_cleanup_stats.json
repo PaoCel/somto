@@ -1,0 +1,69 @@
+{
+  "generatedAt": "2026-05-13 16:38:21",
+  "total": 1500,
+  "indexBefore": {
+    "0": 1156,
+    "1": 205,
+    "2": 121,
+    "3": 18
+  },
+  "indexAfter": {
+    "0": 367,
+    "1": 369,
+    "2": 375,
+    "3": 389
+  },
+  "questionsTouchedByNormalization": 1,
+  "fixCounts": {
+    "e' -> è": 1
+  },
+  "confidence": {
+    "low": 0,
+    "medium": 144,
+    "high": 1356
+  },
+  "spoiler": {
+    "none": 632,
+    "light": 318,
+    "medium": 306,
+    "heavy": 244
+  },
+  "difficulty": {
+    "easy": 490,
+    "medium": 863,
+    "hard": 147
+  },
+  "category": {
+    "anagraphic": 210,
+    "plot": 262,
+    "object": 83,
+    "scene": 77,
+    "character": 345,
+    "motivation": 74,
+    "consequence": 98,
+    "quote_paraphrase": 35,
+    "relationship": 53,
+    "trivia": 220,
+    "chronology": 43
+  },
+  "source": {
+    "GREEN": 1359,
+    "YELLOW": 141,
+    "RED": 0
+  },
+  "byTitleCount": 60,
+  "mediumReviewFile": {
+    "file": "quiz_questions_next60_medium_review.json",
+    "count": 144
+  },
+  "heavySpoilerFile": {
+    "file": "quiz_questions_next60_heavy_spoiler_review.json",
+    "count": 244
+  },
+  "yellowSourceFile": {
+    "file": "quiz_questions_next60_yellow_source_review.json",
+    "count": 141
+  },
+  "structuralIssuesDuringProcessing": [],
+  "finalIssues": []
+}

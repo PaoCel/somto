@@ -1,0 +1,578 @@
+{
+  "generatedAt": "2026-02-19T12:13:23.935Z",
+  "counts": {
+    "missingDescription": 10,
+    "tvNoSeasons": 8,
+    "both": 1
+  },
+  "missingDescription": [
+    {
+      "id": "sicilia-express",
+      "name": "Sicilia Express",
+      "type": "tv",
+      "year": null,
+      "tmdbId": null
+    },
+    {
+      "id": "tmdb_tv_226411",
+      "name": "Mía es la venganza",
+      "type": "tv",
+      "year": 2023,
+      "tmdbId": 226411
+    },
+    {
+      "id": "tmdb_tv_227248",
+      "name": "Más Allá de Tí",
+      "type": "tv",
+      "year": 2023,
+      "tmdbId": 227248
+    },
+    {
+      "id": "tmdb_tv_235759",
+      "name": "El señor de los cielos: Sus comienzos",
+      "type": "tv",
+      "year": 2023,
+      "tmdbId": 235759
+    },
+    {
+      "id": "tmdb_tv_239279",
+      "name": "Pacto de Sangre",
+      "type": "tv",
+      "year": 2023,
+      "tmdbId": 239279
+    },
+    {
+      "id": "tmdb_tv_239559",
+      "name": "El Maleficio",
+      "type": "tv",
+      "year": 2023,
+      "tmdbId": 239559
+    },
+    {
+      "id": "tmdb_tv_242865",
+      "name": "¿A qué estás esperando?",
+      "type": "tv",
+      "year": 2024,
+      "tmdbId": 242865
+    },
+    {
+      "id": "tmdb_tv_243487",
+      "name": "Vivir de amor",
+      "type": "tv",
+      "year": 2024,
+      "tmdbId": 243487
+    },
+    {
+      "id": "tmdb_tv_274326",
+      "name": "Darío Gómez: El rey del despecho",
+      "type": "tv",
+      "year": 2024,
+      "tmdbId": 274326
+    },
+    {
+      "id": "tmdb_tv_302463",
+      "name": "Dinastía Casillas",
+      "type": "tv",
+      "year": 2025,
+      "tmdbId": 302463
+    }
+  ],
+  "tvNoSeasons": [
+    {
+      "id": "kamen-rider-1971",
+      "name": "Kamen Rider",
+      "type": "tv",
+      "year": 1971,
+      "tmdbId": 2661,
+      "meta": {
+        "source": "tmdb-upcoming",
+        "channel": "streaming",
+        "releaseDate": "1971-04-03",
+        "seasons": [
+          {
+            "season": 1,
+            "episodes": 98
+          },
+          {
+            "season": 2,
+            "episodes": 52
+          },
+          {
+            "season": 3,
+            "episodes": 35
+          },
+          {
+            "season": 4,
+            "episodes": 24
+          },
+          {
+            "season": 5,
+            "episodes": 39
+          },
+          {
+            "season": 6,
+            "episodes": 54
+          },
+          {
+            "season": 7,
+            "episodes": 48
+          },
+          {
+            "season": 8,
+            "episodes": 51
+          },
+          {
+            "season": 9,
+            "episodes": 47
+          },
+          {
+            "season": 10,
+            "episodes": 49
+          },
+          {
+            "season": 11,
+            "episodes": 51
+          },
+          {
+            "season": 12,
+            "episodes": 50
+          },
+          {
+            "season": 13,
+            "episodes": 50
+          },
+          {
+            "season": 14,
+            "episodes": 49
+          },
+          {
+            "season": 15,
+            "episodes": 48
+          },
+          {
+            "season": 16,
+            "episodes": 49
+          },
+          {
+            "season": 17,
+            "episodes": 49
+          },
+          {
+            "season": 18,
+            "episodes": 48
+          },
+          {
+            "season": 19,
+            "episodes": 31
+          },
+          {
+            "season": 20,
+            "episodes": 49
+          },
+          {
+            "season": 21,
+            "episodes": 48
+          },
+          {
+            "season": 22,
+            "episodes": 48
+          },
+          {
+            "season": 23,
+            "episodes": 53
+          },
+          {
+            "season": 24,
+            "episodes": 47
+          },
+          {
+            "season": 25,
+            "episodes": 48
+          },
+          {
+            "season": 26,
+            "episodes": 50
+          },
+          {
+            "season": 27,
+            "episodes": 45
+          },
+          {
+            "season": 28,
+            "episodes": 49
+          },
+          {
+            "season": 29,
+            "episodes": 49
+          },
+          {
+            "season": 30,
+            "episodes": 45
+          },
+          {
+            "season": 31,
+            "episodes": 48
+          },
+          {
+            "season": 32,
+            "episodes": 50
+          },
+          {
+            "season": 33,
+            "episodes": 49
+          },
+          {
+            "season": 34,
+            "episodes": 50
+          },
+          {
+            "season": 35,
+            "episodes": 50
+          },
+          {
+            "season": 36,
+            "episodes": 25
+          },
+          {
+            "season": 37,
+            "episodes": 0
+          }
+        ],
+        "seasonsCount": 37,
+        "durationEpisode": 24
+      }
+    },
+    {
+      "id": "lupin",
+      "name": "Lupin",
+      "type": "tv",
+      "year": 2021,
+      "tmdbId": 96677,
+      "meta": {
+        "seasonsCount": 3,
+        "language": "francese",
+        "country": "Francia",
+        "network": "Netflix",
+        "seasons": [
+          {
+            "season": 1,
+            "episodes": 10
+          },
+          {
+            "season": 2,
+            "episodes": 7
+          },
+          {
+            "season": 3,
+            "episodes": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "sicilia-express",
+      "name": "Sicilia Express",
+      "type": "tv",
+      "year": null,
+      "tmdbId": null,
+      "meta": {
+        "country": "Italia"
+      }
+    },
+    {
+      "id": "tmdb_tv_225941",
+      "name": "异人之下",
+      "type": "tv",
+      "year": 2023,
+      "tmdbId": 225941,
+      "meta": {
+        "source": "tmdb_scheduled_import",
+        "tmdb": {
+          "id": 225941,
+          "type": "tv",
+          "releaseDate": "2023-08-04",
+          "originalLanguage": "zh",
+          "popularity": 20.8527,
+          "voteAverage": 8.5,
+          "voteCount": 42,
+          "posterPath": "/rv2wu5Z3IG8cjrBiHTNI2UArRxU.jpg",
+          "backdropPath": "/1Lx5oXLVZclQ94jnfAwmanaey7P.jpg",
+          "importedAt": {
+            "_seconds": 1771290064,
+            "_nanoseconds": 301000000
+          }
+        },
+        "seasons": [
+          {
+            "season": 1,
+            "episodes": 27
+          },
+          {
+            "season": 2,
+            "episodes": 13
+          },
+          {
+            "season": 3,
+            "episodes": 0
+          }
+        ],
+        "seasonsCount": 3,
+        "durationEpisode": 45
+      }
+    },
+    {
+      "id": "tmdb_tv_227975",
+      "name": "Fascino fatale",
+      "type": "tv",
+      "year": 2023,
+      "tmdbId": 227975,
+      "meta": {
+        "source": "tmdb_scheduled_import",
+        "tmdb": {
+          "id": 227975,
+          "type": "tv",
+          "releaseDate": "2023-07-07",
+          "originalLanguage": "en",
+          "popularity": 8.3382,
+          "voteAverage": 6.6,
+          "voteCount": 84,
+          "posterPath": "/sD54ncbAutVcwVDIwCTRanUkbJf.jpg",
+          "backdropPath": "/138GLKdHorsdiG2pqHrIMw05Nc8.jpg",
+          "importedAt": {
+            "_seconds": 1771174874,
+            "_nanoseconds": 711000000
+          }
+        },
+        "seasons": [
+          {
+            "season": 1,
+            "episodes": 14
+          },
+          {
+            "season": 2,
+            "episodes": 10
+          },
+          {
+            "season": 3,
+            "episodes": 0
+          }
+        ],
+        "seasonsCount": 3,
+        "durationEpisode": 30
+      }
+    },
+    {
+      "id": "tmdb_tv_4057",
+      "name": "Criminal Minds",
+      "type": "tv",
+      "year": 2005,
+      "tmdbId": 4057,
+      "meta": {
+        "seasons": [
+          {
+            "season": 1,
+            "episodes": 22
+          },
+          {
+            "season": 2,
+            "episodes": 23
+          },
+          {
+            "season": 3,
+            "episodes": 20
+          },
+          {
+            "season": 4,
+            "episodes": 26
+          },
+          {
+            "season": 5,
+            "episodes": 23
+          },
+          {
+            "season": 6,
+            "episodes": 24
+          },
+          {
+            "season": 7,
+            "episodes": 24
+          },
+          {
+            "season": 8,
+            "episodes": 24
+          },
+          {
+            "season": 9,
+            "episodes": 24
+          },
+          {
+            "season": 10,
+            "episodes": 23
+          },
+          {
+            "season": 11,
+            "episodes": 22
+          },
+          {
+            "season": 12,
+            "episodes": 22
+          },
+          {
+            "season": 13,
+            "episodes": 22
+          },
+          {
+            "season": 14,
+            "episodes": 15
+          },
+          {
+            "season": 15,
+            "episodes": 10
+          },
+          {
+            "season": 16,
+            "episodes": 10
+          },
+          {
+            "season": 17,
+            "episodes": 10
+          },
+          {
+            "season": 18,
+            "episodes": 10
+          },
+          {
+            "season": 19,
+            "episodes": 0
+          }
+        ],
+        "seasonsCount": 19
+      }
+    },
+    {
+      "id": "tmdb_tv_46831",
+      "name": "Државни посао",
+      "type": "tv",
+      "year": 2012,
+      "tmdbId": 46831,
+      "meta": {
+        "seasons": [
+          {
+            "season": 1,
+            "episodes": 197
+          },
+          {
+            "season": 2,
+            "episodes": 204
+          },
+          {
+            "season": 3,
+            "episodes": 190
+          },
+          {
+            "season": 4,
+            "episodes": 173
+          },
+          {
+            "season": 5,
+            "episodes": 169
+          },
+          {
+            "season": 6,
+            "episodes": 147
+          },
+          {
+            "season": 7,
+            "episodes": 167
+          },
+          {
+            "season": 8,
+            "episodes": 181
+          },
+          {
+            "season": 9,
+            "episodes": 205
+          },
+          {
+            "season": 10,
+            "episodes": 209
+          },
+          {
+            "season": 11,
+            "episodes": 186
+          },
+          {
+            "season": 12,
+            "episodes": 120
+          },
+          {
+            "season": 13,
+            "episodes": 0
+          },
+          {
+            "season": 14,
+            "episodes": 109
+          }
+        ],
+        "seasonsCount": 14
+      }
+    },
+    {
+      "id": "tmdb_tv_60625",
+      "name": "Rick and Morty",
+      "type": "tv",
+      "year": 2013,
+      "tmdbId": 60625,
+      "meta": {
+        "seasons": [
+          {
+            "season": 1,
+            "episodes": 11
+          },
+          {
+            "season": 2,
+            "episodes": 10
+          },
+          {
+            "season": 3,
+            "episodes": 10
+          },
+          {
+            "season": 4,
+            "episodes": 10
+          },
+          {
+            "season": 5,
+            "episodes": 10
+          },
+          {
+            "season": 6,
+            "episodes": 10
+          },
+          {
+            "season": 7,
+            "episodes": 10
+          },
+          {
+            "season": 8,
+            "episodes": 10
+          },
+          {
+            "season": 9,
+            "episodes": 0
+          }
+        ],
+        "seasonsCount": 9
+      }
+    }
+  ],
+  "both": [
+    {
+      "id": "sicilia-express",
+      "name": "Sicilia Express",
+      "type": "tv",
+      "year": null,
+      "tmdbId": null
+    }
+  ]
+}

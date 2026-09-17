@@ -1,0 +1,1140 @@
+[
+ {
+  "id": "family_classics_cesaroni_001",
+  "questionText": "Da quale serie spagnola è tratto il format di I Cesaroni?",
+  "explanation": "La serie italiana I Cesaroni è basata sul format spagnolo Los Serrano."
+ },
+ {
+  "id": "family_classics_cesaroni_002",
+  "questionText": "In quale quartiere di Roma è ambientata soprattutto la serie?"
+ },
+ {
+  "id": "family_classics_cesaroni_003",
+  "explanation": "Giulio Cesaroni è interpretato da Claudio Amendola."
+ },
+ {
+  "id": "family_classics_cesaroni_004",
+  "explanation": "Lucia Liguori è interpretata da Elena Sofia Ricci."
+ },
+ {
+  "id": "family_classics_cesaroni_005",
+  "explanation": "Cesare Cesaroni è interpretato da Antonello Fassari."
+ },
+ {
+  "id": "family_classics_cesaroni_006",
+  "explanation": "Marco Cesaroni è interpretato da Matteo Branciamore."
+ },
+ {
+  "id": "family_classics_cesaroni_007",
+  "explanation": "Eva Cudicini è interpretata da Alessandra Mastronardi."
+ },
+ {
+  "id": "family_classics_cesaroni_008",
+  "explanation": "Rudi Cesaroni è interpretato da Niccolò Centioni."
+ },
+ {
+  "id": "family_classics_cesaroni_009",
+  "explanation": "Alice Cudicini è interpretata da Micol Olivieri."
+ },
+ {
+  "id": "family_classics_cesaroni_010",
+  "explanation": "Mimmo Cesaroni è interpretato da Federico Russo."
+ },
+ {
+  "id": "family_classics_cesaroni_011",
+  "explanation": "Walter Masetti è interpretato da Ludovico Fremont."
+ },
+ {
+  "id": "family_classics_cesaroni_012",
+  "questionText": "Qual è il mestiere principale di Giulio nella serie?"
+ },
+ {
+  "id": "family_classics_cesaroni_013",
+  "explanation": "Il fratello di Giulio è Cesare Cesaroni."
+ },
+ {
+  "id": "family_classics_cesaroni_014",
+  "questionText": "Qual è la frase più famosa associata a Cesare?",
+  "explanation": "Cesare è noto soprattutto per la battuta Che amarezza...."
+ },
+ {
+  "id": "family_classics_cesaroni_015",
+  "questionText": "Qual è il vero nome di Mimmo?",
+  "explanation": "Mimmo è il soprannome di Domenico Cesaroni."
+ },
+ {
+  "id": "family_classics_cesaroni_016",
+  "questionText": "Da quale città arriva Lucia prima di trasferirsi a Roma?"
+ },
+ {
+  "id": "family_classics_cesaroni_017",
+  "explanation": "La madre di Lucia è Gabriella Lanfranchi."
+ },
+ {
+  "id": "family_classics_cesaroni_019",
+  "explanation": "Walter è figlio di Ezio Masetti e Stefania Ansaldo."
+ },
+ {
+  "id": "family_classics_cesaroni_020",
+  "questionText": "Qual è il lavoro di Ezio Masetti?"
+ },
+ {
+  "id": "family_classics_cesaroni_021",
+  "explanation": "Il locale di famiglia è la Bottiglieria Cesaroni.",
+  "answers": {
+   "1": "Caffè Garbatella"
+  }
+ },
+ {
+  "id": "family_classics_cesaroni_022",
+  "explanation": "All'inizio della serie Giulio è vedovo della moglie Marta."
+ },
+ {
+  "id": "family_classics_cesaroni_023",
+  "questionText": "Qual è la principale passione artistica di Marco?"
+ },
+ {
+  "id": "family_classics_cesaroni_024",
+  "explanation": "Eva è appassionata della poesia di Pablo Neruda."
+ },
+ {
+  "id": "family_classics_cesaroni_025",
+  "explanation": "Per le prime cinque stagioni la voce narrante è Mimmo."
+ },
+ {
+  "id": "family_classics_cesaroni_028",
+  "explanation": "Sergio è un imprenditore milanese."
+ },
+ {
+  "id": "family_classics_cesaroni_029",
+  "questionText": "Chi è Rachele Diotallevi per Marco?",
+  "explanation": "Rachele è l'insegnante con cui Marco intraprende una relazione nella prima stagione."
+ },
+ {
+  "id": "family_classics_cesaroni_030",
+  "questionText": "Chi è Alex Tribbiani nella seconda stagione?",
+  "explanation": "Alex è uno chef emergente e diventa il nuovo interesse di Eva."
+ },
+ {
+  "id": "family_classics_cesaroni_032",
+  "questionText": "Chi è Pamela Fantoni?",
+  "explanation": "Pamela è una prostituta che incontra Cesare per caso."
+ },
+ {
+  "id": "family_classics_cesaroni_033",
+  "questionText": "Di chi è figlia Matilde Fantoni?",
+  "explanation": "Matilde è la figlia di Pamela."
+ },
+ {
+  "id": "family_classics_cesaroni_034",
+  "questionText": "Da quale città si trasferisce la famiglia Barilon vicino ai Cesaroni?"
+ },
+ {
+  "id": "family_classics_cesaroni_036",
+  "explanation": "Lucia lavora a scuola con Stefania, che è sua amica di vecchia data."
+ },
+ {
+  "id": "family_classics_cesaroni_040",
+  "questionText": "Chi è Olga Di Stefano?",
+  "explanation": "Olga è la sorella di Emma e la madre di Miriam e Andy."
+ },
+ {
+  "id": "family_classics_cesaroni_042",
+  "questionText": "Chi è davvero Maya Smith nella quinta stagione?",
+  "explanation": "Maya finge di essere povera ma in realtà è una principessa."
+ },
+ {
+  "id": "family_classics_cesaroni_045",
+  "questionText": "Chi è Francesco Rizzo?",
+  "explanation": "Francesco Rizzo è un amico di Marco e proprietario di un disco-pub alla Garbatella."
+ },
+ {
+  "id": "family_classics_cesaroni_046",
+  "questionText": "Qual è il sogno condiviso da Alice e Jolanda nella quinta stagione?"
+ },
+ {
+  "id": "family_classics_cesaroni_048",
+  "questionText": "Chi è Annibale Vitale rispetto a Giulio?",
+  "explanation": "Annibale è il quarto figlio di Tiberio Cesaroni e viene ritrovato solo nella sesta stagione."
+ },
+ {
+  "id": "family_classics_cesaroni_049",
+  "questionText": "Con chi è sposato Annibale in Spagna?"
+ },
+ {
+  "id": "family_classics_cesaroni_050",
+  "questionText": "Chi è la madre di Nina, Irene e Ivan?",
+  "explanation": "Sofia Scaramozzino è madre di Nina, Irene e Ivan."
+ },
+ {
+  "id": "family_classics_cesaroni_051",
+  "questionText": "Qual è il titolo del primo episodio della prima stagione?"
+ },
+ {
+  "id": "family_classics_cesaroni_052",
+  "questionText": "Qual è il titolo dell'ultimo episodio della prima stagione?"
+ },
+ {
+  "id": "family_classics_cesaroni_053",
+  "questionText": "Qual è il titolo del primo episodio della seconda stagione?"
+ },
+ {
+  "id": "family_classics_cesaroni_054",
+  "questionText": "Qual è il titolo del secondo episodio della seconda stagione, quello in cui Cesare confessa la sua vergogna?"
+ },
+ {
+  "id": "family_classics_cesaroni_055",
+  "questionText": "Qual è il titolo dell'episodio 21 della seconda stagione?"
+ },
+ {
+  "id": "family_classics_cesaroni_056",
+  "questionText": "Qual è il titolo dell'episodio 22 della seconda stagione?"
+ },
+ {
+  "id": "family_classics_cesaroni_057",
+  "questionText": "Qual è il titolo dell'ultimo episodio della seconda stagione?"
+ },
+ {
+  "id": "family_classics_cesaroni_058",
+  "questionText": "Qual è il titolo del primo episodio della terza stagione?"
+ },
+ {
+  "id": "family_classics_cesaroni_059",
+  "questionText": "Qual è il titolo del secondo episodio della terza stagione?"
+ },
+ {
+  "id": "family_classics_cesaroni_060",
+  "questionText": "Qual è il titolo dell'episodio 18 della terza stagione, quello dedicato alla vecchia canzone dei Gladiators?"
+ },
+ {
+  "id": "family_classics_cesaroni_062",
+  "questionText": "Qual è il titolo del primo episodio della quarta stagione?"
+ },
+ {
+  "id": "family_classics_cesaroni_063",
+  "questionText": "Qual è il titolo dell'episodio 13 della quarta stagione, legato alla memoria di Marta?"
+ },
+ {
+  "id": "family_classics_cesaroni_064",
+  "questionText": "Qual è il titolo dell'ultimo episodio della quarta stagione?"
+ },
+ {
+  "id": "family_classics_cesaroni_065",
+  "questionText": "Qual è il titolo del primo episodio della quinta stagione?"
+ },
+ {
+  "id": "family_classics_cesaroni_066",
+  "questionText": "Qual è il titolo dell'episodio 8 della quinta stagione, dedicato alla canzone dei Gladiators?"
+ },
+ {
+  "id": "family_classics_cesaroni_067",
+  "questionText": "Qual è il titolo dell'episodio 12 della quinta stagione in cui Giulio sale sul ring?"
+ },
+ {
+  "id": "family_classics_cesaroni_070",
+  "questionText": "Qual è il titolo del primo episodio della sesta stagione?"
+ },
+ {
+  "id": "family_classics_cesaroni_071",
+  "questionText": "Qual è il titolo dell'episodio 4 della sesta stagione?"
+ },
+ {
+  "id": "family_classics_cesaroni_072",
+  "questionText": "Qual è il titolo dell'episodio 8 della sesta stagione?"
+ },
+ {
+  "id": "family_classics_cesaroni_073",
+  "questionText": "Qual è il titolo dell'episodio 10 della sesta stagione?"
+ },
+ {
+  "id": "family_classics_cesaroni_074",
+  "questionText": "Qual è il titolo dell'ultimo episodio della sesta stagione?"
+ },
+ {
+  "id": "family_classics_cesaroni_076",
+  "questionText": "Qual è la squadra di calcio per cui tifa Giulio?"
+ },
+ {
+  "id": "family_classics_cesaroni_079",
+  "answers": {
+   "3": "Università"
+  }
+ },
+ {
+  "id": "family_classics_cesaroni_080",
+  "explanation": "Nel primo ciclo la scuola di Lucia è il liceo Ugo Foscolo."
+ },
+ {
+  "id": "family_classics_cesaroni_081",
+  "questionText": "Qual è il nome dell'antica attività di famiglia dei Cesaroni?",
+  "explanation": "Il locale di famiglia è un vecchio negozio di vini e olii poi diventato bottiglieria."
+ },
+ {
+  "id": "family_classics_cesaroni_083",
+  "answers": {
+   "3": "Chiama la Capitaneria dicendo che c'è una bomba"
+  }
+ },
+ {
+  "id": "family_classics_cesaroni_090",
+  "explanation": "Nel primo episodio della quarta stagione Olga è la wedding planner delle nozze."
+ },
+ {
+  "id": "family_classics_cesaroni_094",
+  "questionText": "Con quale donna esce Francesco Rizzo pur essendo già impegnato?",
+  "explanation": "Francesco nasconde ad Alice di essere già impegnato con una donna benestante."
+ },
+ {
+  "id": "family_classics_cesaroni_095",
+  "questionText": "Qual è il nome dell'ultimo figlio di Sofia Scaramozzino?",
+  "explanation": "Ivan è il più piccolo dei tre figli di Sofia."
+ },
+ {
+  "id": "family_classics_cesaroni_098",
+  "explanation": "Sofia rivela che Nina è figlia di Giulio.",
+  "answers": {
+   "0": "Che Nina è sua sorella",
+   "1": "Che Nina è nata a Milano",
+   "2": "Che Nina è la figlia di Marco",
+   "3": "Che Nina è sua figlia"
+  }
+ },
+ {
+  "id": "family_classics_un_medico_035",
+  "questionText": "Che rapporto di parentela lega Sarà Levi a Marco Levi?",
+  "explanation": "Sarà Levi è la sorella di Marco Levi."
+ },
+ {
+  "id": "family_classics_un_medico_036",
+  "questionText": "Che professione sportiva aveva Sarà Levi prima di arrivare a Roma?",
+  "explanation": "Sarà Levi è indicata come ex campionessa di mezzofondo."
+ },
+ {
+  "id": "family_classics_un_medico_039",
+  "explanation": "Lorenzo incontra Sarà Levi durante il volo verso Roma.",
+  "answers": {
+   "1": "Sarà Levi"
+  }
+ },
+ {
+  "id": "family_classics_un_medico_067",
+  "questionText": "Chi è Sarà Levi rispetto a Jonathan?",
+  "explanation": "Jonathan è figlio di Marco, quindi Sarà è sua zia."
+ },
+ {
+  "id": "hp_azkaban_extra_001",
+  "explanation": "Harry non può andare a Hogsmeade perché non ha il modulo di autorizzazione firmato dai Dursley.",
+  "answers": {
+   "0": "Perché ha saltato la lezione di Trasfigurazione",
+   "1": "Perché i Dursley non gli hanno firmato il permesso",
+   "2": "Perché Silente teme un attacco dei Dissennatori",
+   "3": "Perché è ancora in punizione da Piton"
+  }
+ },
+ {
+  "id": "hp_azkaban_extra_005",
+  "explanation": "Cooman interpreta più volte la presenza del Gramo, un enorme cane nero considerato presagio di morte."
+ },
+ {
+  "id": "hp_azkaban_extra_007",
+  "explanation": "Il Giratempo permette a Hermione di tornare indietro di alcune ore e frequentare più lezioni."
+ },
+ {
+  "id": "hp_azkaban_extra_008",
+  "explanation": "Guardando la mappa, Lupin nota Peter Pettigrew vicino a Ron, Harry e Hermione, capendo che Sirius non è l'unico in gioco."
+ },
+ {
+  "id": "hp_azkaban_extra_009",
+  "questionText": "Quale dettaglio fisico di Crosta rende credibile il racconto secondo cui Peter Pettigrew avrebbe lasciato solo un frammento di sé?"
+ },
+ {
+  "id": "hp_azkaban_extra_010",
+  "questionText": "Perché Lupin si precipita fuori senza bere la pozione di Piton proprio nella notte decisiva?",
+  "answers": {
+   "0": "Perché vede Peter Pettigrew sulla Mappa del Malandrino",
+   "1": "Perché riceve un messaggio da Silente",
+   "2": "Perché sente un richiamo dei Dissennatori",
+   "3": "Perché Sirius gli appare alla finestra"
+  }
+ },
+ {
+  "id": "hp_azkaban_extra_011",
+  "explanation": "È Grattastinchi a premere il nodo che blocca il Platano Picchiatore e apre la via sotto l'albero."
+ },
+ {
+  "id": "hp_azkaban_extra_012",
+  "questionText": "Qual è il compito di Macnair nella vicenda che coinvolge Fierobecco?"
+ },
+ {
+  "id": "hp_azkaban_extra_014",
+  "questionText": "Perché Hermione lancia un sasso vicino alla capanna di Hagrid durante il secondo passaggio degli stessi eventi?"
+ },
+ {
+  "id": "hp_azkaban_extra_016",
+  "answers": {
+   "0": "Perché Sirius gli chiede di partire con lui",
+   "1": "Perché ormai tutti sanno che è un lupo mannaro",
+   "2": "Perché il Ministero lo manda ad Azkaban",
+   "3": "Perché Silente lo licenzia dopo l'incidente"
+  }
+ },
+ {
+  "id": "hp_azkaban_extra_017",
+  "answers": {
+   "2": "Un nuovo mantello dell'invisibilità"
+  }
+ },
+ {
+  "id": "hp_azkaban_extra_019",
+  "explanation": "Ron viene trascinato via da Sirius nella sua forma di cane, e da lì si apre il confronto nella Stamberga Strillante.",
+  "answers": {
+   "3": "Lupin già trasformato"
+  }
+ },
+ {
+  "id": "hp_azkaban_extra_020",
+  "explanation": "La mappa risponde a Piton con frasi beffarde e offensive, riconoscendo che non è chi può usarla davvero."
+ },
+ {
+  "id": "hp_azkaban_extra_021",
+  "questionText": "Qual è la frase necessaria per attivare la Mappa del Malandrino?"
+ },
+ {
+  "id": "hp_azkaban_extra_023",
+  "answers": {
+   "0": "Il coraggio vale più della memoria"
+  }
+ },
+ {
+  "id": "hp_azkaban_extra_024",
+  "questionText": "Perché Harry esita a credere subito all'idea che Sirius sia innocente nella Stamberga Strillante?",
+  "answers": {
+   "0": "Perché lo ha visto parlare con Voldemort",
+   "1": "Perché Sirius ha attaccato Hermione davanti a lui",
+   "2": "Perché Cooman gli aveva predetto che fosse un Auror",
+   "3": "Perché pensa che Sirius abbia tradito i suoi genitori"
+  }
+ },
+ {
+  "id": "hp_chamber_001",
+  "questionText": "Perché Dobby arriva a Privet Drive all'inizio del film?",
+  "explanation": "Dobby vuole impedire a Harry di tornare a Hogwarts perché sa che la scuola sta per diventare molto pericolosa."
+ },
+ {
+  "id": "hp_chamber_004",
+  "explanation": "Il Ministero rileva magia a casa di Harry e attribuisce a lui l'incantesimo, anche se in realtà l'ha lanciato Dobby.",
+  "answers": {
+   "0": "Perché ha usato la Metropolvere senza permesso",
+   "1": "Perché è stato rilevato un incantesimo in casa sua",
+   "2": "Perché ha insultato un mago adulto",
+   "3": "Perché ha tentato di scappare di notte"
+  }
+ },
+ {
+  "id": "hp_chamber_007",
+  "questionText": "Perché Harry e Ron non riescono a passare la barriera del binario 9 e 3/4?",
+  "explanation": "Più tardi si scopre che è Dobby ad aver sigillato l'accesso al binario per impedire a Harry di tornare a Hogwarts.",
+  "answers": {
+   "1": "La barriera è stata bloccata da Dobby"
+  }
+ },
+ {
+  "id": "hp_chamber_010",
+  "questionText": "Di chi è la voce che solo Harry sente sibilare nei muri di Hogwarts?"
+ },
+ {
+  "id": "hp_chamber_011",
+  "questionText": "Chi è la prima vittima trovata pietrificata nel castello?",
+  "explanation": "La prima vittima del mostro è Mrs Norris, la gatta di Gazza, trovata immobile sotto il messaggio sul muro."
+ },
+ {
+  "id": "hp_chamber_012",
+  "answers": {
+   "0": "Chi tradisce Serpeverde verrà punito",
+   "1": "L'erede è tornato: inchinatevi",
+   "3": "La Camera dei Segreti è stata aperta: nemici dell'Erede, temete"
+  }
+ },
+ {
+  "id": "hp_chamber_013",
+  "questionText": "Perché Colin Canon sopravvive all'incontro con il mostro della Camera?",
+  "answers": {
+   "0": "È schermato dallo specchio di Hermione"
+  }
+ },
+ {
+  "id": "hp_chamber_016",
+  "answers": {
+   "0": "Perché eredita i libri di Tom Riddle",
+   "1": "Perché parla al serpente davanti a tutti",
+   "2": "Perché Lucius Malfoy lo accusa pubblicamente",
+   "3": "Perché lo vedono uscire dall'ufficio di Gazza"
+  }
+ },
+ {
+  "id": "hp_chamber_018",
+  "answers": {
+   "0": "Nella Stanza delle Necessità"
+  }
+ },
+ {
+  "id": "hp_chamber_026",
+  "explanation": "Aragog scagiona Hagrid: il mostro della Camera non era lui e Hagrid era stato incolpato ingiustamente già cinquant'anni prima.",
+  "answers": {
+   "2": "Che Hagrid è l'ultimo erede di Serpeverde"
+  }
+ },
+ {
+  "id": "hp_chamber_027",
+  "questionText": "Di chi è il ricordo che Harry rivive grazie al diario misterioso?"
+ },
+ {
+  "id": "hp_chamber_029",
+  "explanation": "L'accesso alla Camera è nascosto in un lavandino del bagno di Mirtilla Malcontenta e si apre solo parlando in serpentese."
+ },
+ {
+  "id": "hp_chamber_030",
+  "questionText": "Perché l'incantesimo di memoria di Lockhart esplode contro chi lo lancia nei sotterranei?",
+  "answers": {
+   "2": "La bacchetta di Ron è rotta"
+  }
+ },
+ {
+  "id": "hp_chamber_032",
+  "explanation": "Fawkes arriva portando il Cappello Parlante, da cui Harry riuscirà poi a estrarre l'arma decisiva."
+ },
+ {
+  "id": "hp_chamber_037",
+  "questionText": "Quale verità sconvolgente rivela il diario su Tom Riddle?",
+  "explanation": "La memoria nel diario rivela che Tom Riddle è in realtà il giovane Voldemort, il vero burattinaio dietro gli eventi.",
+  "answers": {
+   "2": "Che è il giovane Lord Voldemort"
+  }
+ },
+ {
+  "id": "hp_chamber_038",
+  "questionText": "Perché Ginny Weasley appare sempre più debole nel corso dell'anno?",
+  "answers": {
+   "0": "Perché teme di essere espulsa per via di Fred e George",
+   "1": "Perché beve per errore una pozione avariata",
+   "2": "Perché subisce un maleficio di Draco durante le lezioni",
+   "3": "Perché il diario le prosciuga energia e volontà"
+  }
+ },
+ {
+  "id": "hp_chamber_039",
+  "explanation": "Riddle attira Ginny nella Camera per completare il proprio ritorno e lasciarla morire laggiù."
+ },
+ {
+  "id": "hp_chamber_040",
+  "explanation": "Per placare il panico e dare l'impressione di agire, il Ministero porta via Hagrid, già accusato anche cinquant'anni prima."
+ },
+ {
+  "id": "hp_chamber_042",
+  "questionText": "Quale pianta viene usata per preparare il rimedio che farà rinvenire i pietrificati?"
+ },
+ {
+  "id": "hp_chamber_043",
+  "explanation": "Le lacrime di Fawkes hanno proprietà guaritrici e neutralizzano il veleno della zanna del basilisco."
+ },
+ {
+  "id": "hp_chamber_046",
+  "answers": {
+   "1": "Perde la capacità di parlare"
+  }
+ },
+ {
+  "id": "hp_chamber_048",
+  "explanation": "È il professor Ruf, il fantasma che insegna Storia della Magia, a spiegare in aula la storia della Camera e di Serpeverde."
+ },
+ {
+  "id": "hp_deathly1_extra_001",
+  "explanation": "Durante la fuga George viene colpito da Sectumsempra e perde un orecchio, dettaglio che segna subito il tono più duro del film."
+ },
+ {
+  "id": "hp_deathly1_extra_002",
+  "explanation": "Il Patronus a forma di lince di Kingsley Shacklebolt avvisa che il Ministero è caduto e che i presenti sono in pericolo."
+ },
+ {
+  "id": "hp_deathly1_extra_003",
+  "questionText": "Dopo la fuga dal Ministero, perché il trio non può più tornare al numero 12 di Grimmauld Place?"
+ },
+ {
+  "id": "hp_deathly1_extra_006",
+  "questionText": "Quale parola il trio smette di pronunciare perché è diventata un Tabu che li espone ai nemici?",
+  "explanation": "Il nome di Voldemort è stato stregato con un Tabu: pronunciarlo rompe le protezioni e attira subito i cacciatori."
+ },
+ {
+  "id": "hp_deathly1_extra_009",
+  "explanation": "Harry segue una cerva Patronus d'argento, indizio che solo più tardi verrà collegato con certezza a Piton."
+ },
+ {
+  "id": "hp_deathly1_extra_011",
+  "explanation": "Harry affida a Ron il compito di colpire il medaglione con la spada di Grifondoro, facendogli superare la prova più intima."
+ },
+ {
+  "id": "hp_deathly1_extra_012",
+  "questionText": "Quale visione usa il medaglione per colpire il punto più vulnerabile di Ron?",
+  "answers": {
+   "0": "Silente gli dice che non è stato scelto per nulla"
+  }
+ },
+ {
+  "id": "hp_deathly1_extra_014",
+  "explanation": "Il simbolo dei Doni della Morte è composto da triangolo, cerchio e linea: mantello, pietra e bacchetta."
+ },
+ {
+  "id": "hp_deathly1_extra_015",
+  "questionText": "Perché Xenophilius Lovegood decide di tradire Harry, Ron e Hermione?",
+  "explanation": "Xenophilius è disperato: i Mangiamorte hanno preso Luna e lui pensa di poterla salvare consegnando il trio.",
+  "answers": {
+   "0": "È segretamente un Mangiamorte",
+   "3": "Spera di riavere Luna, che è stata rapita"
+  }
+ },
+ {
+  "id": "hp_deathly1_extra_016",
+  "explanation": "Bathilda conduce Harry al piano di sopra e gli parla in serpentese, segnale che qualcosa non torna già prima della rivelazione di Nagini."
+ },
+ {
+  "id": "hp_deathly1_extra_018",
+  "explanation": "Sulla tomba dei Potter compare l'epitaffio 'L'ultimo nemico che sarà distrutto è la morte', frase che risuona fortemente con il titolo della storia.",
+  "answers": {
+   "0": "L'ultimo nemico che sarà distrutto è la morte",
+   "1": "Dove il tuo tesoro è, lì sarà anche il tuo cuore",
+   "3": "La felicità si può trovare anche negli attimi più bui"
+  }
+ },
+ {
+  "id": "hp_deathly1_extra_022",
+  "questionText": "Perché Bellatrix va nel panico quando vede la spada di Grifondoro a Malfoy Manor?",
+  "explanation": "Bellatrix sa che nella sua camera blindata è custodito un altro Horcrux e teme che, se la spada è fuori posto, anche il resto sia stato scoperto."
+ },
+ {
+  "id": "hp_deathly1_extra_023",
+  "questionText": "Quale canzone accompagna il breve ballo improvvisato tra Harry e Hermione durante il periodo più cupo della fuga?",
+  "explanation": "La scena del ballo sulle note di 'O Children' è uno dei momenti più umani e malinconici di tutta la saga filmica."
+ },
+ {
+  "id": "hp_deathly1_extra_024",
+  "explanation": "Ron impersona Reg Cattermole, il marito di Mary, e questo rende ancora più concreta la crudeltà del sistema contro i nati Babbani."
+ },
+ {
+  "id": "hp_deathly1_extra_025",
+  "questionText": "Quale contenitore magico porta Hermione sempre con sé per trasportare tenda, libri e oggetti utili?",
+  "explanation": "La piccola borsetta di Hermione è incantata con un Estensore Irriconoscibile, soluzione pratica che salva spesso il trio."
+ },
+ {
+  "id": "hp_deathly2_extra_002",
+  "explanation": "Aberforth apre al trio il passaggio che collega la Testa di Porco con la Stanza delle Necessità, via usata dalla resistenza di Hogwarts.",
+  "answers": {
+   "2": "Dal pub Testa di Porco alla Stanza delle Necessità"
+  }
+ },
+ {
+  "id": "hp_deathly2_extra_003",
+  "explanation": "La scena finale di Parte 1 trova sviluppo qui: Voldemort apre la tomba di Silente e prende la Bacchetta di Sambuco, convinto che gli darà dominio assoluto."
+ },
+ {
+  "id": "hp_deathly2_extra_004",
+  "explanation": "Con una delle sue scene più amate, McGranitt da vita alle statue di Hogwarts per partecipare alla battaglia."
+ },
+ {
+  "id": "hp_deathly2_extra_006",
+  "explanation": "La Dama Grigia è Helena Corvonero, figlia di Rowena, e confessa di aver rubato il diadema molto tempo prima.",
+  "answers": {
+   "2": "Era la custode della Stanza delle Necessità",
+   "3": "È la figlia di Rowena Corvonero che lo rubò"
+  }
+ },
+ {
+  "id": "hp_deathly2_extra_007",
+  "questionText": "Chi scatena accidentalmente il Fuocofatuo demoniaco nella Stanza delle Necessità?",
+  "explanation": "Nella versione filmica è Crabbe a evocare il Fiendfyre che poi non riesce più a controllare."
+ },
+ {
+  "id": "hp_deathly2_extra_008",
+  "answers": {
+   "3": "Il Fiendfyre nella Stanza delle Necessità"
+  }
+ },
+ {
+  "id": "hp_deathly2_extra_011",
+  "explanation": "Molly affronta Bellatrix per proteggere la figlia e la sconfigge in uno dei momenti più liberatori dello scontro finale."
+ },
+ {
+  "id": "hp_deathly2_extra_014",
+  "questionText": "Perché Harry decide di consegnarsi volontariamente a Voldemort nella Foresta Proibita?",
+  "answers": {
+   "3": "Sa che la Bacchetta di Sambuco lo proteggerà comunque"
+  }
+ },
+ {
+  "id": "hp_deathly2_extra_015",
+  "answers": {
+   "2": "La maledizione viene deviata dal mantello dell'invisibilità"
+  }
+ },
+ {
+  "id": "hp_deathly2_extra_017",
+  "explanation": "Il Patronus di Piton è una cerva come quello di Lily: un dettaglio potentissimo che svela la persistenza del suo amore.",
+  "answers": {
+   "0": "È una fenice donata da Silente",
+   "1": "È una cerva, uguale a quello di Lily",
+   "2": "Non riesce più a evocarlo dopo la sua morte",
+   "3": "È un cervo, come quello di James"
+  }
+ },
+ {
+  "id": "hp_deathly2_extra_019",
+  "questionText": "Perché la Bacchetta di Sambuco non risponde pienamente a Voldemort nel duello finale?",
+  "explanation": "Voldemort crede di ereditarla uccidendo Piton, ma la catena di fedeltà passa invece da Draco a Harry quando quest'ultimo lo disarma.",
+  "answers": {
+   "0": "Il suo vero padrone è Harry, dopo il disarmo di Draco",
+   "2": "È stata spezzata e poi ricomposta male"
+  }
+ },
+ {
+  "id": "hp_deathly2_extra_021",
+  "explanation": "La cupola magica regge finché Voldemort non la colpisce con tutta la forza della Bacchetta di Sambuco, aprendo la via all'assalto."
+ },
+ {
+  "id": "hp_deathly2_extra_022",
+  "questionText": "Quale fratello di Silente racconta ad Harry la verità su Ariana nella Testa di Porco?",
+  "explanation": "È Aberforth a offrire il lato più intimo e doloroso della storia familiare dei Silente, ridimensionando l'aura quasi mitica di Albus."
+ },
+ {
+  "id": "hp_deathly2_extra_023",
+  "explanation": "Nella coreografia dello scontro Piton devia i colpi e colpisce i Carrow dietro di lui prima di fuggire, dettaglio amato dai fan perché lascia intuire molto."
+ },
+ {
+  "id": "hp_deathly2_extra_024",
+  "explanation": "È Luna a capire al volo di quale fantasma Harry abbia bisogno, confermando ancora una volta la sua sensibilità fuori dal comune."
+ },
+ {
+  "id": "hp_deathly2_extra_025",
+  "explanation": "Narcissa si china su Harry e lui le sussurra che Draco è vivo: quella risposta le basta per dichiararlo morto davanti a Voldemort."
+ },
+ {
+  "id": "hp_goblet_001",
+  "questionText": "In quale anno è uscito al cinema Harry Potter e il calice di fuoco?",
+  "explanation": "Harry Potter e il calice di fuoco è uscito al cinema nel 2005."
+ },
+ {
+  "id": "hp_goblet_002",
+  "explanation": "La regia del quarto film della saga è di Mike Newell."
+ },
+ {
+  "id": "hp_goblet_004",
+  "explanation": "È il Calice di Fuoco a scegliere i campioni e a espellere i loro nomi tra le fiamme blu."
+ },
+ {
+  "id": "hp_goblet_005",
+  "questionText": "Chi viene annunciato a sorpresa come quarto campione, pur non avendo l'età richiesta?",
+  "explanation": "Il colpo di scena è che il Calice sceglie anche Harry, trasformando il torneo in una gara a quattro campioni."
+ },
+ {
+  "id": "hp_goblet_006",
+  "questionText": "Chi è il preside di Durmstrang che accompagna i suoi studenti a Hogwarts?",
+  "explanation": "La delegazione di Durmstrang è guidata da Igor Karkaroff, ex Mangiamorte dal passato ambiguo."
+ },
+ {
+  "id": "hp_goblet_007",
+  "explanation": "La scuola di Beauxbatons è rappresentata dalla sua imponente direttrice Olympe Maxime."
+ },
+ {
+  "id": "hp_goblet_008",
+  "explanation": "Nella prima prova Harry affronta l'Ungaro Spinato, il drago più aggressivo tra quelli mostrati nel film."
+ },
+ {
+  "id": "hp_goblet_009",
+  "explanation": "L'obiettivo della prima prova è recuperare un uovo d'oro custodito dal drago."
+ },
+ {
+  "id": "hp_goblet_012",
+  "answers": {
+   "3": "Nella Stanza delle Necessità"
+  }
+ },
+ {
+  "id": "hp_goblet_014",
+  "explanation": "Nel film è Neville a dare a Harry l'algabranchia; questo dettaglio differisce dal libro."
+ },
+ {
+  "id": "hp_goblet_015",
+  "questionText": "Chi è l'ostaggio che Harry deve recuperare dal Lago Nero nella seconda prova?",
+  "explanation": "L'ostaggio di Harry nella seconda prova è Ron, il suo migliore amico."
+ },
+ {
+  "id": "hp_goblet_016",
+  "questionText": "Gabrielle, una delle persone trattenute sott'acqua nella seconda prova, è la sorella di chi?",
+  "explanation": "Gabrielle Delacour è la sorella minore di Fleur, campionessa di Beauxbatons."
+ },
+ {
+  "id": "hp_goblet_018",
+  "questionText": "Perché Harry perde tempo prezioso nella seconda prova invece di risalire subito in superficie?"
+ },
+ {
+  "id": "hp_goblet_020",
+  "questionText": "Che cosa bevono Fred e George per provare a superare la linea d'età tracciata attorno al Calice?",
+  "explanation": "I gemelli Weasley usano una Pozione Invecchiante nel tentativo di ingannare la linea d'età."
+ },
+ {
+  "id": "hp_goblet_021",
+  "questionText": "Qual è l'effetto più memorabile del fallimento del piano di Fred e George contro la linea d'età?",
+  "explanation": "La linea d'età li respinge facendoli invecchiare all'istante con lunghe barbe bianche."
+ },
+ {
+  "id": "hp_goblet_023",
+  "questionText": "Chi aveva già invitato Cho Chang al Ballo del Ceppo prima che Harry trovasse il coraggio di chiederle di andarci insieme?",
+  "explanation": "Quando Harry prova a invitare Cho, lei ha già accettato l'invito di Cedric Diggory."
+ },
+ {
+  "id": "hp_goblet_025",
+  "explanation": "La band che si esibisce al Ballo del Ceppo è quella delle Weird Sisters."
+ },
+ {
+  "id": "hp_goblet_026",
+  "explanation": "Moody punisce Malfoy trasformandolo in un furetto in una delle sue scene più memorabili."
+ },
+ {
+  "id": "hp_goblet_028",
+  "explanation": "È Bartemius Crouch Sr. a presiedere il processo del figlio nella memoria mostrata nel Pensatoio."
+ },
+ {
+  "id": "hp_goblet_029",
+  "questionText": "Quale Maledizione Senza Perdono mostra Moody come forma di controllo assoluto sulla volontà altrui?",
+  "explanation": "Moody spiega l'Imperius, pronunciata come Imperio nel film, come maledizione capace di piegare la volontà della vittima."
+ },
+ {
+  "id": "hp_goblet_030",
+  "questionText": "Quale oggetto al centro del labirinto si rivela in realtà una Passaporta?"
+ },
+ {
+  "id": "hp_goblet_034",
+  "questionText": "Nel rituale del cimitero, di chi è l'osso evocato dalla formula \"osso del padre, dato senza consenso\"?"
+ },
+ {
+  "id": "hp_goblet_038",
+  "questionText": "Chi si nasconde davvero dietro l'identità del falso Moody?",
+  "explanation": "L'uomo che si finge Moody è in realtà Barty Crouch Jr., fedele servitore di Voldemort."
+ },
+ {
+  "id": "hp_goblet_039",
+  "explanation": "Il travestimento è mantenuto con dosi continue di Pozione Polisucco conservate nella fiaschetta di Moody."
+ },
+ {
+  "id": "hp_goblet_040",
+  "explanation": "Il vero Moody è rinchiuso in un baule magico, da cui il falso estrae anche capelli per la Polisucco."
+ },
+ {
+  "id": "hp_goblet_043",
+  "questionText": "Per quale sport Viktor Krum è già una celebrità internazionale ancora prima del Torneo Tremaghi?",
+  "explanation": "Viktor Krum è famoso in tutto il mondo come campione di Quidditch."
+ },
+ {
+  "id": "hp_goblet_047",
+  "explanation": "È la professoressa McGranitt a interrompere Moody, scandalizzata dal modo in cui ha punito Malfoy."
+ },
+ {
+  "id": "hp_goblet_049",
+  "questionText": "Chi pronuncia disperato il grido \"Questo è mio figlio!\" quando il corpo di Cedric torna a Hogwarts?",
+  "explanation": "È Amos Diggory, padre di Cedric, a pronunciare una delle battute più strazianti del film."
+ },
+ {
+  "id": "hp_halfblood_extra_002",
+  "explanation": "Nel film Silente raggiunge Harry in un caffè londinese, in una scena molto diversa e più ironica rispetto al libro.",
+  "answers": {
+   "2": "In un caffè della metropolitana"
+  }
+ },
+ {
+  "id": "hp_halfblood_extra_003",
+  "questionText": "In cosa si è trasformato Orazio Lumacorno quando prova a fingersi assente nella sua casa devastata?"
+ },
+ {
+  "id": "hp_halfblood_extra_008",
+  "explanation": "Lumacorno ricorda il pesce magico creato da Lily, un aneddoto che rende ancora più forte il suo legame emotivo con lei e con Harry."
+ },
+ {
+  "id": "hp_halfblood_extra_011",
+  "questionText": "Quale regalo destinato in realtà a Harry fa perdere completamente la testa a Ron?"
+ },
+ {
+  "id": "hp_halfblood_extra_012",
+  "explanation": "Harry infila in bocca a Ron un bezoar, ricordando la lezione di Lumacorno sugli antidoti più rapidi."
+ },
+ {
+  "id": "hp_halfblood_extra_013",
+  "explanation": "Harry usa Sectumsempra senza conoscerne davvero l'effetto, e il risultato sul corpo di Draco è devastante."
+ },
+ {
+  "id": "hp_halfblood_extra_014",
+  "explanation": "Lo scontro avviene nel bagno di Mirtilla Malcontenta, trasformando un luogo già strano in una delle scene più dure del film.",
+  "answers": {
+   "3": "Nella Stanza delle Necessità"
+  }
+ },
+ {
+  "id": "hp_halfblood_extra_016",
+  "questionText": "Qual è l'incarico affidato da Voldemort a Draco nel corso del film?"
+ },
+ {
+  "id": "hp_halfblood_extra_018",
+  "questionText": "Dove nasconde Harry il libro del Principe Mezzosangue dopo aver visto cosa può provocare Sectumsempra?",
+  "explanation": "Sconvolto da quanto è accaduto a Draco, Harry nasconde il manuale nella Stanza delle Necessità.",
+  "answers": {
+   "3": "Nella Stanza delle Necessità"
+  }
+ },
+ {
+  "id": "hp_halfblood_extra_019",
+  "questionText": "Che cosa recuperano Silente e Harry nella caverna prima di scoprire che il loro sforzo non è bastato?",
+  "explanation": "Dopo aver superato la prova del bacile, i due trovano un medaglione che solo più tardi scoprono essere un falso."
+ },
+ {
+  "id": "hp_halfblood_extra_021",
+  "questionText": "Perché Harry non può intervenire subito quando Draco disarma Silente sulla Torre di Astronomia?"
+ },
+ {
+  "id": "hp_halfblood_extra_022",
+  "questionText": "Chi accompagna Harry come ospite alla festa di Natale di Lumacorno, in una delle scelte più spiazzanti ma adorabili del film?"
+ },
+ {
+  "id": "q_1_15",
+  "questionText": "Qual è la vera identità di Taskmaster nel film?",
+  "explanation": "Taskmaster è Antonia Dreykov, la figlia del generale, controllata mentalmente dal padre."
+ },
+ {
+  "id": "q_1_8",
+  "questionText": "Qual è l'identità di Alexei Shostakov nella mitologia del film?",
+  "explanation": "Alexei è il super soldato sovietico noto come Red Guardian, controparte russa di Captain America."
+ },
+ {
+  "id": "q_100_20",
+  "questionText": "In quale università ha studiato Andy Bernard, fatto che ricorda continuamente ai colleghi?"
+ },
+ {
+  "id": "q_101_3",
+  "explanation": "Ross è un paleontologo che lavora al museo e in seguito insegna all'università."
+ },
+ {
+  "id": "q_101_35",
+  "explanation": "Ross diventa professore di paleontologia all'università di New York.",
+  "answers": {
+   "3": "Insegna paleontologia all'università"
+  }
+ },
+ {
+  "id": "q_101_50",
+  "explanation": "Nel finale tutti lasciano le proprie chiavi sul bancone dell'appartamento ormai vuoto, poi vanno a prendere un caffè insieme."
+ },
+ {
+  "id": "q_126_40",
+  "answers": {
+   "2": "Sarà Williams"
+  }
+ },
+ {
+  "id": "q_141_9",
+  "explanation": "Sarà Monaschi, interpretata da Claudia Gerini, è una revisore dei conti del Vaticano che si trova coinvolta negli affari legati alla vendita dei terreni di Ostia.",
+  "answers": {
+   "0": "Sarà Monaschi"
+  }
+ },
+ {
+  "id": "q_144_44",
+  "explanation": "Il ruolo di Agnese Tiberi, direttrice sanitaria ed ex moglie di Andrea Fanti, è interpretato da Sarà Lazzaro.",
+  "answers": {
+   "1": "Sarà Lazzaro"
+  }
+ },
+ {
+  "id": "q_144_8",
+  "explanation": "Agnese Tiberi, interpretata da Sarà Lazzaro, è la direttrice sanitaria del Policlinico Ambrosiano ed ex moglie di Andrea Fanti."
+ },
+ {
+  "id": "q_147_46",
+  "answers": {
+   "0": "Nella graphic novel si chiamava Sarà"
+  }
+ },
+ {
+  "id": "q_151_10",
+  "answers": {
+   "0": "\"Sarà\" di Francesco De Gregori"
+  }
+ },
+ {
+  "id": "q_157_41",
+  "explanation": "Sarà è la guidatrice dell'auto che investe Iván. Mencía crede inizialmente di essere lei la responsabile, ma viene rivelato che era Sarà.",
+  "answers": {
+   "3": "Sarà Barrera"
+  }
+ },
+ {
+  "id": "q_164_31",
+  "questionText": "Come si chiama il padre di Sarà Tancredi nella serie?",
+  "explanation": "Frank Tancredi è il padre di Sarà, governatore dell'Illinois. È soprannominato 'Frontier Justice Frank' per la sua linea dura sulla criminalità. Supporta la pena di morte per Lincoln Burrows."
+ },
+ {
+  "id": "q_164_43",
+  "explanation": "Poseidone è in realtà Jacob Anton Ness (interpretato da Mark Feuerstein), un ex agente CIA che ha sposato Sarà mentre Michael era 'morto'. Aveva ricattato Michael costringendolo a lavorare per lui.",
+  "answers": {
+   "1": "Jacob Anton Ness, il marito di Sarà"
+  }
+ },
+ {
+  "id": "q_165_50",
+  "answers": {
+   "2": "Sarà Gilbert"
+  }
+ },
+ {
+  "id": "q_166_28",
+  "explanation": "L'episodio musicale 7x18 è centrato su Callie Torres che subisce gravi traumi in seguito a un incidente d'auto. Sarà Ramirez, che interpretava Callie, aveva un background da performer teatrale (ha vinto un Tony Award), il che ispirò l'episodio."
+ },
+ {
+  "id": "q_2_10",
+  "questionText": "Quale è la canzone che fa da inno della troupe nel film?",
+  "explanation": "This Is Me è il brano che gli artisti del circo intonano come affermazione della propria identità."
+ },
+ {
+  "id": "q_2_16",
+  "questionText": "In quale luogo iconico Barnum convince Phillip a unirsi alla sua attività, in un numero al bar?",
+  "explanation": "La scena di The Other Side è ambientata in un bar, con i due che cantano e ballano tra i bicchieri."
+ },
+ {
+  "id": "q_2_23",
+  "explanation": "L'idea di costruire una vita fatta di sogni è centrale ed è cantata nel brano A Million Dreams.",
+  "answers": {
+   "0": "Che diventerà ricco grazie al gioco d'azzardo",
+   "1": "Che la porterà a vivere in Europa",
+   "2": "Che le costruirà una vita meravigliosa partendo da sogni e immaginazione"
+  }
+ },
+ {
+  "id": "q_2_24",
+  "questionText": "Quale è l'idea alla base del brano This Is Me cantato dagli artisti?",
+  "explanation": "Il brano è un manifesto di accettazione di sé e orgoglio per la propria diversità.",
+  "answers": {
+   "2": "L'affermazione di orgoglio e identità di chi è diverso"
+  }
+ },
+ {
+  "id": "q_3_20",
+  "questionText": "Quale è l'attività principale del padre di Charlie all'inizio del film?"
+ },
+ {
+  "id": "q_3_23",
+  "answers": {
+   "0": "Accetta solo se anche il nonno Joe vivrà in fabbrica"
+  }
+ },
+ {
+  "id": "q_4_12",
+  "explanation": "Saul è l'avvocato losco che assiste Walter e Jesse nelle loro attività illegali."
+ },
+ {
+  "id": "q_4_18",
+  "questionText": "Quale oggetto, ritrovato in bagno, fa capire a Hank l'identità di Heisenberg?"
+ },
+ {
+  "id": "q_4_24",
+  "answers": {
+   "2": "Lascia Albuquerque sotto identità falsa"
+  }
+ },
+ {
+  "id": "q_414_49",
+  "questionText": "Quale dettaglio su caffè è corretto in Twin Peaks?"
+ },
+ {
+  "id": "q_414_50",
+  "questionText": "In Twin Peaks, quale affermazione è vera su caffè?",
+  "answers": {
+   "0": "caffè: Il caffè",
+   "1": "caffè: il latte alla menta",
+   "2": "caffè: il whisky",
+   "3": "caffè: Il tè verde"
+  }
+ },
+ {
+  "id": "q_5_23",
+  "questionText": "Quale evento mette in pericolo l'Helicarrier a metà film?"
+ },
+ {
+  "id": "q_6_18",
+  "questionText": "Come Tony rivela al mondo la propria identità segreta nel finale?"
+ },
+ {
+  "id": "q_72_9",
+  "answers": {
+   "2": "Sarà"
+  }
+ },
+ {
+  "id": "q_75_8",
+  "answers": {
+   "3": "Sarà"
+  }
+ },
+ {
+  "id": "q_8_24",
+  "questionText": "Cosa appare nella scena a metà titoli di coda?"
+ },
+ {
+  "id": "q_8_25",
+  "answers": {
+   "2": "Sostiene che Scott non sarà mai all'altezza"
+  }
+ },
+ {
+  "id": "q_82_38",
+  "questionText": "Qual è la vera identità del membro mascherato dell'Akatsuki che si fa chiamare Tobi?"
+ },
+ {
+  "id": "q_83_22",
+  "questionText": "Chi si nasconde dietro l'identità del Gigante Femmina che attacca l'Armata Ricognitiva?"
+ },
+ {
+  "id": "q_85_16",
+  "explanation": "Gli occhi dello shinigami, che permettono di vedere nome e durata di vita delle persone, costano metà della vita rimanente.",
+  "answers": {
+   "3": "Metà della propria vita rimanente"
+  }
+ },
+ {
+  "id": "q_85_30",
+  "explanation": "L è noto per consumare grandi quantità di dolci, torte e zucchero, sostenendo che il cervello consumi calorie pensando.",
+  "answers": {
+   "0": "Beve solo caffè amaro"
+  }
+ },
+ {
+  "id": "q_85_34",
+  "questionText": "Chi provoca la morte di L verso la metà della serie?"
+ },
+ {
+  "id": "q_85_41",
+  "explanation": "Kiyomi Takada è una nota conduttrice televisiva, ex compagna di università di Light, che diventa la portavoce pubblica di Kira."
+ },
+ {
+  "id": "q_88_15",
+  "explanation": "Uraraka dice che 'Deku' le ricorda 'dekiru', cioè 'puoi farcela', trasformando un insulto in incoraggiamento."
+ },
+ {
+  "id": "q_88_43",
+  "questionText": "Chi è davvero il villain Dabi, secondo la rivelazione sulla sua identità?",
+  "explanation": "Dabi è in realtà Toya Todoroki, il primogenito di Endeavor creduto morto, fratello maggiore di Shoto."
+ },
+ {
+  "id": "q_88_44",
+  "questionText": "Qual è la vera identità rivelata di Tomura Shigaraki, legata al passato di All Might?",
+  "explanation": "Shigaraki è in realtà Tenko Shimura, nipote di Nana Shimura, la maestra che aveva passato il One For All ad All Might."
+ },
+ {
+  "id": "q_98_41",
+  "questionText": "Presso quale tempio e organizzazione si addestra Arya per diventare un'assassina senza identità?"
+ }
+]

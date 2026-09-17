@@ -1,0 +1,16 @@
+[
+  {
+    "questionId": "q_131_44",
+    "severity": "minor",
+    "problem": "L'explanation implica che Cheadle diventi la 13ª Presidente, ma in realtà Pariston è eletto 13° Presidente e abdica immediatamente; Cheadle diventa la 14ª Presidente secondo le regole dell'Associazione Hunter. La risposta corretta (indice 0) è comunque accurata nella sua descrizione del fatto, ma l'explanation non specifica il numero esatto della carica di Cheadle.",
+    "fix": "Aggiungere nell'explanation: 'Cheadle diventa così la 14ª Presidente dell'Associazione Hunter, poiché Pariston era già stato eletto come 13°.'",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_131_49",
+    "severity": "critical",
+    "problem": "Il testo della domanda è incomprensibile: 'Quale personaggio di Hunter x Hunter presta la sua voce all'amico d'infanzia Pietro di Leorio...' usa un'espressione da doppiaggio ('presta la sua voce') che non ha senso in un contesto narrativo. Non si sta chiedendo di un doppiatore ma del personaggio. Inoltre, il nome 'Pietro' è usato solo nell'adattamento anime del 1999; nell'anime 2011 (Madhouse, quello della serie in oggetto tmdb_tv_46298) il nome dell'amico non viene mai rivelato. La risposta all'indice 1 è però quella corretta (Pietro è solo menzionato, non appare fisicamente).",
+    "fix": "Riscrivere la domanda: 'Qual è il destino dell'amico d'infanzia di Leorio, la cui storia è la motivazione principale per diventare medico?' oppure 'Come si conclude la storia dell'amico di Leorio che lo spinge a voler diventare medico?' con le stesse opzioni di risposta. Nota: il nome Pietro viene dall'anime 1999; nell'anime 2011 l'amico è anonimo.",
+    "correctIndexShouldBe": -1
+  }
+]

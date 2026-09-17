@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Buy a coffee for the person building Somto — Somto</title>
+  <meta name="description" content="Somto is free and ad-free, and it stays that way. If you feel like leaving something, you can pay with Apple Pay, Google Pay or card. Nothing changes in your account.">
+  <link rel="canonical" href="https://somto.it/en/sostieni.html">
+  <link rel="alternate" hreflang="it-IT" href="https://somto.it/sostieni.html">
+  <link rel="alternate" hreflang="en" href="https://somto.it/en/sostieni.html">
+  <link rel="alternate" hreflang="x-default" href="https://somto.it/sostieni.html">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="author" content="Somto">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Somto">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:url" content="https://somto.it/en/sostieni.html">
+  <meta property="og:title" content="Buy a coffee for the person building Somto">
+  <meta property="og:description" content="Somto is free and ad-free, and it stays that way. If you feel like buying a coffee, this is the page.">
+  <meta property="og:image" content="https://somto.it/og/home.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="Buy a coffee for the person building Somto">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Buy a coffee for the person building Somto">
+  <meta name="twitter:description" content="Somto is free and ad-free, and it stays that way. If you feel like buying a coffee, this is the page.">
+  <meta name="twitter:image" content="https://somto.it/og/home.png">
+
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+
+  <script>
+    // Ritorno dal checkout Stripe: il grazie ha una pagina sua.
+    if (window.location.search.indexOf("grazie") !== -1) {
+      window.location.replace("/en/grazie.html");
+    }
+  </script>
+
+  <link rel="stylesheet" href="/css/landing.bundle.css">
+
+  <!-- A few local rules: amounts and the "link not live yet" state. Everything else is landing.bundle.css. -->
+  <style>
+    .tip-amount { display: block; font-size: 2rem; font-weight: 700; line-height: 1.1; margin-bottom: .35rem; }
+    .lp-feature .lp-btn { margin-top: 1rem; width: 100%; justify-content: center; }
+    .tip-pending { pointer-events: none; opacity: .45; }
+    .tip-note { margin-top: 1rem; font-size: .9rem; opacity: .7; }
+    .tip-note[hidden] { display: none; }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://somto.it/en/" },
+      { "@type": "ListItem", "position": 2, "name": "Buy a coffee", "item": "https://somto.it/en/sostieni.html" }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I pay?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Card, Apple Pay or Google Pay, on Stripe's checkout. Your card details never pass through Somto."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does anything change in my account?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, everything stays the same. You don't unlock badges or extra features."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I do it from the iPhone app?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It happens on this page, in the browser. There is nothing to buy inside the app."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I stop the recurring one?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "From the link in Stripe's confirmation email, whenever you want. You don't have to write to anyone."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it tax-deductible?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, Somto is not a non-profit. Stripe sends you a confirmation email with the amount."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "I'd rather not leave anything.",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No worries, nothing changes. If you want to help for free, mention Somto to someone who watches too many shows."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script>
+    // Stripe payment links. Empty = button disabled with a notice.
+    window.__SOMTO_TIP_LINKS__ = {
+      coffee: "https://donate.stripe.com/9B6eV73gs1zbb292t75sA02",
+      breakfast: "https://donate.stripe.com/fZu14h9EQ1zbgmt9Vz5sA01",
+      round: "https://donate.stripe.com/dRmbIV04g91Dgmt8Rv5sA00",
+      custom: "https://donate.stripe.com/4gM4gt8AM5Pr2vDaZD5sA03"
+    };
+  </script>
+</head>
+<body class="lp-body" data-no-shell>
+  <header class="lp-nav" id="lpNav">
+    <div class="lp-nav-inner">
+      <a class="lp-nav-logo" href="/en/" aria-label="Somto — home">
+        <img src="/icons/somto-wordmark.png" alt="Somto">
+      </a>
+      <div class="lp-nav-actions">
+        <nav class="lp-lang" aria-label="Site language">
+          <a href="/sostieni.html" hreflang="it" lang="it">IT</a>
+          <a href="/en/sostieni.html" hreflang="en" aria-current="true">EN</a>
+        </nav>
+        <a class="lp-nav-cta" href="/login.html?next=/home.html">Sign in</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="lp-hero">
+      <div class="lp-hero-glow g1"></div>
+      <div class="lp-hero-glow g2"></div>
+      <div class="lp-hero-glow g3"></div>
+      <div class="lp-hero-inner">
+        <span class="lp-eyebrow">Coffee</span>
+        <h1>If you feel like it, <span class="lp-grad-text">buy me a coffee</span></h1>
+        <p class="lp-hero-sub">
+          Somto is free, with no ads and no subscriptions, and it stays that way
+          even if nobody ever opens this page. But if you feel like leaving
+          something, this is where you do it.
+        </p>
+        <div class="lp-cta-row">
+          <a class="lp-btn lp-btn-primary" href="#amounts">Go to the coffee</a>
+          <a class="lp-btn lp-btn-ghost" href="/en/">Back to Somto</a>
+        </div>
+        <p class="lp-hero-note">Apple Pay, Google Pay or card. Payments handled by Stripe.</p>
+      </div>
+    </section>
+
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">Two lines</span>
+          <h2 class="lp-h2">Why this page exists</h2>
+        </div>
+        <div class="lp-about-text">
+          <p>I build Somto on my own and I enjoy doing it. There is no plan to monetise it and I am not looking for one. If that ever changes I will say so plainly, rather than filling the app with ads.</p>
+          <p>Servers cost money, obviously, but as long as I can carry it I will. This page is here because every so often somebody asks how they can help, and answering "nothing, thanks" every time felt rude.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section" id="amounts">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">How much</span>
+          <h2 class="lp-h2">Up to you</h2>
+          <p class="lp-lead">The amounts below are just convenient ones. If you'd rather pick your own, use the last card.</p>
+        </div>
+        <div class="lp-grid">
+          <article class="lp-feature">
+            <span class="tip-amount">€2</span>
+            <h3>A coffee</h3>
+            <p>An actual one, at the bar down the road. I'll drink it thinking of whoever paid.</p>
+            <a class="lp-btn lp-btn-primary" data-tip="coffee" href="#amounts" rel="nofollow">Give €2</a>
+          </article>
+          <article class="lp-feature">
+            <span class="tip-amount">€5</span>
+            <h3>Coffee and a pastry</h3>
+            <p>Full breakfast. Usually the morning a new version goes out.</p>
+            <a class="lp-btn lp-btn-primary" data-tip="breakfast" href="#amounts" rel="nofollow">Give €5</a>
+          </article>
+          <article class="lp-feature">
+            <span class="tip-amount">€15</span>
+            <h3>A round for the team</h3>
+            <p>The team being me, but it's a nice thought all the same.</p>
+            <a class="lp-btn lp-btn-primary" data-tip="round" href="#amounts" rel="nofollow">Give €15</a>
+          </article>
+          <article class="lp-feature">
+            <span class="tip-amount">You</span>
+            <h3>Any amount you like</h3>
+            <p>Your own figure, once or every month. You can stop the recurring one whenever you want.</p>
+            <a class="lp-btn lp-btn-ghost" data-tip="custom" href="#amounts" rel="nofollow">Choose the amount</a>
+          </article>
+        </div>
+        <p class="tip-note" id="tipPending" hidden>
+          Payments aren't live on this page yet, I'm still setting them up. Check back shortly.
+        </p>
+      </div>
+    </section>
+
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">Worth knowing</span>
+          <h2 class="lp-h2">You unlock nothing</h2>
+        </div>
+        <div class="lp-about-text">
+          <p>Whoever buys a coffee sees exactly the same Somto as whoever doesn't. No badge, no members-only features. If leaving something bought you an advantage, Somto would be a paid app dressed up as a free one, and I'd rather it wasn't.</p>
+          <p>It isn't a subscription, unless you deliberately pick the recurring option, which you can stop whenever you want. And it isn't tax-deductible, because Somto is not a non-profit.</p>
+          <p>I never see your card details, Stripe handles the payment. How I handle data is written in the <a href="/privacy.html">privacy policy</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">FAQ</span>
+          <h2 class="lp-h2">The rest, briefly</h2>
+        </div>
+        <div class="lp-faq">
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">How do I pay?</summary>
+            <div class="lp-faq-a"><p>Card, Apple Pay or Google Pay, on Stripe's checkout. Your card details never pass through Somto.</p></div>
+          </details>
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">Does anything change in my account?</summary>
+            <div class="lp-faq-a"><p>No, everything stays the same. You don't unlock badges or extra features.</p></div>
+          </details>
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">Can I do it from the iPhone app?</summary>
+            <div class="lp-faq-a"><p>It happens on this page, in the browser. There is nothing to buy inside the app.</p></div>
+          </details>
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">How do I stop the recurring one?</summary>
+            <div class="lp-faq-a"><p>From the link in Stripe's confirmation email, whenever you want. You don't have to write to anyone.</p></div>
+          </details>
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">Is it tax-deductible?</summary>
+            <div class="lp-faq-a"><p>No, Somto is not a non-profit. Stripe sends you a confirmation email with the amount.</p></div>
+          </details>
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">I'd rather not leave anything.</summary>
+            <div class="lp-faq-a"><p>No worries, nothing changes. If you want to help for free, mention Somto to someone who watches too many shows.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section lp-final">
+      <div class="lp-container">
+        <div class="lp-final-inner">
+          <h2>Thanks either way</h2>
+          <p>If you got this far, Somto is clearly useful to you. Which was the point.</p>
+          <a class="lp-btn lp-btn-primary" href="#amounts">Go to the coffee</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="lp-footer">
+    <div class="lp-footer-inner">
+      <div class="lp-footer-brand">
+        <img src="/icons/somto-wordmark.png" alt="Somto">
+        <p>The social app for people who love films and TV. Rate, discover and decide what to watch with friends.</p>
+      </div>
+      <nav class="lp-footer-cols" aria-label="Site links">
+        <div class="lp-footer-col">
+          <h4>Somto</h4>
+          <a href="/en/">Home</a>
+          <a href="/login.html?next=/home.html">Sign in</a>
+          <a href="/en/android.html">Somto on Android</a>
+          <a href="/en/sostieni.html">Buy a coffee</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Discover</h4>
+          <a href="/en/watchlist-film-serie.html">Watchlist</a>
+          <a href="/en/app-recensioni-film-serie.html">Ratings and reviews</a>
+          <a href="/en/quiz-film-serie-tv.html">Quiz</a>
+          <a href="/en/consigli-film-serie-amici.html">Recommendations</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Comparisons</h4>
+          <a href="/en/somto-vs-letterboxd.html">Somto vs Letterboxd</a>
+          <a href="/en/somto-vs-justwatch.html">Somto vs JustWatch</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/cookies.html">Cookies</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Support</h4>
+          <a href="/en/support.html">Help centre</a>
+        </div>
+      </nav>
+    </div>
+    <div class="lp-footer-base">© 2026 Somto. All rights reserved.</div>
+  </footer>
+
+  <script>
+    (function () {
+      var nav = document.getElementById("lpNav");
+      if (nav) {
+        var onScroll = function () { nav.classList.toggle("is-scrolled", window.scrollY > 12); };
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+      }
+
+
+
+      var links = window.__SOMTO_TIP_LINKS__ || {};
+      var pending = false;
+      document.querySelectorAll("a[data-tip]").forEach(function (el) {
+        var url = links[el.getAttribute("data-tip")];
+        if (url) {
+          el.href = url;
+          el.rel = "nofollow noopener";
+        } else {
+          pending = true;
+          el.classList.add("tip-pending");
+          el.setAttribute("aria-disabled", "true");
+          el.setAttribute("tabindex", "-1");
+        }
+      });
+      var note = document.getElementById("tipPending");
+      if (note && pending) note.hidden = false;
+    })();
+  </script>
+</body>
+</html>

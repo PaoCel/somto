@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2watch — Home Feed Loading Mock</title>
+  <style>
+    :root {
+      --bg: #0b0b10;
+      --panel: #12131a;
+      --text: #eaeaf1;
+      --muted: #9aa0b5;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+    }
+    .frame {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 18px 48px;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo-anim {
+      width: clamp(130px, 22vw, 210px);
+      filter: drop-shadow(0 8px 30px rgba(0,0,0,0.5));
+    }
+    .logo-anim svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      overflow: visible;
+    }
+
+    /* ── Feed ── */
+    .feed {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      position: relative;
+      z-index: 3;
+      margin-top: 24px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: 0 14px 32px rgba(0,0,0,0.35);
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 14px;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.5s ease-out forwards;
+    }
+    .card:nth-child(1){ animation-delay: 4.0s; }
+    .card:nth-child(2){ animation-delay: 4.3s; }
+    .card:nth-child(3){ animation-delay: 4.6s; }
+    .card:nth-child(4){ animation-delay: 4.9s; }
+    .card:nth-child(5){ animation-delay: 5.2s; }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .avatar {
+      width: 60px; height: 60px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #ff7b95, #5cf4c0);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      color: #0b0b10;
+    }
+    .card h4 { margin: 0 0 6px; font-size: 1rem; }
+    .card p { margin: 0; color: var(--muted); line-height: 1.5; }
+    .skeleton {
+      background: linear-gradient(90deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04), rgba(255,255,255,0.08));
+      background-size: 240% 100%;
+      animation: shimmer-line 1.6s ease-in-out infinite;
+    }
+    @keyframes shimmer-line {
+      0% { background-position: 200% 0; }
+      100% { background-position: -40% 0; }
+    }
+    .line { height: 12px; border-radius: 999px; margin: 8px 0; }
+
+    /* Badge */
+    .cta-floating {
+      position: fixed; top: 20px; right: 16px;
+      background: rgba(11,11,16,0.82);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 10px 14px; border-radius: 12px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.32);
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.9rem; z-index: 4;
+    }
+    .dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: #5cf4c0;
+      box-shadow: 0 0 12px rgba(92,244,192,0.8);
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { transform: scale(0.9); opacity: 0.75; }
+      50%     { transform: scale(1.2); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cta-floating"><span class="dot"></span>Caricamento feed…</div>
+
+  <div class="frame">
+    <div class="hero">
+      <div class="logo-anim">
+        <!--
+          Clean vector "2" logo, rebuilt from icon-1024.svg coordinates.
+          viewBox is 1024 wide, starts at 1024 tall, but the path
+          morph extends the bottom to ~1700.
+          overflow:visible on the SVG lets the carpet grow outside.
+        -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 1024 1024">
+          <defs>
+            <!--
+              Main gradient: diagonal, matching the original multi-color
+              dark-purple → magenta → coral → gold
+            -->
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"   stop-color="#04010a"/>
+              <stop offset="12%"  stop-color="#491985"/>
+              <stop offset="25%"  stop-color="#8f2881"/>
+              <stop offset="38%"  stop-color="#d4417b"/>
+              <stop offset="52%"  stop-color="#f46074"/>
+              <stop offset="65%"  stop-color="#fc7c70"/>
+              <stop offset="78%"  stop-color="#ffb480"/>
+              <stop offset="90%"  stop-color="#ffd8a2"/>
+              <stop offset="100%" stop-color="#ffe8b3"/>
+            </linearGradient>
+            <!-- Extended gradient for when the carpet grows -->
+            <linearGradient id="g2" x1="300" y1="150" x2="700" y2="1700" gradientUnits="userSpaceOnUse">
+              <stop offset="0%"   stop-color="#04010a"/>
+              <stop offset="10%"  stop-color="#491985"/>
+              <stop offset="20%"  stop-color="#8f2881"/>
+              <stop offset="30%"  stop-color="#d4417b"/>
+              <stop offset="40%"  stop-color="#f46074"/>
+              <stop offset="50%"  stop-color="#fc7c70"/>
+              <stop offset="58%"  stop-color="#ffb480"/>
+              <stop offset="65%"  stop-color="#ffd8a2"/>
+              <stop offset="72%"  stop-color="#ffe8b3"/>
+              <stop offset="82%"  stop-color="#fc7c70"/>
+              <stop offset="92%"  stop-color="#d4417b"/>
+              <stop offset="100%" stop-color="#8f2881" stop-opacity="0"/>
+            </linearGradient>
+            <!-- Glow filter -->
+            <filter id="glow" x="-30%" y="-10%" width="160%" height="130%">
+              <feGaussianBlur stdDeviation="18" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          <!--
+            THE ANIMATED "2" LOGO
+            ─────────────────────
+            This is a clean single-path recreation of the outer silhouette
+            of the "2" from icon-1024.svg, built from the extracted coords.
+
+            The path includes:
+            - Rounded rectangle base (the "app icon" background)
+            - The "2" digit cut out as a counter-form
+            - The inner counter-space (hole in the curve)
+
+            ANIMATION STRATEGY:
+            We morph the ENTIRE path. In the "normal" state, the base
+            ends at y≈746. In the "carpet" state, the base bottom
+            stretches down to y≈1650, and the bottom bar of the "2"
+            stretches with it — creating the red carpet effect.
+
+            Since the "2" is a cutout from the rounded rect,
+            stretching the bottom of the rounded rect AND the bottom
+            of the "2" bar simultaneously makes it look like the
+            base of the "2" is extending.
+
+            We use SMIL <animate> to morph between the two states.
+          -->
+
+          <!-- Soft glow behind (blurred copy) -->
+          <path id="glow-path" fill="#d4417b" opacity="0.2" filter="url(#glow)">
+            <animate attributeName="d" dur="4.5s" begin="0.8s" fill="freeze"
+              calcMode="spline"
+              keySplines="0.12 0.8 0.3 1;0.12 0.8 0.3 1"
+              keyTimes="0;0.04;1"
+              values="
+                M353,703 L654,703 L654,714 L353,714 Z;
+                M353,703 L654,703 L654,720 L353,720 Z;
+                M353,703 L654,703 L610,1600 L397,1600 Z
+              "/>
+          </path>
+
+          <!--
+            APPROACH: Two layers
+            1) The original logo as an <image> (full fidelity)
+            2) A carpet path that grows from the base, BEHIND the logo
+
+            The <image> tag embeds the real icon-1024.svg inside this
+            SVG, so we get PERFECT pixel fidelity for the logo itself.
+            The carpet path sits behind it and grows downward.
+            Since they share the same coordinate space (1024×1024),
+            the alignment is mathematically perfect.
+          -->
+
+          <!-- Layer 1: The carpet (behind the logo) -->
+          <path id="carpet" fill="url(#g2)">
+            <!--
+              Carpet shape:
+              Starts as a thin rect matching the bottom of the "2" base bar.
+              The base bar in the original SVG spans:
+                top: y≈703, bottom: y≈714
+                left: x≈353, right: x≈654
+              But the ROUNDED RECT base extends wider: x≈278 to x≈723
+
+              The carpet starts from the full width of the rounded rect base
+              bottom edge (y≈746), so it appears to grow from the bottom
+              of the entire icon shape — not just the "2" bar.
+
+              STATE 1: thin sliver at the bottom of the icon (y 740→746)
+              STATE 2: long trapezoid (y 740→1650)
+            -->
+            <animate attributeName="d"
+              dur="4.5s" begin="0.8s" fill="freeze"
+              calcMode="spline"
+              keySplines="0.12 0.8 0.3 1;0.12 0.8 0.3 1;0.25 1 0.5 1"
+              keyTimes="0;0.03;0.85;1"
+              values="
+                M295,740 C295,744 300,746 306,746 L693,746 C706,746 714,740 718,736 L718,740 C718,740 716,742 714,744 L306,744 C300,744 296,742 295,740 Z;
+                M295,740 C295,744 300,746 306,746 L693,746 C706,746 714,740 718,736 L718,760 C716,762 710,764 700,764 L320,764 C310,764 302,762 295,756 Z;
+                M295,740 C295,744 300,746 306,746 L693,746 C706,746 714,740 718,736 L660,1650 C650,1660 620,1665 580,1665 L440,1665 C400,1665 370,1660 360,1650 Z;
+                M295,740 C295,744 300,746 306,746 L693,746 C706,746 714,740 718,736 L656,1620 C646,1630 616,1635 576,1635 L444,1635 C404,1635 374,1630 364,1620 Z
+              "/>
+          </path>
+
+          <!-- Layer 2: The original logo (on top, perfect fidelity) -->
+          <image href="../icons/icon-1024.svg"
+                 x="0" y="0" width="1024" height="1024"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="feed" aria-label="Mock feed">
+      <div class="card">
+        <div class="avatar">GV</div>
+        <div>
+          <h4>Giorgia V. ha votato "Dune: Part Two"</h4>
+          <div class="line skeleton" style="width: 80%;"></div>
+          <div class="line skeleton" style="width: 55%;"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="avatar">MF</div>
+        <div>
+          <h4>Marco F. ha creato un nuovo thread</h4>
+          <p>"Consigli sci-fi non troppo dark?"</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="avatar">LC</div>
+        <div>
+          <h4>Luca C. ha aggiunto "The Bear"</h4>
+          <div class="line skeleton" style="width: 70%;"></div>
+          <div class="line skeleton" style="width: 48%;"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="avatar">SR</div>
+        <div>
+          <h4>Sara R. ha consigliato a te "Past Lives"</h4>
+          <p>«Penso ti piacerà per il mood lento + fotografia calda»</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="avatar">AB</div>
+        <div>
+          <h4>Alessandro B. ha commentato il tuo post</h4>
+          <div class="line skeleton" style="width: 60%;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

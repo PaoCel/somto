@@ -1,0 +1,9 @@
+[
+  {
+    "questionId": "q_177_29",
+    "severity": "minor",
+    "problem": "L'explanation elenca 'Batman Begins, The Dark Knight, Inception, Dunkirk, Tenet' come i 5 film di Murphy con Nolan prima di Oppenheimer, ma Murphy NON è apparso in Tenet (2020). Il quinto film corretto è The Dark Knight Rises (2012), in cui Murphy riprese il ruolo dello Spaventapasseri. Il conteggio di 5 film e la risposta corretta (indice 3, Cillian Murphy) sono entrambi giusti.",
+    "fix": "Sostituire 'Tenet' con 'The Dark Knight Rises' nell'explanation: '…tra cui Batman Begins, The Dark Knight, The Dark Knight Rises, Inception, Dunkirk…'",
+    "correctIndexShouldBe": -1
+  }
+]

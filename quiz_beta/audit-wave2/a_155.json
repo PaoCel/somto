@@ -1,0 +1,23 @@
+[
+  {
+    "questionId": "q_155_22",
+    "severity": "critical",
+    "problem": "La domanda chiede quale tipo di strega sia Agatha Harkness 'secondo la profezia del Darkhold', ma la profezia del Darkhold riguarda la Scarlet Witch (Wanda), non Agatha. Agatha pratica magia oscura (dark magic), NON magia del Caos. La risposta segnata come corretta (index 3: 'Una strega del Caos, come Wanda') è quindi falsa: Agatha non è una strega del Caos — è una dark magic witch. La stessa explanation ammette che 'la classificazione esatta di Agatha come strega del Caos non è esplicitata nella serie'. La premessa della domanda è fuorviante perché mischia la profezia su Wanda con la natura di Agatha. L'opzione più vicina alla realtà tra quelle disponibili è l'indice 2 ('Non vi è una categoria; la sua magia è oscura e senza limiti').",
+    "fix": "Riscrivere la domanda separando il concetto: o chiedere 'Che tipo di magia pratica Agatha Harkness in WandaVision?' con risposta 'Magia oscura (dark magic)', oppure chiedere 'A chi si riferisce la profezia del Darkhold?' con risposta 'Alla Scarlet Witch (Wanda)'. Con le risposte attuali, se si vuole salvare la domanda, il correctAnswerIndex va cambiato a 2.",
+    "correctIndexShouldBe": 2
+  },
+  {
+    "questionId": "q_155_40",
+    "severity": "critical",
+    "problem": "La domanda afferma che lo spot del Nexus appare nel 'quinto episodio', ma è errato: il commercial Nexus appare nel settimo episodio ('Breaking the Fourth Wall'), come confermato da Screen Rant, ComicBook.com, Collider e altre fonti. L'episodio 5 contiene lo spot dei teli da cucina Lagos. La risposta corretta (indice 2, 'Nexus') è giusta come prodotto, ma la premessa della domanda indica l'episodio sbagliato.",
+    "fix": "Correggere il testo della domanda da 'Nel quinto episodio' a 'Nel settimo episodio'. Il correctAnswerIndex rimane 2 (Nexus).",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_155_39",
+    "severity": "minor",
+    "problem": "La domanda chiede qual è la prima parola pronunciata in assoluto nella serie. Il file stesso la segnala come confidence:medium / sourceLevel:YELLOW con riskNotes che ammette che non è verificabile. La trascrizione dell'episodio 1 mostra che la prima battuta non è univocamente 'Wanda': la sigla inizia con 'Oh' e la prima battuta di dialogo del cold open è 'My' (nel contesto 'My wife and her flying saucers'). Non è verificabile con certezza tramite fonti scritte. Domanda troppo incerta per restare nel pool.",
+    "fix": "Segnare come 'flagged' o rimuovere. In alternativa riformulare con una scena identificabile con certezza.",
+    "correctIndexShouldBe": -1
+  }
+]

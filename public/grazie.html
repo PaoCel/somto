@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Grazie per il caffè — Somto</title>
+  <meta name="description" content="Il caffè è arrivato. Grazie da chi sviluppa Somto.">
+  <link rel="canonical" href="https://somto.it/grazie.html">
+  <meta name="robots" content="noindex,follow">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="author" content="Somto">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Somto">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:url" content="https://somto.it/grazie.html">
+  <meta property="og:title" content="Grazie per il caffè">
+  <meta property="og:description" content="Il caffè è arrivato. Grazie da chi sviluppa Somto.">
+  <meta property="og:image" content="https://somto.it/og/home.png">
+
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+
+  <link rel="stylesheet" href="/css/landing.bundle.css">
+
+  <!-- Confetti: stesse regole di quiz.css, qui in locale perche' il bundle landing non le include. -->
+  <style>
+    .quiz-confetti { position: fixed; inset: 0; z-index: 90; pointer-events: none; overflow: hidden; }
+    .quiz-confetti-piece { position: absolute; top: -24px; width: 8px; height: 8px; will-change: transform, opacity; animation: quizConfettiFall linear forwards; }
+    @keyframes quizConfettiFall {
+      0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(108vh) translateX(var(--quiz-drift, 0px)) rotate(var(--quiz-spin, 360deg)); opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) { .quiz-confetti { display: none; } }
+    .thanks-cup { font-size: 3.5rem; line-height: 1; margin-bottom: 1rem; }
+  </style>
+</head>
+<body class="lp-body" data-no-shell>
+  <header class="lp-nav" id="lpNav">
+    <div class="lp-nav-inner">
+      <a class="lp-nav-logo" href="/" aria-label="Somto — home">
+        <img src="/icons/somto-wordmark.png" alt="Somto">
+      </a>
+      <div class="lp-nav-actions">
+        <nav class="lp-lang" aria-label="Lingua del sito">
+          <a href="/grazie.html" hreflang="it" aria-current="true">IT</a>
+          <a href="/en/grazie.html" hreflang="en" lang="en">EN</a>
+        </nav>
+        <a class="lp-nav-cta" href="/home.html">Torna a Somto</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="lp-hero">
+      <div class="lp-hero-glow g1"></div>
+      <div class="lp-hero-glow g2"></div>
+      <div class="lp-hero-glow g3"></div>
+      <div class="lp-hero-inner">
+        <p class="thanks-cup" aria-hidden="true">☕</p>
+        <span class="lp-eyebrow">Caffè ricevuto</span>
+        <h1>Grazie, <span class="lp-grad-text">ci voleva</span></h1>
+        <p class="lp-hero-sub">
+          Stripe ti ha mandato una email di conferma con l'importo. A meno che
+          tu non abbia scelto il ricorrente, non ti addebita più niente.
+        </p>
+        <div class="lp-cta-row">
+          <a class="lp-btn lp-btn-primary" href="/home.html">Torna a Somto</a>
+          <button class="lp-btn lp-btn-ghost" type="button" id="shareBtn">Dillo a qualcuno</button>
+        </div>
+        <p class="lp-hero-note" id="shareNote" hidden>Link copiato.</p>
+      </div>
+    </section>
+
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">E adesso</span>
+          <h2 class="lp-h2">Niente, appunto</h2>
+        </div>
+        <div class="lp-about-text">
+          <p>Non c'è nessun account da collegare e nessuna ricevuta da conservare. Il tuo Somto è identico a prima, che poi era tutto il senso della cosa.</p>
+          <p>Se hai scelto il ricorrente e un domani cambi idea, il link per fermarlo sta nella email di Stripe. Nessuna spiegazione da dare, nessuno a cui scrivere.</p>
+          <p>Se ti va di dare una mano anche senza spendere, parla di Somto a qualcuno che guarda troppe serie. Funziona meglio del caffè.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="lp-footer">
+    <div class="lp-footer-inner">
+      <div class="lp-footer-brand">
+        <img src="/icons/somto-wordmark.png" alt="Somto">
+        <p>Il social per chi ama film e serie TV. Vota, scopri e decidi cosa guardare con gli amici.</p>
+      </div>
+      <nav class="lp-footer-cols" aria-label="Link del sito">
+        <div class="lp-footer-col">
+          <h4>Somto</h4>
+          <a href="/">Home</a>
+          <a href="/home.html">Torna all'app</a>
+          <a href="/sostieni.html">Offri un caffè</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Legale</h4>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Termini</a>
+          <a href="/cookies.html">Cookie</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Supporto</h4>
+          <a href="/support.html">Centro assistenza</a>
+        </div>
+      </nav>
+    </div>
+    <div class="lp-footer-base">© 2026 Somto. Tutti i diritti riservati.</div>
+  </footer>
+
+  <script type="module">
+    import { fireConfetti } from "/js/components/quizConfetti.js";
+    fireConfetti({ pieceCount: 48 });
+  </script>
+
+  <script>
+    (function () {
+      var nav = document.getElementById("lpNav");
+      if (nav) {
+        var onScroll = function () { nav.classList.toggle("is-scrolled", window.scrollY > 12); };
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+      }
+
+      var btn = document.getElementById("shareBtn");
+      var note = document.getElementById("shareNote");
+      if (!btn) return;
+      btn.addEventListener("click", function () {
+        var url = "https://somto.it/";
+        var text = "Su Somto tengo traccia di film e serie. Provalo.";
+        if (navigator.share) {
+          navigator.share({ title: "Somto", text: text, url: url }).catch(function () {});
+          return;
+        }
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(url).then(function () {
+            if (note) note.hidden = false;
+          }).catch(function () {});
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

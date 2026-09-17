@@ -1,0 +1,43 @@
+/* ============================================
+   MAIN.CSS - Master Import File
+   Ordine di importazione ottimizzato
+   ============================================ */
+
+/* 1. Reset (sempre per primo) */
+@import url('./reset.css');
+
+/* 2. Variables (design tokens) */
+@import url('./variables.css');
+
+/* 3. Base styles */
+@import url('./base.css');
+
+/* 4. Componenti */
+@import url('./components/button.css');
+@import url('./components/card.css');
+@import url('./components/form.css');
+@import url('./components/confirm.css');
+@import url('./components/error-banner.css');
+@import url('./components/toast.css');
+@import url('./components/utilities.css');
+@import url('./components/social.css');
+@import url('./components/splash.css');
+@import url('./components/onboarding.css');
+@import url('./components/app-shell.css');
+@import url('./components/spoiler.css');
+
+/* 5. Pages (stili specifici) */
+@import url('./pages.css');
+@import url('./pages/home.css');
+@import url('./pages/title.css');
+@import url('./pages/search.css');
+@import url('./pages/account.css');
+@import url('./pages/auth.css');
+@import url('./pages/thread.css');
+@import url('./pages/watched.css');
+@import url('./pages/moderation.css');
+@import url('./pages/add_title.css');
+@import url('./pages/match.css');
+@import url('./pages/settings.css');
+@import url('./pages/notifications.css');
+@import url('./pages/admin-analytics.css');

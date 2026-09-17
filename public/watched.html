@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Visti — Somto</title>
+  <meta name="robots" content="noindex,follow">
+  <meta name="description" content="La tua lista di film e serie che hai visto (votati)">
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Somto">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0A0A0A">
+</head>
+<body class="watched-page">
+  <div id="appSplash" class="app-splash"><img class="splash-logo splash-wordmark" src="/icons/somto-wordmark.png" alt="Somto" data-i18n-attr="alt"><div class="splash-spinner"></div></div>
+  <main class="container page">
+    <header class="watched-header">
+      <button class="watched-back" onclick="history.back()" type="button" aria-label="Indietro" data-i18n-attr="aria-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+      </button>
+      <div class="watched-headline">
+        <h1 data-i18n>Visti</h1>
+        <p data-i18n>Tutto quello che hai guardato, anche senza voto.</p>
+      </div>
+    </header>
+
+    <div
+      id="list"
+      class="watched-list"
+      role="list"
+      aria-label="Contenuti guardati"
+    ></div>
+  </main>
+
+  <!-- Toast Container -->
+  <div class="toast-wrap" id="toasts" role="status" aria-live="polite"></div>
+
+  <!-- Scripts -->
+  <script src="/firebaseConfig.js"></script>
+  <script type="module" src="/js/pages/watched.page.js"></script>
+  <script type="module" src="/js/utils/tabbar.bootstrap.js"></script>
+  <script src="/js/pwa.js" defer></script>
+</body>
+</html>

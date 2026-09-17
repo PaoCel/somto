@@ -1,0 +1,368 @@
+{
+  "generatedAt": "2026-06-16 21:36:09",
+  "totalQuestions": 2500,
+  "expected": 2500,
+  "perTitle": [
+    {
+      "rank": 81,
+      "title": "One Piece",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 82,
+      "title": "Naruto",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 83,
+      "title": "L'attacco dei giganti",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 84,
+      "title": "Demon Slayer",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 85,
+      "title": "Death Note",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 86,
+      "title": "Dragon Ball Z",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 87,
+      "title": "Jujutsu Kaisen",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 88,
+      "title": "My Hero Academia",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 89,
+      "title": "Mare Fuori",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 90,
+      "title": "Gomorra - La serie",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 91,
+      "title": "SKAM Italia",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 92,
+      "title": "Romanzo Criminale - La serie",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 93,
+      "title": "Il commissario Montalbano",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 94,
+      "title": "Perfetti sconosciuti",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 95,
+      "title": "Tolo Tolo",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 96,
+      "title": "Tre metri sopra il cielo",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 97,
+      "title": "Smetto quando voglio",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 98,
+      "title": "Il Trono di Spade",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 99,
+      "title": "House of the Dragon",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 100,
+      "title": "The Office (US)",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 101,
+      "title": "Friends",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 102,
+      "title": "Peaky Blinders",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 103,
+      "title": "The Witcher",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 104,
+      "title": "Mercoledì",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 105,
+      "title": "Lupin",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 106,
+      "title": "The Last of Us",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 107,
+      "title": "Dark",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 108,
+      "title": "The Boys",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 109,
+      "title": "Lost",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 110,
+      "title": "Narcos",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 111,
+      "title": "Il Signore degli Anelli: La Compagnia dell'Anello",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 112,
+      "title": "Il Signore degli Anelli: Il ritorno del re",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 113,
+      "title": "Star Wars: Una nuova speranza",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 114,
+      "title": "Pirati dei Caraibi: La maledizione della prima luna",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 115,
+      "title": "Jurassic Park",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 116,
+      "title": "Il Padrino",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 117,
+      "title": "Pulp Fiction",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 118,
+      "title": "Fight Club",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 119,
+      "title": "Forrest Gump",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 120,
+      "title": "Matrix",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 121,
+      "title": "Titanic",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 122,
+      "title": "Il Gladiatore",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 123,
+      "title": "Joker",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 124,
+      "title": "Il cavaliere oscuro",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 125,
+      "title": "Il Re Leone",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 126,
+      "title": "Ritorno al futuro",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 127,
+      "title": "Le ali della libertà",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 128,
+      "title": "Django Unchained",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 129,
+      "title": "Hunger Games",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 130,
+      "title": "Fast & Furious",
+      "count": 50,
+      "short": false
+    }
+  ],
+  "indexBefore": {
+    "0": 1277,
+    "1": 859,
+    "2": 339,
+    "3": 25
+  },
+  "indexAfter": {
+    "0": 594,
+    "1": 615,
+    "2": 632,
+    "3": 659
+  },
+  "questionsTouchedByNormalization": 117,
+  "fixCounts": {
+    "qual e -> qual è": 39,
+    "piu -> più": 23,
+    "puo -> può": 12,
+    "perche -> perché": 20,
+    "gia -> già": 3,
+    "verita -> verità": 1,
+    "capacita -> capacità": 2,
+    "realta -> realtà": 4,
+    "e' -> è": 49,
+    "cosi -> così": 5,
+    "societa -> società": 3,
+    "finche -> finché": 1,
+    "citta -> città": 7
+  },
+  "confidence": {
+    "high": 2438,
+    "medium": 61,
+    "low": 1
+  },
+  "spoiler": {
+    "none": 1269,
+    "light": 463,
+    "medium": 404,
+    "heavy": 364
+  },
+  "difficulty": {
+    "easy": 678,
+    "medium": 1134,
+    "hard": 688
+  },
+  "category": {
+    "motivation": 109,
+    "object": 173,
+    "anagraphic": 314,
+    "relationship": 150,
+    "character": 474,
+    "trivia": 412,
+    "plot": 368,
+    "chronology": 64,
+    "scene": 172,
+    "consequence": 146,
+    "quote_paraphrase": 89,
+    "episode": 29
+  },
+  "structuralIssues": [],
+  "mediumReview": 62,
+  "heavySpoiler": 364
+}

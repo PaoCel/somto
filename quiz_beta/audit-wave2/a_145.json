@@ -1,0 +1,16 @@
+[
+  {
+    "questionId": "q_145_28",
+    "severity": "minor",
+    "problem": "L'explanation descrive Padre Gabrielli come 'il consigliere spirituale di Mariano'. In realtà Padre Gabrielli è l'agente di Mariano Giusti (un prete napoletano macchiettistico che funge da agente, consigliere e guida spirituale). Il ruolo principale è quello di agente, non solo consigliere spirituale. La risposta corretta (Corrado Guzzanti = indice 1) è giusta.",
+    "fix": "Correggere l'explanation: 'Padre Gabrielli, l'agente napoletano-camorrista di Mariano che funge anche da guida spirituale'.",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_145_35",
+    "severity": "minor",
+    "problem": "L'explanation dice che René gira 'di nascosto' Gli occhi del cuore 3 usando il materiale di Medical Dimension. In realtà René usa gli ultimi giorni di riprese ufficiali (non di nascosto) per girare il pilot de Gli occhi del cuore 3, con la consapevolezza della troupe. La risposta corretta (indice 1) rimane giusta.",
+    "fix": "Correggere 'di nascosto' con 'negli ultimi giorni di riprese di Medical Dimension, con la troupe al seguito'.",
+    "correctIndexShouldBe": -1
+  }
+]

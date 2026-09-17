@@ -1,0 +1,16 @@
+[
+  {
+    "questionId": "q_165_43",
+    "severity": "critical",
+    "problem": "La risposta segnata come corretta (indice 2) afferma che la causa dell'incendio non è mai spiegata esplicitamente, ma è FALSO: nell'episodio S7E24 'The Status Quo Combustion' Stuart spiega che l'incendio è stato causato dalla sua hotplate (piastra elettrica). La causa è esplicitamente rivelata nel dialogo. Nessuna delle quattro opzioni descrive correttamente la hotplate, quindi la domanda va riscritta con le opzioni corrette.",
+    "fix": "Riscrivere le opzioni includendo la causa vera: 'Un incidente con la piastra elettrica (hotplate) di Stuart'. Esempio di opzioni corrette: (0) Una piastra elettrica lasciata accesa da Stuart, (1) Un cortocircuito nell'impianto elettrico, (2) Vandali entrati di notte, (3) Un incendio doloso. correctAnswerIndex = 0.",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_165_26",
+    "severity": "minor",
+    "problem": "L'explanation afferma che 'Sheldon aveva proposto nel premiere della stessa stagione' (S11), ma la proposta di matrimonio è avvenuta nel FINALE della stagione 10 ('The Long Distance Dissonance'), non nel premiere dell'11. L'accettazione di Amy è mostrata nel premiere della S11. La risposta corretta (indice 1, undicesima stagione) è giusta.",
+    "fix": "Correggere l'explanation: 'dopo che Sheldon aveva proposto nel finale della decima stagione' (non 'nel premiere della stessa stagione').",
+    "correctIndexShouldBe": -1
+  }
+]

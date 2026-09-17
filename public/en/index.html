@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Somto – Movies, TV shows, watchlist and recommendations from friends</title>
+  <meta name="description" content="Somto is the social app for movies and TV shows: rate what you watch, save titles to your watchlist, discuss, play quizzes, and decide what to watch with friends.">
+  <link rel="canonical" href="https://somto.it/en/">
+  <link rel="alternate" hreflang="it-IT" href="https://somto.it/">
+  <link rel="alternate" hreflang="en" href="https://somto.it/en/">
+  <link rel="alternate" hreflang="x-default" href="https://somto.it/">
+<meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="author" content="Somto">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Somto">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://somto.it/">
+  <meta property="og:title" content="Somto – Movies, TV shows, watchlist and recommendations from friends">
+  <meta property="og:description" content="Somto is the social app for movies and TV shows: rate what you watch, save titles to your watchlist, discuss, play quizzes, and decide what to watch with friends.">
+  <meta property="og:image" content="https://somto.it/og/home.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="Somto — decide what to watch with friends">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Somto – Movies, TV shows, watchlist and recommendations from friends">
+  <meta name="twitter:description" content="Somto is the social app for movies and TV shows: rate what you watch, save titles to your watchlist, discuss, play quizzes, and decide what to watch with friends.">
+  <meta name="twitter:image" content="https://somto.it/og/home.png">
+
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://identitytoolkit.googleapis.com" crossorigin>
+
+  <!-- PWA / icons -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Somto">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="stylesheet" href="/css/landing.bundle.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://somto.it/#organization",
+        "name": "Somto",
+        "alternateName": ["Somto App", "Somto - Movies and TV Shows"],
+        "url": "https://somto.it/",
+        "logo": "https://somto.it/icons/icon-512.png",
+        "description": "Somto is the Italian social app for movies and TV shows: watchlist, ratings, reviews, quizzes and recommendations from friends. Web app and iOS, free.",
+        "founder": { "@type": "Person", "name": "Paolo Celestini" },
+        "sameAs": [
+          "https://apps.apple.com/it/app/somto/id6760966564",
+          "https://www.instagram.com/somto.watch",
+          "https://www.tiktok.com/@somto.watch"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://somto.it/#website",
+        "name": "Somto",
+        "url": "https://somto.it/",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://somto.it/#organization" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Somto",
+        "applicationCategory": "SocialNetworkingApplication",
+        "operatingSystem": "Web, iOS",
+        "description": "Somto is the social app for movies and TV shows: rate what you watch, save titles to your watchlist, discuss, play quizzes, and decide what to watch with friends.",
+        "url": "https://somto.it/",
+        "downloadUrl": "https://apps.apple.com/it/app/somto/id6760966564",
+        "inLanguage": "en",
+        "featureList": [
+          "Ratings and a personal catalog of movies and TV shows",
+          "Watchlist to organize what to watch",
+          "Quizzes about movies and TV shows with leaderboards",
+          "Discussions and recommendations from friends"
+        ],
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+        "publisher": { "@id": "https://somto.it/#organization" },
+        "author": { "@id": "https://somto.it/#organization" },
+        "sameAs": "https://apps.apple.com/it/app/somto/id6760966564"
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="lp-body" data-no-shell>
+
+  <!-- ===== NAV ===== -->
+  <header class="lp-nav" id="lpNav">
+    <div class="lp-nav-inner">
+      <a class="lp-nav-logo" href="/en/" aria-label="Somto — home">
+        <img src="/icons/somto-wordmark.png" alt="Somto">
+      </a>
+      <div class="lp-nav-actions">
+        <nav class="lp-lang" aria-label="Site language">
+          <a href="/" hreflang="it" lang="it">IT</a>
+          <a href="/en/" hreflang="en" aria-current="true">EN</a>
+        </nav>
+        <a class="lp-nav-link" href="/blog/">Blog</a>
+        <a class="lp-nav-cta" href="/login.html?next=/home.html">Sign In</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== HERO: real posters, two doors (account or guest quiz) ===== -->
+    <section class="lp-hero has-wall">
+      <div class="lp-wall" id="lpWall" aria-hidden="true"></div>
+      <div class="lp-veil" aria-hidden="true"></div>
+
+      <div class="lp-hero-inner">
+        <span class="lp-eyebrow">Movies · TV series · Friends</span>
+        <h1>Stop scrolling.<br><span class="lp-grad-text">Watch something.</span></h1>
+        <p class="lp-hero-sub">
+          Somto keeps track of what you watch, remembers where you left off
+          and tells you what your friends are watching. Then you pick tonight's title in a minute.
+        </p>
+        <div class="lp-cta-row">
+          <a class="lp-btn lp-btn-primary" href="/login.html?signup=1&amp;next=/home.html">Start for free</a>
+          <a class="lp-btn lp-btn-ghost" href="/quiz-prova.html">Try a quiz, no sign-up needed</a>
+        </div>
+        <p class="lp-hero-note">
+          Free · <a href="/en/android.html">Android</a> and <a href="https://apps.apple.com/app/id6760966564" rel="noopener">iPhone</a> · No spoilers
+        </p>
+      </div>
+    </section>
+
+    <!-- Android notice: mounted by JS on Android user agents only (landing.page.js) -->
+    <div id="androidNoticeSlot" class="lp-container"></div>
+
+    <!-- ===== IN ACTION: real screens, not gradients ===== -->
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">Somto in action</span>
+          <h2 class="lp-h2">Here's what it actually looks like</h2>
+          <p class="lp-lead">Real screens from the app, not mockups.</p>
+        </div>
+        <div class="lp-shots">
+          <article class="lp-shot">
+            <div class="lp-phone"><img src="/img/landing/en/watchlist.webp" width="620" height="1344" alt="The Somto watchlist with saved titles and tonight's suggestion" loading="lazy"></div>
+            <h3>Your watchlist</h3>
+            <p>What you want to watch, filtered and sorted, with tonight's pick on top.</p>
+          </article>
+          <article class="lp-shot">
+            <div class="lp-phone"><img src="/img/landing/en/scheda-titolo.webp" width="620" height="1344" alt="The Breaking Bad page on Somto with your rating and the community rating" loading="lazy"></div>
+            <h3>Every title, in full</h3>
+            <p>Your rating and the community's, hours tracked, episodes, spoiler-free discussions.</p>
+          </article>
+          <article class="lp-shot">
+            <div class="lp-phone"><img src="/img/landing/en/quiz.webp" width="620" height="1344" alt="A Somto quiz question about a TV series" loading="lazy"></div>
+            <h3>Quizzes and challenges</h3>
+            <p>How well do you really know the shows you love? Try it now, no account needed.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== NUMBERS + store ===== -->
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">What's inside</span>
+          <h2 class="lp-h2">A catalogue that covers what you watch</h2>
+        </div>
+        <div class="lp-stats">
+          <div class="lp-stat"><b>20,000+</b><span>movies and series in the catalogue</span></div>
+          <div class="lp-stat"><b>10,000+</b><span>quiz questions</span></div>
+          <div class="lp-stat"><b>240+</b><span>titles with a playable quiz</span></div>
+        </div>
+        <div class="lp-store">
+          <a href="https://apps.apple.com/app/id6760966564" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.7c0-2.4 2-3.6 2.1-3.6-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.6.9-.8 0-1.9-.9-3.1-.8-1.6 0-3 .9-3.9 2.4-1.6 2.9-.4 7.1 1.2 9.4.8 1.1 1.7 2.4 3 2.4 1.2-.1 1.6-.8 3.1-.8 1.4 0 1.8.8 3.1.8 1.3 0 2.1-1.2 2.9-2.3.9-1.3 1.3-2.6 1.3-2.7-.1 0-2.5-1-2.6-3.9ZM14 5.4c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.1 1.8-1 2.9 1.1.1 2.2-.5 2.8-1.4Z"/></svg>
+            Download on the App Store
+          </a>
+          <a href="/en/android.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18.5h2"/>
+            </svg>
+            On Android it's a web app
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FEATURES: four, not six ===== -->
+    <section class="lp-section" id="funzionalita">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">What you can do</span>
+          <h2 class="lp-h2">Four things, done well</h2>
+        </div>
+        <div class="lp-grid">
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 2.6h11A1.9 1.9 0 0 1 19.4 4.5v16.1c0 .8-.9 1.3-1.6.9L12 18.1l-5.8 3.4c-.7.4-1.6-.1-1.6-.9V4.5A1.9 1.9 0 0 1 6.5 2.6Z"/></svg></span>
+            <h3>Keep track</h3>
+            <p>Watchlist, watched titles, and for series the exact point you left off — episode by episode.</p>
+          </article>
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.6l2.9 5.9 6.5.95-4.7 4.58 1.1 6.47L12 17.96l-5.8 3.05 1.1-6.47L2.6 9.95l6.5-.95L12 2.6Z"/></svg></span>
+            <h3>Rate and review</h3>
+            <p>From 1 to 10, on a whole series, a single season or one episode. With a review, if you like.</p>
+          </article>
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 11.5a3.6 3.6 0 1 0 0-7.2 3.6 3.6 0 0 0 0 7.2Zm8 .5a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM9 13.2c-3.5 0-7 1.8-7 4.6V21h14v-3.2c0-2.8-3.5-4.6-7-4.6Zm8 .3c-.6 0-1.2.06-1.7.17 1.1 1 1.7 2.3 1.7 3.93V21h5v-2.7c0-2.5-2.9-3.8-5-3.8Z"/></svg></span>
+            <h3>Discover from friends</h3>
+            <p>Recommendations, activity and discussions. Spoilers stay covered until you've finished the title.</p>
+          </article>
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L4.5 13.2h6L9 22l9-12h-6.4z"/></svg></span>
+            <h3>Play</h3>
+            <p>Quizzes on the titles you've watched, challenges to friends (even outside Somto) and leaderboards.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STEPS ===== -->
+    <section class="lp-section lp-value" id="come-funziona">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">Getting started</span>
+          <h2 class="lp-h2">Three steps and you're in</h2>
+        </div>
+        <div class="lp-steps">
+          <div class="lp-step">
+            <div class="lp-step-num lp-grad-text">1</div>
+            <h3>Create your account</h3>
+            <p>Email, Google or Apple. Twenty seconds, free.</p>
+          </div>
+          <div class="lp-step">
+            <div class="lp-step-num lp-grad-text">2</div>
+            <h3>Bring your history</h3>
+            <p>Import from TV Time, Netflix or Trakt and find everything you've already watched.</p>
+          </div>
+          <div class="lp-step">
+            <div class="lp-step-num lp-grad-text">3</div>
+            <h3>Pick tonight's title</h3>
+            <p>Suggestions from your taste, your watchlist at hand and friends telling you what's worth it.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== DOORS ===== -->
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">Go deeper</span>
+          <h2 class="lp-h2">Straight to what interests you</h2>
+        </div>
+        <div class="lp-doors">
+          <a href="/en/watchlist-film-serie.html">Movie and TV watchlist</a>
+          <a href="/en/app-recensioni-film-serie.html">Ratings and reviews</a>
+          <a href="/en/quiz-film-serie-tv.html">Movie and TV quizzes</a>
+          <a href="/en/consigli-film-serie-amici.html">Recommendations from friends</a>
+          <a href="/en/vieni-da-tv-time.html">Coming from TV Time?</a>
+          <a href="/en/somto-vs-letterboxd.html">Somto vs Letterboxd</a>
+          <a href="/en/somto-vs-justwatch.html">Somto vs JustWatch</a>
+          <a href="/en/android.html">Somto on Android</a>
+          <a href="/blog/">Blog</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="lp-section" id="chi-siamo">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">About us</span>
+          <h2 class="lp-h2">An independent project</h2>
+        </div>
+        <div class="lp-about-text">
+          <p>Somto comes from a common frustration: spending evenings scrolling endless catalogues without ever really choosing. It's built by people who live for movies and TV: no opaque algorithms, no ads, no spoilers — just your taste, your friends and the drive to find something new.</p>
+          <p>It's free and stays free. Web app and iOS in sync; on Android it <a href="/en/android.html">installs from the browser</a> in ten seconds.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FINAL CTA ===== -->
+    <section class="lp-section lp-final">
+      <div class="lp-container">
+        <div class="lp-final-inner">
+          <h2>What are you watching tonight?</h2>
+          <p>Create your account in twenty seconds, or try a quiz first.</p>
+          <div class="lp-cta-row">
+            <a class="lp-btn lp-btn-primary" href="/login.html?signup=1&amp;next=/home.html">Start for free</a>
+            <a class="lp-btn lp-btn-ghost" href="/quiz-prova.html">Try a quiz</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="lp-footer">
+    <div class="lp-footer-inner">
+      <div class="lp-footer-brand">
+        <img src="/icons/somto-wordmark.png" alt="Somto">
+        <p>The social app for people who love movies and TV shows. Rate, discover, and decide what to watch with friends.</p>
+      </div>
+      <nav class="lp-footer-cols" aria-label="Site links">
+        <div class="lp-footer-col">
+          <h4>Product</h4>
+          <a href="#funzionalita">Features</a>
+          <a href="#come-funziona">How it works</a>
+          <a href="/blog/">Blog</a>
+          <a href="/login.html?next=/home.html">Sign In</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Explore</h4>
+          <a href="/en/watchlist-film-serie.html">Watchlist</a>
+          <a href="/en/app-recensioni-film-serie.html">Ratings and reviews</a>
+          <a href="/en/quiz-film-serie-tv.html">Quiz</a>
+          <a href="/en/consigli-film-serie-amici.html">Recommendations from friends</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Comparisons</h4>
+          <a href="/en/somto-vs-letterboxd.html">Somto vs Letterboxd</a>
+          <a href="/en/somto-vs-justwatch.html">Somto vs JustWatch</a>
+          <a href="/en/vieni-da-tv-time.html">Coming from TV Time</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/cookies.html">Cookies</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Support</h4>
+          <a href="/en/support.html">Help center</a>
+          <a href="/en/android.html">Somto on Android</a>
+        </div>
+      </nav>
+    </div>
+    <div class="lp-footer-base">© 2026 Somto. All rights reserved.</div>
+  </footer>
+
+  <script src="/firebaseConfig.js"></script>
+  <script type="module" src="/js/pages/landing.page.js"></script>
+  <script src="/js/pwa.js" defer></script>
+</body>
+</html>

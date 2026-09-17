@@ -1,0 +1,355 @@
+{
+  "generatedAt": "2026-06-18 11:12:00",
+  "totalQuestions": 2500,
+  "expected": 2500,
+  "perTitle": [
+    {
+      "rank": 131,
+      "title": "Hunter x Hunter",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 132,
+      "title": "Fullmetal Alchemist Brotherhood",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 133,
+      "title": "Tokyo Revengers",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 134,
+      "title": "Spy x Family",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 135,
+      "title": "Chainsaw Man",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 136,
+      "title": "Bleach",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 137,
+      "title": "One Punch Man",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 138,
+      "title": "Haikyu!!",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 139,
+      "title": "Blue Lock",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 140,
+      "title": "Vinland Saga",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 141,
+      "title": "Suburra - La serie",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 142,
+      "title": "Baby",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 143,
+      "title": "L'amica geniale",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 144,
+      "title": "Doc - Nelle tue mani",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 145,
+      "title": "Boris",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 146,
+      "title": "Don Matteo",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 147,
+      "title": "Strappare lungo i bordi",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 148,
+      "title": "Il commissario Ricciardi",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 149,
+      "title": "Che Dio ci aiuti",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 150,
+      "title": "Imma Tataranni",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 151,
+      "title": "Notte prima degli esami",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 152,
+      "title": "Immaturi",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 153,
+      "title": "The Mandalorian",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 154,
+      "title": "Loki",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 155,
+      "title": "WandaVision",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 156,
+      "title": "Sex Education",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 157,
+      "title": "Élite",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 158,
+      "title": "Cobra Kai",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 159,
+      "title": "The Umbrella Academy",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 160,
+      "title": "The White Lotus",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 161,
+      "title": "Severance",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 162,
+      "title": "Succession",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 163,
+      "title": "Ozark",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 164,
+      "title": "Prison Break",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 165,
+      "title": "The Big Bang Theory",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 166,
+      "title": "Grey's Anatomy",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 167,
+      "title": "Le iene",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 168,
+      "title": "Spider-Man",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 169,
+      "title": "Batman Begins",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 170,
+      "title": "The Batman",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 171,
+      "title": "Harry Potter e la pietra filosofale",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 172,
+      "title": "Guerre stellari - L'Impero colpisce ancora",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 173,
+      "title": "Il ritorno dello Jedi",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 174,
+      "title": "Terminator 2",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 175,
+      "title": "Alien",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 176,
+      "title": "Top Gun: Maverick",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 177,
+      "title": "Oppenheimer",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 178,
+      "title": "Barbie",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 179,
+      "title": "Dune",
+      "count": 50,
+      "short": false
+    },
+    {
+      "rank": 180,
+      "title": "Toy Story",
+      "count": 50,
+      "short": false
+    }
+  ],
+  "indexBefore": {
+    "0": 848,
+    "1": 913,
+    "2": 688,
+    "3": 51
+  },
+  "indexAfter": {
+    "0": 626,
+    "1": 644,
+    "2": 614,
+    "3": 616
+  },
+  "questionsTouchedByNormalization": 1,
+  "fixCounts": {
+    "gia -> già": 1
+  },
+  "confidence": {
+    "high": 2483,
+    "medium": 17
+  },
+  "spoiler": {
+    "none": 1695,
+    "light": 207,
+    "medium": 317,
+    "heavy": 281
+  },
+  "difficulty": {
+    "easy": 737,
+    "medium": 1135,
+    "hard": 628
+  },
+  "category": {
+    "anagraphic": 321,
+    "relationship": 80,
+    "motivation": 80,
+    "trivia": 643,
+    "character": 561,
+    "scene": 133,
+    "plot": 348,
+    "object": 101,
+    "consequence": 91,
+    "chronology": 42,
+    "episode": 52,
+    "quote_paraphrase": 48
+  },
+  "structuralIssues": [],
+  "mediumReview": 17,
+  "heavySpoiler": 281
+}

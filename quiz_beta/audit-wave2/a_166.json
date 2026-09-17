@@ -1,0 +1,30 @@
+[
+  {
+    "questionId": "q_166_5",
+    "severity": "minor",
+    "problem": "L'explanation afferma che Cristina 'È stata mentore di Preston Burke' — il rapporto è invertito. Burke era l'attending (superiore) e Cristina la sua specializzanda/resident; Burke era il mentor di Cristina, non il contrario.",
+    "fix": "Correggere in: 'Ha lavorato sotto la guida di Preston Burke (il suo superiore in cardiochirurgia) prima di dirigere l'Istituto Klausman a Zurigo.' Oppure rimuovere il riferimento al mentoring.",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_166_38",
+    "severity": "minor",
+    "problem": "L'explanation indica '(episodio 2x06)' ma la scena 'Pick me, choose me, love me' è nell'episodio 2x05 ('Bring the Pain'), non il 2x06.",
+    "fix": "Cambiare '(episodio 2x06)' in '(episodio 2x05, \"Bring the Pain\")'.",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_166_41",
+    "severity": "minor",
+    "problem": "L'answer corretta elenca solo 'Derek, George, Lexie, Mark e DeLuca', ma sulla spiaggia immaginaria di Meredith nella stagione 17 appaiono anche Miranda Bailey, Richard Webber e Cormac Hayes. La risposta è parziale e potrebbe risultare fuorviante come risposta 'completa'.",
+    "fix": "Riformulare la domanda per chiedere quali personaggi DECEDUTI appaiono sulla spiaggia (escludendo i vivi Bailey/Webber/Hayes), oppure aggiornare l'explanation per precisare che l'elenco cita i principali ma non è esaustivo.",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_166_43",
+    "severity": "minor",
+    "problem": "Nella risposta e nell'explanation l'anno indicato è '(2005)' ma il 63° Golden Globe si tenne il 16 gennaio 2006 (non 2005). Il premio era per la stagione TV 2005, ma la cerimonia è del 2006. La dicitura '63° Golden Globes (2005)' è fattualmente scorretta.",
+    "fix": "Correggere in '63° Golden Globe Awards (2006)' sia nell'answer text sia nell'explanation, aggiungendo eventualmente 'per la stagione televisiva 2005' per chiarezza.",
+    "correctIndexShouldBe": -1
+  }
+]

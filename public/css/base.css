@@ -1,0 +1,174 @@
+/* ============================================
+   BASE.CSS — Layout, tipografia, sfondo app
+   Somto — dark theme unico, feel nativo
+   ============================================ */
+
+/* ===== View Transitions cross-document (feel SPA) ===== */
+@view-transition { navigation: auto; }
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  color: var(--text-primary);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+/* Sfondo schermo: gradiente + cerchi sfocati decorativi (TwoWatchBackground) */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(420px 420px at 88% -6%,  rgba(233, 30, 99, 0.20), transparent 68%),
+    radial-gradient(380px 380px at 2% 9%,    rgba(0, 217, 255, 0.11), transparent 70%),
+    radial-gradient(480px 480px at 6% 98%,   rgba(156, 39, 176, 0.16), transparent 70%),
+    var(--screen-gradient);
+}
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+img { max-width: 100%; display: block; }
+
+input, textarea, select { font: inherit; }
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.page {
+  padding-top: calc(var(--safe-top) + 1rem);
+  padding-bottom: calc(var(--tabbar-height) + 1.25rem);
+  min-height: 100vh;
+  min-height: 100dvh;
+  view-transition-name: tw-content;
+}
+
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Fallback per browser senza View Transitions */
+@supports not (view-transition-name: none) {
+  .page { animation: pageEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+}
+
+::view-transition-old(tw-content) {
+  animation: vtFadeOut 0.18s cubic-bezier(0.4, 0, 1, 1) both;
+}
+::view-transition-new(tw-content) {
+  animation: vtFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes vtFadeOut { to { opacity: 0; transform: translateY(-6px); } }
+@keyframes vtFadeIn  { from { opacity: 0; transform: translateY(10px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(tw-content),
+  ::view-transition-new(tw-content) { animation: none; }
+  .page { animation: none; }
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.page-header h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--h1);
+  font-weight: var(--weight-black);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+}
+
+h1 {
+  font-family: var(--font-display);
+  font-size: var(--h1); font-weight: var(--weight-black);
+  letter-spacing: var(--tracking-tight); line-height: var(--leading-tight);
+  margin: 0 0 var(--space-sm);
+}
+h2 {
+  font-family: var(--font-display);
+  font-size: var(--h2); font-weight: var(--weight-bold);
+  letter-spacing: -0.015em; line-height: 1.2; margin: 0 0 var(--space-sm);
+}
+h3 {
+  font-size: var(--h3); font-weight: var(--weight-bold);
+  line-height: 1.25; margin: 0 0 var(--space-xs);
+}
+
+.hint {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  line-height: 1.45;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.10); border-radius: var(--radius-full); }
+::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.20); }
+::selection { background: rgba(233, 30, 99, 0.25); color: var(--text-primary); }
+
+/* ===== Feedback press globale ===== */
+button:active,
+[role="button"]:active {
+  opacity: 0.86;
+}
+a:active:not(.tab-link):not(.fab):not(.btn):not(.tw-tab) {
+  opacity: 0.78;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn:active { transform: none; }
+}
+
+/* ===== iOS Safari: niente auto-zoom al focus dei campi =====
+   Safari su iOS zooma quando un input/textarea/select messo a fuoco ha
+   font-size < 16px. Forziamo 16px su mobile per tutti i campi di testo
+   così il focus non scatena lo zoom che sbilancia il feel da app.
+   Solo mobile → il look desktop resta invariato. NON reintrodurre
+   maximum-scale (rompe pinch-zoom / accessibilità). */
+@media (max-width: 640px) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="file"]),
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}

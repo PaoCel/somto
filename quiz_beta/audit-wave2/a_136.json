@@ -1,0 +1,9 @@
+[
+  {
+    "questionId": "q_136_33",
+    "severity": "minor",
+    "problem": "L'explanation inverte la logica della toppa di Kenpachi: dice 'togliendo la toppa dall'occhio per limitarsi', ma nella lore di Bleach Kenpachi INDOSSA la toppa per limitare la sua pressione spirituale (la toppa assorbe il reiatsu costantemente). Quando la TOGLIE, il suo potere AUMENTA. La frase è l'opposto della realtà. L'indice di risposta (Undicesima Divisione, index 2) è comunque corretto.",
+    "fix": "Correggere l'explanation in: 'È noto per la sua smisurata forza e per indossare una toppa sull'occhio che assorbe continuamente il suo reiatsu, limitandosi deliberatamente per rendere i combattimenti più equilibrati. Quando la toppa viene tolta, la sua pressione spirituale sale drasticamente.'",
+    "correctIndexShouldBe": -1
+  }
+]

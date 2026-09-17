@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Alternativa a JustWatch con community | Somto</title>
+  <meta name="description" content="JustWatch ti dice dove guardare. Somto ti aiuta a scegliere cosa guardare e a condividerlo con gli amici: voti, watchlist, quiz, in italiano e gratis.">
+  <link rel="canonical" href="https://somto.it/somto-vs-justwatch.html">
+  <link rel="alternate" hreflang="it-IT" href="https://somto.it/somto-vs-justwatch.html">
+  <link rel="alternate" hreflang="en" href="https://somto.it/en/somto-vs-justwatch.html">
+  <link rel="alternate" hreflang="x-default" href="https://somto.it/somto-vs-justwatch.html">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="author" content="Somto">
+
+<!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Somto">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:url" content="https://somto.it/somto-vs-justwatch.html">
+  <meta property="og:title" content="Alternativa a JustWatch con community | Somto">
+  <meta property="og:description" content="JustWatch ti dice dove guardare. Somto ti aiuta a scegliere cosa guardare e a condividerlo con gli amici.">
+  <meta property="og:image" content="https://somto.it/og/vs-justwatch.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="Somto, alternativa a JustWatch con community">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Alternativa a JustWatch con community | Somto">
+  <meta name="twitter:description" content="JustWatch ti dice dove guardare. Somto ti aiuta a scegliere cosa guardare e a condividerlo con gli amici.">
+  <meta name="twitter:image" content="https://somto.it/og/vs-justwatch.png">
+
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://identitytoolkit.googleapis.com" crossorigin>
+
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+
+  <link rel="stylesheet" href="/css/landing.bundle.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Alternativa a JustWatch con community",
+    "url": "https://somto.it/somto-vs-justwatch.html",
+    "inLanguage": "it-IT",
+    "isPartOf": { "@type": "WebSite", "url": "https://somto.it/", "name": "Somto" },
+    "about": "Confronto tra Somto e JustWatch per scegliere cosa guardare"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://somto.it/" },
+      { "@type": "ListItem", "position": 2, "name": "Alternativa a JustWatch", "item": "https://somto.it/somto-vs-justwatch.html" }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Somto mi dice su quale piattaforma di streaming guardare un titolo?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, Somto non mostra i provider di streaming come fa JustWatch. È una scelta: Somto si concentra sulla parte di scelta (cosa guardare) e di community (voti, amici, quiz), non sulla parte di distribuzione."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quando ha senso usare Somto invece di JustWatch?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Somto serve quando non sai cosa guardare e vuoi scegliere — partendo dai voti della community, dai consigli degli amici e dalla tua watchlist. JustWatch serve dopo, quando sai già il titolo e vuoi sapere su quale servizio è disponibile in Italia. Sono due strumenti complementari."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Somto è gratis come JustWatch?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sì, tutte le funzioni di Somto sono gratuite: watchlist, voti, recensioni, quiz e statistiche. Somto è disponibile come web app e su iOS."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Cosa ha Somto che JustWatch non ha?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Una community di spettatori italiani che votano e recensiscono i titoli, un feed dei consigli degli amici, quiz su film e serie TV con XP e sfide, recensioni leggibili in italiano e statistiche personali (ore viste, generi, andamento del gusto)."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .vs-table-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      overflow-x: auto;
+    }
+    .vs-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.96rem;
+      border: 1px solid var(--border, rgba(255,255,255,0.09));
+      border-radius: var(--radius-lg, 16px);
+      overflow: hidden;
+    }
+    .vs-table th, .vs-table td {
+      padding: 0.85rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border, rgba(255,255,255,0.09));
+    }
+    .vs-table th {
+      background: rgba(255,255,255,0.04);
+      color: var(--text-primary, #F5F5F5);
+      font-weight: 700;
+      font-size: 0.92rem;
+      letter-spacing: 0.02em;
+    }
+    .vs-table th.vs-col-feature { width: 50%; }
+    .vs-table td.vs-cell-ok { color: #51d59b; font-weight: 700; }
+    .vs-table td.vs-cell-no { color: #ff7a8c; font-weight: 700; }
+    .vs-table tr:last-child td { border-bottom: 0; }
+    .vs-table tr:hover td { background: rgba(255,255,255,0.02); }
+    @media (max-width: 540px) {
+      .vs-table { font-size: 0.88rem; }
+      .vs-table th, .vs-table td { padding: 0.65rem 0.7rem; }
+    }
+  </style>
+</head>
+<body class="lp-body" data-no-shell>
+
+  <header class="lp-nav" id="lpNav">
+    <div class="lp-nav-inner">
+      <a class="lp-nav-logo" href="/" aria-label="Somto — home">
+        <img src="/icons/somto-wordmark.png" alt="Somto">
+      </a>
+      <div class="lp-nav-actions">
+        <nav class="lp-lang" aria-label="Lingua del sito"><a href="/somto-vs-justwatch.html" hreflang="it" aria-current="true">IT</a><a href="/en/somto-vs-justwatch.html" hreflang="en" lang="en">EN</a></nav>
+        <a class="lp-nav-link" href="/blog/">Blog</a>
+        <a class="lp-nav-cta" href="/login.html?next=/home.html&amp;utm_source=comparison_justwatch">Entra</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="lp-hero">
+      <div class="lp-hero-glow g1"></div>
+      <div class="lp-hero-glow g2"></div>
+      <div class="lp-hero-glow g3"></div>
+      <div class="lp-hero-inner">
+        <span class="lp-eyebrow">Alternative · JustWatch</span>
+        <h1>JustWatch dice <span class="lp-grad-text">dove</span>. Somto aiuta a scegliere <span class="lp-grad-text">cosa</span>.</h1>
+        <p class="lp-hero-sub">
+          JustWatch ti dice su quale piattaforma di streaming è disponibile
+          un titolo. Somto ti aiuta a decidere cosa guardare, partendo dai
+          voti della community e dai consigli dei tuoi amici.
+        </p>
+        <div class="lp-cta-row">
+          <a class="lp-btn lp-btn-primary" href="/login.html?next=/home.html&amp;utm_source=comparison_justwatch">Inizia gratis</a>
+          <a class="lp-btn lp-btn-ghost" href="/">Scopri Somto</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">Due strumenti diversi</span>
+          <h2 class="lp-h2">Posizionamento: cosa fanno e cosa non fanno</h2>
+          <p class="lp-lead">Onestamente: Somto e JustWatch risolvono problemi diversi. È utile averli entrambi.</p>
+        </div>
+        <div class="lp-about-text">
+          <p><strong>JustWatch</strong> è un motore di ricerca dello streaming. Cerchi un titolo e lui ti dice se è su Netflix, Prime Video, Disney+, RaiPlay o altri servizi disponibili in Italia, e ti porta direttamente al player. È molto bravo a fare <em>questa</em> cosa.</p>
+          <p><strong>Somto</strong> non mostra i provider di streaming. Si concentra sull'altra metà del problema: <em>scegliere cosa guardare</em>. Ti dà una watchlist, il voto della community, i voti dei tuoi amici, recensioni e una community italiana. Quando sai cosa vuoi vedere, passi a JustWatch per scoprire dove. Quando non sai cosa guardare, parti da Somto.</p>
+          <p>Per molti spettatori l'uso quotidiano è una combinazione: <strong>Somto per decidere, JustWatch per trovare il player</strong>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">Confronto</span>
+          <h2 class="lp-h2">Somto vs JustWatch</h2>
+          <p class="lp-lead">Le funzioni a confronto, senza barare.</p>
+        </div>
+        <div class="vs-table-wrap">
+          <table class="vs-table" aria-label="Confronto tra Somto e JustWatch">
+            <thead>
+              <tr>
+                <th class="vs-col-feature">Funzione</th>
+                <th>Somto</th>
+                <th>JustWatch</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Indica i provider streaming (Netflix, Prime, ecc.)</td><td class="vs-cell-no">No</td><td class="vs-cell-ok">Sì</td></tr>
+              <tr><td>Deep link al player</td><td class="vs-cell-no">No</td><td class="vs-cell-ok">Sì</td></tr>
+              <tr><td>Watchlist personale</td><td class="vs-cell-ok">Sì</td><td class="vs-cell-ok">Sì</td></tr>
+              <tr><td>Voto della community ai titoli</td><td class="vs-cell-ok">Sì, voto Somto 1-10</td><td class="vs-cell-no">No (mostra voti IMDb/TMDB esterni)</td></tr>
+              <tr><td>Recensioni leggibili in italiano</td><td class="vs-cell-ok">Sì</td><td class="vs-cell-no">No</td></tr>
+              <tr><td>Feed degli amici</td><td class="vs-cell-ok">Sì</td><td class="vs-cell-no">No</td></tr>
+              <tr><td>Consigli da persone che ti conoscono</td><td class="vs-cell-ok">Sì</td><td class="vs-cell-no">No</td></tr>
+              <tr><td>Quiz su film e serie TV</td><td class="vs-cell-ok">Sì (XP, streak, sfide)</td><td class="vs-cell-no">No</td></tr>
+              <tr><td>Discussioni con protezione anti-spoiler</td><td class="vs-cell-ok">Sì</td><td class="vs-cell-no">No</td></tr>
+              <tr><td>Tracking dove sei rimasto sulle serie</td><td class="vs-cell-ok">Sì</td><td class="vs-cell-no">No</td></tr>
+              <tr><td>Statistiche personali (ore, generi)</td><td class="vs-cell-ok">Sì</td><td class="vs-cell-no">No</td></tr>
+              <tr><td>Tutte le funzioni gratis</td><td class="vs-cell-ok">Sì</td><td class="vs-cell-ok">Sì</td></tr>
+              <tr><td>Interfaccia in italiano</td><td class="vs-cell-ok">Sì, nativa</td><td class="vs-cell-ok">Sì</td></tr>
+              <tr><td>App iOS e web</td><td class="vs-cell-ok">Sì</td><td class="vs-cell-ok">Sì</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">Funzionalità</span>
+          <h2 class="lp-h2">Cosa puoi fare su Somto</h2>
+        </div>
+        <div class="lp-grid">
+          <article class="lp-feature">
+            <h3>Voto della community</h3>
+            <p>Ogni titolo ha un voto medio della community Somto (1-10) e recensioni leggibili in italiano. Vedi in due secondi se vale la serata.</p>
+          </article>
+          <article class="lp-feature">
+            <h3>Watchlist personale</h3>
+            <p>Salva i titoli che vuoi vedere e ritrovali in un attimo. Distingui i film dalle serie, ordina per genere, anno, recenti.</p>
+          </article>
+          <article class="lp-feature">
+            <h3>Consigli tra amici</h3>
+            <p>Vedi cosa votano e salvano le persone che segui. Quando un amico ama un titolo, lo sai prima di tutti.</p>
+          </article>
+          <article class="lp-feature">
+            <h3>Quiz e sfide</h3>
+            <p>Domande su film e serie TV con XP, streak giornaliero, classifiche e sfide a un amico — anche se non è su Somto, via link.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">Esplora Somto</span>
+          <h2 class="lp-h2">Inizia da qui</h2>
+        </div>
+        <div class="lp-about-text">
+          <p>Crea la tua <a href="/watchlist-film-serie.html">watchlist di film e serie TV</a>, <a href="/app-recensioni-film-serie.html">vota e recensisci</a> i titoli che hai visto, sfida gli amici ai <a href="/quiz-film-serie-tv.html">quiz su film e serie TV</a> e ricevi <a href="/consigli-film-serie-amici.html">consigli su cosa guardare</a> dagli amici. Se invece vieni da Letterboxd, dai un'occhiata a <a href="/somto-vs-letterboxd.html">Somto vs Letterboxd</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">Domande frequenti</span>
+          <h2 class="lp-h2">Somto vs JustWatch — FAQ</h2>
+        </div>
+        <div class="lp-faq">
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">Somto mi dice su quale piattaforma di streaming guardare un titolo?</summary>
+            <div class="lp-faq-a"><p>No, Somto non mostra i provider di streaming come fa JustWatch. È una scelta: Somto si concentra sulla parte di scelta (cosa guardare) e di community (voti, amici, quiz), non sulla parte di distribuzione.</p></div>
+          </details>
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">Quando ha senso usare Somto invece di JustWatch?</summary>
+            <div class="lp-faq-a"><p>Somto serve quando non sai cosa guardare e vuoi scegliere — partendo dai voti della community, dai consigli degli amici e dalla tua watchlist. JustWatch serve dopo, quando sai già il titolo e vuoi sapere su quale servizio è disponibile in Italia. Sono due strumenti complementari.</p></div>
+          </details>
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">Somto è gratis come JustWatch?</summary>
+            <div class="lp-faq-a"><p>Sì, tutte le funzioni di Somto sono gratuite: watchlist, voti, recensioni, quiz e statistiche. Somto è disponibile come web app e su iOS.</p></div>
+          </details>
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">Cosa ha Somto che JustWatch non ha?</summary>
+            <div class="lp-faq-a"><p>Una community di spettatori italiani che votano e recensiscono i titoli, un feed dei consigli degli amici, quiz su film e serie TV con XP e sfide, recensioni leggibili in italiano e statistiche personali (ore viste, generi, andamento del gusto).</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section lp-final">
+      <div class="lp-container">
+        <div class="lp-final-inner">
+          <h2>Decidi prima cosa guardare</h2>
+          <p>Gratis, su web e iOS. Aggiungi i titoli che ti incuriosiscono e scopri cosa stanno guardando i tuoi amici.</p>
+          <a class="lp-btn lp-btn-primary" href="/login.html?next=/home.html&amp;utm_source=comparison_justwatch">Inizia gratis</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="lp-footer">
+    <div class="lp-footer-inner">
+      <div class="lp-footer-brand">
+        <img src="/icons/somto-wordmark.png" alt="Somto">
+        <p>Il social per chi ama film e serie TV. Vota, scopri e decidi cosa guardare con gli amici.</p>
+      </div>
+      <nav class="lp-footer-cols" aria-label="Link del sito">
+        <div class="lp-footer-col">
+          <h4>Somto</h4>
+          <a href="/">Home</a>
+          <a href="/blog/">Blog</a>
+          <a href="/login.html?next=/home.html">Accedi</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Scopri</h4>
+          <a href="/watchlist-film-serie.html">Watchlist</a>
+          <a href="/app-recensioni-film-serie.html">Voti e recensioni</a>
+          <a href="/quiz-film-serie-tv.html">Quiz</a>
+          <a href="/consigli-film-serie-amici.html">Consigli tra amici</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Confronti</h4>
+          <a href="/somto-vs-letterboxd.html">Somto vs Letterboxd</a>
+          <a href="/somto-vs-justwatch.html">Somto vs JustWatch</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Legale</h4>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Termini</a>
+          <a href="/cookies.html">Cookie</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Supporto</h4>
+          <a href="/support.html">Centro assistenza</a>
+        </div>
+      </nav>
+    </div>
+    <div class="lp-footer-base">© 2026 Somto. Tutti i diritti riservati.</div>
+  </footer>
+
+  <script>
+    (function () {
+      var nav = document.getElementById("lpNav");
+      if (!nav) return;
+      var onScroll = function () { nav.classList.toggle("is-scrolled", window.scrollY > 12); };
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+    })();
+  </script>
+</body>
+</html>

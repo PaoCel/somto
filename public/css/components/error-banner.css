@@ -1,0 +1,9 @@
+.error-banner {
+  background: var(--danger-bg, rgba(220,38,38,0.1));
+  border: 1px solid var(--danger, #dc2626);
+  border-radius: 0.75rem; padding: 1rem;
+  text-align: center; margin-bottom: 1rem;
+}
+.error-banner[hidden] { display: none; }
+.error-banner__msg { color: var(--danger, #dc2626); margin-bottom: 0.5rem; }
+.error-banner__retry { margin-top: 0.25rem; }

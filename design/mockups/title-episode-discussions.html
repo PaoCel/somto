@@ -1,0 +1,371 @@
+<style>
+  /* ===========================================================
+     Somto — Mockup scheda titolo con DISCUSSIONE PER EPISODIO
+     Dati fittizi. Base per il designer.
+     Tema allineato a Somto (dark + gradiente brand).
+     =========================================================== */
+  :root{
+    --bg:#0c0b10; --bg2:#131019; --card:rgba(255,255,255,.045);
+    --card-2:rgba(255,255,255,.06); --brd:rgba(255,255,255,.09);
+    --ink:#f4f2f8; --muted:#a09eb0; --faint:#726f82;
+    --g1:#8b5cf6; --g2:#ec4899; --g3:#f5a524;
+    --brand:linear-gradient(120deg,var(--g1),var(--g2) 55%,var(--g3));
+    --good:#34d399; --spoiler:#f5a524;
+    --r:18px; --r-sm:12px;
+    --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:
+      radial-gradient(1200px 600px at 50% -10%, rgba(139,92,246,.18), transparent 60%),
+      radial-gradient(900px 500px at 90% 10%, rgba(236,72,153,.10), transparent 55%),
+      var(--bg);
+    color:var(--ink);font-family:var(--font);-webkit-font-smoothing:antialiased;
+    display:flex;justify-content:center;padding:26px 14px 60px;line-height:1.45}
+  .app{width:100%;max-width:432px;background:var(--bg2);border:1px solid var(--brd);
+    border-radius:30px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.55)}
+
+  /* chrome bar */
+  .chrome{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 8px}
+  .chrome .ico{width:36px;height:36px;border-radius:50%;background:var(--card);
+    border:1px solid var(--brd);display:grid;place-items:center;font-size:15px;color:var(--muted)}
+  .wordmark{font-weight:800;letter-spacing:.2px;font-size:19px;
+    background:var(--brand);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* hero */
+  .hero{position:relative;padding:14px 16px 0}
+  .backdrop{position:absolute;inset:0 0 auto;height:150px;
+    background:linear-gradient(150deg,#2a1b46,#3a1330 60%,#4a2a10);opacity:.9}
+  .backdrop:after{content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,transparent,var(--bg2))}
+  .heroRow{position:relative;display:flex;gap:14px;padding-top:56px}
+  .poster{width:92px;height:132px;border-radius:14px;flex:none;
+    background:linear-gradient(160deg,#7c3aed,#db2777 60%,#f59e0b);
+    box-shadow:0 12px 30px rgba(0,0,0,.5);display:grid;place-items:center;
+    font-weight:800;color:#fff;font-size:13px;text-align:center;padding:8px}
+  .heroMeta{padding-top:38px}
+  .heroMeta h1{margin:0;font-size:23px;font-weight:800;letter-spacing:-.3px;text-wrap:balance}
+  .sub{color:var(--muted);font-size:13px;margin-top:3px}
+  .rate{display:inline-flex;align-items:center;gap:6px;margin-top:9px;
+    background:var(--card);border:1px solid var(--brd);border-radius:999px;
+    padding:4px 10px;font-size:12.5px;font-weight:600}
+  .rate b{font-variant-numeric:tabular-nums}
+  .rate span{color:var(--faint);font-weight:500}
+
+  /* series actions */
+  .actions{display:flex;gap:8px;padding:16px 16px 4px}
+  .act{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;
+    background:var(--card);border:1px solid var(--brd);border-radius:var(--r-sm);
+    padding:10px 6px;font-size:12.5px;font-weight:600;color:var(--ink);cursor:pointer}
+  .act.primary{background:var(--brand);border:none;color:#fff}
+
+  /* tabs */
+  .tabs{display:flex;gap:22px;padding:16px 18px 0;border-bottom:1px solid var(--brd)}
+  .tab{padding-bottom:12px;font-size:14px;font-weight:600;color:var(--faint);
+    position:relative;cursor:pointer}
+  .tab.on{color:var(--ink)}
+  .tab.on:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2.5px;
+    border-radius:2px;background:var(--brand)}
+
+  .body{padding:16px}
+
+  /* season selector */
+  .seasons{display:flex;gap:8px;overflow-x:auto;padding-bottom:14px;scrollbar-width:none}
+  .seasons::-webkit-scrollbar{display:none}
+  .season{flex:none;padding:8px 14px;border-radius:999px;font-size:13px;font-weight:600;
+    background:var(--card);border:1px solid var(--brd);color:var(--muted);cursor:pointer}
+  .season.on{background:rgba(139,92,246,.16);border-color:rgba(139,92,246,.5);color:#fff}
+
+  .sechead{display:flex;align-items:baseline;justify-content:space-between;margin:2px 2px 12px}
+  .sechead h2{margin:0;font-size:15px;font-weight:700}
+  .sechead .prog{font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums}
+
+  /* episode card */
+  .ep{border:1px solid var(--brd);border-radius:var(--r);background:var(--card);
+    margin-bottom:12px;overflow:hidden;transition:border-color .2s}
+  .ep.open{border-color:rgba(236,72,153,.4)}
+  .epHead{display:flex;gap:12px;padding:12px;cursor:pointer;align-items:center}
+  .thumb{width:112px;height:64px;border-radius:10px;flex:none;position:relative;
+    background:linear-gradient(135deg,#2b2540,#3a2036);display:grid;place-items:center;overflow:hidden}
+  .thumb b{font-size:12px;color:rgba(255,255,255,.9);font-weight:700;letter-spacing:.5px}
+  .thumb.seen:after{content:"✓";position:absolute;top:5px;right:6px;width:18px;height:18px;
+    border-radius:50%;background:var(--good);color:#04231a;font-size:12px;font-weight:800;
+    display:grid;place-items:center}
+  .epInfo{flex:1;min-width:0}
+  .epNo{font-size:11px;font-weight:700;color:var(--g2);letter-spacing:.4px}
+  .epTitle{font-size:14px;font-weight:650;margin:2px 0 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .epMeta{font-size:11.5px;color:var(--faint);margin-top:3px}
+  .epStats{display:flex;gap:12px;align-items:center;margin-top:7px;font-size:12px;color:var(--muted)}
+  .epStats .s{display:inline-flex;align-items:center;gap:4px}
+  .epStats .disc{color:#fff;font-weight:600}
+  .chev{color:var(--faint);font-size:18px;flex:none;transition:transform .2s}
+  .ep.open .chev{transform:rotate(90deg)}
+
+  /* discussion panel */
+  .disc{display:none;border-top:1px solid var(--brd);padding:14px 12px 12px;
+    background:linear-gradient(180deg,rgba(236,72,153,.05),transparent 40%)}
+  .ep.open .disc{display:block}
+  .synopsis{font-size:12.5px;color:var(--muted);background:var(--card-2);
+    border:1px solid var(--brd);border-radius:12px;padding:10px 12px;margin-bottom:14px}
+  .myrate{display:flex;align-items:center;gap:8px;margin-bottom:16px;font-size:12.5px;color:var(--muted)}
+  .stars{letter-spacing:2px;font-size:15px}
+  .stars .f{background:var(--brand);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stars .e{color:#3a3646}
+
+  .discTitle{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;
+    text-transform:uppercase;letter-spacing:.6px;color:var(--faint);margin:2px 2px 12px}
+  .discTitle .n{background:var(--card);border:1px solid var(--brd);border-radius:999px;
+    padding:1px 8px;color:var(--muted);letter-spacing:0}
+
+  .cmt{display:flex;gap:10px;margin-bottom:14px}
+  .av{width:34px;height:34px;border-radius:50%;flex:none;display:grid;place-items:center;
+    font-size:12px;font-weight:800;color:#fff}
+  .cbody{flex:1;min-width:0}
+  .cmeta{font-size:12.5px}
+  .cmeta b{font-weight:650}
+  .cmeta time{color:var(--faint);font-weight:500;margin-left:6px}
+  .ctext{font-size:13.5px;margin:3px 0 0}
+  .cactions{display:flex;gap:16px;margin-top:6px;font-size:12px;color:var(--faint)}
+  .cactions span{display:inline-flex;align-items:center;gap:4px;cursor:pointer}
+  .cactions .liked{color:var(--g2);font-weight:600}
+  .reply{margin-left:44px}
+
+  /* spoiler */
+  .spoiler .ctext{position:relative;filter:blur(6px);user-select:none}
+  .spoiler .veil{position:absolute;inset:0;display:flex;align-items:center;gap:6px;
+    justify-content:center;filter:none;font-size:11.5px;font-weight:600;color:var(--spoiler);
+    cursor:pointer}
+  .spoiler.shown .ctext{filter:none}
+  .spoiler.shown .veil{display:none}
+  .spoiler .wrap{position:relative}
+
+  /* composer */
+  .composer{display:flex;gap:10px;align-items:flex-start;margin-top:6px;
+    background:var(--card-2);border:1px solid var(--brd);border-radius:14px;padding:10px}
+  .composer .av{width:30px;height:30px;background:linear-gradient(135deg,#555,#333);font-size:11px}
+  .cinput{flex:1}
+  .cinput .field{font-size:13px;color:var(--faint);padding:5px 0 10px}
+  .crow{display:flex;align-items:center;justify-content:space-between;
+    border-top:1px solid var(--brd);padding-top:9px}
+  .spoilTog{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);cursor:pointer}
+  .dot{width:32px;height:18px;border-radius:999px;background:#3a3646;position:relative}
+  .dot:after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#8f8ca0}
+  .send{background:var(--brand);border:none;color:#fff;font-weight:700;font-size:12.5px;
+    padding:7px 16px;border-radius:999px;cursor:pointer}
+
+  .note{max-width:432px;margin:16px auto 0;font-size:12px;color:var(--faint);
+    border:1px dashed var(--brd);border-radius:12px;padding:12px 14px}
+  .note b{color:var(--muted)}
+</style>
+
+<div class="app">
+  <!-- header chrome -->
+  <div class="chrome">
+    <div class="ico">‹</div>
+    <div class="wordmark">Somto</div>
+    <div class="ico">⋯</div>
+  </div>
+
+  <!-- hero -->
+  <div class="hero">
+    <div class="backdrop"></div>
+    <div class="heroRow">
+      <div class="poster">TRAVELERS</div>
+      <div class="heroMeta">
+        <h1>Travelers</h1>
+        <div class="sub">2016 · 3 stagioni · Fantascienza</div>
+        <div class="rate">★ <b>8.4</b> <span>· 1.240 voti community</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- series actions -->
+  <div class="actions">
+    <div class="act">＋ Watchlist</div>
+    <div class="act">✓ Visto</div>
+    <div class="act primary">💬 Discuti la serie</div>
+  </div>
+
+  <!-- tabs -->
+  <div class="tabs">
+    <div class="tab">Panoramica</div>
+    <div class="tab on">Episodi</div>
+    <div class="tab">Social</div>
+  </div>
+
+  <div class="body">
+    <!-- season selector -->
+    <div class="seasons">
+      <div class="season on">Stagione 1</div>
+      <div class="season">Stagione 2</div>
+      <div class="season">Stagione 3</div>
+    </div>
+
+    <div class="sechead">
+      <h2>Stagione 1</h2>
+      <div class="prog">3 / 12 visti</div>
+    </div>
+
+    <!-- episode 1x01 (collapsed) -->
+    <div class="ep">
+      <div class="epHead" onclick="toggleEp(this)">
+        <div class="thumb seen"><b>1×01</b></div>
+        <div class="epInfo">
+          <div class="epNo">EPISODIO 1</div>
+          <div class="epTitle">Travelers</div>
+          <div class="epMeta">17 ott 2016 · 43 min</div>
+          <div class="epStats">
+            <span class="s">★ 8.1</span>
+            <span class="s disc">💬 42</span>
+          </div>
+        </div>
+        <div class="chev">›</div>
+      </div>
+      <div class="disc">
+        <div class="synopsis">Coscienze dal futuro prendono il posto di persone del presente un istante prima della loro morte…</div>
+        <div class="discTitle">Discussione episodio <span class="n">42</span></div>
+        <div class="cmt">
+          <div class="av" style="background:linear-gradient(135deg,#8b5cf6,#ec4899)">GM</div>
+          <div class="cbody">
+            <div class="cmeta"><b>giulia_m</b><time>2g</time></div>
+            <p class="ctext">Che pilot pazzesco, il concept dei "viaggiatori" mi ha subito preso.</p>
+            <div class="cactions"><span class="liked">❤ 14</span><span>↩ Rispondi</span></div>
+          </div>
+        </div>
+        <div class="composer">
+          <div class="av">TU</div>
+          <div class="cinput">
+            <div class="field">Commenta l'episodio 1×01…</div>
+            <div class="crow">
+              <span class="spoilTog"><span class="dot"></span> Contiene spoiler</span>
+              <button class="send">Invia</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- episode 1x03 (OPEN — thread ricco) -->
+    <div class="ep open">
+      <div class="epHead" onclick="toggleEp(this)">
+        <div class="thumb seen"><b>1×03</b></div>
+        <div class="epInfo">
+          <div class="epNo">EPISODIO 3</div>
+          <div class="epTitle">Aleksander</div>
+          <div class="epMeta">31 ott 2016 · 42 min</div>
+          <div class="epStats">
+            <span class="s">★ 8.6</span>
+            <span class="s disc">💬 28</span>
+          </div>
+        </div>
+        <div class="chev">›</div>
+      </div>
+      <div class="disc">
+        <div class="synopsis">La squadra affronta una missione che mette alla prova i loro protocolli. Marcy prende una decisione difficile…</div>
+        <div class="myrate">Il tuo voto: <span class="stars"><span class="f">★★★★</span><span class="e">★</span></span> 8/10</div>
+
+        <div class="discTitle">Discussione episodio <span class="n">28</span></div>
+
+        <div class="cmt">
+          <div class="av" style="background:linear-gradient(135deg,#f59e0b,#ec4899)">AR</div>
+          <div class="cbody">
+            <div class="cmeta"><b>utente_demo</b><time>5h</time></div>
+            <p class="ctext">Questo episodio alza tutto di livello. La scena finale col protocollo 3 🔥</p>
+            <div class="cactions"><span class="liked">❤ 9</span><span>↩ Rispondi</span></div>
+          </div>
+        </div>
+
+        <!-- reply -->
+        <div class="cmt reply">
+          <div class="av" style="background:linear-gradient(135deg,#22d3ee,#6366f1)">LF</div>
+          <div class="cbody">
+            <div class="cmeta"><b>luca.f</b><time>4h</time></div>
+            <p class="ctext">Vero, e Marcy qui diventa il mio personaggio preferito.</p>
+            <div class="cactions"><span>❤ 3</span><span>↩ Rispondi</span></div>
+          </div>
+        </div>
+
+        <!-- spoiler comment -->
+        <div class="cmt spoiler">
+          <div class="av" style="background:linear-gradient(135deg,#ec4899,#8b5cf6)">SB</div>
+          <div class="cbody">
+            <div class="cmeta"><b>sara_b</b><time>2h</time></div>
+            <div class="wrap">
+              <p class="ctext">Non mi aspettavo che Aleksander finisse così, quel colpo di scena cambia tutta la stagione…</p>
+              <span class="veil" onclick="this.closest('.spoiler').classList.add('shown')">⚠ Contiene spoiler — tocca per mostrare</span>
+            </div>
+            <div class="cactions"><span>❤ 6</span><span>↩ Rispondi</span></div>
+          </div>
+        </div>
+
+        <!-- composer -->
+        <div class="composer">
+          <div class="av">TU</div>
+          <div class="cinput">
+            <div class="field">Commenta l'episodio 1×03…</div>
+            <div class="crow">
+              <span class="spoilTog"><span class="dot"></span> Contiene spoiler</span>
+              <button class="send">Invia</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- episode 1x04 (collapsed, non visto) -->
+    <div class="ep">
+      <div class="epHead" onclick="toggleEp(this)">
+        <div class="thumb"><b>1×04</b></div>
+        <div class="epInfo">
+          <div class="epNo">EPISODIO 4</div>
+          <div class="epTitle">Hall</div>
+          <div class="epMeta">7 nov 2016 · 42 min</div>
+          <div class="epStats">
+            <span class="s">★ 8.3</span>
+            <span class="s disc">💬 19</span>
+          </div>
+        </div>
+        <div class="chev">›</div>
+      </div>
+      <div class="disc">
+        <div class="synopsis">Un volto dal passato di uno dei viaggiatori riporta a galla vecchi conti in sospeso…</div>
+        <div class="discTitle">Discussione episodio <span class="n">19</span></div>
+        <div class="cmt">
+          <div class="av" style="background:linear-gradient(135deg,#34d399,#3b82f6)">MP</div>
+          <div class="cbody">
+            <div class="cmeta"><b>marco_p</b><time>1g</time></div>
+            <p class="ctext">Episodio più lento ma la tensione cresce bene verso il finale.</p>
+            <div class="cactions"><span>❤ 5</span><span>↩ Rispondi</span></div>
+          </div>
+        </div>
+        <div class="composer">
+          <div class="av">TU</div>
+          <div class="cinput">
+            <div class="field">Commenta l'episodio 1×04…</div>
+            <div class="crow">
+              <span class="spoilTog"><span class="dot"></span> Contiene spoiler</span>
+              <button class="send">Invia</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="note">
+  <b>Nota per il designer — cosa è nuovo.</b> Oggi la scheda titolo ha solo la discussione della <b>serie intera</b>.
+  Qui ogni <b>episodio</b> ha la sua discussione: card episodio con contatore 💬, che si espande in un thread
+  dedicato (commenti, like, risposte, protezione spoiler per singolo commento, voto per episodio, composer con toggle spoiler).
+  Dati e testi sono fittizi. Palette/gradiente = brand Somto. Puoi ripartire da questo HTML.
+</div>
+
+<script>
+  function toggleEp(head){ head.closest('.ep').classList.toggle('open'); }
+  document.querySelectorAll('.season').forEach(function(s){
+    s.addEventListener('click',function(){
+      document.querySelectorAll('.season').forEach(function(x){x.classList.remove('on')});
+      s.classList.add('on');
+    });
+  });
+</script>

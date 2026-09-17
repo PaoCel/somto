@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Prova il Quiz su film e serie — Somto</title>
+  <meta name="description" content="Mettiti alla prova: gioca subito un quiz su film e serie TV, senza registrarti. Poi crea un account per salvare i punti, scalare la classifica e sfidare gli amici.">
+  <link rel="canonical" href="https://somto.it/quiz-prova.html">
+  <meta name="robots" content="index,follow">
+  <meta property="og:title" content="Prova il Quiz su film e serie — Somto">
+  <meta property="og:description" content="Gioca subito un quiz su film e serie, senza registrarti.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://somto.it/quiz-prova.html">
+  <meta property="og:image" content="https://somto.it/og/quiz.png">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/pages/quiz.css">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <meta name="theme-color" content="#0A0A0A">
+</head>
+<body>
+  <header class="quiz-guest-topbar">
+    <a class="quiz-guest-brand" href="/" aria-label="Somto home">
+      <img src="/icons/somto-wordmark.png" alt="Somto" height="26" data-i18n-attr="alt">
+    </a>
+    <a class="btn ghost xs" href="/login.html?next=%2Fquiz.html" data-i18n>Accedi</a>
+  </header>
+
+  <main class="container page">
+    <div id="quizProva" class="quiz-page"></div>
+  </main>
+
+  <div class="toast-wrap" id="toasts" role="status" aria-live="polite"></div>
+
+  <script src="/firebaseConfig.js"></script>
+  <script type="module" src="/js/pages/quiz-prova.page.js"></script>
+  <script src="/js/pwa.js" defer></script>
+</body>
+</html>

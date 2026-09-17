@@ -1,0 +1,23 @@
+[
+  {
+    "questionId": "q_146_37",
+    "severity": "critical",
+    "problem": "Alessandro Borghi è apparso nella SETTIMA stagione (episodio 6 'Numeri primi', 24 settembre 2009), non nella quinta. Fonti: IMDB, tvserial.it, tvblog. La quinta stagione è del 2006, la settima del 2009.",
+    "fix": "Sostituire 'quinta stagione' con 'settima stagione' nel questionText e nell'explanation.",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_146_39",
+    "severity": "minor",
+    "problem": "L'explanation afferma 'È soprannominato Pippo come diminutivo di Giuseppe', ma nella stessa stagione 10 (ep. 10x01) il personaggio si presenta come Filippo Gimignani-Zarfati. 'Pippo' è diminutivo standard di Filippo, non di Giuseppe. La risposta corretta (Filippo Gimignani-Zarfati) è giusta, ma la spiegazione contiene un'affermazione interna contradditoria.",
+    "fix": "Rimuovere la frase 'È soprannominato Pippo come diminutivo di Giuseppe' oppure chiarire che il nome Giuseppe compare solo in un episodio precedente (4x08) e viene contraddetto dall'ep. 10x01. La risposta corretta rimane invariata.",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_146_23",
+    "severity": "minor",
+    "problem": "Il questionText chiede di quale 'sorella' si tratta ('sorella di quale celebre DJ'), ma Nathalie Guetta è in realtà FRATELLASTRO di David Guetta (figli dello stesso padre Pierre Guetta ma da madri diverse). L'explanation lo chiarisce tra parentesi, ma il questionText usa 'sorella' in modo impreciso.",
+    "fix": "Modificare il questionText in 'Nathalie Guetta, l'attrice che interpreta la perpetua Natalina, è parente di quale celebre DJ francese?' oppure aggiungere 'sorellastra/fratellastro' per precisione. La risposta corretta (David Guetta, indice 2) è giusta.",
+    "correctIndexShouldBe": -1
+  }
+]

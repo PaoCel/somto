@@ -1,0 +1,14 @@
+{
+  "name": "somto-blog",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Blog editoriale di Somto — generato con Eleventy, output statico in public/blog/.",
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve",
+    "clean": "rm -rf ../public/blog"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.5"
+  }
+}

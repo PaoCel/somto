@@ -1,0 +1,9 @@
+[
+  {
+    "questionId": "q_148_40",
+    "severity": "minor",
+    "problem": "L'explanation chiama l'arma 'fucile a salve' ma nel romanzo/episodio 'Rondini d'inverno' si tratta di una pistola di scena (pistola scenica), non di un fucile. La risposta corretta (indice 0) descrive comunque fedelmente l'evento (proiettile a salve sostituito con uno vero che uccide un'attrice a teatro), quindi l'answer-key è giusto.",
+    "fix": "Sostituire 'fucile a salve' con 'pistola di scena' (o 'pistola a salve') nell'explanation.",
+    "correctIndexShouldBe": -1
+  }
+]

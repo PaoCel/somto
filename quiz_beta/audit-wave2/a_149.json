@@ -1,0 +1,9 @@
+[
+  {
+    "questionId": "q_149_46",
+    "severity": "critical",
+    "problem": "La domanda chiede quale personaggio si rivela essere il 'figlio biologico' di Suor Angela nella prima stagione, indicando come risposta corretta Marco Ferrari. È un fatto falso: Marco Ferrari NON è il figlio biologico di Suor Angela. Il legame tra i due è che Suor Angela ha partecipato da giovane a una rapina in cui fu ucciso Michele Ferrari, il padre di Marco. L'explanation stessa è contraddittoria: la seconda frase descrive correttamente il vero legame ('era inconsapevolmente legata alla vita del padre di Marco'), ma la prima afferma erroneamente che Marco è il figlio biologico. Nessuna delle quattro opzioni è una risposta corretta alla domanda così formulata, perché Suor Angela non ha un figlio biologico rivelato nella prima stagione.",
+    "fix": "Riscrivere la domanda per riflettere il vero rapporto: 'Per quale motivo Suor Angela protegge l'ispettore Marco Ferrari nella prima stagione?' con risposta corretta 'Perché è coinvolta nell'uccisione del padre di Marco, avvenuta durante una rapina in cui partecipò da giovane.' In alternativa eliminare la domanda. Non esiste una risposta corretta tra le opzioni attuali.",
+    "correctIndexShouldBe": -1
+  }
+]

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyCf5Gi9TZNzJGeZGhW_7zM9zASplIC6GBw</string>
+	<key>PROJECT_ID</key>
+	<string>gia-visto</string>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:538597925021:web:30d160b1a8c5e71c293474</string>
+	<key>GCM_SENDER_ID</key>
+	<string>538597925021</string>
+	<key>STORAGE_BUCKET</key>
+	<string>gia-visto.firebasestorage.app</string>
+	<key>FUNCTIONS_REGION</key>
+	<string>europe-west1</string>
+	<key>APP_CHECK_DEBUG_PROVIDER</key>
+	<false/>
+	<key>USE_EMULATORS</key>
+	<false/>
+	<key>EMULATOR_HOST</key>
+	<string>127.0.0.1</string>
+	<key>AUTH_PORT</key>
+	<integer>59099</integer>
+	<key>FIRESTORE_PORT</key>
+	<integer>58080</integer>
+	<key>FUNCTIONS_PORT</key>
+	<integer>5001</integer>
+	<key>STORAGE_PORT</key>
+	<integer>58081</integer>
+</dict>
+</plist>

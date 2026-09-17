@@ -1,0 +1,152 @@
+/* ============================================
+   VARIABLES.CSS — Somto Design System
+   Allineato 1:1 ai token iOS (TwoWatchTheme.swift)
+   Dark theme unico.
+   ============================================ */
+
+:root {
+  /* ===== SFONDI ===== */
+  --bg:               #0A0A0A;
+  --bg-secondary:     #15151C;
+  --screen-gradient:  linear-gradient(135deg, #191A30, #0A0A0A 55%, #070707);
+  --bg-gradient:      var(--screen-gradient);
+
+  --panel:            rgba(255, 255, 255, 0.06);
+  --panel-strong:     rgba(255, 255, 255, 0.10);
+  --panel-light:      rgba(255, 255, 255, 0.10); /* alias legacy */
+
+  /* ===== GLASS ===== */
+  --glass-bg:         rgba(255, 255, 255, 0.06);
+  --glass-border:     rgba(255, 255, 255, 0.09);
+  --glass-blur:       blur(20px);
+  --glass-shadow:     0 18px 40px rgba(0, 0, 0, 0.32);
+
+  /* ===== TESTO ===== */
+  --text-primary:     #F5F5F5;
+  --text:             #F5F5F5; /* alias legacy */
+  --text-secondary:   #A8A8A8;
+  --text-muted:       rgba(255, 255, 255, 0.48);
+  --text-subtle:      rgba(255, 255, 255, 0.30);
+
+  /* ===== BRAND ===== */
+  --brand-primary:    #E91E63; /* pink */
+  --brand-secondary:  #9C27B0; /* purple */
+  --brand-warm:       #F77737; /* orange */
+  --accent:           #00D9FF; /* cyan */
+
+  /* ===== STATI ===== */
+  --success:          #00E676;
+  --warning:          #FFB300;
+  --danger:           #FF1744;
+
+  /* ===== GRADIENTI ===== */
+  --brand-gradient:   linear-gradient(135deg, #F77737, #E91E63, #9C27B0);
+
+  /* ===== BORDI ===== */
+  --border:           rgba(255, 255, 255, 0.09);
+  --border-medium:    rgba(255, 255, 255, 0.14);
+  --border-strong:    rgba(255, 255, 255, 0.24);
+
+  /* ===== OMBRE ===== */
+  --shadow-sm:        0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow:           0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-lg:        0 18px 40px rgba(0, 0, 0, 0.55);
+  --shadow-card:      0 18px 40px rgba(0, 0, 0, 0.32);
+  --shadow-glow:      0 0 24px rgba(233, 30, 99, 0.30);
+  --shadow-brand:     0 12px 28px rgba(233, 30, 99, 0.32);
+
+  /* ===== SPACING & SAFE AREA ===== */
+  --safe-top:    env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+
+  --space-xxs: 0.25rem;
+  --space-xs:  0.5rem;
+  --space-sm:  0.75rem;
+  --space-md:  1rem;
+  --space-lg:  1.25rem;
+  --space-xl:  1.5rem;
+  --space-2xl: 2rem;
+  --space-3xl: 3rem;
+  --space-4xl: 4rem;
+
+  /* ===== BORDER RADIUS ===== */
+  --radius-card:  24px;
+  --radius-pill:  999px;
+  --radius-input: 14px;
+
+  --radius-xs:   6px;
+  --radius-sm:   10px;
+  --radius-md:   14px;
+  --radius-lg:   20px;
+  --radius-xl:   24px;
+  --radius-2xl:  28px;
+  --radius-full: 999px;
+
+  /* ===== TIPOGRAFIA ===== */
+  --font-sans:    -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display: ui-rounded, "SF Pro Rounded", -apple-system, system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-mono:    "SF Mono", ui-monospace, monospace;
+
+  --text-xs:  12px;
+  --text-sm:  13px;
+  --text-base: 15px;
+  --text-md:  17px;
+  --text-lg:  20px;
+  --text-xl:  26px;
+  --text-2xl: 30px;
+  --text-3xl: 34px;
+
+  --h1: 28px;
+  --h2: 21px;
+  --h3: 17px;
+
+  --leading-tight:   1.1;
+  --leading-normal:  1.4;
+  --leading-relaxed: 1.6;
+
+  --weight-light:     300;
+  --weight-normal:    400;
+  --weight-medium:    500;
+  --weight-semibold:  600;
+  --weight-bold:      700;
+  --weight-extrabold: 800;
+  --weight-black:     900;
+
+  --tracking-tight:  -0.03em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.04em;
+
+  /* ===== POSTER ===== */
+  --poster-aspect: 2/3;
+
+  /* ===== CARD DEFAULTS ===== */
+  --card-padding: var(--space-md);
+  --card-radius:  var(--radius-card);
+
+  /* ===== AVATAR DEFAULTS ===== */
+  --avatar-border-width: 2px;
+
+  /* ===== LAYOUT ===== */
+  --container-max:     520px;
+  --container-padding: 1.1rem;
+
+  --header-height: calc(3.65rem + var(--safe-top));
+  --tabbar-height: calc(4.05rem + var(--safe-bottom));
+
+  /* ===== TRANSIZIONI (spring-like) ===== */
+  --transition-fast:   0.18s cubic-bezier(0.34, 1.4, 0.5, 1);
+  --transition-base:   0.28s cubic-bezier(0.25, 1, 0.4, 1);
+  --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring:       cubic-bezier(0.34, 1.4, 0.5, 1);
+
+  /* ===== Z-INDEX ===== */
+  --z-base:   1;
+  --z-sticky: 50;
+  --z-shell:  85;
+  --z-modal:  100;
+  /* Toast sopra qualsiasi overlay, incluso il takeover onboarding (z-index:1600).
+     I toast sono notifiche: devono restare sempre visibili sopra modali/overlay. */
+  --z-toast:  1700;
+
+  color-scheme: dark;
+}

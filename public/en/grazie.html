@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Thanks for the coffee — Somto</title>
+  <meta name="description" content="The coffee arrived. Thanks, from the person building Somto.">
+  <link rel="canonical" href="https://somto.it/en/grazie.html">
+  <meta name="robots" content="noindex,follow">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="author" content="Somto">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Somto">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:url" content="https://somto.it/en/grazie.html">
+  <meta property="og:title" content="Thanks for the coffee">
+  <meta property="og:description" content="The coffee arrived. Thanks, from the person building Somto.">
+  <meta property="og:image" content="https://somto.it/og/home.png">
+
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+
+  <link rel="stylesheet" href="/css/landing.bundle.css">
+
+  <!-- Confetti: same rules as quiz.css, kept local because the landing bundle does not include them. -->
+  <style>
+    .quiz-confetti { position: fixed; inset: 0; z-index: 90; pointer-events: none; overflow: hidden; }
+    .quiz-confetti-piece { position: absolute; top: -24px; width: 8px; height: 8px; will-change: transform, opacity; animation: quizConfettiFall linear forwards; }
+    @keyframes quizConfettiFall {
+      0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(108vh) translateX(var(--quiz-drift, 0px)) rotate(var(--quiz-spin, 360deg)); opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) { .quiz-confetti { display: none; } }
+    .thanks-cup { font-size: 3.5rem; line-height: 1; margin-bottom: 1rem; }
+  </style>
+</head>
+<body class="lp-body" data-no-shell>
+  <header class="lp-nav" id="lpNav">
+    <div class="lp-nav-inner">
+      <a class="lp-nav-logo" href="/en/" aria-label="Somto — home">
+        <img src="/icons/somto-wordmark.png" alt="Somto">
+      </a>
+      <div class="lp-nav-actions">
+        <nav class="lp-lang" aria-label="Site language">
+          <a href="/grazie.html" hreflang="it" lang="it">IT</a>
+          <a href="/en/grazie.html" hreflang="en" aria-current="true">EN</a>
+        </nav>
+        <a class="lp-nav-cta" href="/home.html">Back to Somto</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="lp-hero">
+      <div class="lp-hero-glow g1"></div>
+      <div class="lp-hero-glow g2"></div>
+      <div class="lp-hero-glow g3"></div>
+      <div class="lp-hero-inner">
+        <p class="thanks-cup" aria-hidden="true">☕</p>
+        <span class="lp-eyebrow">Coffee received</span>
+        <h1>Thanks, <span class="lp-grad-text">that helps</span></h1>
+        <p class="lp-hero-sub">
+          Stripe has sent you a confirmation email with the amount. Unless you
+          picked the recurring option, nothing else gets charged.
+        </p>
+        <div class="lp-cta-row">
+          <a class="lp-btn lp-btn-primary" href="/home.html">Back to Somto</a>
+          <button class="lp-btn lp-btn-ghost" type="button" id="shareBtn">Tell someone</button>
+        </div>
+        <p class="lp-hero-note" id="shareNote" hidden>Link copied.</p>
+      </div>
+    </section>
+
+    <section class="lp-section">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">What now</span>
+          <h2 class="lp-h2">Nothing, that is the idea</h2>
+        </div>
+        <div class="lp-about-text">
+          <p>There is no account to connect and no receipt to keep. Your Somto is exactly the same as before, which was the whole point.</p>
+          <p>If you picked the recurring option and change your mind later, the link to stop it is in Stripe's email. No explanation needed, nobody to write to.</p>
+          <p>If you want to help without spending anything, mention Somto to someone who watches too many shows. It works better than the coffee.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="lp-footer">
+    <div class="lp-footer-inner">
+      <div class="lp-footer-brand">
+        <img src="/icons/somto-wordmark.png" alt="Somto">
+        <p>The social app for people who love films and TV. Rate, discover and decide what to watch with friends.</p>
+      </div>
+      <nav class="lp-footer-cols" aria-label="Site links">
+        <div class="lp-footer-col">
+          <h4>Somto</h4>
+          <a href="/en/">Home</a>
+          <a href="/home.html">Back to the app</a>
+          <a href="/en/sostieni.html">Buy a coffee</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/cookies.html">Cookies</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Support</h4>
+          <a href="/en/support.html">Help centre</a>
+        </div>
+      </nav>
+    </div>
+    <div class="lp-footer-base">© 2026 Somto. All rights reserved.</div>
+  </footer>
+
+  <script type="module">
+    import { fireConfetti } from "/js/components/quizConfetti.js";
+    fireConfetti({ pieceCount: 48 });
+  </script>
+
+  <script>
+    (function () {
+      var nav = document.getElementById("lpNav");
+      if (nav) {
+        var onScroll = function () { nav.classList.toggle("is-scrolled", window.scrollY > 12); };
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+      }
+
+      var btn = document.getElementById("shareBtn");
+      var note = document.getElementById("shareNote");
+      if (!btn) return;
+      btn.addEventListener("click", function () {
+        var url = "https://somto.it/";
+        var text = "I keep track of films and shows on Somto. Give it a go.";
+        if (navigator.share) {
+          navigator.share({ title: "Somto", text: text, url: url }).catch(function () {});
+          return;
+        }
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(url).then(function () {
+            if (note) note.hidden = false;
+          }).catch(function () {});
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

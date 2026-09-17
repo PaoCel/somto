@@ -1,0 +1,7 @@
+/* theme.css — alias of main styles */
+@import url('./variables.css');
+@import url('./base.css');
+@import url('./components/button.css');
+@import url('./components/card.css');
+@import url('./components/form.css');
+@import url('./components/toast.css');

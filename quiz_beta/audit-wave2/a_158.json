@@ -1,0 +1,16 @@
+[
+  {
+    "questionId": "q_158_28",
+    "severity": "critical",
+    "problem": "L'explanation cita 'Cobra Kai S2E5 recap TV Tropes' come fonte, ma la scena in cui Hawk rompe il braccio a Demetri al Golf N' Stuff avviene in Stagione 3, Episodio 5 ('Miyagi-Do'), non in S2E5. Il fatto riportato nella spiegazione è errato: l'episodio è S3E5, non S2E5.",
+    "fix": "Correggere il riferimento nella explanation da 'S2E5' a 'S3E5'. Il testo corretto: 'Hawk rompe il braccio a Demetri durante uno scontro al Golf N' Stuff, nella stagione 3 episodio 5 (Miyagi-Do).'",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_158_35",
+    "severity": "minor",
+    "problem": "L'explanation afferma che il Sekai Taikai 'viene disputato a Barcellona', ma nella realtà della serie i round iniziali si svolgono a Barcellona (stagione 6 parte 2) e dopo la morte di Kwon il torneo viene sospeso e ripreso nel San Fernando Valley (stagione 6 parte 3), dove si decide il vincitore finale. Il finale vero (Johnny vs sensei Wolf) si disputa nella Valley, non a Barcellona.",
+    "fix": "Correggere l'explanation: 'Il Sekai Taikai è il torneo mondiale che fa da sfondo alla sesta stagione. Inizia a Barcellona (parte 2), poi dopo la morte di Kwon viene ripreso nella San Fernando Valley (parte 3), dove si decide il vincitore finale.'",
+    "correctIndexShouldBe": -1
+  }
+]

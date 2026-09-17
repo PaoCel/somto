@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Cerca — Somto</title>
+  <meta name="robots" content="noindex,follow">
+  <link rel="stylesheet" href="/css/main.css">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="/icons/icon-167.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icons/icon-120.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Somto">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0A0A0A">
+</head>
+<body>
+  <div id="appSplash" class="app-splash"><img class="splash-logo splash-wordmark" src="/icons/somto-wordmark.png" alt="Somto" data-i18n-attr="alt"><div class="splash-spinner"></div></div>
+  <main class="container search-page page">
+
+    <!-- Titolo grande rounded -->
+    <h1 class="search-title" data-i18n>Cerca</h1>
+
+    <!-- Campo di ricerca (.searchable iOS) -->
+    <div class="search-field">
+      <svg class="search-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle>
+        <line x1="21" y1="21" x2="16.7" y2="16.7"></line>
+      </svg>
+      <input
+        id="q"
+        class="search-field-input"
+        type="search"
+        placeholder="Cerca un film, una serie…"
+        autocomplete="off"
+        enterkeyhint="search"
+        aria-label="Cerca"
+       data-i18n-attr="placeholder,aria-label">
+      <div id="searchSpinner" class="search-field-spinner" aria-hidden="true"></div>
+      <button id="searchClear" class="search-field-clear" type="button" aria-label="Cancella" data-i18n-attr="aria-label">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm3.5 12.1-1.4 1.4L12 13.4l-2.1 2.1-1.4-1.4L10.6 12 8.5 9.9l1.4-1.4L12 10.6l2.1-2.1 1.4 1.4L13.4 12l2.1 2.1Z"/></svg>
+      </button>
+    </div>
+
+    <!-- Scope picker segmentato (Picker .segmented iOS) -->
+    <div class="search-scope" role="tablist" aria-label="Tipo di ricerca" data-i18n-attr="aria-label">
+      <button class="search-scope-seg active" data-scope="titles" type="button" role="tab" aria-selected="true" data-i18n>Titoli</button>
+      <button class="search-scope-seg" data-scope="users" type="button" role="tab" aria-selected="false" data-i18n>Utenti</button>
+      <button class="search-scope-seg" data-scope="genres" type="button" role="tab" aria-selected="false" data-i18n>Generi</button>
+      <button class="search-scope-seg" data-scope="people" type="button" role="tab" aria-selected="false" data-i18n>Persone</button>
+    </div>
+
+    <!-- Chip filtro tipo (all/movie/tv) — visibile anche in scope "titles" -->
+    <div id="typeBar" class="search-chips hidden">
+      <button class="search-chip active" data-type="all" type="button" data-i18n>Tutti</button>
+      <button class="search-chip" data-type="movie" type="button" data-i18n>Film</button>
+      <button class="search-chip" data-type="tv" type="button" data-i18n>Serie</button>
+    </div>
+
+    <!-- Chip filtro ruolo (all/actor/director) -->
+    <div id="roleBar" class="search-chips hidden">
+      <button class="search-chip active" data-role="all" type="button" data-i18n>Tutti</button>
+      <button class="search-chip" data-role="actor" type="button">Attori</button>
+      <button class="search-chip" data-role="director" type="button">Registi</button>
+    </div>
+
+    <!-- Idle: hint card + ricerche recenti + suggerimenti -->
+    <div id="idleState" class="search-idle" style="display:none;">
+      <div class="search-hint-card">
+        <span id="idleHintIcon" class="search-hint-icon" aria-hidden="true"></span>
+        <p id="idleHintMessage" class="search-hint-message"></p>
+      </div>
+
+      <div id="recentStrip" class="search-strip" style="display:none;">
+        <header class="search-strip-head">
+          <span class="search-strip-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><polyline points="3 3 3 8 8 8"/></svg>
+            Ricerche recenti
+          </span>
+          <button id="recentClear" class="search-strip-action" type="button" data-i18n>Cancella</button>
+        </header>
+        <div id="recentList" class="search-recent-list"></div>
+      </div>
+
+      <div id="suggestStrip" class="search-strip" style="display:none;">
+        <header class="search-strip-head">
+          <span class="search-strip-title">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11 2.5 12.4 7 17 8.4 12.4 9.8 11 14.3 9.6 9.8 5 8.4 9.6 7 11 2.5ZM18 14l.8 2.6L21.4 17l-2.6.8L18 20.4l-.8-2.6L14.6 17l2.6-.4L18 14Z"/></svg>
+            <span id="suggestTitle" data-i18n>Idee per iniziare</span>
+          </span>
+        </header>
+        <div id="suggestChips" class="search-suggest-chips"></div>
+      </div>
+    </div>
+
+    <!-- Risultati -->
+    <div id="results" class="search-results" role="region" aria-live="polite">
+
+      <!-- TITOLI -->
+      <section id="titlesSection" style="display:none;">
+        <header class="search-results-head">
+          <h2 class="search-results-title" data-i18n>Titoli</h2>
+          <span id="titlesCount" class="search-results-count" style="display:none;"></span>
+        </header>
+        <div id="titleResults" class="poster-grid"></div>
+        <div id="titlesPagination" class="search-pagination" style="display:none;"></div>
+      </section>
+
+      <!-- TMDB -->
+      <section id="tmdbSection" style="display:none;">
+        <header class="search-results-head">
+          <h2 class="search-results-title" data-i18n>Risultati da TMDB</h2>
+          <span id="tmdbCount" class="search-results-count" style="display:none;"></span>
+        </header>
+        <div id="tmdbResults" class="poster-grid"></div>
+      </section>
+
+      <!-- UTENTI -->
+      <section id="usersSection" style="display:none;">
+        <header class="search-results-head">
+          <h2 class="search-results-title" data-i18n>Utenti</h2>
+          <span id="usersCount" class="search-results-count" style="display:none;"></span>
+        </header>
+        <div id="userResults" class="search-row-list"></div>
+        <div id="usersPagination" class="search-pagination" style="display:none;"></div>
+      </section>
+
+      <!-- GENERI -->
+      <section id="genresSection" style="display:none;">
+        <header class="search-results-head">
+          <h2 class="search-results-title" data-i18n>Generi</h2>
+        </header>
+
+        <button id="genreSelectorBtn" class="search-genre-selector" type="button">
+          <span class="btn-text">Seleziona generi…</span>
+          <svg class="search-genre-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg>
+        </button>
+
+        <div id="selectedTags" class="search-genre-tags"></div>
+
+        <div id="genreTitlesBlock" class="search-titles-block" style="display:none;">
+          <header class="search-results-head">
+            <h3 id="genreTitlesTitle" class="search-results-title" data-i18n>Titoli</h3>
+            <span id="genreTitlesCount" class="search-results-count" style="display:none;"></span>
+          </header>
+          <div id="genreTitlesWrap" class="poster-grid"></div>
+          <div id="genreTitlesPagination" class="search-pagination" style="display:none;"></div>
+        </div>
+      </section>
+
+      <!-- PERSONE -->
+      <section id="peopleSection" style="display:none;">
+        <header class="search-results-head">
+          <h2 class="search-results-title" data-i18n>Persone</h2>
+          <span id="peopleCount" class="search-results-count" style="display:none;"></span>
+        </header>
+        <div id="peopleResults" class="search-row-list"></div>
+        <div id="peoplePagination" class="search-pagination" style="display:none;"></div>
+
+        <div id="personTitlesBlock" class="search-titles-block" style="display:none;">
+          <header class="search-results-head">
+            <h3 id="personTitlesTitle" class="search-results-title">Filmografia</h3>
+            <span id="personTitlesCount" class="search-results-count" style="display:none;"></span>
+          </header>
+          <div id="personTitlesWrap" class="poster-grid"></div>
+          <div id="personTitlesPagination" class="search-pagination" style="display:none;"></div>
+        </div>
+      </section>
+
+      <!-- NESSUN RISULTATO -->
+      <div id="noResults" class="search-empty" style="display:none;">
+        <span class="search-empty-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.7" y2="16.7"/></svg>
+        </span>
+        <p class="search-empty-title" data-i18n>Nessun titolo trovato</p>
+        <p class="search-empty-text" data-i18n>Prova a controllare l'ortografia, oppure cerca direttamente l'autore o il cast.</p>
+        <p class="search-empty-note" data-i18n>Se il titolo compare in TMDB qui sotto, al tap lo aggiungiamo in automatico.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modale import TMDB -->
+  <div id="tmdbImportModal" class="tmdb-import-modal" style="display:none;" aria-hidden="true">
+    <div class="tmdb-import-backdrop"></div>
+    <div class="tmdb-import-dialog" role="dialog" aria-modal="true" aria-labelledby="tmdbImportTitle">
+      <div class="tmdb-import-spinner" aria-hidden="true"></div>
+      <h3 id="tmdbImportTitle">Aggiunta in corso</h3>
+      <p id="tmdbImportMessage" data-i18n>Stiamo aggiungendo questo titolo da TMDB. Potrebbe richiedere qualche secondo.</p>
+    </div>
+  </div>
+
+  <!-- Bottom sheet generi -->
+  <div id="genreSheet" class="bottom-sheet-overlay">
+    <div class="bottom-sheet">
+      <div class="bottom-sheet-handle"></div>
+
+      <header class="bottom-sheet-header">
+        <h3 class="bottom-sheet-title">
+          Seleziona generi
+          <span id="sheetSelectedCount" class="sheet-selected-count" style="display:none;">0</span>
+        </h3>
+        <button id="sheetClose" class="bottom-sheet-close" type="button" aria-label="Chiudi" data-i18n-attr="aria-label">×</button>
+      </header>
+
+      <div class="sheet-search">
+        <input id="sheetSearch" type="text" placeholder="Cerca genere…" autocomplete="off" data-i18n-attr="placeholder">
+      </div>
+
+      <div id="sheetContent" class="sheet-content"></div>
+
+      <footer class="sheet-footer">
+        <button id="sheetClear" class="sheet-btn secondary" type="button" data-i18n>Cancella</button>
+        <button id="sheetApply" class="sheet-btn primary" type="button">Applica</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-wrap" id="toasts" role="status" aria-live="polite"></div>
+
+  <!-- Scripts -->
+  <script src="/firebaseConfig.js"></script>
+  <script type="module" src="/js/pages/search.page.js"></script>
+  <script type="module" src="/js/utils/tabbar.bootstrap.js"></script>
+  <script src="/js/pwa.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+# Audit qualità quiz next50 — report
+
+Generato dal workflow di audit (50 agenti, fact-check). Totale issue: 106 (critical 20, minor 86).
+
+## Risposta corretta sbagliata → INDICE CORRETTO (3)
+- **q_113_12** (Star Wars: Una nuova speranza) → index 3. La risposta segnata è '6' (index 2) ma Star Wars vinse 7 premi alla 50ª cerimonia degli Oscar 1978: 6 competitivi (scenografia, costumi, montaggio, colonna sonora, sonoro, effetti visivi) + 1 Special 
+- **q_119_50** (Forrest Gump) → index 1. La scena cornice (Forrest sulla panchina) si svolge il 1° aprile 1981, non nel 1982. Il correctAnswerIndex 2 punta a '1982', ma la risposta corretta è l'indice 1 ('1981'). Confermato dalla timeline uf
+- **q_125_39** (Il Re Leone) → index 0. La risposta segnata è 'Xhosa' (index 2), ma il canto di apertura 'Nants ingonyama bagithi Baba' è in lingua Zulu, non Xhosa. Wikipedia (voce 'Circle of Life') e molteplici fonti musicali confermano ch
+
+## Domande difettose → FLAGGED (fuori dal pool, da riscrivere) (17)
+- **q_81_35** (One Piece). Il testo della domanda descrive Barbabianca come 'vecchio capitano di Gol D. Roger', ma Barbabianca (Edward Newgate) non fu mai il capitano di Roger. I due erano rivali contemporanei, ciascuno capitano della propria ciur
+  - fix: Riformulare il testo eliminando il riferimento a 'vecchio capitano di Roger'. Ad es.: 'Quale di questi è uno dei Quattro Imperatori e storico rivale di Gol D. Roger?' oppure 'Quale
+- **q_89_25** (Mare Fuori). Il testo della domanda è grammaticalmente e semanticamente incomprensibile: 'Quante stagioni della prima ondata (S1) sono state divise, con il finale che vede Ciro Ricci protagonista di una rivolta?' mescola 'quante stag
+  - fix: Riformulare in modo chiaro, ad esempio: 'In quale stagione Ciro Ricci orchestra una rivolta nel finale?' con le stesse quattro opzioni (La prima / La terza / La quinta / La sesta s
+- **q_99_22** (House of the Dragon). La domanda chiede 'Quale dei figli di Rhaenyra perde un occhio durante una rissa con il giovane Aemond a Driftmark?' e segna come risposta corretta 'Lucerys (Luke) Velaryon' (index 0). È un errore fattuale completo: è AE
+  - fix: Riscrivere la domanda in modo corretto, ad esempio: 'Chi perde un occhio durante la rissa tra i bambini a Driftmark nell'episodio 7?' → risposta: 'Aemond Targaryen'. Oppure: 'Cosa 
+- **q_100_49** (The Office (US)). La domanda afferma che Robert California 'arriva con l'acquisizione di Sabre', ma questo e falso. Sabre acquisisce Dunder Mifflin nella stagione 6 (2009), guidata inizialmente da Jo Bennett. Robert California appare solo
+  - fix: Correggere la domanda rimuovendo il riferimento all'acquisizione Sabre: es. 'Chi e l'eccentrico CEO interpretato da James Spader che nella stagione 8 convince Jo Bennett a cedergli
+- **q_101_26** (Friends). La domanda chiede dove i protagonisti *scoprono* (discover) che Monica e Chandler sono una coppia segreta. La risposta indicata è 'A Londra', ma nessun personaggio scopre la relazione a Londra: Monica e Chandler si metto
+  - fix: Riformulare la domanda in 'In quale città Monica e Chandler iniziano la loro storia segreta?' (risposta: A Londra, correctAnswerIndex 2 resta valido) OPPURE correggere il testo in 
+- **q_104_38** (Mercoledì). Eugene Ottinger NON è allergico alle api: ha il potere psichico di CONTROLLARE le api ed è fondatore del club di apicoltura della scuola. Descriverlo come 'allergico alle api' è un errore fattuale che stravolge il person
+  - fix: Sostituire 'allergico alle api' con 'capace di controllare le api (potere psichico)' nel testo della domanda.
+- **q_107_31** (Dark). La domanda afferma che la God Particle 'permette il viaggio tra i due mondi paralleli nella terza stagione'. In realtà la God Particle appare per la prima volta e viene stabilizzata nella SECONDA stagione (S2E01-S2E02 'B
+  - fix: Correggere la domanda: la God Particle è introdotta nella seconda stagione (non nella terza). Es.: 'Quale entità permette il viaggio nel tempo a partire dalla seconda stagione?'
+- **q_115_47** (Jurassic Park). Il contenitore Barbasol aveva abbastanza refrigerante per 36 ore, non 48. Il dialogo di Dodgson nel film recita esplicitamente 'C'è abbastanza refrigerante per 36 ore'. Il quiz segna come corretta la risposta '48 ore' (i
+  - fix: Sostituire una delle opzioni errate con '36 ore' e segnare quella come corretta. Ad esempio: ['12 ore', '24 ore', '36 ore', '72 ore'] con correctAnswerIndex: 2.
+- **q_117_19** (Pulp Fiction). Doppia risposta giusta: l'opzione 1 ('Pumpkin e Honey Bunny') è anch'essa corretta perché sono i nomi riconosciuti dei personaggi nel film. Un giocatore che la sceglie non sbaglia. L'opzione 3 ('Pumpkin e Honey Bunny (ve
+  - fix: Riformulare la domanda chiedendo esplicitamente i nomi reali dei due rapinatori ('Quali sono i veri nomi dei personaggi soprannominati Pumpkin e Honey Bunny?') e sostituire l'opzio
+- **q_118_34** (Fight Club). La motivazione indicata per il pestaggio di Angel Face è errata. La risposta dice che il Narratore lo picchia 'per gelosia: Angel Face conosce il piano finale del Project Mayhem mentre il Narratore ne è escluso'. Questa 
+  - fix: Correggere la risposta corretta (index 0) in: 'Per gelosia verso Tyler: il Narratore si sente rifiutato e invidioso perché Tyler mostra favoritismo verso Angel Face' e l'explanatio
+- **q_118_37** (Fight Club). La risposta segnata come corretta è falsa. Si dice che il Narratore 'Chiama le società di carte di credito per avvisarle degli esplosivi negli edifici', ma nel film il Narratore va dalla polizia (che risulta composta da 
+  - fix: Sostituire la risposta corretta (index 0) con: 'Va dalla polizia per avvisarla delle bombe, ma scopre che gli agenti sono membri del Project Mayhem; poi tenta di disattivare gli es
+- **q_120_34** (Matrix). Domanda a doppia risposta corretta: 'Quale dei seguenti personaggi viene ucciso da Cypher durante il suo tradimento?' Tra le opzioni ci sono 'Dozer' (index 0, segnato corretto) e 'Apoc' (index 3). Cypher uccide ENTRAMBI:
+  - fix: Sostituire 'Apoc' con un personaggio che NON viene ucciso da Cypher (es. 'Neo' o 'Morpheus'), oppure rendere la domanda più specifica: 'Quale personaggio Cypher uccide direttamente
+- **q_121_33** (Titanic (1997)). La domanda chiede 'Qual era il primo film nella storia del cinema a superare il miliardo di dollari di incasso al botteghino mondiale PRIMA di Titanic?' — ma nessun film aveva mai superato il miliardo prima di Titanic: f
+  - fix: Riformulare la domanda in modo coerente, ad esempio: 'Quale film deteneva il record di maggior incasso di tutti i tempi prima che Titanic lo superasse?' — risposta corretta: Jurass
+- **q_123_28** (Joker (2019)). La domanda chiede in quale luogo/stato si trova Arthur nella 'scena di apertura del film', e segna come corretta la risposta 'Nello studio di un social worker' (index 1). Ma la vera scena di apertura del film è Arthur ne
+  - fix: Riformulare la domanda in 'Quale scena segue immediatamente la scena di apertura con il trucco da clown?' oppure cambiare la risposta corretta e le opzioni per includere 'Nella sal
+- **q_125_19** (Il Re Leone). La domanda chiede chi 'rivela a Simba adulto che Scar ha ucciso Mufasa'. Il fantasma di Mufasa NON lo rivela esplicitamente: dice solo 'Ricorda chi sei' e invita Simba a tornare, senza menzionare l'omicidio. È Scar stess
+  - fix: Riformulare la domanda in 'Chi guida Simba adulto a ricordare la sua identità e il suo ruolo?' (risposta: fantasma di Mufasa, index 2) oppure riformulare in 'Chi confessa a Simba d
+- **q_127_40** (Le ali della libertà). Il testo della domanda attribuisce la campagna di lettere alla legislatura statale a 'Red', ma nel film è Andy Dufresne a scrivere quelle lettere per sei anni, non Red. Red non ha nulla a che fare con la biblioteca. La r
+  - fix: Sostituire 'Per quanti anni Red scrisse lettere alla legislatura statale' con 'Per quanti anni Andy scrisse lettere alla legislatura statale chiedendo fondi prima di ricevere 200 d
+- **q_129_40** (Hunger Games (2012)). Nel film del 2012 il Distretto 11 NON invia un filone di pane a Katniss: quella scena è presente solo nel libro e fu tagliata dalla versione finale del film. Nel film, la reazione del Distretto 11 alla morte di Rue è la 
+  - fix: Correggere la risposta corretta in 'Non viene inviato nulla – il Distretto 11 si ribella con una rivolta' (già coperto da q_129_49) oppure riformulare la domanda specificando 'nel 
+
+## Minori (backlog, non risposte sbagliate) (86)
+- q_81_15 (One Piece): L'explanation indica che Chopper mangiò 'il Frutto Homo Homo', ma il nome corretto del frutto (sia nel fandom italiano che nelle localizzazi
+- q_82_32 (Naruto): La domanda descrive Killer Bee come 'fratello del Raikage' senza specificare 'adottivo'. Killer Bee è il fratello adottivo (non biologico) d
+- q_83_44 (L'attacco dei giganti): L'explanation afferma che il Gigante Femmina può 'indurire parti del proprio corpo per creare lame'. Il potere di indurimento genera cristal
+- q_85_39 (Death Note): La domanda afferma che Near 'fonda' la SPK, e l'explanation la descrive come 'unità speciale statunitense dedicata alla cattura di Kira' gui
+- q_86_22 (Dragon Ball Z): La domanda dice 'che Goku desidera resuscitare' ma nella trama Dende viene resuscitato tramite un desiderio di massa ('resuscita tutti i mor
+- q_86_38 (Dragon Ball Z): La domanda rivela la risposta nel testo stesso: chiede l'equivalente personale di Vegeta 'chiamata anche Cannone Galick' e l'opzione corrett
+- q_86_39 (Dragon Ball Z): La domanda chiama il Kikoho una 'tecnica difensiva' di Tenshinhan, ma è in realtà un'onda d'attacco offensiva devastante (non difensiva). Ne
+- q_87_22 (Jujutsu Kaisen): La risposta corretta (index 0, 'In un cinema') è giusta: Junpei incontra Mahito al cinema. Tuttavia la spiegazione cita erroneamente 'episod
+- q_87_46 (Jujutsu Kaisen): La risposta (index 0) descrive il meccanismo del Binding Vow con parola chiave 'Enchain', che è reale ma non è l'unico modo in cui Sukuna pr
+- q_89_23 (Mare Fuori): spoilerLevel è 'medium' ma la domanda rivela esplicitamente che Ciro Ricci è morto ('la morte del fratello Ciro') e che Rosa ne incolpa Carm
+- q_89_11 (Mare Fuori): spoilerLevel è 'light' ma il talento da parrucchiere di Carmine è un tratto caratteriale fondamentale introdotto dalla prima stagione, non u
+- q_89_31 (Mare Fuori): La domanda chiede quante stagioni erano state trasmesse 'entro il 2025' e la risposta 'cinque' è corretta per il 2025. Tuttavia al momento d
+- q_90_37 (Gomorra - La serie): L'opzione corretta dice 'che la crede una spia', ma Patrizia era effettivamente diventata una collaboratrice di giustizia (pentita) nel S4, 
+- q_90_44 (Gomorra - La serie): La citazione esatta attribuita a Ciro ('Questa è la differenza tra me e te') non è verificabile verbatim da fonti primarie; lo stesso file l
+- q_91_28 (SKAM Italia): L'explanation descrive Malik come 'migliore amico non musulmano di suo fratello', ma le fonti confermano che Malik proveniva da una famiglia
+- q_92_27 (Romanzo Criminale - La serie): La risposta corretta dice 'Una studentessa, amore del Freddo' ed è tecnicamente vera, ma l'explanation omette un dettaglio narrativo crucial
+- q_93_16 (Il commissario Montalbano): La domanda descrive la trattoria come 'sul mare', ma nei romanzi 'Da Enzo' (il Timone reale a Porto Empedocle) è nella parte alta della citt
+- q_93_21 (Il commissario Montalbano): L'explanation afferma che 'dal 2002 la serie passò a Rai 1'. In realtà il passaggio avvenne dalla quarta stagione (2002), ma le prime TRE st
+- q_95_9 (Tolo Tolo): La domanda chiede il nome dell'amico e 'collega cameriere' di Checco. Oumar (risposta B, index 1) è effettivamente il nome corretto del pers
+- q_95_42 (Tolo Tolo): La domanda afferma che la parola gridata nel finale che rivela il film-nel-film è 'Stop' (index 1). Il dettaglio è tratto da un'unica fonte 
+- q_95_46 (Tolo Tolo): La domanda afferma che il finale assume lo stile di 'un musical con elementi animati' (index 1, confidence:low). La presenza di 'elementi an
+- q_96_16 (Tre metri sopra il cielo): La risposta segnata (Ponte Flaminio, index 1) è corretta per il film 2004 secondo Wikipedia, ma la domanda stessa avverte nelle riskNotes de
+- q_96_31 (Tre metri sopra il cielo): Il testo della domanda è grammaticalmente ambiguo e invertito: 'Di cosa Step accusa Babi di incolparlo?' implica che sia Step ad accusare Ba
+- q_97_36 (Smetto quando voglio): La risposta segnata (laboratorio universitario clandestino) è confermata da Wikipedia, ma il riskNote stesso avvisa che il dato non ha citaz
+- q_97_38 (Smetto quando voglio): La risposta dice Murena è 'ex accademico/ricercatore espulso dal mondo universitario'. Le fonti confermano che è un ex ingegnere navale del 
+- q_97_40 (Smetto quando voglio): L'età di Pietro indicata come 'circa 37 anni' è fonte YELLOW con confidence medium. Edoardo Leo era nato nel 1974 e nel 2014 aveva circa 40 
+- q_98_50 (Il Trono di Spade): L'explanation descrive il pugnale usato da Arya come 'acciaio di drago (ossidiana lavorata)', confondendo Valyrian steel con dragonglass. Il
+- q_98_11 (Il Trono di Spade): Il sourceBasis indica 'episodio S1E3', ma Longclaw viene donata a Jon Snow nell'episodio S1E9 'Baelor' (dopo che Jon salva Mormont dal vendi
+- q_99_46 (House of the Dragon): La domanda dice che Daemon 'decapita nella sala del trono' Vaemond Velaryon, ma in scena Daemon gli taglia via la parte superiore del cranio
+- q_100_43 (The Office (US)): L'answer e la framing della domanda sono imprecise: la domanda chiede 'quale colpo gobbo fa Dwight per vendicarsi di Andy', ma in 'The Duel'
+- q_100_27 (The Office (US)): Il riferimento episodico indica 'S5E14', ma l'episodio 'Stress Relief' e comunemente numerato S5E13 (per la numerazione che conta i doppi ep
+- q_101_38 (Friends): Il testo definisce Mac and C.H.E.E.S.E. 'serie di fantascienza'. Si tratta in realtà di un buddy-cop show (detective con robot partner), non
+- q_103_37 (The Witcher): La spiegazione afferma che 'il dolore di Vesemir lo porta poi a colpirla per cacciare lo spirito', ma nei fatti della serie è Yennefer che s
+- q_103_46 (The Witcher): La spiegazione usa 'figlio' al posto di 'figlia': 'il loro figlio sarà Ciri'. Ciri è femmina (Cirilla). Errore grammaticale/genere nella spi
+- q_104_4 (Mercoledì): Tim Burton non è tra gli 'ideatori' (creator) della serie: i creator ufficiali sono Alfred Gough e Miles Millar. Burton ha partecipato come 
+- q_104_30 (Mercoledì): La società segreta si chiama ufficialmente 'Nightshade Society' (o 'The Nightshades'), non 'Le Belladonne'. La domanda usa 'Le Belladonne (N
+- q_104_31 (Mercoledì): La Poe Cup è una gara in canoa (canoe race), non 'con le barche a remi' (rowing). La distinzione è rilevante perché il questionText contiene
+- q_104_32 (Mercoledì): Due imprecisioni: (1) il nome dello scorpione è 'Nero', non 'Nerone' — la domanda lo chiama 'Nerone (Nero)', ma il nome canonico nella serie
+- q_104_43 (Mercoledì): La domanda chiede come comunicano Mercoledì e Mano 'quando lei deve scrivere' e la risposta indica 'tramite una vecchia macchina da scrivere
+- q_105_10 (Lupin): L'explanation afferma che Assane 'si fa assumere come addetto alle pulizie al Louvre, dove la collana viene messa all'asta, per rubarla dura
+- q_105_36 (Lupin): La domanda chiede 'Come si chiama la moglie di Hubert Pellegrini', ma Anne Pellegrini è l'ex-moglie/moglie separata (estranged wife) di Hube
+- q_105_11 (Lupin): La domanda afferma che Paul Sernine è lo pseudonimo usato 'all'inizio della Parte 1', ma nella stessa sequenza del Louvre Assane usa due ali
+- q_106_34 (The Last of Us): L'explanation afferma che Joel viene ferito 'da un coltello' (knife). In realtà viene trafitto dallo scheggiato manico di legno di una mazza
+- q_107_10 (Dark): La domanda dice che Mikkel è il bambino che scompare 'all'inizio della serie' dando il via alla vicenda. In realtà Erik Obendorf scompare du
+- q_107_15 (Dark): Ulrich Nielsen è definito 'commissario di polizia di Winden'. In realtà Ulrich è un ispettore/detective subordinato; il capo della polizia (
+- q_108_50 (The Boys): Lo slogan/saluto patriottico indicato come risposta corretta è 'Saving America', ma questo non è il famoso catchphrase canonico di Homelande
+- q_109_2 (Lost): L'opzione corretta recita 'neurochirurgo spinale': Jack Shephard è descritto in tutta la serie come 'spinal surgeon' (chirurgo spinale), spe
+- q_109_18 (Lost): La spiegazione dice che Sayid era 'ufficiale delle comunicazioni iracheno che fu torturatore', ma la domanda nell'opzione giusta lo descrive
+- q_109_50 (Lost): spoilerLevel è 'light', ma il testo della domanda rivela esplicitamente che John Locke muore e che l'Uomo in Nero usa la sua spoglia nella s
+- q_110_37 (Narcos): La domanda chiede come viene chiamato Escobar dai suoi uomini nella serie; la risposta corretta 'El Patrón' è verificata. Tuttavia il distra
+- q_110_47 (Narcos): La risposta indica Bogotá come città principale delle riprese. Fonti di produzione confermano che la maggior parte degli interni è stata gir
+- q_111_34 (Il Signore degli Anelli: La Compagnia dell'Anello): La frase segnata come corretta ('Tu non passerai!') non corrisponde alla battuta dell'effettivo doppiaggio italiano del film, che recita 'Tu
+- q_111_39 (Il Signore degli Anelli: La Compagnia dell'Anello): Il testo della domanda è invertito: 'Cosa propone Galadriel a Frodo che lei rifiuta?' — nella scena è FRODO ad offrire spontaneamente l'Anel
+- q_111_50 (Il Signore degli Anelli: La Compagnia dell'Anello): La risposta D afferma che 'tutte le precedenti fanno parte del verso degli Anelli', ma l'opzione A riporta 'Per dominarli tutti', usando il 
+- q_112_46 (Il Signore degli Anelli: Il ritorno del re): L'explanation afferma che Cameron Duncan aveva '16 anni' al momento della morte. Tutte le fonti verificate (Wikipedia, IMDb, NZ On Screen) c
+- q_112_41 (Il Signore degli Anelli: Il ritorno del re): La durata indicata è '200 minuti (circa 3 ore e 20 minuti)'. La maggior parte delle fonti autorevoli (IMDb, Tolkien Gateway, SlashFilm) ripo
+- q_113_30 (Star Wars: Una nuova speranza): Il testo della domanda descrive Ben Burtt come 'Capo del Design dei droidi e degli effetti sonori'. Il design visivo dei droidi (C-3PO, R2-D
+- q_113_36 (Star Wars: Una nuova speranza): La risposta segnata corretta è 'Universal, United Artists e Disney' (index 1). Universal e United Artists sono storicamente confermati; il r
+- q_114_37 (Pirati dei Caraibi: La maledizione della prima luna): Il nome 'Wicked Wench' e il collegamento a Cutler Beckett (che la fece bruciare) NON compaiono nel primo film del 2003. Questa backstory pro
+- q_114_41 (Pirati dei Caraibi: La maledizione della prima luna): La domanda chiede 'Quale regista famoso voleva Robin Williams nel ruolo di Jack Sparrow?' lasciando intendere si tratti della produzione del
+- q_115_16 (Jurassic Park): La domanda afferma che il verso del T-Rex è stato creato da 'una combinazione di versi di elefante, tigre e alligatore'. In realtà le fonti 
+- q_116_33 (Il Padrino): La spiegazione afferma che Brando protestò 'contro i maltrattamenti dei nativi americani ad Hollywood e nella serie TV Kung Fu'. Nessuna fon
+- q_117_32 (Pulp Fiction): Nell'explanation Marvin viene definito 'una loro informatrice' (forma femminile). Marvin è un personaggio maschile: la forma corretta è 'il 
+- q_119_35 (Forrest Gump): L'explanation afferma 'Tom Hanks studiò il suo accento del Tennessee per replicarlo nel personaggio adulto.' Michael Conner Humphreys è orig
+- q_120_30 (Matrix): La domanda recita 'all'inizio del film... inseguiti dalla polizia', il che descrive la fuga di Trinity (a piedi, cabina telefonica) in apert
+- q_120_32 (Matrix): La domanda chiede 'Come viene chiamato il processo...' (implicando un nome tecnico), ma la risposta corretta (index 0) è una frase descritti
+- q_121_15 (Titanic (1997)): La spiegazione afferma che la battuta 'Sono il re del mondo!' fu improvvisata da DiCaprio sul set. In realtà la battuta fu inventata da Jame
+- q_121_42 (Titanic (1997)): La domanda chiede 'Come descrive JACK il Cuore dell'Oceano' ma nel film la descrizione del diamante come '56 carati appartenuto a Luigi XVI'
+- q_121_47 (Titanic (1997)): L'explanation afferma che Rose usa un'ascia 'per spezzare il tubo a cui è legato' Jack. In realtà Rose usa l'ascia per spezzare la catena de
+- q_122_20 (Il Gladiatore): La durata della versione cinematografica è controversa: Wikipedia EN riporta 155 minuti (coerente con la risposta), ma BFI, IMDb e altri dat
+- q_122_31 (Il Gladiatore): Il testo della domanda e l'explanation descrivono lo spettacolo come 'seconda battaglia di Zama contro Annibale (Battaglia di Cartagine)'. N
+- q_123_15 (Joker (2019)): Doppia risposta potenzialmente corretta: la risposta segnata (index 1) 'Primo film vietato ai minori (rated R) a superare il miliardo di dol
+- q_123_4 (Joker (2019)): spoilerLevel dichiarato 'none' ma l'explanation rivela esplicitamente che Arthur uccide Murray Franklin in diretta televisiva — uno dei prin
+- q_124_18 (Il cavaliere oscuro): L'opzione di risposta corretta (index 3) recita "In Cina, custoditi dal ragioniere Lau". Nel film la location è esplicitamente Hong Kong (La
+- q_125_16 (Il Re Leone): spoilerLevel marcato 'medium' per la scena della gola degli gnu, ma questa scena è quella in cui Mufasa muore — lo spoiler più pesante del f
+- q_125_6 (Il Re Leone): La risposta 'Babbuino/Mandrillo' è tecnicamente accettabile ma imprecisa: Rafiki è ufficialmente un mandrillo (mandrill) secondo Disney, non
+- q_126_34 (Ritorno al futuro): La risposta segnata descrive lo skateboard improvvisato come 'il fondo di un carrello per bambini', ma nell'effettiva scena del film Marty s
+- q_126_39 (Ritorno al futuro): La domanda chiede quale esclamazione usa Doc Brown nel film (senza specificare 'nel primo film'), ma i fan italiani conoscono Doc Brown prin
+- q_126_24 (Ritorno al futuro): L'explanation dice che Lorraine legge 'Calvin Klein' 'sulle mutande di Marty (era il marchio del reggiseno)' — questa parentesi è un refuso 
+- q_127_46 (Le ali della libertà): L'explanation afferma che King 'non incassò mai l'assegno, lo incorniciò', ma in realtà King incorniciò l'assegno e poi lo rispedì a Frank D
+- q_127_8 (Le ali della libertà): La risposta corretta (indice 0: 'per i suoi capelli rossi nella novella originale') è sostanzialmente corretta ma leggermente imprecisa: nel
+- q_128_9 (Django Unchained): L'explanation dice 'due anni prima della Guerra di Secessione americana', che riproduce il testo a schermo del film. Tuttavia la Guerra di S
+- q_129_46 (Hunger Games (2012)): Il testo della domanda usa il singolare 'quale canzone di Taylor Swift' (implicando una sola canzone), ma la risposta corretta (index 2) è '
+- q_129_49 (Hunger Games (2012)): La domanda e la risposta (rivolta del Distretto 11 nel film) sono factualmente corrette. Tuttavia, in abbinamento con q_129_40 (che erroneam
+- q_130_4 (Fast & Furious (2009)): spoilerLevel dichiarato 'none' ma la descrizione nel campo explanation ('la fidanzata di Dom la cui morte scatena la trama') rivela esplicit
+- q_130_15 (Fast & Furious (2009)): L'explanation è formulata in modo confuso: 'mentre il vero Arturo Braga (Campos) rimane nell'ombra' lascia intendere che Ramon Campos sia Br

@@ -1,0 +1,9 @@
+[
+  {
+    "questionId": "q_167_40",
+    "severity": "critical",
+    "problem": "Il conteggio della parola 'fuck' indicato (252 volte) è errato. Secondo Wikipedia (List of films that most frequently use the word fuck), Indiewire e altre fonti concordanti, la parola appare 269 volte in Reservoir Dogs. Nessuna delle 4 opzioni di risposta riporta il numero corretto (269), quindi la domanda è strutturalmente difettosa: la risposta segnata è sbagliata e non esiste una risposta corretta tra le opzioni.",
+    "fix": "Correggere l'opzione A da '252 volte' a '269 volte' e aggiornare l'explanation di conseguenza. In alternativa, eliminare la domanda poiché il dato specifico è controverso tra fonti diverse (alcune citano 252, la fonte più autorevole — Wikipedia — riporta 269).",
+    "correctIndexShouldBe": -1
+  }
+]

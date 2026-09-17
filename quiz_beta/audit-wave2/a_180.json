@@ -1,0 +1,16 @@
+[
+  {
+    "questionId": "q_180_22",
+    "severity": "minor",
+    "problem": "L'explanation afferma che Buzz cadde dalla finestra 'accidentalmente usando RC', ma in realtà la caduta fu causata da una reazione a catena (la lavagna colpisce il mappamondo, il mappamondo colpisce la lampada, la lampada colpisce Buzz) — RC non fu lo strumento diretto della caduta. La risposta corretta (index 0) è comunque giusta.",
+    "fix": "Correggere l'explanation in: 'Anche se Woody ha provocato accidentalmente una reazione a catena (lavagna → mappamondo → lampada) che ha fatto cadere Buzz dalla finestra, i giocattoli di Andy vedono solo il risultato e credono che Woody lo abbia fatto apposta per eliminare il rivale.'",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_180_36",
+    "severity": "minor",
+    "problem": "Nessuna delle 4 opzioni rispecchia la citazione reale e iconica di Woody a Sid ('We toys can see everything! So play nice!' / 'I giocattoli vedono tutto! Quindi comportati bene!'). L'opzione segnata come corretta (index 0: 'Ci tratterai bene. Perché se non lo fai...') è una parafrasi molto vaga e generica. Le altre opzioni sono anch'esse inventate. Il pool di risposte non contiene la vera citazione, rendendo la domanda fuorviante.",
+    "fix": "Sostituire le 4 opzioni con la citazione reale come risposta corretta: (0) 'I giocattoli vedono tutto! Quindi comportati bene!' e costruire tre distrattori credibili. Aggiornare explanation di conseguenza.",
+    "correctIndexShouldBe": -1
+  }
+]

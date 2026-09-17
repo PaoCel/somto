@@ -1,0 +1,31 @@
+name: Feature request
+description: Proponi un miglioramento circoscritto
+title: "[Feature]: "
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: Bisogno
+      description: Quale problema utente risolve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposta
+      description: Descrivi il risultato, non solo l'implementazione.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternative considerate
+  - type: checkboxes
+    id: impact
+    attributes:
+      label: Impatto previsto
+      options:
+        - label: Cambia dati o schema Firestore
+        - label: Cambia permessi, privacy o moderazione
+        - label: Aggiunge una dipendenza
+        - label: Cambia UI o accessibilità

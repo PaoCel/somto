@@ -1,0 +1,215 @@
+/* Anti-spoiler gate (allineato a iOS `SpoilerGate.swift`). */
+
+.spoiler-gate {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.spoiler-content {
+  filter: blur(18px);
+  pointer-events: none;
+  user-select: none;
+  transition: filter 200ms ease;
+}
+
+.spoiler-gate.revealed .spoiler-content {
+  filter: none;
+  pointer-events: auto;
+  user-select: text;
+}
+
+.spoiler-gate.revealed .spoiler-overlay {
+  display: none;
+}
+
+.spoiler-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.62);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Variante "progresso" (spoilerProgress.js): il contenuto sfocato è spesso una
+   riga sola di commento, troppo bassa per contenere overlay + bottone. Il
+   min-height dà all'overlay lo spazio per restare leggibile. */
+.spoiler-gate--progress .spoiler-content {
+  min-height: 108px;
+}
+
+.spoiler-overlay-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.spoiler-overlay-title {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text-primary, #fff);
+}
+
+.spoiler-overlay-subtitle {
+  font-size: 12px;
+  color: var(--text-secondary, rgba(255, 255, 255, 0.7));
+}
+
+.spoiler-reveal-btn {
+  appearance: none;
+  border: none;
+  background: var(--brand-primary, #d12d61);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  margin-top: 2px;
+  transition: filter 160ms ease;
+}
+
+.spoiler-reveal-btn:hover { filter: brightness(1.08); }
+.spoiler-reveal-btn:active { filter: brightness(0.92); }
+
+.spoiler-mark-seen-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.spoiler-mark-seen-btn {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary, #fff);
+  padding: 5px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 500;
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.spoiler-mark-seen-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.spoiler-mark-seen-btn[disabled] {
+  opacity: 0.55;
+  cursor: progress;
+}
+
+.spoiler-overlay-extra {
+  font-size: 11px;
+  color: var(--text-muted, rgba(255, 255, 255, 0.55));
+}
+
+/* Composer toggle (allineato a iOS `SpoilerComposerSection.swift`). */
+
+.spoiler-composer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+/* Collassato: solo una chip compatta, niente box vuoto attorno. */
+.spoiler-composer-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  min-height: 36px;
+  padding: 6px 14px;
+  border: 1px solid var(--border-medium, rgba(255, 255, 255, 0.14));
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary, rgba(255, 255, 255, 0.72));
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.spoiler-composer-toggle:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+/* Chip attiva: bordo/testo brand, come i filtri selezionati. */
+.spoiler-composer-toggle:has(input:checked) {
+  border-color: rgba(233, 30, 99, 0.55);
+  background: rgba(233, 30, 99, 0.10);
+  color: var(--brand-primary, #e91e63);
+}
+
+.spoiler-composer-toggle input[type="checkbox"] {
+  accent-color: var(--brand-primary, #d12d61);
+  cursor: pointer;
+  margin: 0;
+}
+
+/* Espanso: il pannello titoli è il box, full width sotto la chip. */
+.spoiler-composer-body[hidden] {
+  display: none;
+}
+
+.spoiler-composer-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.08));
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.spoiler-composer-pickers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.spoiler-composer-pick {
+  appearance: none;
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.18));
+  background: var(--panel, rgba(255, 255, 255, 0.04));
+  color: var(--text-primary, #fff);
+  padding: 5px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.spoiler-composer-pick.selected {
+  background: rgba(209, 45, 97, 0.18);
+  border-color: var(--brand-primary, #d12d61);
+  color: var(--brand-primary, #d12d61);
+}
+
+.spoiler-composer-pick[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.spoiler-composer-hint {
+  font-size: 11px;
+  color: var(--text-muted, rgba(255, 255, 255, 0.55));
+}

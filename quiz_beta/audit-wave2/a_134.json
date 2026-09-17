@@ -1,0 +1,16 @@
+[
+  {
+    "questionId": "q_134_34",
+    "severity": "critical",
+    "problem": "La domanda chiede il numero di soggetto di Anya 'nel Project Apple', ma Anya NON faceva parte del Project Apple. Il Project Apple era un programma militare ostaniano focalizzato su animali (di cui Bond era il Soggetto 8). Anya era invece un soggetto di un'organizzazione DIVERSA e sconosciuta che conduceva esperimenti su esseri umani. L'associazione di Anya al Project Apple è un fatto falso nel testo della domanda. Il nome in codice 007 è corretto per Anya, ma appartiene al suo progetto anonimo, non al Project Apple.",
+    "fix": "Correggere il testo della domanda eliminando il riferimento a 'Project Apple': es. 'Quale numero di soggetto sperimentale era assegnato ad Anya durante gli esperimenti della sua infanzia?' L'explanation va aggiornata di conseguenza, rimuovendo l'affermazione che Bond (Soggetto 008) facesse parte dello stesso progetto di Anya.",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_134_45",
+    "severity": "minor",
+    "problem": "L'explanation afferma che Anya e Bond 'sono probabilmente stati soggetti dello stesso Project Apple'. Questa è un'inesattezza: Bond era effettivamente un soggetto del Project Apple (Soggetto 8), ma Anya proveniva da un'organizzazione diversa e sconosciuta che sperimentava su esseri umani. I due progetti sono distinti, sebbene alcuni scienziati compaiano nei ricordi di entrambi. La risposta corretta (entrambi hanno poteri soprannaturali da esperimenti) rimane valida.",
+    "fix": "Correggere l'explanation: 'Bond era il Soggetto 8 del Project Apple (esperimenti su animali), mentre Anya (Test Subject 007) proveniva da un'organizzazione sconosciuta che sperimentava su esseri umani. I due progetti sono distinti ma presumibilmente collegati.'",
+    "correctIndexShouldBe": -1
+  }
+]

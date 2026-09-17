@@ -1,0 +1,799 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Aggiungi Contenuto • Somto</title>
+  <meta name="robots" content="noindex,follow">
+  <meta name="description" content="Aggiungi un film o serie TV al database di Somto">
+  <link rel="stylesheet" href="/css/add_title.bundle.css">
+  <link rel="stylesheet" href="/css/add_title_new.css">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="/icons/icon-167.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icons/icon-120.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Somto">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0A0A0A">
+</head>
+<body>
+  <div id="appSplash" class="app-splash"><img class="splash-logo splash-wordmark" src="/icons/somto-wordmark.png" alt="Somto" data-i18n-attr="alt"><div class="splash-spinner"></div></div>
+  <!-- Main Content -->
+  <main class="add-title-container page">
+    <!-- Auth Gate -->
+    <section id="authGate" class="container" style="display:none;" role="alert">
+      <div class="card pad">
+        <div class="hint" data-i18n>
+          Per aggiungere un contenuto devi accedere.
+        </div>
+        <div class="row" style="justify-content: flex-end; margin-top: var(--space-md);">
+          <a class="btn ghost" href="/" data-i18n>Annulla</a>
+          <a class="btn primary" href="/login.html" data-i18n>Accedi</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Multi-Step Form -->
+    <div id="formContainer" class="container" style="display:none;">
+      <!-- Header -->
+      <div class="add-title-header">
+        <h1 data-i18n>Aggiungi contenuto</h1>
+        <p data-i18n>Compila i campi richiesti, ti guidiamo passo per passo</p>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="progress-bar" id="progressBar">
+        <div class="progress-dot active" data-step="0"></div>
+        <div class="progress-dot" data-step="1"></div>
+        <div class="progress-dot" data-step="2"></div>
+        <div class="progress-dot" data-step="3"></div>
+        <div class="progress-dot" data-step="4"></div>
+        <div class="progress-dot" data-step="5"></div>
+        <div class="progress-dot" data-step="6"></div>
+      </div>
+
+      <form id="addTitleForm" aria-label="Form aggiungi contenuto">
+        
+        <!-- STEP 0: Scelta modalità inserimento -->
+        <div class="step-container active" data-step="0">
+          <div class="step-content">
+            <div class="step-title" data-i18n>Aggiungi un titolo</div>
+            <div class="step-subtitle" data-i18n>
+              Scegli come vuoi inserire il contenuto
+            </div>
+
+            <div class="import-modes">
+              <!-- Manuale -->
+              <div class="import-mode-card" data-mode="manual">
+                <div class="import-mode-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 3a2.85 2.85 0 1 1 4 4L7 21H3v-4L17 3z"></path>
+                    <path d="M16 5l3 3"></path>
+                  </svg>
+                </div>
+                <div>
+                  <div class="import-mode-label">Inserimento manuale</div>
+                  <div class="import-mode-desc" data-i18n>Compila i campi passo dopo passo</div>
+                </div>
+              </div>
+
+              <!-- Cerca per nome -->
+              <div class="import-mode-card ai" data-mode="search">
+                <div class="import-mode-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="M21 21l-4.3-4.3"></path>
+                  </svg>
+                </div>
+                <div>
+                  <div class="import-mode-label">Cerca su Wikipedia <span class="ai-pill"><span class="ai-sparkle" aria-hidden="true">
+  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 2l1.6 5.4L19 9l-5.4 1.6L12 16l-1.6-5.4L5 9l5.4-1.6L12 2z"/>
+    <path d="M4 14l.8 2.6L7 17.4l-2.2.8L4 21l-.8-2.8L1 17.4l2.2-.8L4 14z"/>
+    <path d="M19 14l.8 2.6L22 17.4l-2.2.8L19 21l-.8-2.8L16.9 17.4l2.3-.8L19 14z"/>
+  </svg>
+</span><span data-i18n>AI powered</span></span></div>
+                  <div class="import-mode-desc" data-i18n>Scrivi il titolo e importa i dati</div>
+                </div>
+              </div>
+
+              <!-- Cerca su TMDB -->
+              <div class="import-mode-card ai" data-mode="tmdb">
+                <div class="import-mode-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="M21 21l-4.3-4.3"></path>
+                  </svg>
+                </div>
+                <div>
+                  <div class="import-mode-label">Cerca su TMDB <span class="tmdb-pill" data-i18n>TMDB</span></div>
+                  <div class="import-mode-desc" data-i18n>Database completo di film e serie TV</div>
+                </div>
+              </div>
+
+              <!-- Link Wikipedia -->
+              <div class="import-mode-card ai" data-mode="link">
+                <div class="import-mode-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10 13a5 5 0 0 1 0-7l1-1a5 5 0 0 1 7 7l-1 1"></path>
+                    <path d="M14 11a5 5 0 0 1 0 7l-1 1a5 5 0 0 1-7-7l1-1"></path>
+                  </svg>
+                </div>
+                <div>
+                  <div class="import-mode-label">Link Wikipedia <span class="ai-pill"><span class="ai-sparkle" aria-hidden="true">
+  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 2l1.6 5.4L19 9l-5.4 1.6L12 16l-1.6-5.4L5 9l5.4-1.6L12 2z"/>
+    <path d="M4 14l.8 2.6L7 17.4l-2.2.8L4 21l-.8-2.8L1 17.4l2.2-.8L4 14z"/>
+    <path d="M19 14l.8 2.6L22 17.4l-2.2.8L19 21l-.8-2.8L16.9 17.4l2.3-.8L19 14z"/>
+  </svg>
+</span><span data-i18n>AI powered</span></span></div>
+                  <div class="import-mode-desc" data-i18n>Incolla un link per importare i dati</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Panel: Cerca per nome -->
+            <div class="import-panel" id="wikiSearchPanel" style="display:none;">
+              <div class="basics-card">
+                <div class="field-group">
+                  <label for="wikiSearchInput" class="label">Titolo</label>
+                  <input id="wikiSearchInput" type="text" class="input" placeholder="es. Breaking Bad, Inception..." autocomplete="off">
+                </div>
+                <div class="field-group">
+                  <label class="label" data-i18n>Tipo</label>
+                  <div class="type-selector" style="margin-bottom: 0;">
+                    <label class="type-option selected" data-wiki-type="movie">
+                      <input type="radio" name="wikiType" value="movie" checked>
+                      <span class="type-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="2" y="7" width="20" height="14" rx="2"></rect>
+                          <path d="M7 7v14"></path>
+                          <path d="M17 7v14"></path>
+                          <path d="M2 12h5"></path>
+                          <path d="M2 16h5"></path>
+                          <path d="M17 12h5"></path>
+                          <path d="M17 16h5"></path>
+                        </svg>
+                      </span>
+                      <span class="type-label" data-i18n>Film</span>
+                    </label>
+                    <label class="type-option" data-wiki-type="tv">
+                      <input type="radio" name="wikiType" value="tv">
+                      <span class="type-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="2" y="7" width="20" height="15" rx="2"></rect>
+                          <path d="M17 2l-5 5-5-5"></path>
+                        </svg>
+                      </span>
+                      <span class="type-label" data-i18n>Serie TV</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="import-capabilities" aria-label="Cosa viene importato" data-i18n-attr="aria-label">
+                  <div class="cap-item">
+                    <span class="cap-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 6L9 17l-5-5"/>
+                      </svg>
+                    </span>
+                    <span>Anno, lingua, paese, network</span>
+                  </div>
+                  <div class="cap-item">
+                    <span class="cap-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 6L9 17l-5-5"/>
+                      </svg>
+                    </span>
+                    <span data-i18n>Regia + cast (max 10) e stagioni/episodi (se disponibili)</span>
+                  </div>
+                  <div class="cap-item muted">
+                    <span class="cap-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 16v-4"/>
+                        <path d="M12 8h.01"/>
+                      </svg>
+                    </span>
+                    <span data-i18n>Il genere lo scegli tu (con suggerimenti)</span>
+                  </div>
+                </div>
+                <button type="button" class="btn primary full" id="wikiSearchBtn" disabled>
+                  <span id="wikiSearchBtnText" data-i18n>Cerca</span>
+                </button>
+                <div id="wikiSearchResults" class="wiki-results" style="display:none;"></div>
+              </div>
+            </div>
+
+            <!-- Panel: Link Wikipedia -->
+            <div class="import-panel" id="wikiLinkPanel" style="display:none;">
+              <div class="basics-card">
+                <div class="field-group">
+                  <label for="wikiLinkInput" class="label">Link Wikipedia</label>
+                  <input id="wikiLinkInput" type="url" class="input" placeholder="https://it.wikipedia.org/wiki/..." autocomplete="off">
+                </div>
+                <button type="button" class="btn primary full" id="wikiLinkBtn" disabled>
+                  <span id="wikiLinkBtnText" data-i18n>Importa</span>
+                </button>
+                <div class="import-capabilities" aria-label="Cosa viene importato" data-i18n-attr="aria-label">
+                  <div class="cap-item">
+                    <span class="cap-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 6L9 17l-5-5"/>
+                      </svg>
+                    </span>
+                    <span>Anno, lingua, paese, network</span>
+                  </div>
+                  <div class="cap-item">
+                    <span class="cap-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 6L9 17l-5-5"/>
+                      </svg>
+                    </span>
+                    <span data-i18n>Regia + cast (max 10) e stagioni/episodi (se disponibili)</span>
+                  </div>
+                  <div class="cap-item muted">
+                    <span class="cap-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 16v-4"/>
+                        <path d="M12 8h.01"/>
+                      </svg>
+                    </span>
+                    <span data-i18n>Il genere lo scegli tu (con suggerimenti)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Panel: Cerca su TMDB -->
+            <div class="import-panel" id="tmdbSearchPanel" style="display:none;">
+              <div class="basics-card">
+                <div class="field-group">
+                  <label for="tmdbSearchInput" class="label">Titolo</label>
+                  <input id="tmdbSearchInput" type="text" class="input" placeholder="es. Breaking Bad, Inception..." autocomplete="off">
+                </div>
+                <div class="import-capabilities" aria-label="Cosa viene importato" data-i18n-attr="aria-label">
+                  <div class="cap-item">
+                    <span class="cap-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 6L9 17l-5-5"/>
+                      </svg>
+                    </span>
+                    <span>Titolo, anno, lingua, paese, network</span>
+                  </div>
+                  <div class="cap-item">
+                    <span class="cap-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 6L9 17l-5-5"/>
+                      </svg>
+                    </span>
+                    <span>Regia, cast (max 10), stagioni, episodi, descrizione</span>
+                  </div>
+                  <div class="cap-item muted">
+                    <span class="cap-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 16v-4"/>
+                        <path d="M12 8h.01"/>
+                      </svg>
+                    </span>
+                    <span data-i18n>Il genere lo scegli tu (con suggerimenti)</span>
+                  </div>
+                </div>
+                <button type="button" class="btn primary full" id="tmdbSearchBtn" disabled>
+                  <span id="tmdbSearchBtnText" data-i18n>Cerca</span>
+                </button>
+                <div id="tmdbSearchResults" class="wiki-results" style="display:none;"></div>
+              </div>
+            </div>
+
+            <!-- Loading / status -->
+            <div id="wikiStatus" class="wiki-status" style="display:none;"></div>
+          </div>
+        </div>
+
+        <!-- STEP 1: Basics (Nome + Tipo + Anno) -->
+        <div class="step-container" data-step="1">
+          <div class="step-content">
+            <div class="step-title" data-i18n>Come si chiama?</div>
+            <div class="step-subtitle" data-i18n>Il titolo del film o della serie TV</div>
+            
+            <div class="basics-card">
+              <!-- Nome -->
+              <div class="field-group">
+                <label for="name" class="label required">Titolo</label>
+                <input
+                  id="name"
+                  type="text"
+                  class="input"
+                  placeholder="es. Hereditary"
+                  autocomplete="off"
+                  required
+                  aria-required="true"
+                >
+                <div id="duplicateWarning" class="duplicate-warning" style="display:none;">
+                  <div class="duplicate-warning-header">
+                    <span class="duplicate-warning-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                        <path d="M12 9v4"></path>
+                        <path d="M12 17h.01"></path>
+                      </svg>
+                    </span>
+                    <span data-i18n>Questo titolo potrebbe già esistere:</span>
+                  </div>
+                  <ul class="duplicate-warning-list" id="duplicateList"></ul>
+                  <p class="duplicate-warning-hint" data-i18n>Se non è un duplicato, puoi proseguire.</p>
+                </div>
+              </div>
+              
+              <!-- Tipo -->
+              <div class="field-group">
+                <label class="label required" data-i18n>È un film o una serie?</label>
+                <div class="type-selector">
+                  <label class="type-option selected" data-type="movie">
+                    <input type="radio" name="type" value="movie" checked>
+                    <div class="type-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="7" width="20" height="14" rx="2"></rect>
+                        <path d="M7 7v14"></path>
+                        <path d="M17 7v14"></path>
+                        <path d="M2 12h5"></path>
+                        <path d="M2 16h5"></path>
+                        <path d="M17 12h5"></path>
+                        <path d="M17 16h5"></path>
+                      </svg>
+                    </div>
+                    <div class="type-label" data-i18n>Film</div>
+                  </label>
+                  <label class="type-option" data-type="tv">
+                    <input type="radio" name="type" value="tv">
+                    <div class="type-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="7" width="20" height="15" rx="2"></rect>
+                        <path d="M17 2l-5 5-5-5"></path>
+                      </svg>
+                    </div>
+                    <div class="type-label" data-i18n>Serie TV</div>
+                  </label>
+                </div>
+              </div>
+              
+              <!-- Anno -->
+              <div class="field-group">
+                <label for="year" class="label" data-i18n>Anno di uscita</label>
+                <div class="year-quick-buttons" id="yearQuickButtons">
+                  <!-- Generati da JS -->
+                </div>
+                <input
+                  id="year"
+                  type="number"
+                  class="input"
+                  min="1880"
+                  max="2100"
+                  placeholder="oppure scrivi l'anno"
+                 data-i18n-attr="placeholder">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2: Details (Durata/Stagioni) -->
+        <div class="step-container" data-step="2">
+          <div class="step-content">
+            <div class="step-title" id="detailsTitle" data-i18n>Durata del film</div>
+            <div class="step-subtitle" id="detailsSubtitle">Quanto dura in minuti?</div>
+            <div id="wikiImportDetailsCard" class="wiki-import-details" style="display:none;"></div>
+            
+            <!-- Film Details -->
+            <div id="movieDetails" class="details-grid">
+              <div class="detail-card">
+                <div class="detail-label">Durata</div>
+                <div class="detail-input-wrapper">
+                  <input
+                    id="durationMovie"
+                    type="number"
+                    class="input detail-input"
+                    min="1"
+                    max="600"
+                    placeholder="120"
+                    inputmode="numeric"
+                  >
+                  <span class="detail-unit" data-i18n>minuti</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- TV Details -->
+            <div id="tvDetails" class="details-grid" style="display:none;">
+              <div class="detail-card">
+                <div class="detail-label">Stagioni</div>
+                <div class="detail-input-wrapper">
+                  <input
+                    id="seasonsCount"
+                    type="number"
+                    class="input detail-input"
+                    min="1"
+                    max="200"
+                    placeholder="3"
+                    inputmode="numeric"
+                  >
+                </div>
+              </div>
+              
+              <div class="detail-card">
+                <div class="detail-label" data-i18n>Episodi per stagione</div>
+                <div class="detail-input-wrapper">
+                  <input
+                    id="episodesPerSeason"
+                    type="number"
+                    class="input detail-input"
+                    min="1"
+                    max="200"
+                    placeholder="10"
+                    inputmode="numeric"
+                  >
+                </div>
+              </div>
+              
+              <div class="detail-card">
+                <div class="detail-label">Durata episodio</div>
+                <div class="detail-input-wrapper">
+                  <input
+                    id="durationEpisode"
+                    type="number"
+                    class="input detail-input"
+                    min="1"
+                    max="300"
+                    placeholder="45"
+                    inputmode="numeric"
+                  >
+                  <span class="detail-unit" data-i18n>min</span>
+                </div>
+              </div>
+              
+              <!-- Toggle per episodi diversi -->
+              <label class="seasons-toggle">
+                <div class="toggle-label" data-i18n>Episodi diversi per stagione</div>
+                <input type="checkbox" id="togglePerSeason" style="display:none;">
+                <div class="toggle-switch"></div>
+              </label>
+              
+              <!-- Grid episodi per stagione -->
+              <div class="seasons-detail-grid" id="seasonsDetailGrid">
+                <!-- Generato da JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3: Poster -->
+        <div class="step-container" data-step="3">
+          <div class="step-content">
+            <div class="step-title" data-i18n>Aggiungi la locandina</div>
+            <div class="step-subtitle" data-i18n>Carica un'immagine verticale (facoltativo)</div>
+            
+            <div class="poster-upload-area">
+              <div class="poster-preview-large" id="posterPreviewLarge">
+                <div class="poster-placeholder">
+                  <div class="poster-placeholder-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="5" width="18" height="16" rx="2" ry="2"></rect>
+                      <circle cx="8.5" cy="10" r="1.5"></circle>
+                      <path d="M21 16l-5-5L5 21"></path>
+                    </svg>
+                  </div>
+                  <div class="poster-placeholder-text">
+                    Tocca per caricare<br>un'immagine
+                  </div>
+                </div>
+              </div>
+              
+              <input
+                id="posterFile"
+                type="file"
+                accept="image/*"
+                class="hidden-file-input"
+                aria-label="Carica locandina"
+               data-i18n-attr="aria-label">
+              
+              <button type="button" class="btn primary poster-upload-button" id="posterUploadBtn">
+                <span class="inline-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h3l2-3h8l2 3h3a2 2 0 0 1 2 2z"></path>
+                    <circle cx="12" cy="13" r="4"></circle>
+                  </svg>
+                </span>
+                <span data-i18n>Carica immagine</span>
+              </button>
+            </div>
+            
+            <p class="hint" data-i18n>JPG o PNG, meglio verticale (2:3). Massimo 5MB.</p>
+            <p class="hint" style="margin-top: var(--space-xs);" data-i18n>Puoi caricarla anche dopo, dalla pagina del titolo.</p>
+            <p id="posterAutoHint" class="hint poster-auto-hint" style="display:none;" data-i18n>
+              📥 Se non carichi nulla, verrà usata automaticamente la locandina importata.
+            </p>
+          </div>
+        </div>
+
+        <!-- STEP 4: Genres -->
+        <div class="step-container" data-step="4">
+          <div class="step-content">
+            <div class="step-title" data-i18n>Quali generi?</div>
+            <div class="step-subtitle" data-i18n>Seleziona almeno un genere</div>
+
+            <!-- Quick import preview (shown after Wikipedia import) -->
+            <div id="wikiImportPreview" class="wiki-import-preview" style="display:none;">
+              <div class="wiki-import-row">
+                <div class="wiki-import-thumb" id="wikiImportThumb" aria-hidden="true"></div>
+                <div class="wiki-import-body">
+                  <div class="wiki-import-title" id="wikiImportTitle"></div>
+                  <div class="wiki-import-sub" id="wikiImportSub"></div>
+                  <div class="wiki-import-people" id="wikiImportPeople"></div>
+                </div>
+              </div>
+              <div class="wiki-import-hint" data-i18n>Ti resta solo scegliere i generi qui sotto.</div>
+            </div>
+
+            <!-- Wikipedia genre suggestions (hidden by default) -->
+            <div id="wikiGenreSuggestions" class="wiki-genre-suggestions" style="display:none;">
+              <div class="wiki-genre-suggestions-label" data-i18n>Suggeriti da Wikipedia:</div>
+              <div class="wiki-genre-suggestions-list" id="wikiGenreSuggestionsList"></div>
+            </div>
+
+            <!-- Search -->
+            <div class="genre-search-wrapper">
+              <div class="input-wrapper">
+                <input
+                  id="genreSearch"
+                  type="text"
+                  class="input"
+                  placeholder="Cerca un genere..."
+                  autocomplete="off"
+                 data-i18n-attr="placeholder">
+              </div>
+            </div>
+            
+            <!-- Genres Grid -->
+            <div class="genres-grid" id="genresGrid">
+              <!-- Generato da JS -->
+            </div>
+            
+            <!-- Add Custom Genre -->
+            <div class="add-custom-genre" id="addCustomGenreBtn">
+              <div class="add-custom-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 5v14"></path>
+                  <path d="M5 12h14"></path>
+                </svg>
+              </div>
+              <div class="add-custom-text" data-i18n>Non trovi il genere? Aggiungilo</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 5: Extras (Optional) -->
+        <div class="step-container" data-step="5">
+          <div class="step-content">
+            <div class="step-title">Dettagli extra</div>
+            <div class="step-subtitle" data-i18n>Tutti questi campi sono facoltativi</div>
+            
+            <div class="basics-card">
+              <!-- Titolo Originale -->
+              <div class="extras-section">
+                <div class="extras-section-title">Titoli alternativi</div>
+                <div class="field-group">
+                  <label for="originalName" class="label">Titolo originale</label>
+                  <input
+                    id="originalName"
+                    type="text"
+                    class="input"
+                    placeholder="es. Original Title"
+                  >
+                </div>
+                
+                <div class="field-group">
+                  <label for="aliases" class="label" data-i18n>Altri titoli</label>
+                  <input
+                    id="aliases"
+                    type="text"
+                    class="input"
+                    placeholder="Separati con virgola"
+                   data-i18n-attr="placeholder">
+                  <p class="field-message">es. Titolo italiano, Titolo UK, ecc.</p>
+                </div>
+              </div>
+              
+              <!-- Info Produzione -->
+              <div class="extras-section">
+                <div class="extras-section-title">Produzione</div>
+                <div class="field-group">
+                  <label for="language" class="label" data-i18n>Lingua</label>
+                  <input
+                    id="language"
+                    type="text"
+                    class="input"
+                    placeholder="es. Italiano, Inglese"
+                  >
+                </div>
+                
+                <div class="field-group">
+                  <label for="country" class="label">Paese</label>
+                  <input
+                    id="country"
+                    type="text"
+                    class="input"
+                    placeholder="es. Italia, USA"
+                  >
+                </div>
+                
+                <div class="field-group">
+                  <label for="network" class="label">Piattaforma / Rete</label>
+                  <input
+                    id="network"
+                    type="text"
+                    class="input"
+                    placeholder="es. Netflix, HBO"
+                  >
+                </div>
+              </div>
+
+              <!-- Persone (optional) -->
+              <div class="extras-section">
+                <div class="extras-section-title">Persone (facoltativo)</div>
+
+                <div class="field-group">
+                  <label class="label" for="directorSearch" data-i18n>Regia</label>
+                  <div class="people-picker" id="directorPicker">
+                    <div class="people-selected" id="directorsSelected"></div>
+                    <input id="directorSearch" type="text" class="input" placeholder="Cerca o aggiungi un regista..." autocomplete="off" data-i18n-attr="placeholder">
+                    <div class="people-results" id="directorResults" style="display:none;"></div>
+                  </div>
+                  <p class="field-message" data-i18n>Puoi aggiungere registi e attori anche successivamente.</p>
+                </div>
+
+                <div class="field-group">
+                  <label class="label" for="castSearch">Attori</label>
+                  <div class="people-picker" id="castPicker">
+                    <div class="people-selected" id="castSelected"></div>
+                    <input id="castSearch" type="text" class="input" placeholder="Cerca o aggiungi un attore..." autocomplete="off" data-i18n-attr="placeholder">
+                    <div class="people-results" id="castResults" style="display:none;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 6: Review -->
+        <div class="step-container" data-step="6">
+          <div class="step-content">
+            <div class="step-title">Tutto ok?</div>
+            <div class="step-subtitle" data-i18n>Controlla i dati prima di salvare</div>
+            
+            <div class="review-card">
+              <!-- Header con poster e meta -->
+              <div class="review-header">
+                <div class="review-poster" id="reviewPoster">
+                  <div class="review-poster-placeholder" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4 7h16"></path>
+                      <path d="M4 17h16"></path>
+                      <path d="M7 7l2 10"></path>
+                      <path d="M12 7l2 10"></path>
+                      <path d="M17 7l2 10"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="review-meta">
+                  <h2 id="reviewTitle">-</h2>
+                  <div class="review-type-year" id="reviewTypeYear">-</div>
+                  <div class="review-genres" id="reviewGenres">
+                    <!-- Generato da JS -->
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Dettagli -->
+              <div id="reviewDetails">
+                <!-- Generato da JS -->
+              </div>
+              
+              <button type="button" class="btn ghost review-edit-button" id="reviewEditBtn">
+                <span class="inline-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 3a2.85 2.85 0 1 1 4 4L7 21H3v-4L17 3z"></path>
+                    <path d="M16 5l3 3"></path>
+                  </svg>
+                </span>
+                Modifica qualcosa
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </main>
+
+  <!-- Floating Action Buttons -->
+  <div class="floating-actions" id="floatingActions" style="display:none;">
+    <button type="button" class="btn floating-btn floating-btn-back" id="btnBack">
+      ←
+    </button>
+    <button type="button" class="btn primary floating-btn floating-btn-next" id="btnNext">
+      <span id="btnNextText">Inizia</span>
+    </button>
+  </div>
+
+  <!-- Custom Genre Modal -->
+  <div class="custom-genre-modal" id="customGenreModal">
+    <div class="custom-genre-backdrop"></div>
+    <div class="custom-genre-sheet">
+      <div class="custom-genre-header">
+        <div class="custom-genre-handle"></div>
+        <div class="custom-genre-title" data-i18n>Aggiungi genere</div>
+      </div>
+      
+      <div class="field-group">
+        <label for="customGenreName" class="label" data-i18n>Nome del genere</label>
+        <input
+          id="customGenreName"
+          type="text"
+          class="input"
+          placeholder="es. Slasher, Cyberpunk..."
+          autocomplete="off"
+        >
+      </div>
+      
+      <div class="custom-genre-actions">
+        <button type="button" class="btn ghost" id="customGenreCancel" data-i18n>Annulla</button>
+        <button type="button" class="btn primary" id="customGenreSave" data-i18n>Aggiungi</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-wrap" id="toasts" role="status" aria-live="polite"></div>
+
+  <!-- Tab Bar -->
+  <nav class="tabbar" aria-label="Navigazione">
+    <a href="/" class="tab-link" data-tab="home" aria-label="Home" data-i18n-attr="aria-label">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+      <span class="tab-label" data-i18n>Home</span>
+    </a>
+    <a href="/match.html" class="tab-link" data-tab="match" aria-label="Match" data-i18n-attr="aria-label">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="10" height="13" rx="2"></rect><rect x="10" y="4" width="10" height="13" rx="2"></rect><path d="M12 13l2 2 4-4"></path></svg>
+      <span class="tab-label" data-i18n>Match</span>
+    </a>
+    <a href="/watchlist.html" class="tab-link" data-tab="watchlist" aria-label="Watchlist" data-i18n-attr="aria-label">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+      <span class="tab-label" data-i18n>Watchlist</span>
+    </a>
+    <a href="/notifications.html" class="tab-link" data-tab="notifications" aria-label="Notifiche" data-i18n-attr="aria-label">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+      <span class="tab-badge" data-badge-kind="notifications" hidden>0</span>
+      <span class="tab-label" data-i18n>Notifiche</span>
+    </a>
+    <a href="/account.html" class="tab-link" data-tab="account" aria-label="Profilo" data-i18n-attr="aria-label">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span class="tab-label" data-i18n>Profilo</span>
+    </a>
+  </nav>
+
+  <script type="module" src="/js/utils/tabbar.bootstrap.js"></script>
+
+  <!-- Scripts -->
+  <script src="/firebaseConfig.js"></script>
+  <script type="module" src="/js/pages/add_title.page.js"></script>
+
+  <script src="/js/pwa.js" defer></script>
+</body>
+</html>

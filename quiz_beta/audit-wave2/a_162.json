@@ -1,0 +1,16 @@
+[
+  {
+    "questionId": "q_162_30",
+    "severity": "minor",
+    "problem": "L'explanation indica 'nel quarto episodio Connor's Wedding', ma l'episodio è il TERZO della stagione 4 (S4E03), non il quarto.",
+    "fix": "Sostituire 'nel quarto episodio' con 'nel terzo episodio' nell'explanation.",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_162_32",
+    "severity": "minor",
+    "problem": "L'explanation dice 'Shiv si astiene', ma nel finale di serie Shiv NON si astiene: vota attivamente SÌ all'accordo GoJo, diventando il voto decisivo che blocca Kendall. Non è un'astensione.",
+    "fix": "Sostituire 'Shiv si astiene e poi sceglie di far diventare CEO Tom' con 'Shiv vota a favore dell'accordo GoJo, fornendo il voto decisivo che blocca Kendall e lascia che Matsson nomini Tom come CEO'.",
+    "correctIndexShouldBe": -1
+  }
+]

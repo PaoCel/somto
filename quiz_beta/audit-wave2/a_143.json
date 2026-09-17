@@ -1,0 +1,9 @@
+[
+  {
+    "questionId": "q_143_49",
+    "severity": "minor",
+    "problem": "Il testo della domanda indica che Fernando getta Lila dalla finestra perché 'vuole andare al ginnasio e studia di nascosto'. L'episodio è reale (Fernando la lancia dal primo piano rompendole un braccio), ma il motivo corretto è che Lila vuole continuare alle scuole medie dopo le elementari — non il ginnasio. Il ginnasio è la scuola successiva frequentata da Elena, non da Lila. La risposta corretta (index 0) rimane la più vicina al vero, ma sia il questionText sia l'explanation citano erroneamente il 'ginnasio' invece delle 'scuole medie'.",
+    "fix": "Sostituire 'vuole andare al ginnasio' con 'vuole continuare a studiare alle scuole medie' nel questionText. Nell'explanation sostituire 'il suo desiderio di iscriversi al ginnasio' con 'il suo desiderio di proseguire alle scuole medie dopo le elementari'.",
+    "correctIndexShouldBe": -1
+  }
+]

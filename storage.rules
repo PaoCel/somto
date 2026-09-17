@@ -1,0 +1,194 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isImageUpload() {
+      return request.resource != null
+        && request.resource.contentType.matches('image/.*');
+    }
+
+    function userListPath(listId) {
+      return /databases/(default)/documents/userLists/$(listId);
+    }
+
+    function userListExists(listId) {
+      return firestore.exists(userListPath(listId));
+    }
+
+    function userListData(listId) {
+      return firestore.get(userListPath(listId)).data;
+    }
+
+    function canReadListCover(listId) {
+      return userListExists(listId)
+        && isSignedIn()
+        && (
+          (('visibility' in userListData(listId)) && userListData(listId).visibility == 'public')
+          || (('ownerUid' in userListData(listId)) && request.auth.uid == userListData(listId).ownerUid)
+          || (
+            ('memberUids' in userListData(listId))
+            && userListData(listId).memberUids is list
+            && userListData(listId).memberUids.hasAny([request.auth.uid])
+          )
+          || (
+            ('viewerUids' in userListData(listId))
+            && userListData(listId).viewerUids is list
+            && userListData(listId).viewerUids.hasAny([request.auth.uid])
+          )
+        );
+    }
+
+    function canEditListCover(listId) {
+      return isSignedIn()
+        && userListExists(listId)
+        && (
+          (('ownerUid' in userListData(listId)) && request.auth.uid == userListData(listId).ownerUid)
+          || (
+            ('editorUids' in userListData(listId))
+            && userListData(listId).editorUids is list
+            && userListData(listId).editorUids.hasAny([request.auth.uid])
+          )
+        );
+    }
+
+    function userImportPath(userId, importId) {
+      return /databases/(default)/documents/users/$(userId)/imports/$(importId);
+    }
+
+    function canWriteManualImportUpload(userId, importId) {
+      return isOwner(userId)
+        && firestore.exists(userImportPath(userId, importId))
+        && firestore.get(userImportPath(userId, importId)).data.status == 'uploading';
+    }
+
+    function isJsonUpload() {
+      return request.resource != null
+        && request.resource.contentType.matches('application/json.*');
+    }
+
+    function isCsvUpload() {
+      return request.resource != null
+        && request.resource.contentType.matches('text/csv.*');
+    }
+
+    // Avatar profilo utente
+    match /avatars/{userId}/{fileName} {
+      allow read: if true;
+      allow write: if isOwner(userId)
+        && isImageUpload()
+        && request.resource.size < 2 * 1024 * 1024;
+      allow delete: if isOwner(userId);
+    }
+
+    // Poster caricati dagli utenti (flow già esistente)
+    match /posters/{userId}/{rest=**} {
+      allow read: if true;
+      allow write: if isOwner(userId)
+        && isImageUpload()
+        && request.resource.size < 6 * 1024 * 1024;
+      allow delete: if isOwner(userId);
+    }
+
+    // Foto aggiunte ai post dei voti
+    match /reviewPhotos/{userId}/{rest=**} {
+      allow read: if true;
+      allow write: if isOwner(userId)
+        && isImageUpload()
+        && request.resource.size < 6 * 1024 * 1024;
+      allow delete: if isOwner(userId);
+    }
+
+    // Cover liste personalizzate / condivise (path corrente)
+    match /listCovers/{listId}/{fileName} {
+      allow read: if canReadListCover(listId);
+      allow write, delete: if false;
+    }
+
+    // Legacy path (compatibilita e cleanup asset storici)
+    match /listCovers/{userId}/{listId}/{fileName} {
+      allow read: if canReadListCover(listId);
+      allow write, delete: if false;
+    }
+
+    // Cache avatar persone (attori/registi) - upload da utenti autenticati.
+    // Path scoped per personId: previene overwrite arbitrario di un avatar
+    // tramite forging del filename quando il path era flat (peopleAvatars/{fileName}).
+    // Blocco esplicito di SVG (vettoriale -> potenziale XSS via foreignObject/script).
+    match /peopleAvatars/{personId}/{fileName} {
+      allow read: if true;
+      allow write: if isSignedIn()
+        && request.resource != null
+        && request.resource.size < 300 * 1024
+        && request.resource.contentType.matches('image/(jpe?g|png|webp|gif)');
+      // Delete solo service/admin: blocca cancellazioni arbitrarie da utenti
+      allow delete: if isSignedIn()
+        && ('admin' in request.auth.token)
+        && request.auth.token.admin == true;
+    }
+
+    // Legacy path (flat) - read-only per backward compatibility.
+    // Lascia disponibili i blob storici scritti prima del refactor scope-by-personId.
+    // Le nuove scritture vanno tutte sotto peopleAvatars/{personId}/...
+    match /peopleAvatars/{fileName} {
+      allow read: if true;
+      allow write, delete: if false;
+    }
+
+    // Legacy path (backward compatibility)
+    match /users/{userId}/{rest=**} {
+      allow read: if true;
+      allow write: if isOwner(userId)
+        && isImageUpload()
+        && request.resource.size < 2 * 1024 * 1024;
+      allow delete: if isOwner(userId);
+    }
+
+    // Import manuali privati: upload diretto browser -> Storage, poi
+    // finalizzazione server-side via Cloud Function. Usato dai payload troppo
+    // grandi per il body callable (>1MB doc Firestore): TV Time Refract (JSON),
+    // TV Time GDPR (CSV movies/series + CSV opzionali voti/commenti) e Netflix
+    // (CSV). Filename whitelisted per sorgente, content-type coerente col
+    // formato, cap 50MB. Non-.json accettati solo come CSV.
+    match /manualImports/{userId}/{importId}/{fileName} {
+      allow read: if isOwner(userId);
+      allow write: if canWriteManualImportUpload(userId, importId)
+        && request.resource.size < 50 * 1024 * 1024
+        && (
+          (fileName in ['movies.json', 'series.json'] && isJsonUpload())
+          || (fileName in [
+                'movies.csv', 'series.csv',
+                'episode_votes.csv', 'movie_ratings.csv', 'movie_votes.csv',
+                'movie_comments.csv', 'episode_comments.csv', 'lists.csv',
+                'show_ratings.csv',
+                'netflix.csv'
+              ] && isCsvUpload())
+        );
+      allow delete: if canWriteManualImportUpload(userId, importId);
+    }
+
+    // Rescue upload (assistenza import): utente loggato carica il proprio
+    // export grezzo (ZIP TV Time / CSV Netflix / JSON Refract) quando il
+    // flusso automatico si inceppa. Scoped per uid, size-cap 30MB, letto/
+    // cancellato solo dal proprietario (noi lo scarichiamo via admin SDK).
+    // Nessun vincolo di content-type: lo ZIP arriva con MIME variabile
+    // (application/zip, x-zip-compressed o vuoto su iOS Safari).
+    match /supportImports/{userId}/{fileName} {
+      allow read: if isOwner(userId);
+      allow write: if isOwner(userId)
+        && request.resource != null
+        && request.resource.size < 30 * 1024 * 1024;
+      allow delete: if isOwner(userId);
+    }
+
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

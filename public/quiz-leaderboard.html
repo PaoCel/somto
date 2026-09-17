@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Quiz · Classifica — Somto</title>
+  <meta name="robots" content="noindex,follow">
+  <meta name="description" content="La classifica del Quiz di Somto: i migliori della settimana e di sempre.">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/pages/quiz.css">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Somto">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0A0A0A">
+</head>
+<body>
+  <div id="appSplash" class="app-splash">
+    <img class="splash-logo splash-wordmark" src="/icons/somto-wordmark.png" alt="Somto" data-i18n-attr="alt">
+    <div class="splash-spinner"></div>
+  </div>
+
+  <main class="container page">
+    <div id="quizLeaderboard" class="quiz-leaderboard-page"></div>
+  </main>
+
+  <div class="toast-wrap" id="toasts" role="status" aria-live="polite"></div>
+
+  <script src="/firebaseConfig.js"></script>
+  <script type="module" src="/js/pages/quiz-leaderboard.page.js"></script>
+  <script type="module" src="/js/utils/tabbar.bootstrap.js"></script>
+  <script src="/js/pwa.js" defer></script>
+</body>
+</html>

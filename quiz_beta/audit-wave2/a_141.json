@@ -1,0 +1,23 @@
+[
+  {
+    "questionId": "q_141_1",
+    "severity": "minor",
+    "problem": "L'explanation cita solo 'Cattleya e Rai Fiction' come co-produttori, omettendo Bartleby Film, che risulta dalla prima stagione come terza casa di produzione (confermato da Wikipedia EN e fonti Netflix ufficiali). La risposta corretta (opzione 0) è comunque giusta.",
+    "fix": "Aggiungere 'Bartleby Film' alla lista delle case di produzione nell'explanation: 'Netflix, Cattleya, Rai Fiction e Bartleby Film'.",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_141_27",
+    "severity": "minor",
+    "problem": "L'explanation afferma che Piotta 'ha firmato l'intera colonna sonora originale della terza stagione', ma il testo della domanda dice 'ha composto parte della colonna sonora'. La domanda sottostima il contributo di Piotta alla S3 (ne ha composta l'intera colonna sonora originale). Incoerenza tra domanda ed explanation. La risposta corretta (Piotta) rimane invariata.",
+    "fix": "Uniformare il testo della domanda: sostituire 'parte della colonna sonora originale della terza stagione' con 'l'intera colonna sonora originale della terza stagione'.",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_141_35",
+    "severity": "minor",
+    "problem": "L'explanation dice 'Rai Fiction, che ha partecipato alla produzione nelle prime due stagioni', ma la domanda chiede solo della prima stagione. Il riferimento alle 'prime due stagioni' è un'informazione aggiuntiva corretta (Rai Fiction non era nella terza). Tuttavia omette anche qui Bartleby Film come co-produttore già dalla S1.",
+    "fix": "Aggiungere Bartleby Film alla lista dei co-produttori nell'explanation.",
+    "correctIndexShouldBe": -1
+  }
+]

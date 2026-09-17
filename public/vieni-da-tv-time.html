@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Alternativa a TV Time: Somto, l'app italiana per serie e film</title>
+  <meta name="description" content="TV Time ha chiuso il 15 luglio 2026. Somto è l'alternativa italiana e gratuita: importa il tuo export TV Time — episodi visti, voti, rewatch, watchlist — e continua da dove eri rimasto, su web e iOS.">
+  <link rel="canonical" href="https://somto.it/vieni-da-tv-time.html">
+  <link rel="alternate" hreflang="it-IT" href="https://somto.it/vieni-da-tv-time.html">
+  <link rel="alternate" hreflang="en" href="https://somto.it/en/vieni-da-tv-time.html">
+  <link rel="alternate" hreflang="x-default" href="https://somto.it/vieni-da-tv-time.html">
+<meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="author" content="Somto">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Somto">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:url" content="https://somto.it/vieni-da-tv-time.html">
+  <meta property="og:title" content="Alternativa a TV Time: Somto, l'app italiana per serie e film">
+  <meta property="og:description" content="TV Time ha chiuso. Su Somto importi il tuo export — episodi visti, voti, rewatch, watchlist — e continui da dove eri rimasto. Gratis, in italiano, web e iOS.">
+  <meta property="og:image" content="https://somto.it/og/blog/come-esportare-dati-tv-time.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="Alternativa a TV Time: porta la tua cronologia su Somto">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Alternativa a TV Time: Somto, l'app italiana per serie e film">
+  <meta name="twitter:description" content="TV Time ha chiuso. Su Somto importi il tuo export — episodi visti, voti, rewatch, watchlist — e continui da dove eri rimasto. Gratis, in italiano, web e iOS.">
+  <meta name="twitter:image" content="https://somto.it/og/blog/come-esportare-dati-tv-time.png">
+
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://identitytoolkit.googleapis.com" crossorigin>
+
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+
+  <link rel="stylesheet" href="/css/landing.bundle.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://somto.it/" },
+      { "@type": "ListItem", "position": 2, "name": "Alternativa a TV Time", "item": "https://somto.it/vieni-da-tv-time.html" }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Alternativa a TV Time: Somto, l'app italiana per serie e film",
+    "description": "TV Time ha chiuso il 15 luglio 2026. Somto è l'alternativa italiana e gratuita: importa il tuo export TV Time e continua da dove eri rimasto.",
+    "url": "https://somto.it/vieni-da-tv-time.html",
+    "inLanguage": "it-IT",
+    "isPartOf": { "@type": "WebSite", "name": "Somto", "url": "https://somto.it/" }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Qual è la migliore alternativa a TV Time?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Dipende da cosa ti serve. Somto è l'alternativa italiana: gratuita, su web e iOS, con watchlist, tracking episodio per episodio, voti anche per stagione, quiz e community anti-spoiler — e importa l'export di TV Time recuperando anche rewatch delle serie, antologie e titoli con nomi non latini. Se invece cerchi lo scrobbling automatico da Plex o Kodi, quella è la specialità di Trakt. Per un confronto con altre app: Somto vs Letterboxd."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "TV Time ha chiuso davvero?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sì. TV Time ha terminato il servizio il 15 luglio 2026: l'app è stata rimossa dagli store e lo strumento ufficiale di export dei dati (gdpr.tvtime.com) non è più raggiungibile."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Non ho esportato i dati in tempo: posso ancora recuperarli?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Lo strumento self-service di export non risponde più, quindi non c'è più una via automatica. Puoi provare a scrivere al supporto di TV Time citando il diritto di accesso ai dati (GDPR), ma non c'è garanzia di risposta. Controlla prima email e cartella download: se avevi richiesto l'export, l'archivio ZIP potrebbe essere già sul tuo dispositivo. In ogni caso su Somto puoi ripartire: cerchi i titoli, li segni come visti e ricostruisci il tuo catalogo."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Cosa importa Somto dall'export di TV Time?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Carichi lo ZIP intero e Somto importa: film e serie visti con le date precise, il progresso delle serie stagione per stagione, i rewatch, la watchlist, i voti (convertiti dalla scala di TV Time in decimi, modificabili quando vuoi) e le recensioni con lo spoiler flag preservato. Gestisce anche i casi difficili: antologie che TV Time accorpa in un'unica serie, titoli con nomi non latini, export vecchi con formati diversi. Non importiamo reazioni/emozioni per episodio e commenti senza un voto abbinato: non hanno un equivalente diretto su Somto."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Somto è gratis e in italiano?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sì. Somto è completamente gratuito su web e iOS ed è pensato e sviluppato in italiano: interfaccia, schede titolo, community e supporto."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "C'è l'app Android?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "L'app Android è in lavorazione. Nel frattempo la web app di Somto funziona molto bene anche su Android: puoi aggiungerla alla schermata Home dal browser e usarla come un'app."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="lp-body" data-no-shell>
+
+  <header class="lp-nav" id="lpNav">
+    <div class="lp-nav-inner">
+      <a class="lp-nav-logo" href="/" aria-label="Somto — home">
+        <img src="/icons/somto-wordmark.png" alt="Somto">
+      </a>
+      <div class="lp-nav-actions">
+        <nav class="lp-lang" aria-label="Lingua del sito"><a href="/vieni-da-tv-time.html" hreflang="it" aria-current="true">IT</a><a href="/en/vieni-da-tv-time.html" hreflang="en" lang="en">EN</a></nav>
+        <a class="lp-nav-link" href="/blog/come-esportare-dati-tv-time/">Guida export</a>
+        <a class="lp-nav-cta" href="/login.html?signup=1&amp;next=/import.html&amp;utm_source=tvtime_landing">Entra</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="lp-hero">
+      <div class="lp-hero-glow g1"></div>
+      <div class="lp-hero-glow g2"></div>
+      <div class="lp-hero-glow g3"></div>
+      <div class="lp-hero-inner">
+        <span class="lp-eyebrow">L'alternativa italiana a TV Time</span>
+        <h1><span class="lp-grad-text">TV Time ha chiuso.</span> La tua cronologia no.</h1>
+        <p class="lp-hero-sub">
+          Diciamocelo con onestà: Somto non è identico a TV Time. Ma watchlist, episodi visti,
+          voti e community ci sono già — in italiano, gratis, su web e iOS. E se hai l'export
+          di TV Time, lo importi tutto: anni di serate passate a guardare, non da ricominciare da zero.
+        </p>
+        <div class="lp-cta-row">
+          <a class="lp-btn lp-btn-primary" href="/login.html?signup=1&amp;next=/import.html&amp;utm_source=tvtime_landing">Importa la mia cronologia</a>
+          <a class="lp-btn lp-btn-ghost" href="#domande-frequenti">Non ho fatto l'export in tempo</a>
+        </div>
+        <p class="lp-hero-note">Nessuna carta di credito, nessun impegno: registrati e importa la cronologia in pochi minuti.</p>
+      </div>
+    </section>
+
+    <section class="lp-section lp-value" id="porta-con-te-i-tuoi-dati">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">Porta con te i tuoi dati</span>
+          <h2 class="lp-h2">Hai l'export di TV Time? Tre passi e hai finito</h2>
+          <p class="lp-lead">TV Time ha chiuso il 15 luglio 2026 e il tool di export ufficiale non risponde più. Se avevi richiesto l'archivio, il resto è questione di minuti.</p>
+        </div>
+        <div class="lp-steps">
+          <div class="lp-step">
+            <div class="lp-step-num lp-grad-text">1</div>
+            <h3>Ritrova il tuo export</h3>
+            <p>È l'archivio (di solito uno ZIP) che avevi richiesto da gdpr.tvtime.com prima della chiusura. Cerca nella email e nella cartella Download: spesso è già lì.</p>
+          </div>
+          <div class="lp-step">
+            <div class="lp-step-num lp-grad-text">2</div>
+            <h3>Registrati su Somto</h3>
+            <p>Pochi secondi con email, Google o Apple. È gratis, su web e iOS.</p>
+          </div>
+          <div class="lp-step">
+            <div class="lp-step-num lp-grad-text">3</div>
+            <h3>Importa il file</h3>
+            <p>Carica l'archivio così com'è (lo ZIP intero, lo leggiamo noi) e ritrova la tua cronologia dentro Somto in pochi minuti.</p>
+          </div>
+        </div>
+        <div class="lp-about-text">
+          <p><strong>Nota trasparente:</strong> importiamo i film e le serie che hai visto (con le date precise), il progresso delle serie stagione per stagione, i rewatch, la watchlist, i voti (convertiti dalla scala a 5 stelle di TV Time in un voto 1-10, che puoi sempre modificare) e le recensioni che hai scritto, con il flag spoiler preservato. Gestiamo anche i casi difficili: antologie che TV Time accorpa in un'unica serie, titoli con nomi non latini, export vecchi con formati diversi. Email, password e altri dati personali restano sul tuo dispositivo: leggiamo solo la cronologia. Non importiamo reazioni/emozioni per episodio e commenti senza un voto abbinato: TV Time non li rende comparabili al modello di voto di Somto.</p>
+          <p>Vuoi sapere cosa conteneva l'export e come era fatto? Qui la guida completa: <a href="/blog/come-esportare-dati-tv-time/">i dati di TV Time, file per file</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section" id="cosa-trovi-su-somto">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">Cosa trovi su Somto</span>
+          <h2 class="lp-h2">Le funzioni che ti servono per non perdere il filo</h2>
+        </div>
+        <div class="lp-grid">
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 5h16v2H4V5Zm0 6h16v2H4v-2Zm0 6h10v2H4v-2Z"/></svg></span>
+            <h3>Watchlist per piattaforma</h3>
+            <p>Salva cosa vuoi vedere, filtra per piattaforma streaming, genere e anno.</p>
+          </article>
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 15h-2v-2h2v2Zm0-4h-2V7h2v6Z"/></svg></span>
+            <h3>Tracking episodi e stagioni</h3>
+            <p>Segna dove sei rimasto in ogni serie, stagione per stagione.</p>
+          </article>
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.6l2.9 5.9 6.5.95-4.7 4.58 1.1 6.47L12 17.96l-5.8 3.05 1.1-6.47L2.6 9.95l6.5-.95L12 2.6Z"/></svg></span>
+            <h3>Voti e recensioni</h3>
+            <p>Vota 1-10 ciò che hai visto e scrivi cosa ne pensi, anche per singola stagione.</p>
+          </article>
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L4.5 13.2h6L9 22l9-12h-6.4z"/></svg></span>
+            <h3>Match</h3>
+            <p>Scorri i titoli suggeriti e decidi in fretta cosa guardare stasera.</p>
+          </article>
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 16.4a1.35 1.35 0 1 1 0-2.7 1.35 1.35 0 0 1 0 2.7Zm1.8-6.3c-.8.5-1 .9-1 1.6v.3h-1.8v-.5c0-1.2.4-1.9 1.4-2.5.7-.5 1-.8 1-1.4 0-.7-.5-1.1-1.3-1.1-.8 0-1.3.4-1.5 1.3l-1.7-.6C9.1 7.3 10.3 6.4 12 6.4c2 0 3.3 1.1 3.3 2.7 0 1.2-.5 1.9-1.5 2.5Z"/></svg></span>
+            <h3>Quiz, sfide e classifiche</h3>
+            <p>Mettiti alla prova su film e serie TV, sfida gli amici e scala la classifica. In beta.</p>
+          </article>
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 11.5a3.6 3.6 0 1 0 0-7.2 3.6 3.6 0 0 0 0 7.2Zm8 .5a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM9 13.2c-3.5 0-7 1.8-7 4.6V21h14v-3.2c0-2.8-3.5-4.6-7-4.6Zm8 .3c-.6 0-1.2.06-1.7.17 1.1 1 1.7 2.3 1.7 3.93V21h5v-2.7c0-2.5-2.9-3.8-5-3.8Z"/></svg></span>
+            <h3>Amici e feed</h3>
+            <p>Segui gli amici, guarda cosa vedono e ricevi consigli tra chi si conosce davvero.</p>
+          </article>
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1 3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5l-9-4Zm-1.2 14.6-4-4 1.4-1.4 2.6 2.6 5.6-5.6 1.4 1.4-7 7Z"/></svg></span>
+            <h3>Anti-spoiler</h3>
+            <p>Discussioni e post protetti: i finali restano nascosti finché non hai visto il titolo.</p>
+          </article>
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 20V10h3v10H4Zm7 0V4h3v16h-3Zm7 0v-7h3v7h-3Z"/></svg></span>
+            <h3>Statistiche</h3>
+            <p>Titoli visti, ore passate a guardare, generi preferiti: tutto in un colpo d'occhio.</p>
+          </article>
+          <article class="lp-feature">
+            <span class="lp-feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2Zm0 16H7V4h10v14Z"/></svg></span>
+            <h3>Gratis, web e iOS</h3>
+            <p>Nessun costo. App iOS nativa; Android è in lavorazione, intanto la web app è installabile.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section lp-mission" id="i-tuoi-dati">
+      <div class="lp-container">
+        <span class="lp-eyebrow">I tuoi dati restano tuoi</span>
+        <p class="lp-mission-quote">
+          I tuoi dati sono <span class="lp-grad-text">sempre esportabili</span> e non li vendiamo a terzi.
+          Somto è un progetto italiano indipendente: se scrivi al supporto, ti risponde una persona vera.
+          Nessun lock-in: quello che è successo con TV Time qui non può succederti.
+        </p>
+      </div>
+    </section>
+
+    <section class="lp-section" id="domande-frequenti">
+      <div class="lp-container">
+        <div class="lp-section-head">
+          <span class="lp-eyebrow">Domande frequenti</span>
+          <h2 class="lp-h2">Tutto sul passaggio da TV Time a Somto</h2>
+        </div>
+        <div class="lp-faq">
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">Qual è la migliore alternativa a TV Time?</summary>
+            <div class="lp-faq-a"><p>Dipende da cosa ti serve. Somto è l'alternativa italiana: gratuita, su web e iOS, con watchlist, tracking episodio per episodio, voti anche per stagione, quiz e community anti-spoiler — e importa l'export di TV Time recuperando anche rewatch delle serie, antologie e titoli con nomi non latini. Se invece cerchi lo scrobbling automatico da Plex o Kodi, quella è la specialità di Trakt. Per un confronto con altre app: <a href="/somto-vs-letterboxd.html">Somto vs Letterboxd</a>.</p></div>
+          </details>
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">TV Time ha chiuso davvero?</summary>
+            <div class="lp-faq-a"><p>Sì. TV Time ha terminato il servizio il 15 luglio 2026: l'app è stata rimossa dagli store e lo strumento ufficiale di export dei dati (gdpr.tvtime.com) non è più raggiungibile.</p></div>
+          </details>
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">Non ho esportato i dati in tempo: posso ancora recuperarli?</summary>
+            <div class="lp-faq-a"><p>Lo strumento self-service di export non risponde più, quindi non c'è più una via automatica. Puoi provare a scrivere al supporto di TV Time citando il diritto di accesso ai dati (GDPR), ma non c'è garanzia di risposta. Controlla prima email e cartella Download: se avevi richiesto l'export, l'archivio ZIP potrebbe essere già sul tuo dispositivo. In ogni caso su Somto puoi ripartire: cerchi i titoli, li segni come visti e ricostruisci il tuo catalogo.</p></div>
+          </details>
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">Cosa importa Somto dall'export di TV Time?</summary>
+            <div class="lp-faq-a"><p>Carichi lo ZIP intero dalla pagina import e Somto recupera: film e serie visti (con le date), il progresso serie stagione per stagione, i rewatch, la watchlist, i voti (convertiti in decimi, modificabili) e le recensioni con lo spoiler flag. Gestiamo anche i casi difficili: antologie accorpate, titoli con nomi non latini, export vecchi con formati diversi. Reazioni/emozioni per episodio e commenti senza un voto abbinato non vengono importati: non hanno un equivalente diretto su Somto.</p></div>
+          </details>
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">Somto è gratis e in italiano?</summary>
+            <div class="lp-faq-a"><p>Sì. Somto è completamente gratuito su web e iOS ed è pensato e sviluppato in italiano: interfaccia, schede titolo, community e supporto.</p></div>
+          </details>
+          <details class="lp-faq-item">
+            <summary class="lp-faq-q">C'è l'app Android?</summary>
+            <div class="lp-faq-a"><p>L'app Android è in lavorazione. Nel frattempo la web app di Somto funziona molto bene anche su Android: puoi aggiungerla alla schermata Home dal browser e usarla come un'app.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-section lp-final">
+      <div class="lp-container">
+        <div class="lp-final-inner">
+          <h2>La tua cronologia merita una casa</h2>
+          <p>Registrati su Somto, importa l'export di TV Time e ritrova subito watchlist, voti e community.</p>
+          <a class="lp-btn lp-btn-primary" href="/login.html?signup=1&amp;next=/import.html&amp;utm_source=tvtime_landing">Importa la mia cronologia</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="lp-footer">
+    <div class="lp-footer-inner">
+      <div class="lp-footer-brand">
+        <img src="/icons/somto-wordmark.png" alt="Somto">
+        <p>Il social per chi ama film e serie TV. Vota, scopri e decidi cosa guardare con gli amici.</p>
+      </div>
+      <nav class="lp-footer-cols" aria-label="Link del sito">
+        <div class="lp-footer-col">
+          <h4>Somto</h4>
+          <a href="/">Home</a>
+          <a href="/login.html?next=/home.html">Accedi</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Scopri</h4>
+          <a href="/watchlist-film-serie.html">Watchlist</a>
+          <a href="/app-recensioni-film-serie.html">Voti e recensioni</a>
+          <a href="/quiz-film-serie-tv.html">Quiz</a>
+          <a href="/consigli-film-serie-amici.html">Consigli tra amici</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Confronti</h4>
+          <a href="/somto-vs-letterboxd.html">Somto vs Letterboxd</a>
+          <a href="/somto-vs-justwatch.html">Somto vs JustWatch</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Guida TV Time</h4>
+          <a href="/blog/come-esportare-dati-tv-time/">Come esportare i dati</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Legale</h4>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Termini</a>
+          <a href="/cookies.html">Cookie</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Supporto</h4>
+          <a href="/support.html">Centro assistenza</a>
+        </div>
+      </nav>
+    </div>
+    <div class="lp-footer-base">© 2026 Somto. Tutti i diritti riservati.</div>
+  </footer>
+
+  <script>
+    (function () {
+      var nav = document.getElementById("lpNav");
+      if (!nav) return;
+      var onScroll = function () { nav.classList.toggle("is-scrolled", window.scrollY > 12); };
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+    })();
+  </script>
+</body>
+</html>

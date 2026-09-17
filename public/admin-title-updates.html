@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Date di uscita - Somto</title>
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Console admin privata per correggere e pubblicare le date di uscita dei titoli Somto.">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/pages/admin-editorial.css">
+
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Somto">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0A0A0A">
+</head>
+<body class="admin-editorial-page">
+  <div id="appSplash" class="app-splash">
+    <img class="splash-logo splash-wordmark" src="/icons/somto-wordmark.png" alt="Somto">
+    <div class="splash-spinner"></div>
+  </div>
+
+  <main class="analytics-shell" aria-labelledby="pageTitle">
+    <header class="analytics-topbar">
+      <a class="analytics-back" href="/account.html" aria-label="Torna al profilo">Indietro</a>
+      <div>
+        <p class="analytics-kicker">Admin</p>
+        <h1 id="pageTitle">Date di uscita</h1>
+      </div>
+      <div class="analytics-topbar-actions">
+        <button id="reloadListBtn" class="btn small primary" type="button">Aggiorna elenco</button>
+      </div>
+    </header>
+
+    <section id="gate" class="analytics-state" hidden role="alert">
+      <h2>Accesso negato</h2>
+      <p>Questa pagina risponde solo agli account admin.</p>
+    </section>
+
+    <section id="mainContent" hidden>
+      <section class="editorial-card" aria-labelledby="reviewCardTitle">
+        <h2 id="reviewCardTitle" class="editorial-card-title">Correggi un evento</h2>
+
+        <p id="noSelection" class="analytics-muted">Scegli un evento dall'elenco qui sotto, oppure cerca un titolo.</p>
+
+        <div id="reviewForm" hidden>
+          <div class="editorial-selected" id="selectedSummary"></div>
+
+          <div class="field">
+            <label class="label" for="effectiveDateInput">Data di uscita</label>
+            <input id="effectiveDateInput" class="input" type="date">
+            <p class="hint">Data di calendario. Cambiarla la blocca: lo scanner TMDB non la riscrive più.</p>
+          </div>
+
+          <div class="field">
+            <label class="label" for="lockDateCheck">
+              <input id="lockDateCheck" type="checkbox">
+              Conferma e blocca la data attuale
+            </label>
+            <p class="hint">Da usare quando la data è già giusta: la fissa e azzera il conflitto con la fonte.</p>
+          </div>
+
+          <div class="field">
+            <label class="label" for="regionInput">Region</label>
+            <input id="regionInput" class="input" type="text" maxlength="2" placeholder="IT" autocapitalize="characters">
+          </div>
+
+          <div class="field">
+            <label class="label" for="releaseTypeSelect">Tipo di uscita</label>
+            <select id="releaseTypeSelect" class="input">
+              <option value="">Non toccare</option>
+              <option value="1">Premiere</option>
+              <option value="2">Cinema (limitato)</option>
+              <option value="3">Cinema</option>
+              <option value="4">Digitale</option>
+              <option value="5">Home video</option>
+              <option value="6">TV</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label class="label" for="noteInput">Nota</label>
+            <input id="noteInput" class="input" type="text" maxlength="240" placeholder="Fonte della correzione (opzionale)">
+            <p class="hint">Si salva solo insieme a una correzione: da sola andrebbe persa.</p>
+          </div>
+
+          <div class="field">
+            <label class="label" for="publishCheck">
+              <input id="publishCheck" type="checkbox">
+              Pubblica l'evento
+            </label>
+            <p class="hint">Un evento pubblicato compare nella scheda del titolo. Se l'uscita è entro due settimane parte anche una notifica.</p>
+          </div>
+
+          <div class="editorial-actions">
+            <button id="verifyBtn" class="btn secondary" type="button">Verifica (dry run)</button>
+            <button id="applyBtn" class="btn primary" type="button" disabled>Applica</button>
+          </div>
+
+          <p id="applyHint" class="hint">Prima di scrivere serve la verifica: dice se parte una notifica.</p>
+
+          <div id="checkPanel" class="editorial-preview" hidden>
+            <h3>Esito della verifica</h3>
+            <div id="checkNotify" class="editorial-alert" role="status"></div>
+            <div id="checkWarnings"></div>
+            <dl>
+              <dt>Campi bloccati</dt><dd id="checkLocked">-</dd>
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <section class="editorial-card" aria-labelledby="searchCardTitle">
+        <h2 id="searchCardTitle" class="editorial-card-title">Cerca un titolo</h2>
+        <div class="field">
+          <label class="label" for="titleSearchInput">Titolo</label>
+          <div class="editorial-search-wrap">
+            <input id="titleSearchInput" class="input" type="search" placeholder="Cerca un titolo nel catalogo..." autocomplete="off">
+            <div id="titleSearchResults" class="editorial-search-results" hidden></div>
+          </div>
+          <p class="hint">Serve per correggere una data sbagliata su un evento già pubblicato, che non compare nell'elenco.</p>
+        </div>
+        <div id="searchEvents"></div>
+      </section>
+
+      <section class="editorial-card" aria-labelledby="queueCardTitle">
+        <h2 id="queueCardTitle" class="editorial-card-title">Da rivedere</h2>
+        <p class="analytics-muted">Prima i conflitti con TMDB (il film è stato spostato), poi le bozze da pubblicare.</p>
+        <div class="analytics-table-wrap">
+          <table class="analytics-table">
+            <thead>
+              <tr>
+                <th>Titolo</th>
+                <th>Data</th>
+                <th>Stato</th>
+                <th>Editoriale</th>
+                <th>Azioni</th>
+              </tr>
+            </thead>
+            <tbody id="eventsBody">
+              <tr><td colspan="5"><div class="analytics-empty">Carico...</div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div class="toast-wrap" id="toasts" role="status" aria-live="polite"></div>
+
+  <script src="/firebaseConfig.js"></script>
+  <script type="module" src="/js/pages/admin-title-updates.page.js"></script>
+  <script src="/js/pwa.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+/* Page-scoped bundle for Home (lighter than main.css) */
+@import url('./reset.css');
+@import url('./variables.css');
+@import url('./base.css');
+@import url('./components/button.css');
+@import url('./components/card.css');
+@import url('./components/form.css');
+@import url('./components/error-banner.css');
+@import url('./components/toast.css');
+@import url('./components/utilities.css');
+@import url('./components/social.css');
+@import url('./components/splash.css');
+@import url('./components/onboarding.css');
+@import url('./pages.css');
+@import url('./pages/home.css');

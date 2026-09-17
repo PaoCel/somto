@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Match — Somto</title>
+  <meta name="robots" content="noindex,follow">
+  <meta name="description" content="Match di Somto: scorri rapido sui titoli suggeriti per te.">
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Somto">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0A0A0A">
+</head>
+<body>
+  <div id="appSplash" class="app-splash">
+    <img class="splash-logo splash-wordmark" src="/icons/somto-wordmark.png" alt="Somto" data-i18n-attr="alt">
+    <div class="splash-spinner"></div>
+  </div>
+
+  <main class="container page match-page">
+    <div class="match-topbar">
+      <button id="matchInfoBtn" class="match-info-btn" type="button" aria-label="Info su Match" aria-haspopup="dialog" data-i18n-attr="aria-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"></circle>
+          <path d="M12 16v-4"></path>
+          <path d="M12 8h.01"></path>
+        </svg>
+      </button>
+    </div>
+
+    <section class="match-stage" aria-live="polite">
+      <div id="matchSkeleton" class="match-state match-state-skeleton">
+        <div class="match-card-skeleton">
+          <div class="skel skel-poster"></div>
+          <div class="skel-info">
+            <div class="skel skel-pill"></div>
+            <div class="skel skel-title"></div>
+            <div class="skel skel-line short"></div>
+            <div class="skel skel-line"></div>
+          </div>
+        </div>
+        <p class="match-loading-label" data-i18n>Sto preparando la tua coda Match…</p>
+      </div>
+
+      <div id="matchError" class="match-state match-state-card glass-card" style="display:none;">
+        <div class="state-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path>
+            <path d="M12 9v5"></path>
+            <path d="M12 17h.01"></path>
+          </svg>
+        </div>
+        <h2>Errore caricamento</h2>
+        <p data-i18n>Non sono riuscito a caricare i match. Riprova ora.</p>
+        <button id="matchRetryBtn" class="btn primary" type="button" data-i18n>Riprova</button>
+      </div>
+
+      <div id="matchEmpty" class="match-state match-state-card glass-card" style="display:none;">
+        <div class="state-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 3v4"></path>
+            <path d="M3 5h4"></path>
+            <path d="M6 17v4"></path>
+            <path d="M4 19h4"></path>
+            <path d="M13 3l2.5 6.5L22 12l-6.5 2.5L13 21l-2.5-6.5L4 12l6.5-2.5L13 3z"></path>
+          </svg>
+        </div>
+        <h2 data-i18n>Coda esaurita per ora</h2>
+        <p data-i18n>Hai finito i titoli disponibili per questo passaggio. Ricarica o torna più tardi dopo nuovi segnali.</p>
+        <button id="matchReloadBtn" class="btn primary" type="button" data-i18n>Ricarica</button>
+        <a id="matchPrefsBtn" class="btn ghost" href="/watchlist.html">Cambia preferenze</a>
+      </div>
+
+      <div id="matchDeck" class="match-deck" style="display:none;"></div>
+    </section>
+
+    <div id="matchActionBar" class="match-actionbar" style="display:none;">
+      <button class="match-action skip" type="button" data-action="skip" aria-label="Passo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M18 6L6 18"></path>
+          <path d="M6 6l12 12"></path>
+        </svg>
+      </button>
+      <button class="match-action like" type="button" data-action="like" aria-label="Mi interessa" data-i18n-attr="aria-label">
+        <svg viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+        </svg>
+      </button>
+      <button class="match-action super" type="button" data-action="superlike" aria-label="Super match">
+        <svg viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true">
+          <path d="M12 2l2.95 5.98 6.6.96-4.78 4.66 1.13 6.57L12 17.02 6.1 20.17l1.13-6.57L2.45 8.94l6.6-.96L12 2z"></path>
+        </svg>
+      </button>
+    </div>
+  </main>
+
+  <div id="matchInfoSheet" class="match-sheet" aria-hidden="true">
+    <div class="match-sheet-scrim" data-sheet-dismiss></div>
+    <div class="match-sheet-panel" role="dialog" aria-modal="true" aria-labelledby="matchSheetTitle">
+      <div class="match-sheet-grabber" aria-hidden="true"></div>
+      <button class="match-sheet-close" type="button" data-sheet-dismiss aria-label="Chiudi" data-i18n-attr="aria-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M18 6L6 18"></path>
+          <path d="M6 6l12 12"></path>
+        </svg>
+      </button>
+      <div class="match-sheet-body">
+        <h2 id="matchSheetTitle" data-i18n>Match: decidi cosa guardare in 10 secondi</h2>
+        <p class="match-sheet-lead" data-i18n>Scorri a sinistra per scartare, a destra per dare like, verso l'alto per un super match, in basso se l'hai già visto.</p>
+
+        <div class="match-intro-tiles">
+          <div class="match-intro-tile">
+            <span class="match-intro-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5"></path>
+                <path d="M12 19l-7-7 7-7"></path>
+              </svg>
+            </span>
+            <strong data-i18n>Sinistra</strong>
+            <small data-i18n>Non mi piace</small>
+          </div>
+          <div class="match-intro-tile">
+            <span class="match-intro-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="M12 5l7 7-7 7"></path>
+              </svg>
+            </span>
+            <strong data-i18n>Destra</strong>
+            <small data-i18n>Like</small>
+          </div>
+          <div class="match-intro-tile">
+            <span class="match-intro-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 19V5"></path>
+                <path d="M5 12l7-7 7 7"></path>
+              </svg>
+            </span>
+            <strong data-i18n>Su</strong>
+            <small>Super match</small>
+          </div>
+          <div class="match-intro-tile">
+            <span class="match-intro-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 5v14"></path>
+                <path d="M19 12l-7 7-7-7"></path>
+              </svg>
+            </span>
+            <strong data-i18n>Giù</strong>
+            <small data-i18n>L'ho già visto</small>
+          </div>
+        </div>
+
+        <div class="match-sheet-notes">
+          <h3 data-i18n>Like</h3>
+          <p data-i18n>Segnale positivo leggero che migliora le proposte successive.</p>
+          <h3>Super match</h3>
+          <p data-i18n>Segnale forte, usato per dare priorità alta a titoli e pattern simili.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-wrap" id="toasts" role="status" aria-live="polite"></div>
+
+  <script src="/firebaseConfig.js"></script>
+  <script type="module" src="/js/pages/match.page.js"></script>
+  <script type="module" src="/js/utils/tabbar.bootstrap.js"></script>
+  <script src="/js/pwa.js" defer></script>
+</body>
+</html>

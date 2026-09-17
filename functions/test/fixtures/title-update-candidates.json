@@ -1,0 +1,24 @@
+{
+  "candidateIdsInWindow": [
+    "tmdb_video_tv_97546_fixture-trailer"
+  ],
+  "candidates": [
+    {
+      "id": "tmdb_video_tv_97546_fixture-trailer",
+      "titleId": "ted-lasso",
+      "tmdbId": 97546,
+      "mediaType": "tv",
+      "eventType": "trailer",
+      "source": "tmdb",
+      "sourceId": "fixture-trailer",
+      "sourceUrl": "https://www.youtube.com/watch?v=fixture-trailer",
+      "publishedAt": "2026-07-20T10:00:00.000Z",
+      "headlineByLocale": {
+        "en-US": "Season 4 Official Trailer"
+      },
+      "official": true,
+      "autoPublishEligible": true,
+      "confidence": 1
+    }
+  ]
+}

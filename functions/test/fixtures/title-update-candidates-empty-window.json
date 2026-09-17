@@ -1,0 +1,22 @@
+{
+  "candidateIdsInWindow": [],
+  "candidates": [
+    {
+      "id": "tmdb_video_movie_11_old",
+      "titleId": "tmdb_movie_11",
+      "tmdbId": 11,
+      "mediaType": "movie",
+      "eventType": "trailer",
+      "source": "tmdb",
+      "sourceId": "old",
+      "sourceUrl": "https://www.youtube.com/watch?v=old",
+      "publishedAt": "2012-01-01T00:00:00.000Z",
+      "headlineByLocale": {
+        "en-US": "Old trailer"
+      },
+      "official": true,
+      "autoPublishEligible": true,
+      "confidence": 1
+    }
+  ]
+}

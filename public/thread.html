@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Thread — Somto</title>
+  <meta name="robots" content="noindex,follow">
+  <meta name="description" content="Discussione privata o pubblica">
+  <link rel="stylesheet" href="/css/main.css">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Somto">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0A0A0A">
+</head>
+<body>
+  <div id="appSplash" class="app-splash"><img class="splash-logo splash-wordmark" src="/icons/somto-wordmark.png" alt="Somto" data-i18n-attr="alt"><div class="splash-spinner"></div></div>
+
+  <main class="container page thread-page">
+
+    <!-- THREAD SLIM HEADER (compact: back + context name/episode label + menu) -->
+    <section id="threadHeadCard" class="thread-slim-head" style="display:none;">
+      <button id="threadBackBtn" class="thread-slim-back" type="button" aria-label="Indietro" data-i18n-attr="aria-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <a id="titleLink" class="thread-slim-titlelink" href="#" style="display:none;">
+        <div id="threadTitle" class="thread-slim-name" data-i18n>Thread</div>
+        <div id="threadSub" class="thread-slim-sub"></div>
+      </a>
+      <div id="threadPlainName" class="thread-slim-name" style="display:none;"></div>
+      <button id="threadMenuBtn" class="thread-slim-menu-btn" type="button" aria-label="Opzioni discussione">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="8" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="16" cy="12" r="1.4"/>
+        </svg>
+      </button>
+    </section>
+
+    <div id="threadInfo" class="group-info-box" style="display:none;"></div>
+
+    <!-- Episode spoiler entry gate: shown once per open for episode-scoped public threads -->
+    <div id="episodeSpoilerGate" class="episode-spoiler-gate" style="display:none;">
+      <div class="episode-spoiler-gate-icon">🚫</div>
+      <div class="episode-spoiler-gate-title">Attenzione agli spoiler</div>
+      <p id="episodeSpoilerGateText" class="episode-spoiler-gate-text"></p>
+      <div class="episode-spoiler-gate-actions">
+        <button id="episodeSpoilerGateBack" class="btn ghost" type="button">Torna indietro</button>
+        <button id="episodeSpoilerGateEnter" class="btn primary" type="button" data-i18n>Entra</button>
+      </div>
+    </div>
+
+    <div id="authGate" class="glass-card" style="display:none;">
+      <h2 style="margin:0 0 var(--space-xs);font-size:var(--text-md);" data-i18n>Accedi per aprire il thread</h2>
+      <p class="hint" style="margin:0 0 var(--space-md);" data-i18n>Le discussioni del catalogo sono disponibili solo agli utenti autenticati.</p>
+      <a class="btn primary" href="/login.html" data-i18n>Accedi</a>
+    </div>
+
+    <div id="threadApp" class="thread-app" style="display:none;">
+      <div id="messagesEmpty" class="messages-empty" style="display:none;">
+        <div class="empty-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="empty-text" data-i18n>Ancora nessun messaggio</div>
+        <div class="empty-cta" data-i18n>Apri tu la conversazione: il primo messaggio popolerà il thread in tempo reale.</div>
+      </div>
+      <div id="messages" class="messages"></div>
+      <div id="typingIndicator" class="typing-indicator">
+        <span class="typing-dots"><span></span><span></span><span></span></span>
+        <span id="typingText" data-i18n>sta scrivendo…</span>
+      </div>
+
+      <div class="composer-wrap">
+        <div id="mentionDropdown" class="mention-dropdown" style="display:none;"></div>
+        <div class="composer">
+          <textarea id="msgText" class="composer-textarea" placeholder="Scrivi un messaggio... usa @ e #" rows="1" autocomplete="off" data-i18n-attr="placeholder"></textarea>
+          <button id="btnGif" class="composer-gif-btn" type="button" aria-label="Aggiungi una GIF" data-i18n data-i18n-attr="aria-label">GIF</button>
+          <button id="btnSend" class="composer-send-btn" type="button" aria-label="Invia messaggio" data-i18n-attr="aria-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="toast-wrap" id="toasts" role="status" aria-live="polite"></div>
+
+  <script type="module" src="/js/utils/tabbar.bootstrap.js"></script>
+
+  <!-- Firebase config MUST be loaded before any module that imports /js/firebase.js -->
+  <script src="/firebaseConfig.js"></script>
+  <script type="module" src="/js/pages/thread.page.js"></script>
+  <script src="/js/pwa.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+[
+  {
+    "questionId": "q_170_15",
+    "severity": "minor",
+    "problem": "L'answer option recita 'Con i denti di un ratto in una gabbia' (singolare), ma nel film molteplici ratti rosicchiano il volto di Pete Savage. La risposta è comunque quella corretta (gabbia di ratti sul volto), ma 'un ratto' è impreciso.",
+    "fix": "Cambiare 'un ratto' in 'dei ratti' nell'opzione di risposta: 'Con i denti dei ratti in una gabbia posta sul suo volto'.",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_170_32",
+    "severity": "minor",
+    "problem": "Il testo della domanda descrive il nome del sito come 'in spagnolo \"topo alato\"'. Ma 'rata alada' in spagnolo significa 'ratto alato' (winged rat), non 'topo alato' (winged mouse): in spagnolo 'rata' = ratto, 'ratón' = topo. 'Topo alato' sarebbe la traduzione errata.",
+    "fix": "Sostituire 'topo alato' con 'ratto alato' nel testo della domanda: '...in spagnolo \"ratto alato\"'.",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_170_44",
+    "severity": "critical",
+    "problem": "L'explanation contiene un fatto falso: scrive 'La Stangata (The French Connection, 1971)'. Ma 'La Stangata' è il titolo italiano di 'The Sting' (1973), NON di 'The French Connection'. 'The French Connection' (1971) in italiano si chiama 'Il braccio violento della legge'. Il correctAnswerIndex (Chinatown = 1) è corretto.",
+    "fix": "Correggere l'explanation sostituendo 'La Stangata (The French Connection, 1971)' con 'The French Connection (Il braccio violento della legge, 1971)'. Oppure, se si vuole citare La Stangata: 'La Stangata (The Sting, 1973)'.",
+    "correctIndexShouldBe": -1
+  }
+]

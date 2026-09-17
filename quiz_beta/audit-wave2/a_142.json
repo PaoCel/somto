@@ -1,0 +1,16 @@
+[
+  {
+    "questionId": "q_142_7",
+    "severity": "minor",
+    "problem": "L'explanation dice che lo scandalo 'divenne di pubblico dominio attorno al 2014', ma il caso esplose nell'ottobre 2013 (non 2014). La risposta corretta rimane invariata.",
+    "fix": "Correggere '2014' in '2013' nell'explanation: '...il caso divenne di pubblico dominio nell'ottobre 2013.'",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_142_40",
+    "severity": "minor",
+    "problem": "La domanda e la risposta corretta affermano che Baby era la 'terza produzione originale italiana Netflix'. TvBlog e altre fonti la descrivono però come la 'seconda serie tv originale italiana' (dopo Suburra), contando solo le serie narrative e non la docu-serie First Team: Juventus (febbraio 2018). La conta 'terza' è difendibile solo includendo il documentario sulla Juventus, il che non è univoco. La risposta è ambigua, non formalmente sbagliata.",
+    "fix": "Rendere la risposta meno assolutista: es. 'Una delle prime produzioni originali italiane Netflix' oppure specificare nell'explanation che la conta include la docu-serie First Team: Juventus (feb 2018).",
+    "correctIndexShouldBe": -1
+  }
+]

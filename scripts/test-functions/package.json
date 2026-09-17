@@ -1,0 +1,14 @@
+{
+  "name": "somto-functions-tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node run.mjs",
+    "test:auth": "node run.mjs",
+    "test:triggers": "node triggers.mjs"
+  },
+  "dependencies": {
+    "firebase": "^10.12.5",
+    "firebase-admin": "^13.9.0"
+  }
+}

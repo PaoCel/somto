@@ -1,0 +1,5 @@
+/* Bundle CSS della landing page pubblica (/) */
+@import url('./reset.css');
+@import url('./variables.css');
+@import url('./base.css');
+@import url('./pages/landing.css');

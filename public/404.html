@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>404 — Somto</title>
+  <meta name="robots" content="noindex,follow">
+  <link rel="stylesheet" href="/css/main.css" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="/icons/icon-167.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icons/icon-120.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Somto">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0A0A0A">
+</head>
+<body>
+  <div class="container">
+    <div class="card pad" style="margin-top:18px">
+      <div class="card-title" data-i18n>Pagina non trovata</div>
+      <div class="card-sub" style="margin-top:6px" data-i18n>Hai seguito un link che non esiste (ancora).</div>
+      <div class="divider"></div>
+      <a class="btn primary" href="/" data-i18n>Torna alla Home</a>
+    </div>
+  </div>
+
+  <!-- Traduce il markup marcato `data-i18n`: questa pagina non carica
+       l'app-shell, quindi il modulo va importato esplicitamente. -->
+  <script type="module" src="/js/i18n/index.js"></script>
+  <script src="/js/pwa.js" defer></script>
+</body>
+</html>

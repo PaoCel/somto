@@ -1,0 +1,324 @@
+/* admin-editorial.css — per le console editoriali admin: admin-official-updates.html
+   e admin-title-updates.html (link diretto nelle pagine, NON @import in main.css:
+   pagine admin rare, niente peso extra sulle pagine pubbliche). Riusa .analytics-*
+   (admin-analytics.css, già in main.css), .input/.label/.field/.char-counter
+   (form.css) e .btn (button.css). */
+
+.admin-editorial-page {
+  background:
+    radial-gradient(circle at 10% -10%, rgba(251, 191, 36, 0.16), transparent 34rem),
+    radial-gradient(circle at 100% 0%, rgba(45, 212, 191, 0.12), transparent 30rem),
+    var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.editorial-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.035);
+  margin-bottom: 20px;
+}
+
+.editorial-card-title {
+  margin: 0 0 16px;
+  font-size: 1.15rem;
+}
+
+#linkedCountLabel {
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: none;
+}
+
+.editorial-search-wrap {
+  position: relative;
+}
+
+.editorial-search-results {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  max-height: 280px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(10, 10, 10, 0.96);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+  display: grid;
+  gap: 2px;
+  padding: 6px;
+}
+
+/* `display: grid` sopra vince su `[hidden]` (stile UA, specificita' piu' bassa):
+   senza questa riga il dropdown vuoto resta a schermo come una barra scura. */
+.editorial-search-results[hidden] {
+  display: none;
+}
+
+.editorial-search-result {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+}
+
+.editorial-search-result:hover,
+.editorial-search-result:focus-visible {
+  background: rgba(255, 255, 255, 0.06);
+  outline: none;
+}
+
+.editorial-search-result strong {
+  display: block;
+  font-size: 0.92rem;
+}
+
+.editorial-search-result span {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.editorial-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.editorial-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 6px 5px 12px;
+  border-radius: var(--radius-full, 999px);
+  background: rgba(233, 30, 99, 0.10);
+  border: 1px solid rgba(233, 30, 99, 0.25);
+  font-size: 0.82rem;
+  max-width: 100%;
+}
+
+.editorial-chip-label {
+  font-weight: 700;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.editorial-chip-id {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.editorial-chip-remove {
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  line-height: 1;
+  cursor: pointer;
+  flex: 0 0 auto;
+  font-size: 0.9rem;
+}
+
+.editorial-chip-remove:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.editorial-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.editorial-preview {
+  margin-top: 18px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(45, 212, 191, 0.06);
+}
+
+.editorial-preview h3 {
+  margin: 0 0 10px;
+  font-size: 0.96rem;
+}
+
+.editorial-preview dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 4px 12px;
+}
+
+.editorial-preview dt {
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.editorial-preview dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.editorial-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: var(--radius-full, 999px);
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* `.analytics-table td span { display: block }` (admin-analytics.css) vince sul
+   badge e lo stira per tutta la cella: dentro le tabelle va ripristinata la
+   pillola. Vale anche per la colonna Stato di admin-official-updates.html. */
+.analytics-table td .editorial-badge {
+  display: inline-flex;
+}
+
+.editorial-badge--draft {
+  background: rgba(251, 191, 36, 0.14);
+  color: #fbbf24;
+  border: 1px solid rgba(251, 191, 36, 0.30);
+}
+
+.editorial-badge--published {
+  background: rgba(0, 230, 118, 0.12);
+  color: var(--success, #00e676);
+  border: 1px solid rgba(0, 230, 118, 0.25);
+}
+
+.editorial-badge--retired {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+@media (max-width: 680px) {
+  .editorial-actions .btn {
+    flex: 1 1 auto;
+  }
+}
+
+/* ─── admin-title-updates.html: revisione date di uscita ─────────────────── */
+
+/* Riquadro dell'evento selezionato: stessa griglia dell'anteprima. */
+.editorial-selected {
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.editorial-selected h3 {
+  margin: 0 0 10px;
+  font-size: 1rem;
+}
+
+.editorial-selected dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 6px 12px;
+  align-items: start;
+}
+
+.editorial-selected dt {
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.editorial-selected dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+/* L'esito del dry run non sta dietro un tooltip: pubblicare un'uscita imminente
+   manda una push che non si annulla, quindi la riga deve essere leggibile senza
+   interagire con niente. */
+.editorial-alert {
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.editorial-alert--notify {
+  background: rgba(233, 30, 99, 0.14);
+  border: 1px solid rgba(233, 30, 99, 0.45);
+  color: var(--text);
+}
+
+.editorial-alert--quiet {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.editorial-warnings {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  font-size: 0.86rem;
+  color: var(--text-muted);
+}
+
+.editorial-preview .editorial-alert ~ dl {
+  margin-top: 12px;
+}
+
+.editorial-conflict {
+  margin-top: 6px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: rgba(251, 191, 36, 0.10);
+  border: 1px solid rgba(251, 191, 36, 0.30);
+  font-size: 0.82rem;
+}
+
+.editorial-badge--locked {
+  background: rgba(45, 212, 191, 0.12);
+  color: #2dd4bf;
+  border: 1px solid rgba(45, 212, 191, 0.30);
+}
+
+.editorial-badge--window {
+  background: rgba(233, 30, 99, 0.12);
+  color: #f472b6;
+  border: 1px solid rgba(233, 30, 99, 0.30);
+  margin-top: 4px;
+}
+
+.editorial-row--conflict > td:first-child {
+  box-shadow: inset 3px 0 0 rgba(251, 191, 36, 0.75);
+}

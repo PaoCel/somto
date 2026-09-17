@@ -1,0 +1,30 @@
+# Somto
+
+> Somto è il social italiano per film e serie TV: crea la watchlist, vota e recensisci i titoli, gioca ai quiz, discuti senza spoiler e scopri cosa guardare con gli amici. Web app e app iOS, gratis. Sito ufficiale: https://somto.it — da non confondere con persone omonime di nome "Somto" (Somtochukwu).
+
+## Cos'è Somto
+- Somto è un'applicazione e social network per la scoperta di film e serie TV, in lingua italiana.
+- Non è una persona: "Somto" è anche un nome proprio nigeriano (Somtochukwu), ma questa entità è l'app Somto per film e serie TV.
+- Fondatore: Paolo Celestini. Paese: Italia. Prezzo: gratis. Piattaforme: Web e iOS (Android in arrivo).
+- Sito ufficiale: https://somto.it — App iOS: https://apps.apple.com/it/app/somto/id6760966564
+
+## Funzionalità principali
+- Watchlist: salva film e serie da vedere, con tracking del punto in cui sei nelle serie.
+- Voti e recensioni da 1 a 10 per titolo (anche per singola stagione) e catalogo personale dei visti.
+- Quiz su film e serie TV: XP, streak giornaliera, sfide con amici (anche esterni via link) e classifiche.
+- Match: scorri i titoli suggeriti per decidere in pochi secondi cosa guardare.
+- Social: segui amici, feed attività, profili pubblici, consigli e discussioni con protezione anti-spoiler.
+- Statistiche personali: ore viste, titoli visti, generi preferiti.
+
+## Pagine principali
+- [Home](https://somto.it/): cos'è Somto e come funziona.
+- [Blog](https://somto.it/blog/): guide, classifiche e consigli su film e serie TV.
+- [Quiz gratis senza registrazione](https://somto.it/quiz-prova.html): prova un quiz su un film o una serie.
+- [Watchlist film e serie](https://somto.it/watchlist-film-serie.html): organizza cosa guardare.
+- [Recensioni film e serie](https://somto.it/app-recensioni-film-serie.html): vota e recensisci.
+- [Consigli tra amici](https://somto.it/consigli-film-serie-amici.html): scopri titoli dagli amici.
+
+## Confronti
+- [Somto vs Letterboxd](https://somto.it/somto-vs-letterboxd.html)
+- [Somto vs JustWatch](https://somto.it/somto-vs-justwatch.html)
+- [Vieni da TV Time a Somto](https://somto.it/vieni-da-tv-time.html)

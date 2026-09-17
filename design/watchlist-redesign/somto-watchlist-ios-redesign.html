@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Somto — Watchlist, iOS native</title>
+<style>
+  :root{
+    --sf:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",Arial,sans-serif;
+    --bg:#000000;
+    --bg2:#1c1c1e;
+    --bg3:#2c2c2e;
+    --bg4:#3a3a3c;
+    --sep:rgba(84,84,88,0.65);
+    --sep-op:rgba(84,84,88,0.36);
+    --label:#ffffff;
+    --label2:rgba(235,235,245,0.6);
+    --label3:rgba(235,235,245,0.3);
+    --tint:#ff375f;      /* brand-tinted systemPink */
+    --tint-soft:rgba(255,55,95,0.16);
+    --gold:#f2b84c;
+    --green:#32d74b;
+    --radius:14px;
+    --radius-s:10px;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:#050505; min-height:100vh; display:flex; align-items:flex-start; justify-content:center;
+    gap:48px; padding:56px 24px; font-family:var(--sf); flex-wrap:wrap;
+  }
+
+  .phone{ width:390px; height:844px; background:#000; border-radius:54px; padding:14px;
+    box-shadow:0 40px 90px -20px rgba(0,0,0,0.85), 0 0 0 1px rgba(255,255,255,0.06); position:relative; }
+  .screen{ width:100%; height:100%; background:var(--bg); border-radius:40px; overflow:hidden; position:relative; display:flex; flex-direction:column; }
+  .notch{ position:absolute; top:14px; left:50%; transform:translateX(-50%); width:120px; height:32px; background:#000; border-radius:20px; z-index:60; }
+  .statusbar{ display:flex; justify-content:space-between; align-items:center; padding:16px 26px 4px; font-weight:600; font-size:15px; color:var(--label); flex-shrink:0; position:relative; z-index:55; }
+  .home-ind{ position:absolute; bottom:8px; left:50%; transform:translateX(-50%); width:134px; height:5px; background:rgba(255,255,255,0.7); border-radius:4px; z-index:60; }
+
+  /* Nav bar with large-title collapse */
+  .navbar{ position:relative; z-index:40; flex-shrink:0; }
+  .navbar-blur{
+    position:absolute; inset:0; background:rgba(20,20,22,0.72); backdrop-filter:blur(20px) saturate(180%);
+    border-bottom:0.5px solid transparent; opacity:0; transition:opacity .2s ease, border-color .2s ease;
+  }
+  .navbar.scrolled .navbar-blur{ opacity:1; border-color:var(--sep); }
+  .navbar-inline{
+    display:flex; align-items:center; justify-content:center; height:44px; position:relative; z-index:2;
+    opacity:0; transform:translateY(6px); transition:opacity .18s ease, transform .18s ease;
+  }
+  .navbar.scrolled .navbar-inline{ opacity:1; transform:translateY(0); }
+  .navbar-inline b{ font-size:17px; font-weight:600; color:var(--label); }
+  .navbar-leading, .navbar-trailing{
+    position:absolute; top:0; height:44px; display:flex; align-items:center; gap:14px; z-index:3;
+  }
+  .navbar-leading{ left:16px; } .navbar-trailing{ right:16px; }
+  .nav-icon-btn{ width:32px; height:32px; border-radius:50%; background:var(--bg3); display:flex; align-items:center; justify-content:center; color:var(--label); border:none; }
+  .nav-icon-btn:active{ transform:scale(0.9); }
+  .avatar{ width:32px;height:32px;border-radius:50%; background:linear-gradient(135deg,#3a3a3c,#1c1c1e); border:1px solid var(--sep); }
+  .large-title-wrap{ position:relative; z-index:2; padding:2px 16px 8px; }
+  .large-title{ font-size:34px; font-weight:700; color:var(--label); letter-spacing:0.3px; margin:0; transition:opacity .15s ease; }
+  .large-sub{ font-size:14px; color:var(--label2); margin:4px 0 0; line-height:1.4; max-width:300px; }
+  .navbar.scrolled .large-title-wrap{ opacity:0; height:0; padding:0 16px; overflow:hidden; }
+
+  /* Search bar (native) */
+  .search-wrap{ padding:8px 16px 10px; display:flex; align-items:center; gap:8px; }
+  .search-field{
+    flex:1; display:flex; align-items:center; gap:6px; background:var(--bg3); border-radius:10px; padding:7px 8px; color:var(--label3);
+  }
+  .search-field input{ border:none; background:none; outline:none; color:var(--label); font-family:var(--sf); font-size:15px; width:100%; }
+  .search-field input::placeholder{ color:var(--label2); }
+  .search-cancel{ font-size:15px; color:var(--tint); background:none; border:none; width:0; overflow:hidden; opacity:0; transition:all .22s ease; white-space:nowrap; }
+  .search-wrap.active .search-cancel{ width:60px; opacity:1; }
+
+  /* Segmented control (system) */
+  .segmented{ margin:2px 16px 4px; background:var(--bg3); border-radius:9px; padding:2px; display:flex; position:relative; }
+  .segmented .thumb{
+    position:absolute; top:2px; left:2px; height:calc(100% - 4px); width:calc(25% - 2px);
+    background:#48484a; border-radius:7px; box-shadow:0 1px 4px rgba(0,0,0,0.4); transition:transform .28s cubic-bezier(.4,0,.2,1); z-index:1;
+  }
+  .segmented button{ flex:1; position:relative; z-index:2; background:none; border:none; padding:6px 2px; font-family:var(--sf); font-size:13px; font-weight:500; color:var(--label2); }
+  .segmented button.active{ color:var(--label); font-weight:600; }
+
+  .content{ flex:1; overflow-y:auto; overflow-x:hidden; scrollbar-width:none; position:relative; }
+  .content::-webkit-scrollbar{ display:none; }
+  .panel{ display:none; padding-bottom:120px; }
+  .panel.active{ display:block; }
+
+  /* Grouped list */
+  .group-label{ font-size:13px; font-weight:400; color:var(--label2); text-transform:uppercase; letter-spacing:0.3px; margin:22px 16px 6px; }
+  .group{ margin:0 16px; background:var(--bg2); border-radius:var(--radius); overflow:hidden; }
+  .row{ position:relative; overflow:hidden; }
+  .row + .row .row-inner{ border-top:0.5px solid var(--sep); }
+  .row-inner{
+    display:flex; align-items:center; gap:12px; padding:10px 12px; background:var(--bg2); position:relative; z-index:2;
+    transition:transform .18s ease;
+  }
+  .row-actions{
+    position:absolute; top:0; right:0; bottom:0; display:flex; z-index:1;
+  }
+  .row-action{ width:76px; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:2px; color:#fff; font-size:11px; font-weight:600; border:none; }
+  .row-action.remove{ background:#ff453a; }
+  .row-action.move{ background:#8a8a8e; }
+
+  .poster{ width:46px; height:64px; border-radius:6px; flex-shrink:0; background:linear-gradient(160deg,var(--p1,#3a3a3c),var(--p2,#1c1c1e)); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; color:rgba(255,255,255,0.8); }
+  .row-body{ flex:1; min-width:0; }
+  .row-title{ font-size:15px; font-weight:600; color:var(--label); margin:0 0 2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .row-meta{ font-size:12.5px; color:var(--label2); margin:0; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+  .kind-tag{ color:var(--tint); font-weight:600; }
+  .rating{ color:var(--gold); font-weight:600; }
+  .row-genres{ font-size:12px; color:var(--label3); margin-top:2px; }
+  .chevron{ color:var(--label3); flex-shrink:0; }
+  .status-dot{ width:9px; height:9px; border-radius:50%; flex-shrink:0; }
+  .status-dot.progress{ background:var(--tint); }
+  .status-dot.todo{ background:var(--label3); }
+
+  /* Hero percorso card — App Store style */
+  .hero-card{ margin:0 16px; border-radius:20px; overflow:hidden; background:var(--bg2); border:0.5px solid var(--sep-op); }
+  .hero-visual{ height:150px; position:relative; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; }
+  .hero-visual .tile{ background:linear-gradient(160deg, rgba(255,255,255,0.14), rgba(255,255,255,0.02)); }
+  .hero-badge{ position:absolute; top:10px; right:10px; background:rgba(0,0,0,0.55); backdrop-filter:blur(10px); color:#fff; font-size:11px; font-weight:700; padding:4px 10px; border-radius:20px; }
+  .hero-body{ padding:14px 16px 16px; }
+  .hero-title{ font-size:17px; font-weight:700; color:var(--label); margin:0 0 3px; }
+  .hero-meta{ font-size:12.5px; color:var(--label2); margin:0 0 12px; }
+  .progressview{ height:4px; border-radius:2px; background:var(--bg4); overflow:hidden; margin-bottom:8px; }
+  .progressview i{ display:block; height:100%; width:25%; background:var(--tint); border-radius:2px; }
+  .hero-foot{ display:flex; justify-content:space-between; align-items:center; }
+  .hero-foot span{ font-size:12px; color:var(--label2); }
+  .pill-btn{ font-size:12.5px; font-weight:600; color:var(--tint); background:none; border:none; }
+
+  /* Grid (Condivise) */
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; padding:0 16px; }
+  .grid-card-visual{ height:110px; border-radius:14px; overflow:hidden; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; margin-bottom:8px; }
+  .grid-card-visual .tile{ background:linear-gradient(150deg,var(--c1),var(--c2)); }
+  .grid-card-title{ font-size:13.5px; font-weight:600; color:var(--label); margin:0 0 1px; }
+  .grid-card-sub{ font-size:11.5px; color:var(--label2); margin:0; }
+
+  /* App-store style reco card */
+  .reco-card{ margin:0 16px 16px; border-radius:18px; overflow:hidden; background:var(--bg2); }
+  .reco-top{ padding:12px 14px 0; display:flex; align-items:center; gap:6px; }
+  .reco-eyebrow{ font-size:11px; color:var(--gold); font-weight:600; }
+  .reco-body{ display:flex; gap:12px; padding:10px 14px 14px; }
+  .reco-poster{ width:64px; height:88px; border-radius:8px; flex-shrink:0; background:linear-gradient(160deg,var(--p1),var(--p2)); }
+  .reco-actions{ display:flex; gap:8px; margin-top:8px; }
+  .btn-cap{ font-size:12px; font-weight:600; padding:6px 12px; border-radius:14px; border:none; }
+  .btn-cap.solid{ background:var(--tint); color:#fff; }
+  .btn-cap.ghost{ background:var(--bg3); color:var(--label2); }
+
+  .fab{ position:absolute; right:18px; bottom:94px; width:50px; height:50px; border-radius:25px; background:var(--tint); border:none; color:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 20px -4px rgba(255,55,95,0.6); z-index:20; }
+  .fab:active{ transform:scale(0.92); }
+
+  /* Tab bar */
+  .tabbar{ position:relative; z-index:30; display:flex; justify-content:space-around; padding:8px 4px 4px; flex-shrink:0; }
+  .tabbar-blur{ position:absolute; inset:0; background:rgba(20,20,22,0.78); backdrop-filter:blur(20px) saturate(180%); border-top:0.5px solid var(--sep); }
+  .tab-item{ position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; gap:2px; background:none; border:none; color:var(--label3); }
+  .tab-item span{ font-size:10px; font-weight:500; }
+  .tab-item.active{ color:var(--tint); }
+  .tab-item:active svg{ transform:scale(0.88); }
+
+  /* Detail / push screen */
+  .push-screen{ position:absolute; inset:0; background:var(--bg); z-index:70; transform:translateX(100%); transition:transform .32s cubic-bezier(.32,.72,0,1); display:flex; flex-direction:column; }
+  .push-screen.open{ transform:translateX(0); }
+  .push-scroll{ flex:1; overflow-y:auto; scrollbar-width:none; }
+  .push-scroll::-webkit-scrollbar{ display:none; }
+  .push-nav{ display:flex; align-items:center; height:44px; padding:0 8px; }
+  .back-btn{ display:flex; align-items:center; gap:2px; color:var(--tint); background:none; border:none; font-size:17px; }
+  .detail-visual{ margin:4px 16px 0; height:190px; border-radius:20px; overflow:hidden; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; position:relative; }
+  .detail-visual .tile{ background:linear-gradient(150deg,var(--c1),var(--c2)); }
+  .detail-h1{ font-size:24px; font-weight:700; color:var(--label); margin:16px 16px 4px; }
+  .detail-p{ font-size:14px; color:var(--label2); margin:0 16px 8px; line-height:1.5; }
+  .detail-caption{ font-size:12px; color:var(--label3); margin:0 16px 18px; }
+  .detail-actions{ display:flex; gap:10px; margin:0 16px 22px; }
+  .btn-block{ flex:1; display:flex; align-items:center; justify-content:center; gap:6px; padding:11px; border-radius:12px; font-weight:600; font-size:14px; border:none; }
+  .btn-block.solid{ background:var(--tint); color:#fff; }
+  .btn-block.ghost{ background:var(--bg3); color:var(--label); }
+
+  /* Context menu */
+  .cm-backdrop{ position:absolute; inset:0; background:rgba(0,0,0,0.35); backdrop-filter:blur(2px); z-index:80; opacity:0; pointer-events:none; transition:opacity .18s ease; }
+  .cm-backdrop.show{ opacity:1; pointer-events:auto; }
+  .cm-preview{ position:absolute; z-index:82; background:var(--bg2); border-radius:14px; padding:10px 12px; box-shadow:0 20px 40px rgba(0,0,0,0.5); display:flex; align-items:center; gap:12px; width:280px; transform:scale(0.94); opacity:0; transition:all .2s cubic-bezier(.34,1.56,.64,1); }
+  .cm-preview.show{ transform:scale(1); opacity:1; }
+  .cm-menu{ position:absolute; z-index:82; background:rgba(44,44,46,0.9); backdrop-filter:blur(24px); border-radius:14px; overflow:hidden; width:230px; opacity:0; transform:scale(0.94); transition:all .2s cubic-bezier(.34,1.56,.64,1); }
+  .cm-menu.show{ opacity:1; transform:scale(1); }
+  .cm-item{ display:flex; align-items:center; justify-content:space-between; padding:12px 16px; font-size:15px; color:var(--label); border-bottom:0.5px solid var(--sep-op); }
+  .cm-item.destructive{ color:#ff453a; }
+  .cm-hint{ position:absolute; bottom:100px; left:0; right:0; text-align:center; font-size:11px; color:var(--label3); z-index:15; pointer-events:none; }
+
+  /* Sheet with its own nav bar */
+  .modal-overlay{ position:fixed; inset:0; background:rgba(0,0,0,0.5); display:none; align-items:flex-end; justify-content:center; z-index:200; }
+  .modal-overlay.open{ display:flex; }
+  .sheet{ width:390px; max-width:100%; max-height:90%; background:var(--bg2); border-radius:14px 14px 0 0; overflow-y:auto; transform:translateY(24px); transition:transform .3s ease; }
+  .modal-overlay.open .sheet{ transform:translateY(0); }
+  .sheet-grabber{ width:36px; height:5px; background:var(--bg4); border-radius:3px; margin:8px auto 4px; }
+  .sheet-nav{ display:flex; align-items:center; justify-content:space-between; padding:8px 16px 12px; border-bottom:0.5px solid var(--sep-op); }
+  .sheet-nav-btn{ font-size:17px; background:none; border:none; color:var(--tint); }
+  .sheet-nav-btn.bold{ font-weight:600; }
+  .sheet-nav-title{ font-size:17px; font-weight:600; color:var(--label); }
+  .form-group{ margin:20px 16px 0; background:var(--bg3); border-radius:12px; overflow:hidden; }
+  .form-row{ padding:12px 14px; border-bottom:0.5px solid var(--sep-op); }
+  .form-row:last-child{ border-bottom:none; }
+  .form-row label{ display:block; font-size:11px; color:var(--label2); margin-bottom:4px; text-transform:uppercase; letter-spacing:0.3px; }
+  .form-row input, .form-row textarea{ width:100%; background:none; border:none; outline:none; color:var(--label); font-family:var(--sf); font-size:15px; resize:none; }
+  .form-row textarea{ height:56px; }
+  .seg-two{ display:flex; gap:10px; margin:16px 16px 0; }
+  .seg-card{ flex:1; background:var(--bg3); border:1px solid transparent; border-radius:12px; padding:12px; }
+  .seg-card.sel{ border-color:var(--tint); background:var(--tint-soft); }
+  .seg-card b{ display:block; font-size:13.5px; color:var(--label); margin-bottom:2px; }
+  .seg-card small{ color:var(--label2); font-size:11px; }
+  .vis-group{ display:flex; margin:16px 16px 0; background:var(--bg3); border-radius:10px; padding:2px; }
+  .vis-opt{ flex:1; text-align:center; padding:8px 4px; font-size:12.5px; font-weight:500; color:var(--label2); border-radius:8px; }
+  .vis-opt.sel{ background:#48484a; color:var(--label); font-weight:600; }
+  .chip-row-sel{ display:flex; gap:8px; flex-wrap:wrap; margin:14px 16px 24px; }
+  .chip-sel{ display:flex; align-items:center; gap:6px; background:var(--bg3); border-radius:16px; padding:5px 6px 5px 12px; font-size:12.5px; color:var(--label); }
+  .chip-sel button{ background:var(--bg4); border:none; color:var(--label2); width:16px;height:16px;border-radius:50%; }
+
+  .notes{ width:300px; color:var(--label2); font-size:13px; line-height:1.6; font-family:var(--sf); }
+  .notes h2{ color:var(--label); font-size:20px; margin:0 0 4px; }
+  .notes .lead{ color:var(--label3); font-size:12.5px; margin-bottom:20px; }
+  .notes h3{ font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--tint); margin:20px 0 10px; }
+  .notes ul{ padding-left:18px; margin:0; }
+  .notes li{ margin-bottom:8px; }
+  .notes b{ color:var(--label); }
+  @media (max-width:760px){ body{ padding:20px 12px; gap:24px; } .notes{ width:100%; max-width:390px; order:2; } }
+</style>
+</head>
+<body>
+
+<div class="phone">
+  <div class="notch"></div>
+  <div class="screen">
+    <div class="statusbar">
+      <span>9:41</span>
+      <div style="display:flex;gap:6px;">
+        <svg width="16" height="11" viewBox="0 0 16 11"><rect x="0" y="6" width="3" height="5" rx="0.6" fill="#fff"/><rect x="4.3" y="4" width="3" height="7" rx="0.6" fill="#fff"/><rect x="8.6" y="2" width="3" height="9" rx="0.6" fill="#fff"/><rect x="12.9" y="0" width="3" height="11" rx="0.6" fill="#fff"/></svg>
+        <svg width="22" height="11" viewBox="0 0 22 11"><rect x="0.75" y="0.75" width="18.5" height="9.5" rx="2.25" stroke="#fff" stroke-opacity="0.6"/><rect x="2" y="2" width="16" height="7" rx="1.3" fill="#fff"/><rect x="20.2" y="3.3" width="1.4" height="4.4" rx="0.7" fill="#fff" fill-opacity="0.6"/></svg>
+      </div>
+    </div>
+
+    <div class="navbar" id="navbar">
+      <div class="navbar-blur"></div>
+      <div class="navbar-leading"><button class="nav-icon-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="14" y2="17"/></svg></button></div>
+      <div class="navbar-inline"><b>Watchlist</b></div>
+      <div class="navbar-trailing">
+        <button class="nav-icon-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></button>
+        <div class="avatar"></div>
+      </div>
+      <div class="large-title-wrap">
+        <h1 class="large-title">Watchlist</h1>
+        <p class="large-sub">Salva, organizza e pianifica cosa vuoi vedere.</p>
+      </div>
+      <div class="search-wrap" id="searchWrap">
+        <div class="search-field">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.6" y2="16.6"/></svg>
+          <input id="searchInput" placeholder="Cerca nella tua watchlist">
+        </div>
+        <button class="search-cancel" id="searchCancel" onclick="cancelSearch()">Annulla</button>
+      </div>
+      <div class="segmented" id="segmented">
+        <div class="thumb" id="thumb"></div>
+        <button class="active" data-tab="home">Home</button>
+        <button data-tab="davedere">Da vedere</button>
+        <button data-tab="condivise">Condivise</button>
+        <button data-tab="perte">Per te</button>
+      </div>
+    </div>
+
+    <div class="content" id="content">
+      <!-- HOME -->
+      <div class="panel active" data-panel="home">
+        <div class="group-label">Percorsi e rewatch</div>
+        <div class="hero-card">
+          <div class="hero-visual">
+            <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+            <span class="hero-badge">↻ Rewatch</span>
+          </div>
+          <div class="hero-body">
+            <p class="hero-title">Weekend Terra di Mezzo</p>
+            <p class="hero-meta">4 titoli · ordine cronologico</p>
+            <div class="progressview"><i></i></div>
+            <div class="hero-foot"><span>1 di 4 visti</span><button class="pill-btn">Continua ›</button></div>
+          </div>
+        </div>
+
+        <div class="group-label">Da vedere</div>
+        <p class="cm-hint" id="cmHint">Tieni premuto per le azioni rapide · scorri per rimuovere</p>
+        <div class="group" id="homeList">
+          <div class="row" data-title="Iron Man">
+            <div class="row-actions"><button class="row-action move" onclick="closeSwipe(this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 4v16M4 12h16"/></svg>Sposta</button><button class="row-action remove" onclick="closeSwipe(this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>Rimuovi</button></div>
+            <div class="row-inner" onpointerdown="startSwipe(event,this)" oncontextmenu="return false;">
+              <div class="poster" style="--p1:#8a2b2b;--p2:#2a1010;">IM</div>
+              <div class="row-body">
+                <p class="row-title">Iron Man</p>
+                <p class="row-meta"><span class="kind-tag">Film</span> · 2008 · 2h 06m</p>
+                <p class="row-genres">Azione, Fantascienza</p>
+              </div>
+              <span class="status-dot todo"></span>
+              <svg class="chevron" width="9" height="15" viewBox="0 0 9 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1 1 8 7.5 1 14"/></svg>
+            </div>
+          </div>
+          <div class="row" data-title="L'incredibile Hulk">
+            <div class="row-actions"><button class="row-action move" onclick="closeSwipe(this)">Sposta</button><button class="row-action remove" onclick="closeSwipe(this)">Rimuovi</button></div>
+            <div class="row-inner" onpointerdown="startSwipe(event,this)" oncontextmenu="return false;">
+              <div class="poster" style="--p1:#2b6b46;--p2:#0f2318;">IH</div>
+              <div class="row-body">
+                <p class="row-title">L'incredibile Hulk</p>
+                <p class="row-meta"><span class="kind-tag">Film</span> · 2008 · 1h 52m</p>
+                <p class="row-genres">Fantascienza, Azione</p>
+              </div>
+              <span class="status-dot todo"></span>
+              <svg class="chevron" width="9" height="15" viewBox="0 0 9 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1 1 8 7.5 1 14"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DA VEDERE -->
+      <div class="panel" data-panel="davedere">
+        <div class="group-label">Solo titoli non ancora completati</div>
+        <div class="group" id="davList">
+          <div class="row">
+            <div class="row-actions"><button class="row-action move" onclick="closeSwipe(this)">Sposta</button><button class="row-action remove" onclick="closeSwipe(this)">Rimuovi</button></div>
+            <div class="row-inner" onpointerdown="startSwipe(event,this)" oncontextmenu="return false;">
+              <div class="poster" style="--p1:#8a2b2b;--p2:#2a1010;">IM</div>
+              <div class="row-body"><p class="row-title">Iron Man</p><p class="row-meta"><span class="kind-tag">Film</span> · 2008 · 2h 06m</p><p class="row-genres">Azione, Fantascienza</p></div>
+              <span class="status-dot todo"></span>
+              <svg class="chevron" width="9" height="15" viewBox="0 0 9 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1 1 8 7.5 1 14"/></svg>
+            </div>
+          </div>
+          <div class="row">
+            <div class="row-actions"><button class="row-action move" onclick="closeSwipe(this)">Sposta</button><button class="row-action remove" onclick="closeSwipe(this)">Rimuovi</button></div>
+            <div class="row-inner" onpointerdown="startSwipe(event,this)" oncontextmenu="return false;">
+              <div class="poster" style="--p1:#2b6b46;--p2:#0f2318;">IH</div>
+              <div class="row-body"><p class="row-title">L'incredibile Hulk</p><p class="row-meta"><span class="kind-tag">Film</span> · 2008 · 1h 52m</p><p class="row-genres">Fantascienza, Azione</p></div>
+              <span class="status-dot todo"></span>
+              <svg class="chevron" width="9" height="15" viewBox="0 0 9 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1 1 8 7.5 1 14"/></svg>
+            </div>
+          </div>
+          <div class="row">
+            <div class="row-actions"><button class="row-action move" onclick="closeSwipe(this)">Sposta</button><button class="row-action remove" onclick="closeSwipe(this)">Rimuovi</button></div>
+            <div class="row-inner" onpointerdown="startSwipe(event,this)" oncontextmenu="return false;">
+              <div class="poster" style="--p1:#8a5a1e;--p2:#2a1c0a;">I2</div>
+              <div class="row-body"><p class="row-title">Iron Man 2</p><p class="row-meta"><span class="kind-tag">Film</span> · 2010 · 2h 04m · <span class="rating">★ 8.0</span></p><p class="row-genres">Avventura, Azione</p></div>
+              <span class="status-dot todo"></span>
+              <svg class="chevron" width="9" height="15" viewBox="0 0 9 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1 1 8 7.5 1 14"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONDIVISE -->
+      <div class="panel" data-panel="condivise">
+        <div class="group-label">Le mie liste</div>
+        <div class="grid2">
+          <div onclick="openDetail()">
+            <div class="grid-card-visual"><div class="tile" style="--c1:#8a2b2b;--c2:#2a1010;"></div><div class="tile" style="--c1:#2b6b46;--c2:#0f2318;"></div><div class="tile" style="--c1:#8a5a1e;--c2:#2a1c0a;"></div><div class="tile" style="--c1:#3d3752;--c2:#1c1a24;"></div></div>
+            <p class="grid-card-title">La mia watchlist</p><p class="grid-card-sub">4 titoli</p>
+          </div>
+          <div onclick="openDetail()">
+            <div class="grid-card-visual"><div class="tile" style="--c1:#2a3a63;--c2:#111427;"></div><div class="tile" style="--c1:#4a3d2a;--c2:#1c1710;"></div><div class="tile" style="--c1:#5c2a3a;--c2:#20101a;"></div><div class="tile" style="--c1:#2a5c4a;--c2:#0f1f1a;"></div></div>
+            <p class="grid-card-title">Weekend Terra di Mezzo</p><p class="grid-card-sub">4 titoli</p>
+          </div>
+        </div>
+        <div class="group-label">Con amici e community</div>
+        <div class="group">
+          <div class="row">
+            <div class="row-inner" style="padding:10px 12px;" onclick="openDetail()">
+              <div class="grid-card-visual" style="width:56px;height:56px;margin:0;flex-shrink:0;"><div class="tile" style="--c1:#c2681a;--c2:#3a1f08;"></div><div class="tile" style="--c1:#2a6b5c;--c2:#0f221c;"></div><div class="tile" style="--c1:#3a5c8a;--c2:#101c2a;"></div><div class="tile" style="--c1:#8a3a5c;--c2:#2a1020;"></div></div>
+              <div class="row-body"><p class="row-title">Comfort watch condivisa</p><p class="row-meta">4 titoli · 3 collaboratori</p></div>
+              <svg class="chevron" width="9" height="15" viewBox="0 0 9 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1 1 8 7.5 1 14"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PER TE -->
+      <div class="panel" data-panel="perte">
+        <div class="group-label">Suggeriti in base ai tuoi gusti</div>
+        <div class="reco-card">
+          <div class="reco-top"><span class="reco-eyebrow">✦ PERCHÉ HAI FINITO IRON MAN</span></div>
+          <div class="reco-body">
+            <div class="reco-poster" style="--p1:#5c2a8a;--p2:#1c0f2a;"></div>
+            <div><p class="row-title">Thor: Love and Thunder</p><p class="row-meta"><span class="kind-tag">Film</span> · 2022 · 1h 59m</p>
+              <div class="reco-actions"><button class="btn-cap solid">+ Watchlist</button><button class="btn-cap ghost">Non interessa</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="reco-card">
+          <div class="reco-top"><span class="reco-eyebrow">✦ POPOLARE TRA I TUOI AMICI</span></div>
+          <div class="reco-body">
+            <div class="reco-poster" style="--p1:#1e6b8a;--p2:#0a1f2a;"></div>
+            <div><p class="row-title">Stranger Things</p><p class="row-meta"><span class="kind-tag">Serie</span> · 4 stagioni</p>
+              <div class="reco-actions"><button class="btn-cap solid">+ Watchlist</button><button class="btn-cap ghost">Non interessa</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="fab" id="fab" onclick="openModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+
+    <!-- context menu layer -->
+    <div class="cm-backdrop" id="cmBackdrop"></div>
+    <div class="cm-preview" id="cmPreview"></div>
+    <div class="cm-menu" id="cmMenu">
+      <div class="cm-item">Segna come visto <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="cm-item">Sposta in un percorso <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v16M4 12h16"/></svg></div>
+      <div class="cm-item destructive">Rimuovi dalla lista <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg></div>
+    </div>
+
+    <!-- push / detail screen -->
+    <div class="push-screen" id="detailScreen">
+      <div class="push-scroll">
+        <div class="push-nav"><button class="back-btn" onclick="closeDetail()"><svg width="11" height="18" viewBox="0 0 11 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 1 1.5 9 9 17"/></svg>Watchlist</button></div>
+        <div class="detail-visual">
+          <div class="tile" style="--c1:#8a2b2b;--c2:#2a1010;"></div><div class="tile" style="--c1:#2b6b46;--c2:#0f2318;"></div>
+          <div class="tile" style="--c1:#8a5a1e;--c2:#2a1c0a;"></div><div class="tile" style="--c1:#3d3752;--c2:#1c1a24;"></div>
+        </div>
+        <h1 class="detail-h1">Weekend Terra di Mezzo</h1>
+        <p class="detail-p">Percorso demo per valutare card, progresso e liste personali.</p>
+        <p class="detail-caption">CODEX UI 26F3129B · 4 TITOLI</p>
+        <div class="detail-actions">
+          <button class="btn-block solid"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v14"/></svg>Condividi</button>
+          <button class="btn-block ghost"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copia link</button>
+        </div>
+        <div class="group-label">Titoli</div>
+        <div class="group">
+          <div class="row"><div class="row-inner"><div class="poster" style="--p1:#3d3752;--p2:#1c1a24;">LA</div><div class="row-body"><p class="row-title">La Compagnia dell'Anello</p><p class="row-meta"><span class="kind-tag">Film</span> · 2001</p></div><span class="status-dot todo"></span></div></div>
+          <div class="row"><div class="row-inner"><div class="poster" style="--p1:#2a5c8a;--p2:#101f2a;">DT</div><div class="row-body"><p class="row-title">Le due torri</p><p class="row-meta"><span class="kind-tag">Film</span> · 2002</p></div><span class="status-dot todo"></span></div></div>
+          <div class="row"><div class="row-inner"><div class="poster" style="--p1:#8a5a1e;--p2:#2a1c0a;">RR</div><div class="row-body"><p class="row-title">Il ritorno del re</p><p class="row-meta"><span class="kind-tag">Film</span> · 2003</p></div><span class="status-dot todo"></span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabbar">
+      <div class="tabbar-blur"></div>
+      <button class="tab-item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg><span>Home</span></button>
+      <button class="tab-item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg><span>Match</span></button>
+      <button class="tab-item active"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg><span>Watchlist</span></button>
+      <button class="tab-item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.9.4-1.5 1-1.5 2.2"/><circle cx="12" cy="17" r="0.4" fill="currentColor"/></svg><span>Quiz</span></button>
+      <button class="tab-item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"/></svg><span>Profilo</span></button>
+    </div>
+  </div>
+  <div class="home-ind"></div>
+</div>
+
+<!-- MODAL SHEET with own nav bar -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="sheet">
+    <div class="sheet-grabber"></div>
+    <div class="sheet-nav">
+      <button class="sheet-nav-btn" onclick="closeModal()">Annulla</button>
+      <span class="sheet-nav-title">Nuova lista</span>
+      <button class="sheet-nav-btn bold" onclick="closeModal()">Salva</button>
+    </div>
+    <div class="form-group">
+      <div class="form-row"><label>Titolo</label><input placeholder="Es. Maratona Marvel"></div>
+      <div class="form-row"><label>Descrizione</label><textarea placeholder="A cosa serve questa lista?"></textarea></div>
+    </div>
+    <div class="seg-two">
+      <div class="seg-card sel" onclick="selTog(this)"><b>Raccolta</b><small>Titoli senza ordine</small></div>
+      <div class="seg-card" onclick="selTog(this)"><b>Percorso</b><small>Ordine cronologico</small></div>
+    </div>
+    <div class="vis-group" id="visGroup">
+      <div class="vis-opt sel" onclick="selVis(this)">Privata</div>
+      <div class="vis-opt" onclick="selVis(this)">Condivisa</div>
+      <div class="vis-opt" onclick="selVis(this)">Pubblica</div>
+    </div>
+    <div class="form-group" style="margin-top:16px;">
+      <div class="form-row"><label>Aggiungi titoli</label><input placeholder="Cerca film o serie..."></div>
+    </div>
+    <div class="chip-row-sel">
+      <div class="chip-sel">Iron Man <button>✕</button></div>
+      <div class="chip-sel">Thor <button>✕</button></div>
+    </div>
+  </div>
+</div>
+
+<div class="notes">
+  <h2>Note — versione iOS nativa</h2>
+  <p class="lead">Stesso brand (tint corallo + oro), ma vocabolario 100% Human Interface Guidelines invece che "componenti da sito web".</p>
+  <h3>Cosa è cambiato</h3>
+  <ul>
+    <li><b>Large Title</b> che collassa in nav bar con blur allo scroll (prova a scorrere).</li>
+    <li><b>Liste grouped</b>: righe unite in un contenitore, separatori da 0.5px, chevron per la navigazione — non più card isolate.</li>
+    <li><b>Swipe-to-reveal</b>: trascina una riga in "Da vedere" verso sinistra per Sposta/Rimuovi, come Mail o Promemoria.</li>
+    <li><b>Context menu</b>: tieni premuto su una riga in Home per il menu rapido con preview, come su iOS 13+.</li>
+    <li><b>Search bar nativa</b> con "Annulla" che appare al focus.</li>
+    <li><b>Sheet con nav bar propria</b>: Annulla / Titolo / Salva, non più bottoni in fondo.</li>
+    <li><b>Tab bar</b>: icona piena solo sullo stato attivo (SF Symbols outline→filled), blur reale.</li>
+    <li>Font di sistema (SF Pro via <code>-apple-system</code>), colori semantici iOS (systemBackground, label, secondaryLabel) in dark mode.</li>
+  </ul>
+  <h3>Prova</h3>
+  <ul>
+    <li>Scorri la Home per vedere il titolo comprimersi.</li>
+    <li>Trascina "Iron Man" in Home verso sinistra.</li>
+    <li>Tieni premuto su "L'incredibile Hulk" in Home.</li>
+    <li>Tocca la barra di ricerca in "Da vedere" (torna su Home prima).</li>
+  </ul>
+</div>
+
+<script>
+  // nav scroll collapse
+  const content = document.getElementById('content');
+  const navbar = document.getElementById('navbar');
+  content.addEventListener('scroll', ()=>{ navbar.classList.toggle('scrolled', content.scrollTop > 60); });
+
+  // tabs
+  const tabs = document.querySelectorAll('#segmented button');
+  const thumb = document.getElementById('thumb');
+  const panels = document.querySelectorAll('.panel');
+  function goTab(name){
+    tabs.forEach(b=> b.classList.toggle('active', b.dataset.tab===name));
+    panels.forEach(p=> p.classList.toggle('active', p.dataset.panel===name));
+    const idx = Array.from(tabs).findIndex(b=>b.dataset.tab===name);
+    thumb.style.transform = `translateX(${idx*100}%)`;
+    content.scrollTop = 0; navbar.classList.remove('scrolled');
+    document.getElementById('fab').style.display = (name==='davedere'||name==='condivise') ? 'flex':'none';
+  }
+  tabs.forEach(b=> b.addEventListener('click', ()=> goTab(b.dataset.tab)));
+  document.getElementById('fab').style.display='none';
+
+  // search focus
+  const searchWrap = document.getElementById('searchWrap');
+  document.getElementById('searchInput').addEventListener('focus', ()=> searchWrap.classList.add('active'));
+  function cancelSearch(){ document.getElementById('searchInput').value=''; document.getElementById('searchInput').blur(); searchWrap.classList.remove('active'); }
+
+  // swipe to reveal
+  let swipeState = null;
+  function startSwipe(e, el){
+    if(document.body.dataset.longpress==='1') return;
+    const startX = e.clientX; const row = el;
+    row.setPointerCapture(e.pointerId);
+    let moved = 0;
+    function onMove(ev){
+      moved = Math.min(0, ev.clientX - startX);
+      moved = Math.max(moved, -152);
+      row.style.transform = `translateX(${moved}px)`;
+    }
+    function onUp(){
+      row.removeEventListener('pointermove', onMove);
+      row.removeEventListener('pointerup', onUp);
+      if(moved < -70){ row.style.transform = 'translateX(-152px)'; }
+      else{ row.style.transform = 'translateX(0)'; }
+    }
+    row.addEventListener('pointermove', onMove);
+    row.addEventListener('pointerup', onUp);
+  }
+  function closeSwipe(btn){ const row = btn.closest('.row').querySelector('.row-inner'); row.style.transform='translateX(0)'; }
+
+  // long press context menu
+  let pressTimer = null;
+  document.querySelectorAll('#homeList .row-inner').forEach(rowEl=>{
+    rowEl.addEventListener('pointerdown', (e)=>{
+      pressTimer = setTimeout(()=> showContextMenu(rowEl), 480);
+    });
+    ['pointerup','pointerleave','pointermove'].forEach(evt=> rowEl.addEventListener(evt, ()=> clearTimeout(pressTimer)));
+  });
+  function showContextMenu(rowEl){
+    document.body.dataset.longpress='1';
+    const rect = rowEl.getBoundingClientRect();
+    const phoneRect = document.querySelector('.screen').getBoundingClientRect();
+    const top = rect.top - phoneRect.top;
+    const left = rect.left - phoneRect.left;
+    const backdrop = document.getElementById('cmBackdrop');
+    const preview = document.getElementById('cmPreview');
+    const menu = document.getElementById('cmMenu');
+    preview.innerHTML = rowEl.innerHTML;
+    preview.style.top = top+'px'; preview.style.left = Math.max(10,left)+'px';
+    menu.style.top = (top+80)+'px'; menu.style.left = Math.max(10,left)+'px';
+    backdrop.classList.add('show'); preview.classList.add('show'); menu.classList.add('show');
+    document.getElementById('cmHint').style.opacity='0';
+  }
+  document.getElementById('cmBackdrop').addEventListener('click', hideContextMenu);
+  function hideContextMenu(){
+    document.getElementById('cmBackdrop').classList.remove('show');
+    document.getElementById('cmPreview').classList.remove('show');
+    document.getElementById('cmMenu').classList.remove('show');
+    setTimeout(()=> document.body.dataset.longpress='0', 200);
+  }
+  document.querySelectorAll('.cm-item').forEach(i=> i.addEventListener('click', hideContextMenu));
+
+  // form toggles
+  function selTog(el){ el.parentElement.querySelectorAll('.seg-card').forEach(c=>c.classList.remove('sel')); el.classList.add('sel'); }
+  function selVis(el){ el.parentElement.querySelectorAll('.vis-opt').forEach(c=>c.classList.remove('sel')); el.classList.add('sel'); }
+  function openModal(){ document.getElementById('modalOverlay').classList.add('open'); }
+  function closeModal(){ document.getElementById('modalOverlay').classList.remove('open'); }
+  document.getElementById('modalOverlay').addEventListener('click', e=>{ if(e.target.id==='modalOverlay') closeModal(); });
+
+  // push detail
+  function openDetail(){ document.getElementById('detailScreen').classList.add('open'); }
+  function closeDetail(){ document.getElementById('detailScreen').classList.remove('open'); }
+</script>
+</body>
+</html>

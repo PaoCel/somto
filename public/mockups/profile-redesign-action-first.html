@@ -1,0 +1,1687 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2watch - Profilo Redesign (Action First)</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Space+Grotesk:wght@600;700&display=swap");
+
+    :root {
+      --bg: #f3efe6;
+      --surface: #fffdf8;
+      --surface-strong: #fff8ea;
+      --surface-ink: #11141a;
+      --ink: #13161e;
+      --muted: #636778;
+      --line: #d9d2c3;
+      --brand: #eb5e28;
+      --brand-strong: #b54419;
+      --success: #0c7a52;
+      --warning: #b56a00;
+      --danger: #b62222;
+      --focus: #0f62fe;
+      --shadow-lg: 0 24px 50px rgba(28, 27, 26, 0.18);
+      --shadow-sm: 0 8px 18px rgba(31, 30, 29, 0.08);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --touch: 46px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+    }
+
+    body {
+      font-family: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 18% -12%, rgba(235, 94, 40, 0.27), transparent 35%),
+        radial-gradient(circle at 105% 12%, rgba(15, 98, 254, 0.16), transparent 36%),
+        var(--bg);
+      color: var(--ink);
+      line-height: 1.35;
+    }
+
+    .profile-shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 18px 14px 44px;
+      display: grid;
+      gap: var(--space-4);
+      grid-template-columns: 1fr;
+    }
+
+    .left-rail,
+    .main-stage {
+      display: grid;
+      gap: var(--space-4);
+      align-content: start;
+    }
+
+    .card {
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--line);
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+      padding: var(--space-5);
+    }
+
+    .profile-hero {
+      display: grid;
+      gap: var(--space-4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(140deg, rgba(235, 94, 40, 0.08), transparent 36%);
+      pointer-events: none;
+    }
+
+    .profile-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-3);
+      position: relative;
+      z-index: 1;
+    }
+
+    .chip-set {
+      display: inline-flex;
+      gap: var(--space-2);
+      align-items: center;
+    }
+
+    .chip {
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--surface-ink);
+      background: #fff;
+    }
+
+    .chip.status {
+      border-color: rgba(12, 122, 82, 0.32);
+      color: var(--success);
+      background: rgba(12, 122, 82, 0.11);
+    }
+
+    .role-switch {
+      display: inline-flex;
+      gap: 6px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 4px;
+      background: #fffcf4;
+    }
+
+    .role-switch button {
+      border: 0;
+      border-radius: 999px;
+      padding: 8px 12px;
+      min-height: 34px;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .role-switch button.active {
+      background: var(--surface-ink);
+      color: #fff;
+    }
+
+    .identity-row {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--space-4);
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .avatar-button {
+      border: 0;
+      background: none;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+      position: relative;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+    }
+
+    .avatar-ring {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 3px rgba(235, 94, 40, 0.43);
+      background: linear-gradient(145deg, #ffe7dd, #ffd3be);
+      color: #4b1f10;
+      font-weight: 800;
+      font-size: 29px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .avatar-ring img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .avatar-button .edit-dot {
+      position: absolute;
+      right: -2px;
+      bottom: -2px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      background: var(--surface-ink);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      line-height: 1;
+    }
+
+    .name-wrap {
+      display: grid;
+      gap: 4px;
+    }
+
+    .name-wrap h1 {
+      margin: 0;
+      font-family: "Space Grotesk", "Manrope", sans-serif;
+      font-size: clamp(1.25rem, 3.6vw, 1.8rem);
+      line-height: 1.1;
+      letter-spacing: -0.015em;
+    }
+
+    .handle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .moderation-btn {
+      border: 1px dashed rgba(181, 106, 0, 0.46);
+      color: #7a4100;
+      background: rgba(252, 225, 178, 0.51);
+      border-radius: 999px;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      min-height: 36px;
+      padding: 0 12px;
+      justify-self: start;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+    }
+
+    .profile-shell[data-user-role="user"] .moderation-btn {
+      display: none;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-3);
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: #fff;
+      padding: 12px 10px;
+      text-align: center;
+      display: grid;
+      gap: 2px;
+      min-height: 72px;
+      justify-items: center;
+      align-content: center;
+    }
+
+    button.stat {
+      cursor: pointer;
+      font: inherit;
+      color: inherit;
+    }
+
+    .stat-label {
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .stat-value {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      min-width: 52px;
+    }
+
+    .skeleton {
+      color: transparent;
+      border-radius: 9px;
+      background: linear-gradient(110deg, #eee7dc 8%, #fff8ef 18%, #eee7dc 33%);
+      background-size: 210% 100%;
+      animation: shimmer 1.1s linear infinite;
+      min-height: 22px;
+    }
+
+    .skeleton-line {
+      height: 12px;
+      border-radius: 999px;
+      background: linear-gradient(110deg, #eee7dc 8%, #fff8ef 18%, #eee7dc 33%);
+      background-size: 210% 100%;
+      animation: shimmer 1.1s linear infinite;
+    }
+
+    @keyframes shimmer {
+      to {
+        background-position-x: -210%;
+      }
+    }
+
+    .onboarding-card {
+      background: linear-gradient(130deg, #11141a, #1a202c);
+      color: #f9fbff;
+      border-color: rgba(255, 255, 255, 0.08);
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    .onboarding-card .eyebrow {
+      margin: 0;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 800;
+      color: #8ed8ff;
+    }
+
+    .onboarding-title {
+      margin: 0;
+      font-family: "Space Grotesk", "Manrope", sans-serif;
+      font-size: 1.1rem;
+      line-height: 1.2;
+    }
+
+    .confidence-row {
+      display: grid;
+      gap: 8px;
+    }
+
+    .confidence-row small {
+      color: #cfd5e6;
+      font-weight: 600;
+    }
+
+    .confidence-meter {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.22);
+      overflow: hidden;
+    }
+
+    .confidence-meter span {
+      display: block;
+      height: 100%;
+      width: 86%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #54dba2, #ffe58f);
+    }
+
+    .cta-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2);
+    }
+
+    .btn {
+      border: 1px solid transparent;
+      border-radius: 14px;
+      min-height: var(--touch);
+      font: inherit;
+      font-weight: 800;
+      padding: 0 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+    }
+
+    .btn:active {
+      transform: translateY(1px) scale(0.995);
+    }
+
+    .btn.primary {
+      background: var(--brand);
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(235, 94, 40, 0.33);
+    }
+
+    .btn.primary:hover {
+      background: var(--brand-strong);
+    }
+
+    .btn.light {
+      background: rgba(255, 255, 255, 0.12);
+      color: #f9fbff;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn.ghost {
+      background: #fff;
+      border-color: var(--line);
+      color: var(--surface-ink);
+    }
+
+    .btn.danger {
+      background: #fff0ef;
+      border-color: rgba(182, 34, 34, 0.28);
+      color: var(--danger);
+    }
+
+    .action-card {
+      display: grid;
+      gap: var(--space-3);
+      background: var(--surface-strong);
+    }
+
+    .action-card h2 {
+      margin: 0;
+      font-size: 1rem;
+      font-family: "Space Grotesk", "Manrope", sans-serif;
+      letter-spacing: -0.01em;
+    }
+
+    .action-grid {
+      display: grid;
+      gap: var(--space-2);
+    }
+
+    .secondary-actions {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--space-2);
+    }
+
+    .push-chip {
+      min-height: var(--touch);
+      border: 1px solid rgba(12, 122, 82, 0.35);
+      border-radius: 12px;
+      background: rgba(12, 122, 82, 0.11);
+      color: #0b5f42;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.9rem;
+      font-weight: 800;
+      padding: 0 12px;
+    }
+
+    .friend-banner {
+      width: 100%;
+      border: 1px solid rgba(15, 98, 254, 0.33);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(120deg, rgba(15, 98, 254, 0.08), rgba(79, 140, 255, 0.2));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-2);
+      padding: 12px;
+      cursor: pointer;
+    }
+
+    .friend-banner strong {
+      display: block;
+      font-size: 0.9rem;
+    }
+
+    .friend-banner span {
+      font-size: 0.8rem;
+      color: #294265;
+      font-weight: 700;
+    }
+
+    .friend-badge {
+      border-radius: 999px;
+      min-width: 32px;
+      min-height: 32px;
+      padding: 0 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #0f62fe;
+      color: #fff;
+      font-weight: 900;
+    }
+
+    .workspace {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    .watchlist-priority {
+      border: 1px solid rgba(17, 20, 26, 0.15);
+      border-radius: var(--radius-lg);
+      padding: 12px;
+      background: #fffdf8;
+      display: grid;
+      gap: 10px;
+    }
+
+    .watchlist-priority header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .watchlist-priority h2 {
+      margin: 0;
+      font-size: 0.96rem;
+      font-family: "Space Grotesk", "Manrope", sans-serif;
+    }
+
+    .watchlist-priority p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .watchlist-quick {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 12px;
+      padding: 10px;
+    }
+
+    .watchlist-count {
+      border-radius: 999px;
+      border: 1px solid rgba(15, 98, 254, 0.22);
+      background: rgba(15, 98, 254, 0.1);
+      color: #14419e;
+      font-size: 0.74rem;
+      font-weight: 900;
+      padding: 5px 10px;
+      white-space: nowrap;
+    }
+
+    .tabs {
+      display: grid;
+      gap: var(--space-3);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2);
+    }
+
+    .tabs-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .tab {
+      min-height: 42px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      background: transparent;
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--muted);
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .tab.active {
+      color: #fff;
+      border-color: rgba(17, 20, 26, 0.4);
+      background: var(--surface-ink);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    .tab-panel {
+      display: none;
+      gap: var(--space-4);
+    }
+
+    .tab-panel.active {
+      display: grid;
+      animation: panel-in 0.24s ease;
+    }
+
+    @keyframes panel-in {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .search {
+      width: 100%;
+      min-height: 46px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      padding: 0 14px;
+      font: inherit;
+      font-size: 0.95rem;
+      color: var(--ink);
+      background: #fff;
+    }
+
+    .search::placeholder {
+      color: #8b8ea0;
+    }
+
+    .vote-list,
+    .saved-list,
+    .suggestion-list,
+    .request-list,
+    .friend-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .vote-item,
+    .saved-item,
+    .suggestion-item,
+    .request-item,
+    .friend-item {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: #fff;
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .vote-item,
+    .saved-item,
+    .suggestion-head,
+    .friend-item,
+    .request-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .title-copy {
+      display: grid;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .title-copy strong {
+      font-size: 0.92rem;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .rating-badge {
+      min-width: 42px;
+      min-height: 32px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-size: 0.92rem;
+      font-weight: 900;
+      border: 1px solid rgba(235, 94, 40, 0.36);
+      background: rgba(235, 94, 40, 0.12);
+      color: #8a2d0c;
+      flex-shrink: 0;
+    }
+
+    .filters {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .filters .search {
+      grid-column: 1 / -1;
+    }
+
+    .select,
+    .year {
+      width: 100%;
+      min-height: 44px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      padding: 0 12px;
+      font: inherit;
+      font-size: 0.9rem;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .empty-state,
+    .error-state,
+    .populated-state {
+      border-radius: var(--radius-md);
+      border: 1px dashed var(--line);
+      padding: 18px;
+      display: grid;
+      gap: 6px;
+      text-align: center;
+      background: #fff;
+    }
+
+    .error-state {
+      border-style: solid;
+      border-color: rgba(182, 34, 34, 0.3);
+      background: #fff5f5;
+      color: #731616;
+    }
+
+    .empty-state p,
+    .error-state p,
+    .populated-state p {
+      margin: 0;
+      color: inherit;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .activity-layout {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    .activity-col {
+      display: grid;
+      gap: 10px;
+    }
+
+    .activity-col h3 {
+      margin: 0;
+      font-size: 0.95rem;
+      font-family: "Space Grotesk", "Manrope", sans-serif;
+    }
+
+    .archive-btn {
+      min-height: 34px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: #fff;
+      font: inherit;
+      font-size: 0.79rem;
+      font-weight: 800;
+      color: var(--muted);
+      padding: 0 10px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .archive-btn.archived {
+      border-color: rgba(12, 122, 82, 0.36);
+      color: #0b5f42;
+      background: rgba(12, 122, 82, 0.11);
+    }
+
+    .suggestion-item {
+      align-items: stretch;
+    }
+
+    .suggestion-body {
+      display: grid;
+      gap: 4px;
+    }
+
+    .push-prefs {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: #fffbf1;
+      padding: 12px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .prefs-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .prefs-top strong {
+      font-size: 0.92rem;
+      display: block;
+    }
+
+    .prefs-chips {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .prefs-chips span {
+      border: 1px solid rgba(15, 98, 254, 0.28);
+      background: rgba(15, 98, 254, 0.1);
+      color: #14419e;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 5px 10px;
+    }
+
+    .pref-grid {
+      display: grid;
+      gap: 8px;
+    }
+
+    .pref-item {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      padding: 10px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 6px 12px;
+      align-items: center;
+    }
+
+    .pref-item strong {
+      font-size: 0.86rem;
+    }
+
+    .pref-item small {
+      font-size: 0.75rem;
+      color: var(--muted);
+      grid-column: 1 / 2;
+    }
+
+    .pref-item input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .switch {
+      width: 48px;
+      height: 28px;
+      border-radius: 999px;
+      border: 1px solid #b9becc;
+      background: #d9dde7;
+      display: inline-flex;
+      align-items: center;
+      padding: 3px;
+      transition: 0.2s ease;
+      grid-row: 1 / span 2;
+      justify-self: end;
+    }
+
+    .switch::after {
+      content: "";
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 2px 3px rgba(0, 0, 0, 0.18);
+      transition: 0.2s ease;
+    }
+
+    .pref-item input:checked + .switch {
+      border-color: rgba(12, 122, 82, 0.5);
+      background: rgba(12, 122, 82, 0.32);
+    }
+
+    .pref-item input:checked + .switch::after {
+      transform: translateX(20px);
+    }
+
+    .state-board {
+      display: grid;
+      gap: var(--space-3);
+    }
+
+    .state-board h3 {
+      margin: 0;
+      font-size: 1rem;
+      font-family: "Space Grotesk", "Manrope", sans-serif;
+    }
+
+    .state-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .state-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      background: #fff;
+      display: grid;
+      gap: 8px;
+    }
+
+    .state-card header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    .state-label {
+      border-radius: 999px;
+      padding: 3px 8px;
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #fff;
+      background: var(--surface-ink);
+    }
+
+    .state-label.empty {
+      background: #7e6f4b;
+    }
+
+    .state-label.error {
+      background: #9f1f1f;
+    }
+
+    .state-label.populated {
+      background: #0b6d4a;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: grid;
+      align-items: end;
+      justify-items: stretch;
+      padding: 0;
+    }
+
+    .modal[hidden] {
+      display: none;
+    }
+
+    .modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 13, 20, 0.72);
+      backdrop-filter: blur(3px);
+    }
+
+    .modal-dialog {
+      position: relative;
+      margin-top: auto;
+      border-radius: 22px 22px 0 0;
+      background: #fff;
+      border: 1px solid #d9d2c3;
+      padding: var(--space-5);
+      box-shadow: var(--shadow-lg);
+      max-height: 86vh;
+      overflow: auto;
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: start;
+    }
+
+    .modal-head h2 {
+      margin: 0;
+      font-size: 1.1rem;
+      font-family: "Space Grotesk", "Manrope", sans-serif;
+    }
+
+    .modal-close {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--surface-ink);
+      font-size: 1.2rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .avatar-preview {
+      width: min(320px, 100%);
+      aspect-ratio: 1;
+      border-radius: 24px;
+      overflow: hidden;
+      margin: 0 auto;
+      background: #111;
+    }
+
+    .avatar-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .avatar-preview-fallback {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      font-family: "Space Grotesk", "Manrope", sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.6rem, 13vw, 4rem);
+      background: linear-gradient(145deg, #ffd9c8, #ffbe9f);
+      color: #541e0d;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-2);
+      align-items: center;
+    }
+
+    .toolbar .search {
+      flex: 1;
+    }
+
+    .friend-item,
+    .request-item {
+      padding: 10px;
+      border-radius: 12px;
+    }
+
+    .friend-meta,
+    .request-meta {
+      display: grid;
+      gap: 2px;
+    }
+
+    .avatar-dot {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #e6dfd1;
+      display: grid;
+      place-items: center;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #564f44;
+      flex-shrink: 0;
+    }
+
+    .request-actions {
+      display: inline-flex;
+      gap: 6px;
+    }
+
+    .request-actions .btn {
+      min-height: 34px;
+      padding: 0 10px;
+      font-size: 0.78rem;
+      border-radius: 10px;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    button,
+    a,
+    input,
+    select {
+      touch-action: manipulation;
+    }
+
+    @media (min-width: 760px) {
+      .filters {
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+      }
+
+      .filters .search {
+        grid-column: auto;
+      }
+
+      .activity-layout {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .state-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .modal {
+        align-items: center;
+        justify-items: center;
+        padding: 24px;
+      }
+
+      .modal-dialog {
+        width: min(620px, 100%);
+        border-radius: 22px;
+        margin: 0;
+      }
+    }
+
+    @media (min-width: 1040px) {
+      .profile-shell {
+        padding: 28px 22px 52px;
+        grid-template-columns: 350px 1fr;
+        gap: var(--space-5);
+      }
+
+      .left-rail {
+        position: sticky;
+        top: 18px;
+        align-self: start;
+      }
+
+      .main-stage .workspace {
+        padding: 22px;
+      }
+
+      .tab-panel {
+        padding: 0 6px 2px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="profile-shell" data-user-role="trusted" id="profileShell">
+    <aside class="left-rail">
+      <section class="card profile-hero" aria-label="Header profilo">
+        <div class="profile-topbar">
+          <div class="chip-set">
+            <span class="chip">Profilo</span>
+            <span class="chip status">Online</span>
+          </div>
+          <div class="role-switch" role="group" aria-label="Simula ruolo utente">
+            <button type="button" data-role="user">Utente</button>
+            <button type="button" class="active" data-role="trusted">Admin/Trusted</button>
+          </div>
+        </div>
+
+        <div class="identity-row">
+          <button class="avatar-button" type="button" data-open-modal="avatarModal" aria-label="Apri anteprima foto profilo">
+            <span class="avatar-ring">
+              <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=320&q=80" alt="Foto profilo">
+            </span>
+            <span class="edit-dot" aria-hidden="true">+</span>
+          </button>
+          <div class="name-wrap">
+            <h1>Martina Rinaldi</h1>
+            <p class="handle">@marti_cinema</p>
+            <button class="moderation-btn" type="button">Moderazione</button>
+          </div>
+        </div>
+
+        <div class="stats-grid" aria-live="polite">
+          <div class="stat" aria-label="Voti">
+            <span class="stat-label">Voti</span>
+            <strong class="stat-value skeleton counter" data-final="247">000</strong>
+          </div>
+          <button class="stat" type="button" data-open-modal="friendsModal" aria-label="Apri lista amici">
+            <span class="stat-label">Amici</span>
+            <strong class="stat-value skeleton counter" data-final="84">000</strong>
+          </button>
+          <div class="stat" aria-label="Following">
+            <span class="stat-label">Following</span>
+            <strong class="stat-value skeleton counter" data-final="132">000</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="card onboarding-card" aria-label="Onboarding profilo e preferenze">
+        <p class="eyebrow">Profilo e Preferenze</p>
+        <h2 class="onboarding-title">Livello 3: Curatore in crescita</h2>
+        <div class="confidence-row">
+          <small>Confidence attuale: <strong>86%</strong></small>
+          <div class="confidence-meter" role="img" aria-label="Confidence 86 per cento"><span></span></div>
+        </div>
+        <div class="cta-row">
+          <button class="btn primary" type="button">Completa setup</button>
+          <button class="btn light" type="button">Ricalibra gusti</button>
+        </div>
+      </section>
+
+      <section class="card action-card" aria-label="Azioni principali del profilo">
+        <h2>Cosa vuoi fare adesso?</h2>
+        <div class="action-grid">
+          <a class="btn primary" href="#">Vota un titolo</a>
+          <button class="btn primary" type="button">Suggerimento flash</button>
+        </div>
+        <div class="secondary-actions">
+          <button class="push-chip" type="button">Push attive</button>
+          <button class="btn danger" type="button">Esci</button>
+        </div>
+      </section>
+
+      <button class="friend-banner" type="button" data-open-modal="requestsModal" aria-label="Apri richieste amicizia">
+        <div>
+          <strong>Richieste d'amicizia in attesa</strong>
+          <span>Tocca per gestirle subito</span>
+        </div>
+        <span class="friend-badge">4</span>
+      </button>
+    </aside>
+
+    <section class="main-stage">
+      <div class="card workspace">
+        <div class="tabs" aria-label="Tab profilo">
+          <section class="watchlist-priority" aria-label="Focus watchlist">
+            <header>
+              <h2>Parti dalla tua watchlist</h2>
+              <span class="watchlist-count">12 da vedere</span>
+            </header>
+            <div class="watchlist-quick">
+              <div class="title-copy">
+                <strong>Ultimo salvato: "The Substance"</strong>
+                <span class="meta">Aggiunto ieri - 2 amici l'hanno votato</span>
+              </div>
+              <button class="btn ghost" type="button" data-tab="panelSalvati">Apri</button>
+            </div>
+          </section>
+
+          <div class="tabs-list" role="tablist" aria-label="Contenuti profilo">
+            <button class="tab active" type="button" role="tab" aria-selected="true" aria-controls="panelSalvati" id="tabSalvati" data-tab="panelSalvati">Salvati</button>
+            <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="panelVoti" id="tabVoti" data-tab="panelVoti">Voti</button>
+            <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="panelAttivita" id="tabAttivita" data-tab="panelAttivita">Attivita'</button>
+          </div>
+
+          <section class="tab-panel" id="panelVoti" role="tabpanel" aria-labelledby="tabVoti">
+            <input class="search" type="search" placeholder="Cerca tra i voti..." aria-label="Cerca voti">
+            <div class="vote-list">
+              <article class="vote-item">
+                <div class="title-copy">
+                  <strong>Dune: Part Two</strong>
+                  <span class="meta">Film - Fantascienza - 2024</span>
+                </div>
+                <span class="rating-badge">9.5</span>
+              </article>
+              <article class="vote-item">
+                <div class="title-copy">
+                  <strong>Shogun</strong>
+                  <span class="meta">Serie TV - Storico - 2024</span>
+                </div>
+                <span class="rating-badge">8.5</span>
+              </article>
+              <article class="vote-item">
+                <div class="title-copy">
+                  <strong>Past Lives</strong>
+                  <span class="meta">Film - Dramma - 2023</span>
+                </div>
+                <span class="rating-badge">8</span>
+              </article>
+            </div>
+          </section>
+
+          <section class="tab-panel active" id="panelSalvati" role="tabpanel" aria-labelledby="tabSalvati">
+            <div class="filters">
+              <input class="search" type="search" placeholder="Cerca titolo salvato" aria-label="Ricerca salvati">
+              <select class="select" aria-label="Filtro tipo">
+                <option>Tutti i tipi</option>
+                <option>Film</option>
+                <option>Serie TV</option>
+                <option>In approvazione</option>
+              </select>
+              <select class="select" aria-label="Filtro genere">
+                <option>Tutti i generi</option>
+                <option>Dramma</option>
+                <option>Thriller</option>
+                <option>Commedia</option>
+              </select>
+              <input class="year" type="number" min="1900" max="2100" placeholder="Anno min" aria-label="Filtro anno minimo">
+            </div>
+
+            <div class="saved-list">
+              <article class="saved-item">
+                <div class="title-copy">
+                  <strong>The Substance</strong>
+                  <span class="meta">Film - Horror - 2024</span>
+                </div>
+                <button class="btn ghost" type="button">Vota ora</button>
+              </article>
+              <article class="saved-item">
+                <div class="title-copy">
+                  <strong>Shogun</strong>
+                  <span class="meta">Serie TV - Storico - 2024</span>
+                </div>
+                <button class="btn ghost" type="button">Dettaglio</button>
+              </article>
+            </div>
+
+            <div class="empty-state">
+              <p>Stato vuoto filtri: nessun titolo salvato con i filtri correnti.</p>
+              <button class="btn ghost" type="button">Azzera filtri</button>
+            </div>
+          </section>
+
+          <section class="tab-panel" id="panelAttivita" role="tabpanel" aria-labelledby="tabAttivita">
+            <div class="activity-layout">
+              <article class="activity-col">
+                <h3>Suggerimenti ricevuti</h3>
+                <div class="suggestion-list">
+                  <article class="suggestion-item">
+                    <div class="suggestion-head">
+                      <div class="title-copy">
+                        <strong>Elena ti ha consigliato "The Bear"</strong>
+                        <span class="meta">2 ore fa</span>
+                      </div>
+                      <button class="archive-btn" type="button" aria-pressed="false">Archivia</button>
+                    </div>
+                    <div class="suggestion-body">
+                      <span class="meta">"Puntate corte, ritmo altissimo. Perfetta per stasera."</span>
+                    </div>
+                  </article>
+                  <article class="suggestion-item">
+                    <div class="suggestion-head">
+                      <div class="title-copy">
+                        <strong>Luca ti ha consigliato "Perfect Days"</strong>
+                        <span class="meta">Ieri</span>
+                      </div>
+                      <button class="archive-btn archived" type="button" aria-pressed="true">Archiviato</button>
+                    </div>
+                  </article>
+                </div>
+              </article>
+
+              <article class="activity-col">
+                <h3>Suggerimenti inviati</h3>
+                <div class="suggestion-list">
+                  <article class="suggestion-item">
+                    <div class="suggestion-head">
+                      <div class="title-copy">
+                        <strong>Hai suggerito "Severance" a Davide</strong>
+                        <span class="meta">in attesa di risposta</span>
+                      </div>
+                      <button class="archive-btn" type="button" aria-pressed="false">Archivia</button>
+                    </div>
+                  </article>
+                </div>
+              </article>
+            </div>
+
+            <section class="push-prefs" aria-label="Preferenze notifiche push">
+              <div class="prefs-top">
+                <strong>Preferenze notifiche push</strong>
+                <div class="prefs-chips" aria-hidden="true">
+                  <span>Social</span>
+                  <span>Thread</span>
+                  <span>Reminder</span>
+                </div>
+              </div>
+
+              <div class="pref-grid">
+                <label class="pref-item">
+                  <div>
+                    <strong>Messaggi thread</strong>
+                    <small>Nuovi messaggi nei thread seguiti.</small>
+                  </div>
+                  <input type="checkbox" checked>
+                  <span class="switch" aria-hidden="true"></span>
+                </label>
+
+                <label class="pref-item">
+                  <div>
+                    <strong>Menzioni</strong>
+                    <small>Avviso quando vieni citato.</small>
+                  </div>
+                  <input type="checkbox" checked>
+                  <span class="switch" aria-hidden="true"></span>
+                </label>
+
+                <label class="pref-item">
+                  <div>
+                    <strong>Suggerimenti</strong>
+                    <small>Nuovi consigli dai tuoi amici.</small>
+                  </div>
+                  <input type="checkbox" checked>
+                  <span class="switch" aria-hidden="true"></span>
+                </label>
+
+                <label class="pref-item">
+                  <div>
+                    <strong>Promemoria</strong>
+                    <small>Rientro app e attività utili.</small>
+                  </div>
+                  <input type="checkbox">
+                  <span class="switch" aria-hidden="true"></span>
+                </label>
+              </div>
+            </section>
+          </section>
+        </div>
+      </div>
+
+      <section class="card state-board" aria-label="Stati interfaccia">
+        <h3>Stati gestiti nel design system</h3>
+        <div class="state-grid">
+          <article class="state-card">
+            <header>
+              <span>Caricamento tab</span>
+              <span class="state-label">Loading</span>
+            </header>
+            <div class="skeleton-line" style="width: 70%"></div>
+            <div class="skeleton-line" style="width: 88%"></div>
+            <div class="skeleton-line" style="width: 54%"></div>
+          </article>
+
+          <article class="state-card">
+            <header>
+              <span>Stato vuoto</span>
+              <span class="state-label empty">Empty</span>
+            </header>
+            <p class="meta">Nessun elemento disponibile con i filtri attuali.</p>
+          </article>
+
+          <article class="state-card">
+            <header>
+              <span>Errore recupero</span>
+              <span class="state-label error">Error</span>
+            </header>
+            <div class="error-state">
+              <p>Connessione instabile. Riprova tra pochi secondi.</p>
+            </div>
+          </article>
+
+          <article class="state-card">
+            <header>
+              <span>Contenuto disponibile</span>
+              <span class="state-label populated">Populated</span>
+            </header>
+            <div class="populated-state">
+              <p>12 suggerimenti visibili, 3 archiviati.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div class="modal" id="avatarModal" hidden>
+    <button class="modal-backdrop" data-close-modal aria-label="Chiudi modal"></button>
+    <section class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="avatarModalTitle">
+      <div class="modal-head">
+        <h2 id="avatarModalTitle">Anteprima foto profilo</h2>
+        <button class="modal-close" type="button" data-close-modal aria-label="Chiudi">x</button>
+      </div>
+      <div class="avatar-preview">
+        <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=700&q=80" alt="Anteprima avatar">
+      </div>
+      <button class="btn primary" type="button">Cambia foto</button>
+    </section>
+  </div>
+
+  <div class="modal" id="friendsModal" hidden>
+    <button class="modal-backdrop" data-close-modal aria-label="Chiudi modal"></button>
+    <section class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="friendsModalTitle">
+      <div class="modal-head">
+        <h2 id="friendsModalTitle">I tuoi amici</h2>
+        <button class="modal-close" type="button" data-close-modal aria-label="Chiudi">x</button>
+      </div>
+      <div class="toolbar">
+        <input class="search" type="search" placeholder="Cerca tra gli amici" aria-label="Ricerca amici">
+      </div>
+      <div class="friend-list">
+        <article class="friend-item">
+          <div class="avatar-dot">ER</div>
+          <div class="friend-meta">
+            <strong>Elena Rossi</strong>
+            <span class="meta">@elenarossi</span>
+          </div>
+          <button class="btn ghost" type="button">Apri</button>
+        </article>
+        <article class="friend-item">
+          <div class="avatar-dot">DV</div>
+          <div class="friend-meta">
+            <strong>Davide Valli</strong>
+            <span class="meta">@dvdvalli</span>
+          </div>
+          <button class="btn ghost" type="button">Apri</button>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <div class="modal" id="requestsModal" hidden>
+    <button class="modal-backdrop" data-close-modal aria-label="Chiudi modal"></button>
+    <section class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="requestsModalTitle">
+      <div class="modal-head">
+        <h2 id="requestsModalTitle">Richieste d'amicizia</h2>
+        <button class="modal-close" type="button" data-close-modal aria-label="Chiudi">x</button>
+      </div>
+      <div class="request-list">
+        <article class="request-item">
+          <div class="avatar-dot">GC</div>
+          <div class="request-meta">
+            <strong>Giulia Conti</strong>
+            <span class="meta">Vuole connettersi con te</span>
+          </div>
+          <div class="request-actions">
+            <button class="btn primary" type="button">Accetta</button>
+            <button class="btn ghost" type="button">Rifiuta</button>
+          </div>
+        </article>
+        <article class="request-item">
+          <div class="avatar-dot">LM</div>
+          <div class="request-meta">
+            <strong>Lorenzo M.</strong>
+            <span class="meta">Amico in comune: 3</span>
+          </div>
+          <div class="request-actions">
+            <button class="btn primary" type="button">Accetta</button>
+            <button class="btn ghost" type="button">Rifiuta</button>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      const shell = document.getElementById("profileShell");
+      const tabs = Array.from(document.querySelectorAll(".tab"));
+      const panels = Array.from(document.querySelectorAll(".tab-panel"));
+      const tabShortcuts = Array.from(document.querySelectorAll("[data-tab]")).filter((node) => !node.classList.contains("tab"));
+      const modalTriggers = Array.from(document.querySelectorAll("[data-open-modal]"));
+      const roleButtons = Array.from(document.querySelectorAll("[data-role]"));
+      const archiveButtons = Array.from(document.querySelectorAll(".archive-btn"));
+      const counters = Array.from(document.querySelectorAll(".counter"));
+
+      let activeModal = null;
+      let lastFocus = null;
+      let trapHandler = null;
+
+      function setRole(role) {
+        shell.setAttribute("data-user-role", role);
+        roleButtons.forEach((button) => {
+          button.classList.toggle("active", button.dataset.role === role);
+        });
+      }
+
+      roleButtons.forEach((button) => {
+        button.addEventListener("click", () => setRole(button.dataset.role));
+      });
+
+      function activateTab(panelId) {
+        tabs.forEach((item) => {
+          const isActive = item.dataset.tab === panelId;
+          item.classList.toggle("active", isActive);
+          item.setAttribute("aria-selected", String(isActive));
+        });
+        panels.forEach((panel) => panel.classList.toggle("active", panel.id === panelId));
+      }
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => activateTab(tab.dataset.tab));
+      });
+
+      tabShortcuts.forEach((shortcut) => {
+        shortcut.addEventListener("click", () => activateTab(shortcut.dataset.tab));
+      });
+
+      function trapFocus(modal) {
+        const focusable = Array.from(
+          modal.querySelectorAll("button,[href],input,select,textarea,[tabindex]:not([tabindex='-1'])")
+        ).filter((el) => !el.hasAttribute("disabled"));
+
+        if (!focusable.length) return () => {};
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        trapHandler = (event) => {
+          if (event.key === "Escape") {
+            event.preventDefault();
+            closeModal(modal);
+            return;
+          }
+          if (event.key !== "Tab") return;
+
+          if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+          }
+        };
+
+        document.addEventListener("keydown", trapHandler);
+        first.focus();
+
+        return () => {
+          if (trapHandler) {
+            document.removeEventListener("keydown", trapHandler);
+            trapHandler = null;
+          }
+        };
+      }
+
+      function openModal(modal) {
+        if (!modal) return;
+        lastFocus = document.activeElement;
+        activeModal = modal;
+        modal.hidden = false;
+        document.body.style.overflow = "hidden";
+        modal.cleanupFocus = trapFocus(modal);
+      }
+
+      function closeModal(modal) {
+        if (!modal) return;
+        modal.hidden = true;
+        modal.cleanupFocus && modal.cleanupFocus();
+        modal.cleanupFocus = null;
+        document.body.style.overflow = "";
+        activeModal = null;
+        if (lastFocus && typeof lastFocus.focus === "function") {
+          lastFocus.focus();
+        }
+      }
+
+      modalTriggers.forEach((trigger) => {
+        trigger.addEventListener("click", () => {
+          const modal = document.getElementById(trigger.dataset.openModal);
+          openModal(modal);
+        });
+      });
+
+      document.querySelectorAll("[data-close-modal]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const modal = button.closest(".modal");
+          closeModal(modal);
+        });
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && activeModal) {
+          closeModal(activeModal);
+        }
+      });
+
+      archiveButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const archived = button.classList.toggle("archived");
+          button.textContent = archived ? "Archiviato" : "Archivia";
+          button.setAttribute("aria-pressed", String(archived));
+        });
+      });
+
+      setTimeout(() => {
+        counters.forEach((counter) => {
+          const finalValue = counter.dataset.final || "0";
+          counter.textContent = finalValue;
+          counter.classList.remove("skeleton");
+        });
+      }, 1200);
+    })();
+  </script>
+</body>
+</html>

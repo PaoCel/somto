@@ -1,0 +1,16 @@
+[
+  {
+    "questionId": "q_154_8",
+    "severity": "critical",
+    "problem": "La domanda chiede quale sia il titolo del primo episodio di ENTRAMBE le stagioni, come se fosse uguale. Ma S1E1 si intitola 'Glorious Purpose' mentre S2E1 si intitola 'Ouroboros': i due primi episodi hanno titoli diversi. La premessa è falsa e la domanda è incomprensibile. Lo stesso explanation lo contraddice esplicitamente scrivendo 'La stagione 2 si apre invece con l'episodio Ouroboros'.",
+    "fix": "Riformulare la domanda in modo corretto, ad esempio: 'Quale titolo condividono il primo episodio della stagione 1 e il finale della stagione 2 di Loki?' oppure 'Come si intitola il primo episodio della stagione 1 di Loki?' Risposta corretta rimane l'indice 2 ('Glorious Purpose') se la domanda viene riformulata come sopra.",
+    "correctIndexShouldBe": -1
+  },
+  {
+    "questionId": "q_154_34",
+    "severity": "minor",
+    "problem": "L'explanation afferma che Mobius 'guida una moto d'acqua' in S2E5, ma in realtà nella scena lui è seduto su una moto d'acqua ferma all'interno del negozio Piranha Powersports di Cleveland, non la guida realmente in acqua. La risposta (jet ski) è comunque corretta.",
+    "fix": "Correggere l'explanation: 'nel negozio dove lavora trova una moto d'acqua su cui si siede con soddisfazione, vivendo comunque un momento iconico per i fan'.",
+    "correctIndexShouldBe": -1
+  }
+]

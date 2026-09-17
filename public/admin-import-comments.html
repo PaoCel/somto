@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Revisione commenti import - Somto</title>
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Console admin privata per rivedere e pubblicare i commenti-episodio importati da TV Time.">
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Somto">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0A0A0A">
+
+  <style>
+    .ic-wrap { max-width: 860px; margin: 0 auto; padding: 24px 16px 80px; }
+    .ic-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+    .ic-head h1 { font-size: 1.4rem; margin: 0; }
+    .ic-intro { color: var(--text-muted, #9aa); font-size: .9rem; margin: 0 0 20px; line-height: 1.4; }
+    .ic-btn { border: 1px solid var(--border, #333); background: var(--surface, #151515); color: var(--text-primary, #eee);
+      border-radius: 10px; padding: 8px 14px; font-size: .9rem; cursor: pointer; }
+    .ic-btn:disabled { opacity: .45; cursor: default; }
+    .ic-btn-primary { background: var(--brand-primary, #6c5ce7); border-color: transparent; color: #fff; font-weight: 600; }
+    .ic-btn.ghost { background: transparent; }
+    .ic-card { border: 1px solid var(--border, #2a2a2a); background: var(--surface, #141414); border-radius: 14px;
+      padding: 16px; margin-bottom: 14px; }
+    .ic-card-target { border-color: var(--brand-primary, #6c5ce7); box-shadow: 0 0 0 2px rgba(108,92,231,.2); }
+    .ic-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .ic-name { margin: 0; font-size: 1.05rem; }
+    .ic-sub { margin: 2px 0 0; font-size: .8rem; color: var(--text-muted, #999); }
+    .ic-sub code { font-size: .78rem; }
+    .ic-badge { font-size: .78rem; padding: 4px 10px; border-radius: 999px; background: #2a2a2a; color: #bbb; white-space: nowrap; }
+    .ic-badge-on { background: rgba(108,92,231,.22); color: #c9c0ff; font-weight: 600; }
+    .ic-pills { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+    .ic-pill { font-size: .76rem; padding: 3px 9px; border-radius: 8px; background: #1e1e1e; color: #aaa; }
+    .ic-pill.ok strong { color: #7bd88f; }
+    .ic-pill.warn strong { color: #e8b04b; }
+    .ic-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+    .ic-candidates { margin-top: 12px; border-top: 1px solid var(--border, #262626); padding-top: 10px; display: grid; gap: 8px; }
+    .ic-cand { background: #101010; border: 1px solid #222; border-radius: 10px; padding: 8px 10px; }
+    .ic-cand-meta { display: flex; gap: 8px; align-items: center; margin-bottom: 4px; }
+    .ic-cand-loc { font-size: .76rem; color: #999; }
+    .ic-cand-text { margin: 0; font-size: .86rem; line-height: 1.35; color: #ddd; white-space: pre-wrap; }
+    .ic-tag { font-size: .68rem; text-transform: uppercase; letter-spacing: .04em; padding: 2px 7px; border-radius: 6px; background: #2a2a2a; color: #bbb; }
+    .ic-tag.ok { background: rgba(123,216,143,.18); color: #7bd88f; }
+    .ic-tag.warn { background: rgba(232,176,75,.18); color: #e8b04b; }
+    .ic-tag.rej { background: rgba(255,122,122,.16); color: #ff9b9b; }
+    .ic-pill.rej strong { color: #ff9b9b; }
+    .ic-selbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 8px 10px;
+      background: #101010; border: 1px solid #222; border-radius: 10px; }
+    .ic-selall { display: inline-flex; align-items: center; gap: 6px; font-size: .82rem; color: #ccc; cursor: pointer; }
+    .ic-selcount { font-size: .78rem; color: #999; }
+    .ic-selbar-spacer { flex: 1; }
+    .ic-btn-danger { background: rgba(255,122,122,.12); border-color: rgba(255,122,122,.4); color: #ff9b9b; }
+    .ic-btn-small { padding: 3px 9px; font-size: .76rem; margin-left: auto; }
+    .ic-cand-check { accent-color: var(--brand-primary, #6c5ce7); width: 15px; height: 15px; flex: none; cursor: pointer; }
+    .ic-cand.is-rejected .ic-cand-text { opacity: .55; text-decoration: line-through; }
+    .ic-result { margin: 12px 0 0; font-size: .85rem; color: #bbb; }
+    .ic-result.ok { color: #7bd88f; }
+    .ic-result.error { color: #ff7a7a; }
+    .ic-muted { color: var(--text-muted, #999); font-size: .88rem; }
+    .ic-error { color: #ff7a7a; font-size: .88rem; }
+  </style>
+</head>
+<body>
+  <div id="appSplash" class="app-splash">
+    <img class="splash-logo splash-wordmark" src="/icons/somto-wordmark.png" alt="Somto">
+  </div>
+
+  <main class="ic-wrap">
+    <section id="gate" class="analytics-state" hidden role="alert">
+      <h2>Accesso negato</h2>
+      <p>Questa pagina risponde solo agli account admin.</p>
+    </section>
+
+    <section id="mainContent" hidden>
+      <div class="ic-head">
+        <h1>Revisione commenti import</h1>
+        <button id="reloadBtn" class="ic-btn ghost" type="button">Ricarica</button>
+      </div>
+      <p class="ic-intro">
+        Commenti-episodio importati da TV Time, in coda di revisione. "Pubblica i risolti"
+        li scrive sui thread-episodio pubblici a nome dell'utente (idempotente).
+        Fai prima un'"Anteprima" per vedere quanti verrebbero pubblicati.
+        Con "Mostra candidati" scegli i singoli commenti: pubblichi o scarti
+        solo quelli selezionati (uno scartato non viene mai pubblicato, anche
+        da "Pubblica i risolti"; si può ripristinare).
+      </p>
+      <div id="queueList"></div>
+      <p id="emptyState" class="ic-muted" hidden>Nessun import con commenti in coda. Le code si popolano quando arrivano nuovi import TV Time con commenti-episodio.</p>
+    </section>
+  </main>
+
+  <script src="/firebaseConfig.js"></script>
+  <script type="module" src="/js/pages/admin-import-comments.page.js"></script>
+  <script src="/js/pwa.js" defer></script>
+</body>
+</html>

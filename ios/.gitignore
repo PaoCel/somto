@@ -1,0 +1,7 @@
+.DS_Store
+DerivedData/
+build/
+*.xcuserstate
+TwoWatch.xcodeproj/project.xcworkspace/xcuserdata/
+TwoWatch.xcodeproj/xcuserdata/
+
