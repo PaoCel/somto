@@ -8,7 +8,7 @@
     "test:triggers": "node triggers.mjs"
   },
   "dependencies": {
-    "firebase": "^10.12.5",
+    "firebase": "^13.1.0",
     "firebase-admin": "^13.9.0"
   }
 }
